@@ -5,7 +5,7 @@ import {MenuItem} from './MenuItem'
 export function MenuInner() {
   return (
     <>
-      <MenuItem title="داشبورد فروش اینتزنتی" to='/dashboard/esale' />
+      <MenuItem title="بازرگانی سپهر ایرانیان" to='/dashboard' />
       {/* <MenuItem title="داشبورد مدیریت امور مشتریان" to='/dashboard-esale' />
       <MenuItem title="داشبورد مدیریت حمل محصول" to='/dashboard-esale' /> */}
       {/* <MenuItem title='Layout Builder' to='/builder' /> */}

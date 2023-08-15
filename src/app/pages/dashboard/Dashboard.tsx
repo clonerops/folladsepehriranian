@@ -9,7 +9,7 @@ const Dashboard = () => {
                     className="rounded-lg bg-indigo-600 flex justify-center items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 cursor-pointer"
                 >
                     <span className="text-white px-8 py-12 font-yekan_bold">
-                        مدیریت فروش اینترنتی
+                        ثبت سفارشات
                     </span>
                 </Link>
                 <Link
@@ -17,7 +17,7 @@ const Dashboard = () => {
                     className="rounded-lg bg-indigo-600 flex justify-center items-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer"
                 >
                     <span className="text-white px-8 py-12 font-yekan_bold">
-                        مدیریت امور مشتریان
+                        لیست سفارشات
                     </span>
                 </Link>
                 <Link
@@ -25,7 +25,7 @@ const Dashboard = () => {
                     className="rounded-lg bg-indigo-600 flex justify-center items-center bg-gradient-to-r from-green-400 to-blue-500 cursor-pointer"
                 >
                     <span className="text-white px-8 py-12 font-yekan_bold">
-                        مدیریت حمل محصول
+                        انبارداری
                     </span>
                 </Link>
             </div>

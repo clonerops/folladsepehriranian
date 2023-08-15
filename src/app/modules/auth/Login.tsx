@@ -136,7 +136,7 @@ const Login = () => {
                     >
                         <div className="text-center mb-auto">
                             <label className="text-white font-yekan_bold text-2xl my-8">
-                                فولاد سپهر ایرانیان
+                                بازرگانی سپهر ایرانیان
                             </label>
                         </div>
                         <div className="flex justify-center items-center">

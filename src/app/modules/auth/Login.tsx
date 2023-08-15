@@ -146,6 +146,7 @@ const Login = () => {
                                 )}`}
                                 width={300}
                                 height={300}
+                                alt="Sepehr Logo"
                                 className="mx-auto"
                             />
                         </div>

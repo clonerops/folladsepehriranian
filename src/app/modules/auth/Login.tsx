@@ -6,7 +6,7 @@ import Captcha from "./components/Captcha";
 import { useGetCaptcha } from "./core/_hooks";
 import { useState } from "react";
 import { loginUser } from "./core/_requests";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const Login = () => {
     const loginSchema = Yup.object().shape({
@@ -27,7 +27,7 @@ const Login = () => {
         captcha: "",
     };
 
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { data: captcha, refetch } = useGetCaptcha();
 
@@ -35,24 +35,24 @@ const Login = () => {
         initialValues,
         validationSchema: loginSchema,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
-            setLoading(true)
+            setLoading(true);
             const userData = {
                 username: values.username,
                 password: values.password,
                 captchaToken: captcha.tokenString,
-                captchaCode: values.captcha
-            }
+                captchaCode: values.captcha,
+            };
             try {
                 const auth = await loginUser(userData);
-                localStorage.setItem("auth", JSON.stringify(auth))
+                localStorage.setItem("auth", JSON.stringify(auth));
                 Cookies.set("token", `${auth?.jwtToken}`);
-                setLoading(false)
+                setLoading(false);
                 window.location.reload();
             } catch (error) {
                 setStatus("اطلاعات ورود نادرست می باشد");
                 setSubmitting(false);
-                setLoading(false)
-                refetch()
+                setLoading(false);
+                refetch();
             }
         },
     });
@@ -127,25 +127,29 @@ const Login = () => {
                 </form>
                 <div>
                     <div
-                        className="h-full w-full bg-cover"
+                        className="h-full w-full flex flex-col"
                         style={{
                             backgroundImage: `url(${toAbsoluteUrl(
                                 "/media/logos/auth-bg.png"
                             )})`,
                         }}
                     >
-                        <div className="flex justify-center items-center">
+                        <div className="text-center mb-auto">
                             <label className="text-white font-yekan_bold text-2xl my-8">
-                                داشبورد اختصاصی مدیریت امور مشتریان
+                                فولاد سپهر ایرانیان
                             </label>
                         </div>
-                        <div>
+                        <div className="flex justify-center items-center">
                             <img
                                 src={`${toAbsoluteUrl(
-                                    "/media/logos/demo_7403_none-2.png"
+                                    "/media/logos/bazarganilogo.png"
                                 )}`}
+                                width={300}
+                                height={300}
+                                className="mx-auto"
                             />
                         </div>
+                        <div className="mt-auto" />
                     </div>
                 </div>
             </div>

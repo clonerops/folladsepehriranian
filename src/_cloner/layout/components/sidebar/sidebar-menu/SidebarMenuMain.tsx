@@ -45,7 +45,7 @@ const SidebarMenuMain = () => {
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'
       >
-        <SidebarMenuItem to='/crafted/pages/profile/overview' title='ثبت سفارش' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/order' title='ثبت سفارش' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       {/* <SidebarMenuItemWithSub

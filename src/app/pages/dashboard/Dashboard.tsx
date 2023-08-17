@@ -5,7 +5,7 @@ const Dashboard = () => {
         <>
             <div className="grid grid-cols-3 gap-4">
                 <Link
-                    to="/dashboard/esale"
+                    to="/dashboard/order"
                     className="rounded-lg bg-indigo-600 flex justify-center items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 cursor-pointer"
                 >
                     <span className="text-white px-8 py-12 font-yekan_bold">

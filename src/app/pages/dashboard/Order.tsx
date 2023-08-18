@@ -2,6 +2,8 @@ import { useState } from "react";
 import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
+import Inputs from "../../modules/auth/components/Inputs";
+import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
 
@@ -19,27 +21,52 @@ const Order = () => {
     return (
         <>
             <Card6 title="" image="">
-                <div className="flex flex-row items-center gap-8">
-                    <div className="w-50">
+                <div className="grid grid-cols-4 items-center gap-8">
+                    <div>
                         <ProfessionalSelect placeholder={"کالا / محصول"} />
                     </div>
-                    <div className="w-50">
+                    <div>
                         <ProfessionalSelect placeholder={"انبار"} />
                     </div>
-                    <div className="w-50">
+                    <div>
                         <CustomDatepicker placeholder={"تاریخ تسویه"} />
                     </div>
-                    <div className="w-50">
+                    <div>
+                        <CustomInput />
+                    </div>
+                    <div>
                         {factorOptions.map((item: {
                             id: number;
                             title: string;
                         }) => {
-                            return <label className="mx-4" key={item.id}>
+                            return <label className="ml-4" key={item.id}>
                                 <input className="mx-2 w-[16px] h-[16px]" type="radio" value={item.id} name="factorType" checked={factorType === item.id} onChange={handleRadio} />
                                 <span className="">{item.title}</span>
                             </label>
                         })}
-
+                    </div>
+                    <div>
+                        <CustomInput />
+                    </div>
+                    <div>
+                        <CustomInput />
+                    </div>
+                    <div>
+                        <CustomInput />
+                    </div>
+                    <div>
+                        <CustomInput />
+                    </div>
+                    <div className="">
+                        {factorOptions.map((item: {
+                            id: number;
+                            title: string;
+                        }) => {
+                            return <label className="ml-4" key={item.id}>
+                                <input className="mx-2 w-[16px] h-[16px]" type="radio" value={item.id} name="factorType" checked={factorType === item.id} onChange={handleRadio} />
+                                <span className="">{item.title}</span>
+                            </label>
+                        })}
                     </div>
                 </div>
             </Card6>

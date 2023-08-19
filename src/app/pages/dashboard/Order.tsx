@@ -7,6 +7,8 @@ import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
 
+    const [chooseProduct, setChooseProduct] = useState<boolean>(false)
+
     const factorOptions = [
         { id: 1, title: "رسمی سپهر" },
         { id: 2, title: "رسمی مهفام" },
@@ -17,10 +19,11 @@ const Order = () => {
         setFactorType(Number(e.target.value))
     }
 
-    console.log(factorType)
+
     return (
         <>
             <Card6 title="" image="">
+                {/* Search Customer */}
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="min-w-[100%] md:min-w-[50%] my-2 md:my-0">
                         <ProfessionalSelect
@@ -31,6 +34,55 @@ const Order = () => {
                     <button className="btn btn-primary my-2 md:my-0">
                         افزودن مشتری جدید
                     </button>
+                </div>
+                <div className="relative">
+                    <input onFocus={() => setChooseProduct(true)} onBlur={() => setChooseProduct(false)} type="text" className="border border-gray-600 rounded-sm py-2 w-[340px]" />
+                    {chooseProduct &&
+                        <div className="border w-[340px] overflow-auto max-h-[250px] min-h-[48px] absolute top-[48px] box-border bg-white shadow-md">
+                            <ul>
+                                <li className="min-h-[67px]">kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                                <li>kjfsjfljflsjldf</li>
+                            </ul>
+                        </div>
+                    }
                 </div>
                 {/* <div className="grid grid-cols-4 items-center gap-8">
                         <div>

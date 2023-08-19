@@ -13,6 +13,7 @@ import { App } from "../App";
 import Login from "../modules/auth/Login";
 
 import Cookies from "js-cookie";
+import Register from "../modules/auth/Register";
 
 const { PUBLIC_URL } = process.env;
 
@@ -33,6 +34,7 @@ const AppRoutes: FC = () => {
                     ) : (
                         <>
                             <Route path="auth/*" element={<Login />} />
+                            <Route path="auth/register" element={<Register />} />
                             <Route path="*" element={<Navigate to="/auth" />} />
                         </>
                     )}

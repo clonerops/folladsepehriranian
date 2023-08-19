@@ -7,7 +7,7 @@ const Inputs = (props: any) => {
                 {props.title}
             </label>
             <input
-                placeholder={props.title}
+                placeholder={props.placeholder}
                 {...props.getFieldProps(props.name)}
                 className={clsx(
                     "form-control bg-transparent",

@@ -2,8 +2,8 @@ import { useFormik } from "formik";
 import { toAbsoluteUrl } from "../../../_cloner/helpers";
 import Inputs from "./components/Inputs";
 import * as Yup from "yup";
-import Captcha from "./components/Captcha";
-import { useGetCaptcha } from "./core/_hooks";
+// import Captcha from "./components/Captcha";
+// import { useGetCaptcha } from "./core/_hooks";
 import { useState } from "react";
 import { loginUser } from "./core/_requests";
 import Cookies from "js-cookie";
@@ -18,18 +18,18 @@ const Login = () => {
             .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("رمز عبور الزامی است"),
-        captcha: Yup.string().required("کدامنیتی الزامی است"),
+        // captcha: Yup.string().required("کدامنیتی الزامی است"),
     });
 
     const initialValues = {
         username: "",
         password: "",
-        captcha: "",
+        // captcha: "",
     };
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { data: captcha, refetch } = useGetCaptcha();
+    // const { data: captcha, refetch } = useGetCaptcha();
 
     const formik = useFormik({
         initialValues,
@@ -39,8 +39,8 @@ const Login = () => {
             const userData = {
                 username: values.username,
                 password: values.password,
-                captchaToken: captcha.tokenString,
-                captchaCode: values.captcha,
+                // captchaToken: captcha.tokenString,
+                // captchaCode: values.captcha,
             };
             try {
                 const auth = await loginUser(userData);
@@ -52,7 +52,7 @@ const Login = () => {
                 setStatus("اطلاعات ورود نادرست می باشد");
                 setSubmitting(false);
                 setLoading(false);
-                refetch();
+                // refetch();
             }
         },
     });
@@ -91,7 +91,7 @@ const Login = () => {
                             title="کلمه عبور"
                         ></Inputs>
                     </div>
-                    <div className="w-50">
+                    {/* <div className="w-50">
                         <Captcha captcha={captcha?.image} refetch={refetch} />
                         <Inputs
                             type="text"
@@ -102,7 +102,7 @@ const Login = () => {
                             name={"captcha"}
                             title="کد امنیتی"
                         ></Inputs>
-                    </div>
+                    </div> */}
                     <div className="d-grid mb-10 w-50">
                         <button
                             type="submit"
@@ -135,12 +135,12 @@ const Login = () => {
                         }}
                     >
                         <div className="text-center mb-auto">
-                            <label className="text-white font-yekan_bold text-2xl my-8">
+                            {/* <label className="text-white font-yekan_bold text-2xl my-8">
                                 بازرگانی سپهر ایرانیان
-                            </label>
+                            </label> */}
                         </div>
                         <div className="flex justify-center items-center">
-                            <img
+                            {/* <img
                                 src={`${toAbsoluteUrl(
                                     "/media/logos/bazarganilogo.png"
                                 )}`}
@@ -148,7 +148,7 @@ const Login = () => {
                                 height={300}
                                 alt="Sepehr Logo"
                                 className="mx-auto"
-                            />
+                            /> */}
                         </div>
                         <div className="mt-auto" />
                     </div>

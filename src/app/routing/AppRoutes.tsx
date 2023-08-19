@@ -10,10 +10,9 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { ErrorsPage } from "../modules/errors/ErrorsPage";
 import { App } from "../App";
-import Login from "../modules/auth/Login";
 
 import Cookies from "js-cookie";
-import Register from "../modules/auth/Register";
+import Auth from "../modules/auth/Auth";
 
 const { PUBLIC_URL } = process.env;
 
@@ -33,8 +32,7 @@ const AppRoutes: FC = () => {
                         </>
                     ) : (
                         <>
-                            <Route path="auth/*" element={<Login />} />
-                            <Route path="auth/register" element={<Register />} />
+                            <Route path="auth/*" element={<Auth />} />
                             <Route path="*" element={<Navigate to="/auth" />} />
                         </>
                     )}

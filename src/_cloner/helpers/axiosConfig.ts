@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { getRefreshToken } from "./reusableFunction";
 
 export const dashboardHttp = axios.create({
-    baseURL: "https://transferapi.saipacorp.com/api/",
+    baseURL: "https://iraniansepehr.com/api/",
     headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,
@@ -11,7 +11,7 @@ export const dashboardHttp = axios.create({
 });
 
 export const http = axios.create({
-    baseURL: "https://transferapi.saipacorp.com/",
+    baseURL: "https://iraniansepehr.com/api/",
     headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("token")}`,

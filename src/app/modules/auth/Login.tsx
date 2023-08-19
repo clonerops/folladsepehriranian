@@ -19,7 +19,7 @@ const Login = () => {
     });
 
     const initialValues = {
-        username: "",
+        email: "",
         password: "",
     };
 
@@ -32,7 +32,7 @@ const Login = () => {
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             setLoading(true);
             const userData = {
-                username: values.username,
+                email: values.email,
                 password: values.password,
             };
             try {
@@ -60,10 +60,10 @@ const Login = () => {
                         type="text"
                         login={true}
                         getFieldProps={formik.getFieldProps}
-                        touched={formik.touched.username}
-                        errors={formik.errors.username}
-                        name={"username"}
-                        title="نام کاربری"
+                        touched={formik.touched.email}
+                        errors={formik.errors.email}
+                        name={"email"}
+                        title="ایمیل"
                     ></Inputs>
                 </div>
                 <div className="w-50">

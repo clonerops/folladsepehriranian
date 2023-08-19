@@ -52,6 +52,10 @@ const Register = () => {
             const userData = {
                 username: values.username,
                 password: values.password,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                confrimPassword: values.confrimPassword,
             };
             try {
                 const auth = await loginUser(userData);

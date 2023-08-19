@@ -16,10 +16,8 @@ const registerUser = async (formData: IRegisterUser) => {
 };
 
 const loginUser = async (formData: ILoginUser) => {
-    const { data } = await http.post(
-        "/Account/authenticate",
-        JSON.stringify(formData)
-    );
+    console.log(formData)
+    const { data } = await http.post("/Account/authenticate",JSON.stringify(formData));
     return data;
 };
 

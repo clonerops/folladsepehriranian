@@ -8,7 +8,7 @@ import ResetPassword from "./components/ResetPassword";
 
 const Login = () => {
     const loginSchema = Yup.object().shape({
-        username: Yup.string()
+        email: Yup.string()
             .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("نام کاربری الزامی است"),
@@ -19,8 +19,8 @@ const Login = () => {
     });
 
     const initialValues = {
-        email: "",
-        password: "",
+        email: "sepehrofficial@info.com",
+        password: "123Pa$$word!",
     };
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -35,6 +35,7 @@ const Login = () => {
                 email: values.email,
                 password: values.password,
             };
+            console.log("shdgahjdgahsj")
             try {
                 const auth = await loginUser(userData);
                 localStorage.setItem("auth", JSON.stringify(auth));

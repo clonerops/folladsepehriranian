@@ -14,7 +14,7 @@ export const http = axios.create({
     baseURL: "https://iraniansepehr.com/api/",
     headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${Cookies.get("token")}`,
+        // Authorization: `Bearer ${Cookies.get("token")}`,
     },
 });
 

@@ -42,12 +42,12 @@ const Auth = () => {
                         }}
                     >
                         <div className="text-center mb-auto">
-                            {/* <label className="text-white font-yekan_bold text-2xl my-8">
+                            <label className="text-white font-yekan_bold text-2xl my-8">
                                 بازرگانی سپهر ایرانیان
-                            </label> */}
+                            </label>
                         </div>
                         <div className="flex justify-center items-center">
-                            {/* <img
+                            <img
                                 src={`${toAbsoluteUrl(
                                     "/media/logos/bazarganilogo.png"
                                 )}`}
@@ -55,7 +55,7 @@ const Auth = () => {
                                 height={300}
                                 alt="Sepehr Logo"
                                 className="mx-auto"
-                            /> */}
+                            />
                         </div>
                         <div className="mt-auto" />
                     </div>

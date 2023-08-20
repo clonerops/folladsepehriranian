@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import Inputs from "./components/Inputs";
 import * as Yup from "yup";
 import { useState } from "react";
-import { loginUser } from "./core/_requests";
 import Cookies from "js-cookie";
 import ResetPassword from "./components/ResetPassword";
 import { toAbsoluteUrl } from "../../../_cloner/helpers";
@@ -61,9 +60,6 @@ const Login = () => {
             }
         },
     });
-
-    console.log("data", data?.data?.Message)
-
     return (
         <>
             <div className="grid grid-cols-2 h-screen">

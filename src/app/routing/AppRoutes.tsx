@@ -12,7 +12,6 @@ import { ErrorsPage } from "../modules/errors/ErrorsPage";
 import { App } from "../App";
 
 import Cookies from "js-cookie";
-import Auth from "../modules/auth/Auth";
 import Login from "../modules/auth/Login";
 
 const { PUBLIC_URL } = process.env;

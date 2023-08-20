@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
-import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
+import { useState } from "react";
+// import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
+// import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
-import Inputs from "../../modules/auth/components/Inputs";
-import CustomInput from "../../../_cloner/helpers/components/CustomInput";
+// import Inputs from "../../modules/auth/components/Inputs";
+// import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
-    const [chooseProduct, setChooseProduct] = useState<boolean>(false);
-
     const data = [
         { id: 1, title: "ابوالفضل معصومی 23 ساله کارخانه" },
         { id: 2, title: "فرهاد معصومی 25 ساله کارخانه" },
@@ -18,7 +16,6 @@ const Order = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredData, setFilteredData] = useState(data);
     const [showProducts, setShowProducts] = useState(false);
-    const suggestionsRef = useRef<any>(null); // Ref to the suggestions dropdown
 
     function handleInputChange(event: any) {
         const newInputValue = event.target.value;
@@ -54,7 +51,6 @@ const Order = () => {
     // };
     const handleFocuse = () => {
         setShowProducts(true);
-        setChooseProduct(true);
     };
     const handleBlur = () => {
         setTimeout(() => {

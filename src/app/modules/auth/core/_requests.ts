@@ -17,8 +17,13 @@ const registerUser = async (formData: IRegisterUser) => {
 };
 
 const loginUser = async (formData: ILoginUser) => {
-    const { data } = await http.post("/Account/authenticate",JSON.stringify(formData));
-    return data;
+    try {
+        const { data } = await http.post("/Account/authenticate",JSON.stringify(formData));
+        return data;
+        
+    } catch (error: any) {
+        return error.response
+    }
 };
 
 const forgetPasswordUser = async (formData: IForgetPassword) => {

@@ -5,6 +5,8 @@ import { useState } from "react";
 import { loginUser } from "./core/_requests";
 import Cookies from "js-cookie";
 import ResetPassword from "./components/ResetPassword";
+import { toAbsoluteUrl } from "../../../_cloner/helpers";
+import { useLoginUser } from "./core/_hooks";
 
 const Login = () => {
     const loginSchema = Yup.object().shape({
@@ -19,12 +21,15 @@ const Login = () => {
     });
 
     const initialValues = {
-        userName: "sepehrofficial@info.com",
-        password: "123Pa$$word!",
+        userName: "clonerops",
+        password: "aBo217767345@",
     };
 
     const [loading, setLoading] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false)
+
+    const { mutate, data } = useLoginUser()
 
     const formik = useFormik({
         initialValues,
@@ -36,11 +41,19 @@ const Login = () => {
                 password: values.password,
             };
             try {
-                const auth = await loginUser(userData);
-                localStorage.setItem("auth", JSON.stringify(auth));
-                Cookies.set("token", `${auth?.jwtToken}`);
-                setLoading(false);
-                window.location.reload();
+                mutate(userData, {
+                    onSuccess: (loginData) => {
+                        if (loginData.succeeded) {
+                            localStorage.setItem("auth", JSON.stringify(loginData?.data));
+                            Cookies.set("token", `${loginData?.data?.jwToken}`);
+                            setLoading(false);
+                            window.location.reload();
+                        } else {
+                            setIsError(true)
+                            setLoading(false);
+                        }
+                    }
+                });
             } catch (error) {
                 setStatus("اطلاعات ورود نادرست می باشد");
                 setSubmitting(false);
@@ -49,63 +62,100 @@ const Login = () => {
         },
     });
 
+    console.log("data", data?.data?.Message)
+
     return (
         <>
-            <form
-                onSubmit={formik.handleSubmit}
-                className="flex justify-center items-center flex-col"
-            >
-                <div className="w-50">
-                    <Inputs
-                        type="text"
-                        login={true}
-                        getFieldProps={formik.getFieldProps}
-                        touched={formik.touched.userName}
-                        errors={formik.errors.userName}
-                        name={"userName"}
-                        title="نام کاربری"
-                    ></Inputs>
-                </div>
-                <div className="w-50">
-                    <Inputs
-                        type="password"
-                        login={true}
-                        getFieldProps={formik.getFieldProps}
-                        touched={formik.touched.password}
-                        errors={formik.errors.password}
-                        name={"password"}
-                        title="کلمه عبور"
-                    ></Inputs>
-                </div>
-                <div
-                    onClick={() => setIsOpen(true)}
-                    className="w-50 mb-8 cursor-pointer"
+            <div className="grid grid-cols-2 h-screen">
+                <form
+                    onSubmit={formik.handleSubmit}
+                    className="flex justify-center items-center flex-col"
                 >
-                    <span>کلمه عبور خود را فراموش کرده ام!</span>
-                </div>
-                <div className="d-grid mb-10 w-50">
-                    <button
-                        type="submit"
-                        id="kt_sign_in_submit"
-                        className="btn btn-primary"
-                        disabled={formik.isSubmitting || !formik.isValid}
+                    {isError &&
+                        <div>
+                            <p className="text-red-500">{data?.data?.Message}</p>
+                        </div>
+                    }
+                    <div className="w-50">
+                        <Inputs
+                            type="text"
+                            login={true}
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.userName}
+                            errors={formik.errors.userName}
+                            name={"userName"}
+                            title="نام کاربری"
+                        ></Inputs>
+                    </div>
+                    <div className="w-50">
+                        <Inputs
+                            type="password"
+                            login={true}
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.password}
+                            errors={formik.errors.password}
+                            name={"password"}
+                            title="کلمه عبور"
+                        ></Inputs>
+                    </div>
+                    <div
+                        onClick={() => setIsOpen(true)}
+                        className="w-50 mb-8 cursor-pointer"
                     >
-                        {!loading && (
-                            <span className="indicator-label">ادامه</span>
-                        )}
-                        {loading && (
-                            <span
-                                className="indicator-progress"
-                                style={{ display: "block" }}
-                            >
-                                درحال پردازش...
-                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        )}
-                    </button>
+                        <span>کلمه عبور خود را فراموش کرده ام!</span>
+                    </div>
+                    <div className="d-grid mb-10 w-50">
+                        <button
+                            type="submit"
+                            id="kt_sign_in_submit"
+                            className="btn btn-primary"
+                            disabled={formik.isSubmitting || !formik.isValid}
+                        >
+                            {!loading && (
+                                <span className="indicator-label">ادامه</span>
+                            )}
+                            {loading && (
+                                <span
+                                    className="indicator-progress"
+                                    style={{ display: "block" }}
+                                >
+                                    درحال پردازش...
+                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            )}
+                        </button>
+                    </div>
+                </form>
+                <ResetPassword isOpen={isOpen} setIsOpen={setIsOpen} />
+                <div>
+                    <div
+                        className="h-full w-full flex flex-col"
+                        style={{
+                            backgroundImage: `url(${toAbsoluteUrl(
+                                "/media/logos/auth-bg.png"
+                            )})`,
+                        }}
+                    >
+                        <div className="text-center mb-auto">
+                            <label className="text-white font-yekan_bold text-2xl my-8">
+                                بازرگانی سپهر ایرانیان
+                            </label>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <img
+                                src={`${toAbsoluteUrl(
+                                    "/media/logos/bazarganilogo.png"
+                                )}`}
+                                width={300}
+                                height={300}
+                                alt="Sepehr Logo"
+                                className="mx-auto"
+                            />
+                        </div>
+                        <div className="mt-auto" />
+                    </div>
                 </div>
-            </form>
-            <ResetPassword isOpen={isOpen} setIsOpen={setIsOpen} />
+            </div>
         </>
     );
 };

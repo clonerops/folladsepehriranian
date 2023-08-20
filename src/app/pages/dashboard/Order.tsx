@@ -5,6 +5,7 @@ import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import Register from "../../modules/auth/Register";
+import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
@@ -33,7 +34,7 @@ const Order = () => {
                 item.title.toLowerCase().includes(word)
             );
         });
-    
+
         setFilteredData(newProduct);
 
         setShowProducts(true);
@@ -76,56 +77,67 @@ const Order = () => {
                     <button onClick={() => setIsOpen(true)} className="btn btn-primary my-2 md:my-0">
                         افزودن مشتری جدید
                     </button>
-                </div>  
+                </div>
                 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} reqular={true} className="w-[800px]">
                     <Register />
                 </Modal>
-                <div className="relative">
-                    <input
-                        onFocus={handleFocuse}
-                        onBlur={handleBlur}
-                        value={searchQuery}
-                        onChange={handleInputChange}
-                        type="text"
-                        className="border border-gray-400 rounded-md py-2 w-[340px]"
-                    />
+                <div className="flex items-center gap-x-8 mt-8">
+                    <div className="relative">
+                        <input
+                            onFocus={handleFocuse}
+                            onBlur={handleBlur}
+                            value={searchQuery}
+                            onChange={handleInputChange}
+                            placeholder="کالا / محصول"
+                            type="text"
+                            className="border px-2 border-gray-400 rounded-md py-2 w-[340px]"
+                        />
 
-                    {showProducts && (
-                        <div className="border w-[340px] overflow-auto max-h-[250px] min-h-[48px] absolute top-[48px] box-border bg-white shadow-md">
-                            <ul
-                                onClick={(e) => e.stopPropagation()}
-                                className="serach__product-lists"
-                            >
-                                {filteredData.map((item, index) => {
-                                    return (
-                                        <li
-                                            key={index}
-                                            onClick={() =>
-                                                handleProductSelect(item)
-                                            }
-                                            className="min-h-[67px] cursor-pointer"
-                                        >
-                                            <div className="flex flex-row justify-between items-center">
-                                                <div className=" relative flex flex-col pt-4">
-                                                    <span className="text-sm px-4">
+                        {showProducts && (
+                            <div className="border w-[340px] overflow-auto max-h-[250px] min-h-[48px] absolute top-[48px] box-border bg-white shadow-md">
+                                <ul
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="serach__product-lists"
+                                >
+                                    {filteredData.map((item, index) => {
+                                        return (
+                                            <li
+                                                key={index}
+                                                onClick={() =>
+                                                    handleProductSelect(item)
+                                                }
+                                                className="min-h-[67px] cursor-pointer"
+                                            >
+                                                <div className="flex flex-row justify-between items-center">
+                                                    <div className=" relative flex flex-col pt-4">
+                                                        <span className="text-sm px-4">
+                                                            {" "}
+                                                            {item.title}
+                                                        </span>
+                                                        <span className="text-red-500 text-xs px-4 absolute top-10 right-0 ">
+                                                            کیلوگرم
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-xs px-4">
                                                         {" "}
-                                                        {item.title}
-                                                    </span>
-                                                    <span className="text-red-500 text-xs px-4 absolute top-10 right-0 ">
-                                                        کیلوگرم
+                                                        کارخانه
                                                     </span>
                                                 </div>
-                                                <span className="text-xs px-4">
-                                                    {" "}
-                                                    کارخانه
-                                                </span>
-                                            </div>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                    )}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <CustomInput placeholder="مقدار / تعداد" />
+                    </div>
+                    <div>
+                        <button className="border-2 border-blue-500 py-2 px-16 rounded-md">
+                            <span> + افزودن کالا</span>
+                        </button>
+                    </div>
                 </div>
                 {/* <div className="grid grid-cols-4 items-center gap-8">
                         <div>

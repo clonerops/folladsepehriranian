@@ -2,9 +2,8 @@ import { useFormik } from "formik";
 import Inputs from "./components/Inputs";
 import * as Yup from "yup";
 import { useState } from "react";
-import { registerUser } from "./core/_requests";
 import { useRegisterUser } from "./core/_hooks";
-import { KTSVG, toAbsoluteUrl } from "../../../_cloner/helpers";
+// import { KTSVG, toAbsoluteUrl } from "../../../_cloner/helpers";
 
 const Register = () => {
     const loginSchema = Yup.object().shape({
@@ -112,7 +111,7 @@ const Register = () => {
             </div> */}
             <form
                 onSubmit={formik.handleSubmit}
-                className="flex justify-center items-center flex-col"
+                className="flex justify-center items-center flex-col container py-16"
             >
                 <div className="flex flex-wrap px-4">
                     <div className="w-50 px-2">
@@ -205,11 +204,11 @@ const Register = () => {
                     <button
                         type="submit"
                         id="kt_sign_in_submit"
-                        className="btn btn-primary"
+                        className="bg-green-500 py-4 px-16 rounded-lg hover:bg-green-700 transition"
                         disabled={formik.isSubmitting || !formik.isValid}
                     >
                         {!loading && (
-                            <span className="indicator-label">ادامه</span>
+                            <span className="indicator-label text-white">ثبت</span>
                         )}
                         {loading && (
                             <span

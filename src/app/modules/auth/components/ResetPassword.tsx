@@ -46,6 +46,7 @@ const ResetPassword = (props: {
             isOpen={props.isOpen}
             onClose={() => props.setIsOpen(false)}
             reqular
+            className="w-[600px]"
         >
             <form className="flex justify-center items-center flex-col mx-16 my-8">
                 <div className="w-full">

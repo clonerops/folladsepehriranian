@@ -24,7 +24,7 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
         ></span>
         {reqular ? (
           <div
-            className={`inline-block transform overflow-auto rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle ${className}`}
+            className={`inline-block transform overflow-auto rounded-lg bg-white text-left align-bottom shadow-xl transition-all  sm:align-middle ${className}`}
             role='dialog'
             aria-modal='true'
             aria-labelledby='modal-headline'

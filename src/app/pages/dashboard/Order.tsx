@@ -2,10 +2,15 @@ import { useState } from "react";
 // import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
 // import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
+import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
+import Modal from "../../../_cloner/helpers/components/Modal";
+import Register from "../../modules/auth/Register";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+
     const data = [
         { id: 1, title: "ابوالفضل معصومی 23 ساله کارخانه" },
         { id: 2, title: "فرهاد معصومی 25 ساله کارخانه" },
@@ -61,17 +66,20 @@ const Order = () => {
         <>
             <Card6 title="" image="">
                 {/* Search Customer */}
-                {/* <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="min-w-[100%] md:min-w-[50%] my-2 md:my-0">
                         <ProfessionalSelect
                             placeholder="جستجو مشتری"
                         />
                     </div>
 
-                    <button className="btn btn-primary my-2 md:my-0">
+                    <button onClick={() => setIsOpen(true)} className="btn btn-primary my-2 md:my-0">
                         افزودن مشتری جدید
                     </button>
-                </div> */}
+                </div>  
+                <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} reqular={true} className="w-[800px]">
+                    <Register />
+                </Modal>
                 <div className="relative">
                     <input
                         onFocus={handleFocuse}

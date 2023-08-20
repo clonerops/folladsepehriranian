@@ -8,7 +8,7 @@ import ResetPassword from "./components/ResetPassword";
 
 const Login = () => {
     const loginSchema = Yup.object().shape({
-        email: Yup.string()
+        userName: Yup.string()
             .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("نام کاربری الزامی است"),
@@ -19,7 +19,7 @@ const Login = () => {
     });
 
     const initialValues = {
-        email: "sepehrofficial@info.com",
+        userName: "sepehrofficial@info.com",
         password: "123Pa$$word!",
     };
 
@@ -32,10 +32,9 @@ const Login = () => {
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             setLoading(true);
             const userData = {
-                email: values.email,
+                userName: values.userName,
                 password: values.password,
             };
-            console.log("shdgahjdgahsj")
             try {
                 const auth = await loginUser(userData);
                 localStorage.setItem("auth", JSON.stringify(auth));
@@ -61,10 +60,10 @@ const Login = () => {
                         type="text"
                         login={true}
                         getFieldProps={formik.getFieldProps}
-                        touched={formik.touched.email}
-                        errors={formik.errors.email}
-                        name={"email"}
-                        title="ایمیل"
+                        touched={formik.touched.userName}
+                        errors={formik.errors.userName}
+                        name={"userName"}
+                        title="نام کاربری"
                     ></Inputs>
                 </div>
                 <div className="w-50">

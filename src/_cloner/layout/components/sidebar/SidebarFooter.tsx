@@ -13,7 +13,7 @@ const SidebarFooter = () => {
         data-bs-dismiss-='click'
         title='Metronic Docs & Components'
       >
-        <span className='btn-label'>بازرگانی سپهر ایرانیان</span>
+        <span className='btn-label'>تست سایدبار</span>
         <KTSVG path='/media/icons/duotune/general/gen005.svg' className='btn-icon svg-icon-2 m-0' />
       </a>
     </div>

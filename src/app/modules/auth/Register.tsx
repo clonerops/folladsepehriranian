@@ -2,33 +2,34 @@ import { useFormik } from "formik";
 import Inputs from "./components/Inputs";
 import * as Yup from "yup";
 import { useState } from "react";
-import { loginUser } from "./core/_requests";
-import Cookies from "js-cookie";
+import { registerUser } from "./core/_requests";
+import { useRegisterUser } from "./core/_hooks";
+import { KTSVG, toAbsoluteUrl } from "../../../_cloner/helpers";
 
 const Register = () => {
     const loginSchema = Yup.object().shape({
         firstName: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("نام الزامی است"),
         lastName: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("نام خانوادگی الزامی است"),
         email: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("ایمیل الزامی است"),
-        username: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+        userName: Yup.string()
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("نام کاربری الزامی است"),
         password: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("کلمه عبور الزامی است"),
         confirmPassword: Yup.string()
-            .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
+            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("تکرار کلمه عبور الزامی است"),
     });
@@ -37,34 +38,42 @@ const Register = () => {
         firstName: "",
         lastName: "",
         email: "",
-        username: "",
+        userName: "",
         password: "",
-        confrimPassword: "",
+        confirmPassword: "",
     };
 
     const [loading, setLoading] = useState<boolean>(false);
+    const [isError, setIsError] = useState(false);
+    const { mutate, data } = useRegisterUser();
 
     const formik = useFormik({
         initialValues,
         validationSchema: loginSchema,
-        onSubmit: async (values, { setStatus, setSubmitting }) => {
+        onSubmit: async (values, { setStatus, setSubmitting, resetForm }) => {
             setLoading(true);
             const userData = {
-                username: values.username,
+                userName: values.userName,
                 password: values.password,
                 firstName: values.firstName,
                 lastName: values.lastName,
                 email: values.email,
-                confrimPassword: values.confrimPassword,
+                confirmPassword: values.confirmPassword,
             };
             try {
-                const auth = await loginUser(userData);
-                localStorage.setItem("auth", JSON.stringify(auth));
-                Cookies.set("token", `${auth?.jwtToken}`);
+                mutate(userData, {
+                    onSuccess: (fetchData) => {
+                        if (fetchData.status === 400) {
+                            setIsError(true);
+                        } else {
+                            setIsError(false);
+                        }
+                    },
+                });
                 setLoading(false);
-                window.location.reload();
             } catch (error) {
                 setStatus("اطلاعات ورود نادرست می باشد");
+                alert();
                 setSubmitting(false);
                 setLoading(false);
             }
@@ -73,6 +82,34 @@ const Register = () => {
 
     return (
         <>
+            {/* <div>
+                {data?.status === 400 && isError && (
+                    <div className="w-50 h-auto bg-gray-200 border-r-2 border-r-red-600">
+                        <div
+                            onClick={() => setIsError(false)}
+                            className="float-left"
+                        >
+                            <KTSVG
+                                className=""
+                                path={toAbsoluteUrl(
+                                    "/media/icons/duotune/art/art001.svg"
+                                )}
+                            />
+                        </div>
+                        <ul>
+                            {data?.data?.errors?.map((item: any) => {
+                                console.log("item", item)
+                                return (
+                                    <li className="p-4">
+                                        ConfirmPassword' and 'Password' do not
+                                        match
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                )}
+            </div> */}
             <form
                 onSubmit={formik.handleSubmit}
                 className="flex justify-center items-center flex-col"
@@ -88,6 +125,9 @@ const Register = () => {
                             name={"firstName"}
                             title="نام"
                         ></Inputs>
+                        {isError && data?.data?.errors.FirstName && (
+                            <span>{data?.data?.errors.FirstName[0]}</span>
+                        )}
                     </div>
                     <div className="w-50 px-2">
                         <Inputs
@@ -99,6 +139,9 @@ const Register = () => {
                             name={"lastName"}
                             title="نام خانوادگی"
                         ></Inputs>
+                        {isError && data?.data?.errors.LastName && (
+                            <span>{data?.data?.errors.LastName[0]}</span>
+                        )}
                     </div>
                     <div className="w-50 px-2">
                         <Inputs
@@ -110,17 +153,23 @@ const Register = () => {
                             name={"email"}
                             title="ایمیل"
                         ></Inputs>
+                        {isError && data?.data?.errors.Email && (
+                            <span>{data?.data?.errors.Email[0]}</span>
+                        )}
                     </div>
                     <div className="w-50 px-2">
                         <Inputs
                             type="text"
                             login={true}
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.username}
-                            errors={formik.errors.username}
-                            name={"username"}
+                            touched={formik.touched.userName}
+                            errors={formik.errors.userName}
+                            name={"userName"}
                             title="نام کاربری"
                         ></Inputs>
+                        {isError && data?.data?.errors.UserName && (
+                            <span>{data?.data?.errors.UserName[0]}</span>
+                        )}
                     </div>
                     <div className="w-50 px-2">
                         <Inputs
@@ -132,17 +181,23 @@ const Register = () => {
                             name={"password"}
                             title="کلمه عبور"
                         ></Inputs>
+                        {isError && data?.data?.errors.Password && (
+                            <span>{data?.data?.errors.Password[0]}</span>
+                        )}
                     </div>
                     <div className="w-50 px-2">
                         <Inputs
                             type="password"
                             login={true}
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.confrimPassword}
-                            errors={formik.errors.confrimPassword}
-                            name={"confrimPassword"}
+                            touched={formik.touched.confirmPassword}
+                            errors={formik.errors.confirmPassword}
+                            name={"confirmPassword"}
                             title="تکرار کلمه عبور"
                         ></Inputs>
+                        {isError && data?.data?.errors.ConfirmPassword && (
+                            <span>{data?.data?.errors.ConfirmPassword[0]}</span>
+                        )}
                     </div>
                 </div>
                 <div className="w-full px-6 flex justify-between items-center">

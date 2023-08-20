@@ -123,3 +123,6 @@ tr {
     right: 0 !important;
     left: 0 !important;
 }
+.serach__product-lists li:nth-child(even){
+    background-color: rgba(0,0,0,0.1);
+}

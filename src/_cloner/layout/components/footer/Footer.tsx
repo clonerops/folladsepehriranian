@@ -18,7 +18,8 @@ const Footer = () => {
           target='_blank'
           className='text-gray-800 text-hover-primary'
         >
-          گروه بازرگانی سپهر ایرانیان
+          {/* گروه بازرگانی سپهر ایرانیان */}
+          تست
         </a>
       </div>
 

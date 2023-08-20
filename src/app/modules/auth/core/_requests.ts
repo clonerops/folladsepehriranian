@@ -8,15 +8,15 @@ import {
 } from "./_models";
 
 const registerUser = async (formData: IRegisterUser) => {
-    const { data } = await http.post(
-        "/Account/register",
-        JSON.stringify(formData)
-    );
-    return data;
+    try {
+        const { data } = await http.post("/Account/register",JSON.stringify(formData));
+        return data
+    } catch (error: any) {
+        return error.response
+    }
 };
 
 const loginUser = async (formData: ILoginUser) => {
-    console.log(formData)
     const { data } = await http.post("/Account/authenticate",JSON.stringify(formData));
     return data;
 };

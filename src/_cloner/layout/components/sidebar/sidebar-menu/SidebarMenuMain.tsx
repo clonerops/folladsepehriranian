@@ -34,7 +34,7 @@ const SidebarMenuMain = () => {
         title='Layout Builder'
         fontIcon='bi-layers'
       /> */}
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>سفارشات</span>
         </div>
@@ -47,7 +47,7 @@ const SidebarMenuMain = () => {
       >
         <SidebarMenuItem to='/dashboard/order' title='ثبت سفارش' hasBullet={true} />
 
-      </SidebarMenuItemWithSub>
+      </SidebarMenuItemWithSub> */}
       {/* <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'

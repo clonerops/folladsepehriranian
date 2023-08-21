@@ -170,12 +170,12 @@ const Order = () => {
                             </div>
                         )}
                     </div>
-                    <div>
+                    {/* <div>
                         <CustomInput placeholder="مقدار / تعداد" />
                     </div>
                     <div>
                         <CustomInput placeholder="قیمت" />
-                    </div>
+                    </div> */}
                     {/* <div>
                         <button className="border-2 border-blue-500 py-2 px-16 rounded-md">
                             <span> + افزودن کالا</span>

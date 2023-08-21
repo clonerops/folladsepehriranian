@@ -1,7 +1,8 @@
 import { KTSVG } from "../../../../_cloner/helpers";
+import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import { IProduct } from "../core/_models";
 
-const ProductSelectedList = () => {
+const ProductSelectedListInModal = () => {
     const fakeData = [
         {
             id: 1,
@@ -11,7 +12,10 @@ const ProductSelectedList = () => {
         },
     ];
     return (
-        <div>
+        <div className="container py-8">
+            <div className="w-50 my-2">
+                <CustomInput placeholder="جستجو محصول / کالا" />
+            </div>
             <table className="w-full">
                 <thead className="bg-gray-200">
                     <tr>
@@ -22,13 +26,13 @@ const ProductSelectedList = () => {
                             کالا / محصول
                         </td>
                         <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
-                            مقدار
+                            انبار
+                        </td>
+                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            موجودی
                         </td>
                         <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
                             قیمت
-                        </td>
-                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
-                            حذف
                         </td>
                     </tr>
                 </thead>
@@ -46,19 +50,13 @@ const ProductSelectedList = () => {
                                     {item.product}
                                 </td>
                                 <td className="text-center py-4 border border-gray-300">
-                                    {item.count}
+                                    بازرگانی
                                 </td>
                                 <td className="text-center py-4 border border-gray-300">
-                                    {item.price} ریال
+                                    {item.count}
                                 </td>
                                 <td className="flex justify-center items-center py-4 border border-gray-300 mx-auto">
-                                    <KTSVG
-                                        className="text-red-500"
-                                        svgClassName=""
-                                        path={
-                                            "/media/icons/duotune/arrows/arr011.svg"
-                                        }
-                                    />
+                                    {item.price} ریال
                                 </td>
                             </tr>
                         );
@@ -69,4 +67,4 @@ const ProductSelectedList = () => {
     );
 };
 
-export default ProductSelectedList;
+export default ProductSelectedListInModal;

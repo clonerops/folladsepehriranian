@@ -6,17 +6,35 @@ import ProfessionalSelect from "../../../_cloner/helpers/components/Professional
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateUser from "../user/CreateUser";
+import ProductSelectedList from "./components/ProductSelectedList";
+import CustomTextarea from "../../../_cloner/helpers/components/CustomTextarea";
+import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
+import CusromRadioGroupButton from "../../../_cloner/helpers/components/CusromRadioGroupButton";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const data = [
         { id: 1, title: "ابوالفضل معصومی 23 ساله کارخانه" },
         { id: 2, title: "فرهاد معصومی 25 ساله کارخانه" },
         { id: 3, title: "Abolfazl 35 ساله" },
         { id: 4, title: "ابوالفضل معصومی 23 ابوالفضل محمدی 12 ساله" },
+    ];
+
+    const factorType = [
+        { id: 1, title: "غیررسمی" },
+        { id: 2, title: "رسمی مهفام" },
+        { id: 3, title: "رسمی سپهر" },
+    ];
+    const exitType = [
+        { id: 1, title: "عادی" },
+        { id: 2, title: "بعد از تسویه" },
+    ];
+    const sendType = [
+        { id: 1, title: "ارسال با مشتری" },
+        { id: 2, title: "ارسال بازرگانی" },
     ];
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -69,19 +87,25 @@ const Order = () => {
                 {/* Search Customer */}
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="min-w-[100%] md:min-w-[50%] my-2 md:my-0">
-                        <ProfessionalSelect
-                            placeholder="جستجو مشتری"
-                        />
+                        <ProfessionalSelect placeholder="جستجو مشتری" />
                     </div>
 
-                    <button onClick={() => setIsOpen(true)} className="btn btn-primary my-2 md:my-0">
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="btn btn-primary my-2 md:my-0"
+                    >
                         افزودن مشتری جدید
                     </button>
                 </div>
-                <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} reqular={true} className="w-[800px]">
+                <Modal
+                    isOpen={isOpen}
+                    onClose={() => setIsOpen(false)}
+                    reqular={true}
+                    className="w-[800px]"
+                >
                     <CreateUser />
                 </Modal>
-                <div className="flex items-center gap-x-8 mt-8">
+                {/* <div className="flex items-center gap-x-8 mt-8">
                     <div className="relative">
                         <input
                             onFocus={handleFocuse}
@@ -138,55 +162,57 @@ const Order = () => {
                             <span> + افزودن کالا</span>
                         </button>
                     </div>
+                </div> */}
+                <div className="grid grid-cols-3 gap-8">
+                    <div className="col-span-2">
+                        <ProductSelectedList />
+                    </div>
+                    <div className="">
+                        <div className="flex flex-col gap-4">
+                            <CustomDatepicker placeholder="تاریخ تسویه" />
+                            {/* <CustomModernDatepicker /> */}
+                            <div className="w-100">
+                                <CustomTextarea placeholder="توضیحات" />
+                            </div>
+                        </div>
+
+                        <div className="pt-4">
+                            <label className="font-yekan_bold">نوع فاکتور</label>
+                            <div>
+                                <CusromRadioGroupButton items={factorType} />
+                            </div>
+                        </div>
+                        <div className="pt-4">
+                            <label className="font-yekan_bold">نوع خروج</label>
+                            <div>
+                                <CusromRadioGroupButton items={exitType} />
+                            </div>
+                        </div>
+                        <div className="pt-4">
+                            <label className="font-yekan_bold">نوع ارسال</label>
+                            <div>
+                                <CusromRadioGroupButton items={sendType} />
+                            </div>
+                        </div>
+
+                        <div className="flex justify-between pt-8">
+                            <span className="font-weight-bold">قیمت کل</span>
+                            <span className="font-weight-bold">
+                                {/* {sliceNumberPrice(totalAmount)} ریال */}
+                            </span>
+                        </div>
+                        <div className="salefactor d-flex flex-column justify-content-between">
+                            <span className="font-weight-bold">
+                                {/* {convertToPersianWord(totalAmount)} تومان */}
+                            </span>
+                        </div>
+                        <div className="d-flex justify-content-end mt-5">
+                            <button className="bg-green-600 text-white px-8 py-2 rounded-md">
+                                ثبت سفارش
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                {/* <div className="grid grid-cols-4 items-center gap-8">
-                        <div>
-                            <ProfessionalSelect placeholder={"کالا / محصول"} />
-                        </div>
-                        <div>
-                            <ProfessionalSelect placeholder={"انبار"} />
-                        </div>
-                        <div>
-                            <CustomDatepicker placeholder={"تاریخ تسویه"} />
-                        </div>
-                        <div>
-                            <CustomInput />
-                        </div>
-                        <div>
-                            {factorOptions.map((item: {
-                                id: number;
-                                title: string;
-                            }) => {
-                                return <label className="ml-4" key={item.id}>
-                                    <input className="mx-2 w-[16px] h-[16px]" type="radio" value={item.id} name="factorType" checked={factorType === item.id} onChange={handleRadio} />
-                                    <span className="">{item.title}</span>
-                                </label>
-                            })}
-                        </div>
-                        <div>
-                            <CustomInput />
-                        </div>
-                        <div>
-                            <CustomInput />
-                        </div>
-                        <div>
-                            <CustomInput />
-                        </div>
-                        <div>
-                            <CustomInput />
-                        </div>
-                        <div className="">
-                            {factorOptions.map((item: {
-                                id: number;
-                                title: string;
-                            }) => {
-                                return <label className="ml-4" key={item.id}>
-                                    <input className="mx-2 w-[16px] h-[16px]" type="radio" value={item.id} name="factorType" checked={factorType === item.id} onChange={handleRadio} />
-                                    <span className="">{item.title}</span>
-                                </label>
-                            })}
-                        </div>
-                    </div> */}
             </Card6>
         </>
     );

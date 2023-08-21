@@ -22,7 +22,7 @@ const AppRoutes: FC = () => {
             <Routes>
                 <Route element={<App />}>
                     <Route path="error/*" element={<ErrorsPage />} />
-                    {Cookies.get("token") ? (
+                    {/* {Cookies.get("token") ? ( */}
                         <>
                             <Route path="/*" element={<PrivateRoutes />} />
                             <Route
@@ -30,12 +30,12 @@ const AppRoutes: FC = () => {
                                 element={<Navigate to="/dashboard/esale" />}
                             />
                         </>
-                    ) : (
-                        <>
-                            <Route path="auth/*" element={<Login />} />
-                            <Route path="*" element={<Navigate to="/auth" />} />
-                        </>
-                    )}
+                    {/* // ) : (
+                    //     <>
+                    //         <Route path="auth/*" element={<Login />} />
+                    //         <Route path="*" element={<Navigate to="/auth" />} />
+                    //     </>
+                    // )} */}
                 </Route>
             </Routes>
         </BrowserRouter>

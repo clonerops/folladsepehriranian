@@ -1,8 +1,8 @@
 import {Route, Routes, Navigate} from 'react-router-dom'
 import {MasterLayout} from '../../_cloner/layout/MasterLayout'
 import Dashboard from '../pages/dashboard/Dashboard'
-import Order from '../pages/dashboard/Order'
-import CreateUser from '../pages/dashboard/CreateUser'
+import Order from '../modules/order/Order'
+import CreateUser from '../modules/user/CreateUser'
 
 const PrivateRoutes = () => {
 
@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
         {/* Orders */}
         <Route path='dashboard/order' element={<Order />} />
         {/* Users */}
-        <Route path='dashboard/create-user' element={<CreateUser />} />
+        <Route path='dashboard/user/create' element={<CreateUser />} />
         {/* Lazy Modules */}
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />

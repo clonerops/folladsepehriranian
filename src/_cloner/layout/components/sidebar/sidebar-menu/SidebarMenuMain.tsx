@@ -2,7 +2,6 @@
 // import React from 'react'
 // import {KTSVG} from '../../../../helpers'
 // import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
-import { KTSVG } from '../../../../helpers'
 import { SidebarMenuItem } from './SidebarMenuItem'
 import { SidebarMenuItemWithSub } from './SidebarMenuItemWithSub'
 
@@ -59,7 +58,7 @@ const SidebarMenuMain = () => {
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'
       >
-        <SidebarMenuItem to='/dashboard/create-user' title='ایجاد کاربر جدید' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/user/create' title='ایجاد کاربر جدید' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       {/* <SidebarMenuItemWithSub

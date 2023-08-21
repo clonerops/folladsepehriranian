@@ -1,11 +1,11 @@
-import { useFormik } from "formik";
-import Inputs from "./components/Inputs";
 import * as Yup from "yup";
 import { useState } from "react";
+import { useFormik } from "formik";
+import AuthInputs from "../../../_cloner/helpers/components/AuthInputs";
+import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import { useRegisterUser } from "./core/_hooks";
-// import { KTSVG, toAbsoluteUrl } from "../../../_cloner/helpers";
 
-const Register = () => {
+const CreateUser = () => {
     const loginSchema = Yup.object().shape({
         firstName: Yup.string()
             .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
@@ -44,6 +44,7 @@ const Register = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const { mutate, data } = useRegisterUser();
 
     const formik = useFormik({
@@ -62,14 +63,16 @@ const Register = () => {
             try {
                 mutate(userData, {
                     onSuccess: (fetchData) => {
-                        if (fetchData.status === 400) {
+                        if (fetchData.status !== 200) {
                             setIsError(true);
+                            setLoading(false);
                         } else {
+                            setIsSuccess(true)
                             setIsError(false);
+                            setLoading(false);
                         }
                     },
                 });
-                setLoading(false);
             } catch (error) {
                 setStatus("اطلاعات ورود نادرست می باشد");
                 alert();
@@ -79,43 +82,22 @@ const Register = () => {
         },
     });
 
+    console.log(isSuccess)
+
     return (
-        <>
-            {/* <div>
-                {data?.status === 400 && isError && (
-                    <div className="w-50 h-auto bg-gray-200 border-r-2 border-r-red-600">
-                        <div
-                            onClick={() => setIsError(false)}
-                            className="float-left"
-                        >
-                            <KTSVG
-                                className=""
-                                path={toAbsoluteUrl(
-                                    "/media/icons/duotune/art/art001.svg"
-                                )}
-                            />
-                        </div>
-                        <ul>
-                            {data?.data?.errors?.map((item: any) => {
-                                console.log("item", item)
-                                return (
-                                    <li className="p-4">
-                                        ConfirmPassword' and 'Password' do not
-                                        match
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
-                )}
-            </div> */}
+        <Card6 image="" title="">
+            {data?.data?.Message || data?.message &&
+                <div className="w-full bg-green-500 p-4 rounded-md">
+                    <p className="text-white">{data?.data?.Message || data?.message}</p>
+                </div>
+            }
             <form
                 onSubmit={formik.handleSubmit}
                 className="flex justify-center items-center flex-col container py-16"
             >
                 <div className="flex flex-wrap px-4">
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="text"
                             login={true}
                             getFieldProps={formik.getFieldProps}
@@ -123,13 +105,13 @@ const Register = () => {
                             errors={formik.errors.firstName}
                             name={"firstName"}
                             title="نام"
-                        ></Inputs>
-                        {isError && data?.data?.errors.FirstName && (
-                            <span>{data?.data?.errors.FirstName[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.FirstName && (
+                            <span className="text-red-500">{data?.data?.errors?.FirstName[0]}</span>
                         )}
                     </div>
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="text"
                             login={true}
                             getFieldProps={formik.getFieldProps}
@@ -137,65 +119,69 @@ const Register = () => {
                             errors={formik.errors.lastName}
                             name={"lastName"}
                             title="نام خانوادگی"
-                        ></Inputs>
-                        {isError && data?.data?.errors.LastName && (
-                            <span>{data?.data?.errors.LastName[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.LastName && (
+                            <span className="text-red-500">{data?.data?.errors?.LastName[0]}</span>
                         )}
                     </div>
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="text"
                             login={true}
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.email}
                             errors={formik.errors.email}
+                            isError={data?.data?.errors?.Email}
                             name={"email"}
                             title="ایمیل"
-                        ></Inputs>
-                        {isError && data?.data?.errors.Email && (
-                            <span>{data?.data?.errors.Email[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.Email && (
+                            <span className="text-red-500">{data?.data?.errors?.Email[0]}</span>
                         )}
                     </div>
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="text"
                             login={true}
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.userName}
                             errors={formik.errors.userName}
+                            isError={data?.data?.errors?.UserName}
                             name={"userName"}
                             title="نام کاربری"
-                        ></Inputs>
-                        {isError && data?.data?.errors.UserName && (
-                            <span>{data?.data?.errors.UserName[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.UserName && (
+                            <span className="text-red-500">{data?.data?.errors?.UserName[0]}</span>
                         )}
                     </div>
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="password"
                             login={true}
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.password}
                             errors={formik.errors.password}
+                            isError={data?.data?.errors?.Password}
                             name={"password"}
                             title="کلمه عبور"
-                        ></Inputs>
-                        {isError && data?.data?.errors.Password && (
-                            <span>{data?.data?.errors.Password[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.Password && (
+                            <span className="text-red-500">{data?.data?.errors?.Password[0]}</span>
                         )}
                     </div>
                     <div className="w-50 px-2">
-                        <Inputs
+                        <AuthInputs
                             type="password"
                             login={true}
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.confirmPassword}
                             errors={formik.errors.confirmPassword}
+                            isError={data?.data?.errors?.ConfirmPassword}
                             name={"confirmPassword"}
                             title="تکرار کلمه عبور"
-                        ></Inputs>
-                        {isError && data?.data?.errors.ConfirmPassword && (
-                            <span>{data?.data?.errors.ConfirmPassword[0]}</span>
+                        ></AuthInputs>
+                        {isError && data?.data?.errors?.ConfirmPassword && (
+                            <span className="text-red-500">{data?.data?.errors?.ConfirmPassword[0]}</span>
                         )}
                     </div>
                 </div>
@@ -212,7 +198,7 @@ const Register = () => {
                         )}
                         {loading && (
                             <span
-                                className="indicator-progress"
+                                className="indicator-progress text-white"
                                 style={{ display: "block" }}
                             >
                                 درحال پردازش...
@@ -222,8 +208,9 @@ const Register = () => {
                     </button>
                 </div>
             </form>
-        </>
-    );
-};
 
-export default Register;
+        </Card6>
+    )
+}
+
+export default CreateUser

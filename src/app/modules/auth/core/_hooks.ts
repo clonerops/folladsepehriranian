@@ -4,15 +4,9 @@ import {
     IConfirmEmail,
     IForgetPassword,
     ILoginUser,
-    IRegisterUser,
     IResetPassword,
 } from "./_models";
 
-const useRegisterUser = () => {
-    return useMutation((formData: IRegisterUser) => {
-        return api.registerUser(formData);
-    });
-};
 
 const useLoginUser = () => {
     return useMutation((formData: ILoginUser) => {
@@ -39,7 +33,6 @@ const useConfirmEmail = () => {
 };
 
 export {
-    useRegisterUser,
     useLoginUser,
     useForgetPasswordUser,
     useResetPasswordUser,

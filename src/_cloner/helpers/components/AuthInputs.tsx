@@ -12,10 +12,10 @@ const AuthInputs = (props: any) => {
                 className={clsx(
                     "form-control bg-transparent",
                     {
-                        "is-invalid": props.touched && props.errors,
+                        "is-invalid": props.touched && props.errors || props.isError,
                     },
                     {
-                        "is-valid": props.touched && !props.errors,
+                        "is-valid": props.touched && !props.errors || props.isError,
                     }
                 )}
                 type={props.type}

@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import Modal from "../../../_cloner/helpers/components/Modal";
-import Register from "../../modules/auth/Register";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
+import CreateUser from "../user/CreateUser";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
@@ -79,7 +79,7 @@ const Order = () => {
                     </button>
                 </div>
                 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} reqular={true} className="w-[800px]">
-                    <Register />
+                    <CreateUser />
                 </Modal>
                 <div className="flex items-center gap-x-8 mt-8">
                     <div className="relative">

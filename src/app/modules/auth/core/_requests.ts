@@ -3,18 +3,9 @@ import {
     IConfirmEmail,
     IForgetPassword,
     ILoginUser,
-    IRegisterUser,
     IResetPassword,
 } from "./_models";
 
-const registerUser = async (formData: IRegisterUser) => {
-    try {
-        const { data } = await http.post("/Account/register",JSON.stringify(formData));
-        return data
-    } catch (error: any) {
-        return error.response
-    }
-};
 
 const loginUser = async (formData: ILoginUser) => {
     try {
@@ -50,7 +41,6 @@ const confirmEmailUser = async (formData: IConfirmEmail) => {
 };
 
 export {
-    registerUser,
     loginUser,
     forgetPasswordUser,
     resetPasswordUser,

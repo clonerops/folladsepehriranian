@@ -87,16 +87,16 @@ const CreateUser = () => {
     return (
         <Card6 image="" title="">
             {data?.data?.Message || data?.message &&
-                <div className="w-full bg-green-500 p-4 rounded-md">
-                    <p className="text-white">{data?.data?.Message || data?.message}</p>
+                <div className="tw-w-full tw-bg-green-500 tw-p-4 tw-rounded-md">
+                    <p className="tw-text-white">{data?.data?.Message || data?.message}</p>
                 </div>
             }
             <form
                 onSubmit={formik.handleSubmit}
-                className="flex justify-center items-center flex-col container py-16"
+                className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-container tw-py-16"
             >
-                <div className="flex flex-wrap px-4">
-                    <div className="w-50 px-2">
+                <div className="tw-flex tw-flex-wrap tw-px-4">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -107,10 +107,10 @@ const CreateUser = () => {
                             title="نام"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.FirstName && (
-                            <span className="text-red-500">{data?.data?.errors?.FirstName[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.FirstName[0]}</span>
                         )}
                     </div>
-                    <div className="w-50 px-2">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -121,10 +121,10 @@ const CreateUser = () => {
                             title="نام خانوادگی"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.LastName && (
-                            <span className="text-red-500">{data?.data?.errors?.LastName[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.LastName[0]}</span>
                         )}
                     </div>
-                    <div className="w-50 px-2">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -136,10 +136,10 @@ const CreateUser = () => {
                             title="ایمیل"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Email && (
-                            <span className="text-red-500">{data?.data?.errors?.Email[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.Email[0]}</span>
                         )}
                     </div>
-                    <div className="w-50 px-2">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -151,10 +151,10 @@ const CreateUser = () => {
                             title="نام کاربری"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.UserName && (
-                            <span className="text-red-500">{data?.data?.errors?.UserName[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.UserName[0]}</span>
                         )}
                     </div>
-                    <div className="w-50 px-2">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="password"
                             login={true}
@@ -166,10 +166,10 @@ const CreateUser = () => {
                             title="کلمه عبور"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Password && (
-                            <span className="text-red-500">{data?.data?.errors?.Password[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.Password[0]}</span>
                         )}
                     </div>
-                    <div className="w-50 px-2">
+                    <div className="tw-w-50 tw-px-2">
                         <AuthInputs
                             type="password"
                             login={true}
@@ -181,24 +181,24 @@ const CreateUser = () => {
                             title="تکرار کلمه عبور"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.ConfirmPassword && (
-                            <span className="text-red-500">{data?.data?.errors?.ConfirmPassword[0]}</span>
+                            <span className="tw-text-red-500">{data?.data?.errors?.ConfirmPassword[0]}</span>
                         )}
                     </div>
                 </div>
-                <div className="w-full px-6 flex justify-between items-center">
+                <div className="tw-w-full tw-px-6 tw-flex tw-justify-between tw-items-center">
                     <div />
                     <button
                         type="submit"
                         id="kt_sign_in_submit"
-                        className="bg-green-500 py-4 px-16 rounded-lg hover:bg-green-700 transition"
+                        className="tw-bg-green-500 tw-py-4 tw-px-16 tw-rounded-lg tw-hover:bg-green-700 tw-transition"
                         disabled={formik.isSubmitting || !formik.isValid}
                     >
                         {!loading && (
-                            <span className="indicator-label text-white">ثبت</span>
+                            <span className="indicator-label tw-text-white">ثبت</span>
                         )}
                         {loading && (
                             <span
-                                className="indicator-progress text-white"
+                                className="indicator-progress tw-text-white"
                                 style={{ display: "block" }}
                             >
                                 درحال پردازش...

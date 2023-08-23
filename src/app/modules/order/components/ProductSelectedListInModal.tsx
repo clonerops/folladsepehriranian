@@ -12,26 +12,26 @@ const ProductSelectedListInModal = () => {
         },
     ];
     return (
-        <div className="container py-8">
-            <div className="w-50 my-2">
+        <div className="container tw-text-red-500">
+            <div className="tw-w-50 tw-my-2">
                 <CustomInput placeholder="جستجو محصول / کالا" />
             </div>
-            <table className="w-full">
-                <thead className="bg-gray-200">
+            <table className="tw-w-full">
+                <thead className="tw-bg-gray-200">
                     <tr>
-                        <td className="py-4 px-4 text-center text-gray-600 border border-gray-300">
+                        <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             ردیف
                         </td>
-                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                        <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             کالا / محصول
                         </td>
-                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                        <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             انبار
                         </td>
-                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                        <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             موجودی
                         </td>
-                        <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                        <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             قیمت
                         </td>
                     </tr>
@@ -40,22 +40,22 @@ const ProductSelectedListInModal = () => {
                     {fakeData.map((item: IProduct, index) => {
                         return (
                             <tr
-                                className="cursor-pointer hover:bg-gray-100"
+                                className="tw-cursor-pointer tw-hover:bg-gray-100"
                                 key={item.id}
                             >
-                                <td className="text-center py-4 border border-gray-300">
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {index + 1}
                                 </td>
-                                <td className="text-center py-4 border border-gray-300">
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.product}
                                 </td>
-                                <td className="text-center py-4 border border-gray-300">
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     بازرگانی
                                 </td>
-                                <td className="text-center py-4 border border-gray-300">
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.count}
                                 </td>
-                                <td className="flex justify-center items-center py-4 border border-gray-300 mx-auto">
+                                <td className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 mx-auto">
                                     {item.price} ریال
                                 </td>
                             </tr>

@@ -62,17 +62,17 @@ const Login = () => {
     });
     return (
         <>
-            <div className="grid grid-cols-2 h-screen">
+            <div className="tw-grid tw-grid-cols-2 tw-h-screen">
                 <form
                     onSubmit={formik.handleSubmit}
-                    className="flex justify-center items-center flex-col"
+                    className="tw-flex tw-justify-center tw-items-center tw-flex-col"
                 >
                     {isError &&
                         <div>
-                            <p className="text-red-500">{data?.data?.Message}</p>
+                            <p className="tw-text-red-500">{data?.data?.Message}</p>
                         </div>
                     }
-                    <div className="w-50">
+                    <div className="tw-w-50">
                         <Inputs
                             type="text"
                             login={true}
@@ -83,7 +83,7 @@ const Login = () => {
                             title="نام کاربری"
                         ></Inputs>
                     </div>
-                    <div className="w-50">
+                    <div className="tw-w-50">
                         <Inputs
                             type="password"
                             login={true}
@@ -96,11 +96,11 @@ const Login = () => {
                     </div>
                     <div
                         onClick={() => setIsOpen(true)}
-                        className="w-50 mb-8 cursor-pointer"
+                        className="tw-w-50 tw-mb-8 tw-cursor-pointer"
                     >
                         <span>کلمه عبور خود را فراموش کرده ام!</span>
                     </div>
-                    <div className="d-grid mb-10 w-50">
+                    <div className="tw-d-grid tw-mb-10 tw-w-50">
                         <button
                             type="submit"
                             id="kt_sign_in_submit"
@@ -125,19 +125,19 @@ const Login = () => {
                 <ResetPassword isOpen={isOpen} setIsOpen={setIsOpen} />
                 <div>
                     <div
-                        className="h-full w-full flex flex-col"
+                        className="tw-h-full tw-w-full tw-flex tw-flex-col"
                         style={{
                             backgroundImage: `url(${toAbsoluteUrl(
                                 "/media/logos/auth-bg.png"
                             )})`,
                         }}
                     >
-                        <div className="text-center mb-auto">
+                        <div className="tw-text-center tw-mb-auto">
                             {/* <label className="text-white font-yekan_bold text-2xl my-8">
                                 بازرگانی سپهر ایرانیان
                             </label> */}
                         </div>
-                        <div className="flex justify-center items-center">
+                        <div className="tw-flex tw-justify-center tw-items-center">
                             {/* <img
                                 src={`${toAbsoluteUrl(
                                     "/media/logos/bazarganilogo.png"
@@ -148,7 +148,7 @@ const Login = () => {
                                 className="mx-auto"
                             /> */}
                         </div>
-                        <div className="mt-auto" />
+                        <div className="tw-mt-auto" />
                     </div>
                 </div>
             </div>

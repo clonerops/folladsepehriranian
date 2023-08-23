@@ -63,41 +63,41 @@ const Products = () => {
         <>
             <div>
                 <div>
-                    <button onClick={() => setIsCreateOpen(true)} className="bg-green-500 px-16 py-4 rounded-md"> 
-                        <span className="text-white">ایجاد محصول جدید</span>
+                    <button onClick={() => setIsCreateOpen(true)} className="tw-bg-green-500 tw-px-16 tw-py-4 tw-rounded-md"> 
+                        <span className="tw-text-white">ایجاد محصول جدید</span>
                     </button>
                 </div>
-                <table className="w-full my-2">
-                    <thead className="bg-gray-200">
+                <table className="tw-w-full tw-my-2">
+                    <thead className="tw-bg-gray-200">
                         <tr>
-                            <td className="py-4 px-4 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 ردیف
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 نام محصول
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 برند محصول
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 سایز محصول
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 وزن تقریبی
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 تعداد در بسته
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 اندازه
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 استاندارد
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 توضیحات
                             </td>
-                            <td className="py-4 px-2 text-center text-gray-600 border border-gray-300">
+                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 عملیات
                             </td>
                         </tr>
@@ -106,51 +106,51 @@ const Products = () => {
                         {currentItems.map((item: IProducts, index) => {
                             return (
                                 <tr
-                                // className="cursor-pointer hover:bg-gray-100"
+                                // className="tw-cursor-pointer hover:bg-gray-100"
                                 // key={item.id}
                                 // onClick={() => handleRowClick(item)}
                                 // className={
                                 //     selectedRows?.id === item.
                                 //         ? "bg-yellow-100"
-                                //         : "cursor-pointer hover:bg-gray-100"
+                                //         : "tw-cursor-pointer hover:bg-gray-100"
                                 // }
                                 >
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {startRowIndex + index + 1}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.productName}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.productBrandId}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.productSize}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.numberInPackage}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.size}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    <td className="text-center py-4 border border-gray-300">
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.standard}
                                     </td>
-                                    <td className="flex justify-center items-center text-center py-4 border border-gray-300">
-                                        <div className="flex gap-4">
+                                    <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                        <div className="tw-flex tw-gap-4">
                                             <div
                                                 onClick={() =>
                                                     handleEdit(
                                                         item.productBrandId
                                                     )
                                                 }
-                                                className="cursor-pointer text-yellow-500"
+                                                className="tw-cursor-pointer tw-text-yellow-500"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@ const Products = () => {
                                                         item.productBrandId
                                                     )
                                                 }
-                                                className="cursor-pointer text-red-500"
+                                                className="tw-cursor-pointer tw-text-red-500"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -201,18 +201,18 @@ const Products = () => {
                     <p>
                         صفحه {currentPage} از {totalPages}
                     </p>
-                    <div className="flex justify-between">
+                    <div className="tw-flex tw-justify-between">
                         <button
                             disabled={currentPage === 1}
                             onClick={() => goToPage(currentPage - 1)}
-                            className="bg-gray-200 rounded-md px-6 py-2"
+                            className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
                         >
                             قبلی
                         </button>
                         <button
                             disabled={currentPage === totalPages}
                             onClick={() => goToPage(currentPage + 1)}
-                            className="bg-gray-200 rounded-md px-6 py-2"
+                            className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
                         >
                             بعدی
                         </button>

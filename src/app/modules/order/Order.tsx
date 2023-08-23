@@ -88,14 +88,14 @@ const Order = () => {
         <>
             <Card6 title="" image="">
                 {/* Search Customer */}
-                <div className="flex flex-col md:flex-row items-center justify-between">
-                    <div className="min-w-[100%] md:min-w-[50%] my-2 md:my-0">
+                <div className="tw-flex tw-flex-col tw-md:flex-row tw-items-center tw-tw-justify-between">
+                    <div className="tw-min-w-[100%] tw-md:min-w-[50%] tw-my-2 tw-md:my-0">
                         <ProfessionalSelect placeholder="جستجو مشتری" />
                     </div>
 
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="btn btn-primary my-2 md:my-0"
+                        className="tw-btn tw-btn-primary tw-my-2 tw-md:my-0"
                     >
                         افزودن مشتری جدید
                     </button>
@@ -104,25 +104,25 @@ const Order = () => {
                     isOpen={isOpen}
                     onClose={() => setIsOpen(false)}
                     reqular={true}
-                    className="w-[800px]"
+                    className="tw-w-[800px]"
                 >
                     <CreateUser />
                 </Modal>
-                <div className="flex flex-row flex-wrap gap-4">
+                <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-4">
                     <div>
-                        <button onClick={() => setSelectedProductOpen(true)} className="bg-yellow-500 rounded-md px-16 py-2">
+                        <button onClick={() => setSelectedProductOpen(true)} className="tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-2">
                             <span>+ انتخاب کالا</span>
                         </button>
                         <Modal
                             isOpen={selectedProductOpen}
                             onClose={() => setSelectedProductOpen(false)}
                             reqular={true}
-                            className="w-[800px]"
+                            className="tw-w-[800px]"
                         >
                             <ProductSelectedListInModal />
                         </Modal>
                     </div>
-                    <div className="relative">
+                    <div className="tw-relative">
                         <input
                             onFocus={handleFocuse}
                             onBlur={handleBlur}
@@ -148,7 +148,7 @@ const Order = () => {
                                                 }
                                                 className="min-h-[67px] cursor-pointer"
                                             >
-                                                <div className="flex flex-row justify-between items-center">
+                                                <div className="flex flex-row tw-justify-between items-center">
                                                     <div className=" relative flex flex-col pt-4">
                                                         <span className="text-sm px-4">
                                                             {" "}
@@ -182,7 +182,7 @@ const Order = () => {
                         </button>
                     </div> */}
                 </div>
-                {/* <div className="flex items-center gap-x-8 mt-8">
+                {/* <div className="tw-flex tw-items-center tw-gap-x-8 tw-mt-8">
                     <div className="relative">
                         <input
                             onFocus={handleFocuse}
@@ -191,11 +191,11 @@ const Order = () => {
                             onChange={handleInputChange}
                             placeholder="کالا / محصول"
                             type="text"
-                            className="border px-2 border-gray-400 rounded-md py-2 w-[340px]"
+                            className="tw-border tw-px-2 tw-border-gray-400 tw-rounded-md tw-py-2 tw-w-[340px]"
                         />
 
                         {showProducts && (
-                            <div className="border w-[340px] overflow-auto max-h-[250px] min-h-[48px] absolute top-[48px] box-border bg-white shadow-md">
+                            <div className="tw-border tw-w-[340px] tw-overflow-auto tw-max-h-[250px] tw-min-h-[48px] tw-absolute tw-top-[48px] tw-box-border tw-bg-white tw-shadow-md">
                                 <ul
                                     onClick={(e) => e.stopPropagation()}
                                     className="serach__product-lists"
@@ -209,17 +209,17 @@ const Order = () => {
                                                 }
                                                 className="min-h-[67px] cursor-pointer"
                                             >
-                                                <div className="flex flex-row justify-between items-center">
-                                                    <div className=" relative flex flex-col pt-4">
-                                                        <span className="text-sm px-4">
+                                                <div className="tw-flex tw-flex-row tw-justify-between tw-items-center">
+                                                    <div className=" tw-relative tw-flex tw-flex-col tw-pt-4">
+                                                        <span className="tw-text-sm tw-px-4">
                                                             {" "}
                                                             {item.title}
                                                         </span>
-                                                        <span className="text-red-500 text-xs px-4 absolute top-10 right-0 ">
+                                                        <span className="tw-text-red-500 tw-text-xs tw-px-4 tw-absolute tw-top-10 tw-right-0 ">
                                                             کیلوگرم
                                                         </span>
                                                     </div>
-                                                    <span className="text-xs px-4">
+                                                    <span className="tw-text-xs tw-px-4">
                                                         {" "}
                                                         کارخانه
                                                     </span>
@@ -235,53 +235,53 @@ const Order = () => {
                         <CustomInput placeholder="مقدار / تعداد" />
                     </div>
                     <div>
-                        <button className="border-2 border-blue-500 py-2 px-16 rounded-md">
+                        <button className="tw-border-2 tw-border-blue-500 tw-py-2 tw-px-16 tw-rounded-md">
                             <span> + افزودن کالا</span>
                         </button>
                     </div>
                 </div> */}
-                {/* <div className="grid grid-cols-3 gap-8">
-                    <div className="col-span-2">
+                {/* <div className="tw-grid tw-grid-cols-3 tw-gap-8">
+                    <div className="tw-col-span-2">
                         <ProductSelectedList />
                     </div>
                     <div className="">
-                        <div className="flex flex-col gap-4">
+                        <div className="tw-flex tw-flex-col tw-gap-4">
                             <CustomDatepicker placeholder="تاریخ تسویه" />
-                            <div className="w-100">
+                            <div className="tw-w-100">
                                 <CustomTextarea placeholder="توضیحات" />
                             </div>
                         </div>
 
-                        <div className="pt-4">
-                            <label className="font-yekan_bold">نوع فاکتور</label>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع فاکتور</label>
                             <div>
                                 <CusromRadioGroupButton items={factorType} />
                             </div>
                         </div>
-                        <div className="pt-4">
-                            <label className="font-yekan_bold">نوع خروج</label>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع خروج</label>
                             <div>
                                 <CusromRadioGroupButton items={exitType} />
                             </div>
                         </div>
-                        <div className="pt-4">
-                            <label className="font-yekan_bold">نوع ارسال</label>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع ارسال</label>
                             <div>
                                 <CusromRadioGroupButton items={sendType} />
                             </div>
                         </div>
 
-                        <div className="flex justify-between pt-8">
-                            <span className="font-weight-bold">قیمت کل</span>
-                            <span className="font-weight-bold">
+                        <div className="tw-flex tw-justify-between tw-pt-8">
+                            <span className="tw-font-weight-bold">قیمت کل</span>
+                            <span className="tw-font-weight-bold">
                             </span>
                         </div>
                         <div className="salefactor d-flex flex-column justify-content-between">
                             <span className="font-weight-bold">
                             </span>
                         </div>
-                        <div className="d-flex justify-content-end mt-5">
-                            <button className="bg-green-600 text-white px-8 py-2 rounded-md">
+                        <div className="d-flex justify-content-end tw-mt-5">
+                            <button className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
                                 ثبت سفارش
                             </button>
                         </div>

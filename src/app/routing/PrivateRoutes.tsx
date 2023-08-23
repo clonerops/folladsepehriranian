@@ -3,6 +3,7 @@ import {MasterLayout} from '../../_cloner/layout/MasterLayout'
 import Dashboard from '../pages/dashboard/Dashboard'
 import Order from '../modules/order/Order'
 import CreateUser from '../modules/user/CreateUser'
+import Products from '../modules/product/Products'
 
 const PrivateRoutes = () => {
 
@@ -17,6 +18,9 @@ const PrivateRoutes = () => {
         <Route path='dashboard/order' element={<Order />} />
         {/* Users */}
         <Route path='dashboard/user/create' element={<CreateUser />} />
+        {/* Products */}
+        <Route path='dashboard/product/managment' element={<Products />} />
+
         {/* Lazy Modules */}
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />

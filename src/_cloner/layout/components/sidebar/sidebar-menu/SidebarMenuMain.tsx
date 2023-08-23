@@ -61,6 +61,20 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/dashboard/user/create' title='ایجاد کاربر جدید' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
+      <div className='menu-item'>
+        <div className='menu-content pt-8 pb-2'>
+          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>محصولات</span>
+        </div>
+      </div>
+      <SidebarMenuItemWithSub
+        to='/crafted/pages'
+        title='مدیریت محصولات'
+        fontIcon='bi-archive'
+        icon='/media/icons/duotune/general/gen022.svg'
+      >
+        <SidebarMenuItem to='/dashboard/product/managment' title='لیست محصولات' hasBullet={true} />
+
+      </SidebarMenuItemWithSub>
       {/* <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'

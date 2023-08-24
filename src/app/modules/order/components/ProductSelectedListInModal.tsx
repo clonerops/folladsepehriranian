@@ -1,20 +1,39 @@
-import { KTSVG } from "../../../../_cloner/helpers";
+import React, { useState } from "react";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import { IProduct } from "../core/_models";
+import { IProducts } from "../../product/core/_models";
 
-const ProductSelectedListInModal = () => {
-    const fakeData = [
-        {
-            id: 1,
-            product: "گرد 8 20*20 سپهر کارخانه",
-            count: "20",
-            price: 536985,
-        },
-    ];
+const ProductSelectedListInModal = (props: {
+    products: IProducts[] | undefined
+    productLoading: boolean
+    productError: boolean
+    setSelectedProductOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setSelectProductFromModal: React.Dispatch<React.SetStateAction<IProducts | undefined>>
+}) => {
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value)
+    }
+
+    const filteredData = props.products?.filter((item) => {
+        const values = Object.values(item);
+        return values.some((value) =>
+            value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
+
+    const handleSelectProduct = (item: IProducts) => {
+        props.setSelectedProductOpen(false)
+        props.setSelectProductFromModal(item)
+    }
+
     return (
-        <div className="container tw-text-red-500">
+        <div className="container tw-my-8">
             <div className="tw-w-50 tw-my-2">
-                <CustomInput placeholder="جستجو محصول / کالا" />
+                <CustomInput
+                    value={searchTerm}
+                    onChange={handleSearchInput}
+                    placeholder="جستجو محصول / کالا" />
             </div>
             <table className="tw-w-full">
                 <thead className="tw-bg-gray-200">
@@ -37,26 +56,27 @@ const ProductSelectedListInModal = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {fakeData.map((item: IProduct, index) => {
+                    {filteredData?.map((item: IProducts, index: number) => {
                         return (
                             <tr
-                                className="tw-cursor-pointer tw-hover:bg-gray-100"
+                                className="tw-cursor-pointer hover:tw-bg-yellow-100"
                                 key={item.id}
+                                onClick={() => handleSelectProduct(item)}
                             >
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {index + 1}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.product}
+                                    {item.productName}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    بازرگانی
+                                    {item.standard}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.count}
+                                    {item.approximateWeight}
                                 </td>
                                 <td className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 mx-auto">
-                                    {item.price} ریال
+                                    {item.productSize} ریال
                                 </td>
                             </tr>
                         );

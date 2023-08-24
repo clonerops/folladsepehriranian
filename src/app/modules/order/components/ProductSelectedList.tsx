@@ -1,15 +1,18 @@
 import { KTSVG } from "../../../../_cloner/helpers";
-import { IProduct } from "../core/_models";
+import { IProducts } from "../../product/core/_models";
 
-const ProductSelectedList = () => {
-    const fakeData = [
-        {
-            id: 1,
-            product: "گرد 8 20*20 سپهر کارخانه",
-            count: "20",
-            price: 536985,
-        },
-    ];
+const ProductSelectedList = (props: {
+    orders: IProducts[] | undefined
+    setOrders: any
+}) => {
+const handleDeleteFromList = (index: number) => {
+    if(props.orders) {
+        const cloneItems = [...props.orders]
+        cloneItems?.splice(index, 1)
+        props.setOrders(cloneItems)
+    }
+}
+
     return (
         <div>
             <table className="tw-w-full">
@@ -33,7 +36,7 @@ const ProductSelectedList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {fakeData.map((item: IProduct, index) => {
+                    {props.orders?.map((item: IProducts, index: number) => {
                         return (
                             <tr
                                 className="tw-cursor-pointer tw-hover:bg-gray-100"
@@ -43,15 +46,15 @@ const ProductSelectedList = () => {
                                     {index + 1}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.product}
+                                    {item.productName}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.count}
+                                    {item.approximateWeight}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.price} ریال
+                                    {item.numberInPackage} ریال
                                 </td>
-                                <td className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 tw-mx-auto">
+                                <td onClick={() => handleDeleteFromList(index)} className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 tw-mx-auto">
                                     <KTSVG
                                         className="tw-text-red-500"
                                         svgClassName=""

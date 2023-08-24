@@ -1,7 +1,7 @@
 const CustomInput = (props: {
     placeholder: string;
     value?: string | number;
-    onChange?: () => void;
+    onChange?: any;
     formikInput?: boolean;
     getFieldProps?: any;
     name?: string;

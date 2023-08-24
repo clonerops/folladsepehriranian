@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 
 interface IProps {
   isOpen: boolean
@@ -8,7 +8,7 @@ interface IProps {
   children: React.ReactNode
 }
 
-const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
+const Modal: FC<IProps> = ({ isOpen, onClose, className, reqular, children }) => {
 
   if (!isOpen) return null
 
@@ -29,6 +29,12 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
             aria-modal='true'
             aria-labelledby='modal-headline'
           >
+            <div onClick={onClose} className='tw-cursor-pointer tw-p-4'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+
             {children}
           </div>
         ) : (
@@ -39,6 +45,12 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
             aria-modal='true'
             aria-labelledby='modal-headline'
           >
+            <div onClick={onClose} className='tw-cursor-pointer tw-p-4'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+
             {children}
           </div>
         )}

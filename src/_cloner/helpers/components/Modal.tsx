@@ -13,18 +13,18 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
   if (!isOpen) return null
 
   return (
-    <div className='fixed inset-0 z-[150]'>
-      <div className='flex min-h-screen items-center justify-center px-4 pt-4 pb-20 text-center sm:p-0'>
-        <div className='fixed inset-0 transition-opacity' aria-hidden='true' onClick={onClose}>
-          <div className='absolute inset-0 bg-gray-500 opacity-75'></div>
+    <div className='tw-fixed tw-inset-0 tw-z-[150]'>
+      <div className='tw-flex tw-min-h-screen tw-items-center tw-justify-center tw-px-4 tw-pt-4 tw-pb-20 tw-text-center tw-sm:p-0'>
+        <div className='tw-fixed tw-inset-0 tw-transition-opacity' aria-hidden='true' onClick={onClose}>
+          <div className='tw-absolute tw-inset-0 tw-bg-gray-500 tw-opacity-75'></div>
         </div>
         <span
-          className='hidden sm:inline-block sm:h-screen sm:align-middle'
+          className='tw-hidden tw-sm:inline-block tw-sm:h-screen tw-sm:align-middle'
           aria-hidden='true'
         ></span>
         {reqular ? (
           <div
-            className={`inline-block transform overflow-auto rounded-lg bg-white text-left align-bottom shadow-xl transition-all  sm:align-middle ${className}`}
+            className={`tw-inline-block tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all  tw-sm:align-middle ${className}`}
             role='dialog'
             aria-modal='true'
             aria-labelledby='modal-headline'
@@ -33,7 +33,7 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
           </div>
         ) : (
           <div
-            className={`inline-block z-[200] h-[40rem] transform overflow-auto rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-[80%] sm:align-middle ${className}`}
+            className={`tw-inline-block tw-z-[200] tw-h-[40rem] tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all tw-sm:my-8 tw-sm:w-[80%] tw-sm:align-middle ${className}`}
             // className={`inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle ${className}`}
             role='dialog'
             aria-modal='true'

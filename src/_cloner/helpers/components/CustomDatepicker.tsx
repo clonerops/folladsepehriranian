@@ -13,7 +13,7 @@ const CustomDatepicker: FC<IProps> = ({ title, placeholder, onChange, defaultVal
         <DatePicker
             round="x4"
             className="datepickerzaman"
-            inputClass=" border w-full border-gray-500 rounded-md py-2"
+            inputClass="tw-border tw-w-full tw-border-gray-500 tw-rounded-md tw-py-2"
             onChange={onChange}
             defaultValue={defaultValue}
             inputAttributes={{

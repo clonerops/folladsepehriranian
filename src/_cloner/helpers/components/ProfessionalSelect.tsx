@@ -29,7 +29,7 @@ const ProfessionalSelect = (props: any) => {
       options={props.options}
       onChange={props.onChange}
       defaultInputValue={props.defaultInputValue}
-      className='h-full rounded-md text-md'
+      className='tw-h-full tw-rounded-md tw-text-md'
       defaultValue={props.defaultValue}
       value={props.value}
       placeholder={props.placeholder}

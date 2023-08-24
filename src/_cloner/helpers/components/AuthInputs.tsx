@@ -3,7 +3,7 @@ import clsx from "clsx";
 const AuthInputs = (props: any) => {
     return (
         <div className="fv-row mb-2">
-            <label className="form-label fs-6 fw-bolder text-dark w-full text-right">
+            <label className="form-label fs-6 fw-bolder tw-text-dark tw-w-full tw-text-right">
                 {props.title}
             </label>
             <input
@@ -24,7 +24,7 @@ const AuthInputs = (props: any) => {
                 autoComplete="off"
             />
             {props.touched && props.errors && (
-                <div className="fv-plugins-message-container w-full text-right">
+                <div className="fv-plugins-message-container tw-w-full tw-text-right">
                     <span role="alert">{props.errors}</span>
                 </div>
             )}

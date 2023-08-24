@@ -19,7 +19,7 @@ const CustomTextarea: FC<IProps> = ({title, value, name, key,placeholder, onChan
         >
             {/* <label className="dropdown__label">{title}</label> */}
             <textarea 
-                className='p-2 w-full rounded-md border border-gray-500'
+                className='tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500'
                 name={name}
                 key={key}
                 value={value}

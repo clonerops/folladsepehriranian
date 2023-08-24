@@ -2,7 +2,7 @@ const CustomInput = (props: {
     placeholder: string
 }) => {
     return (
-        <input type="text" className="p-2 w-full rounded-md border border-gray-500" value={""} onChange={() => { }} placeholder={props.placeholder} />
+        <input type="text" className="tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500" value={""} onChange={() => { }} placeholder={props.placeholder} />
     )
 }
 

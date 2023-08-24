@@ -31,7 +31,7 @@ const Products = () => {
     const itemsPerPage = 20; // Number of items to show per page
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const { data: products } = useRetrieveProducts();
+    const { data: products, isLoading: productsLoading, isError: productsError } = useRetrieveProducts();
     const { mutate } = useDeleteProduct();
 
     const filteredData = fakeData.filter((item) => {
@@ -114,6 +114,8 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        {productsLoading && <span>درحال بارگزاری</span>}
+                        {productsError && <span>بارگزاری محصولات با خطا مواجه شده است!</span>}
                         {products?.data?.map(
                             (item: IProducts, index: number) => {
                                 return (

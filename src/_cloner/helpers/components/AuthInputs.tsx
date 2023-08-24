@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 const AuthInputs = (props: any) => {
     return (
-        <div className="fv-row mb-2">
+        <div className="fv-row mb-2 tw-w-full">
             <label className="form-label fs-6 fw-bolder tw-text-dark tw-w-full tw-text-right">
                 {props.title}
             </label>

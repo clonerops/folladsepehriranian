@@ -93,10 +93,9 @@ const CreateUser = () => {
                 ))}
             <form
                 onSubmit={formik.handleSubmit}
-                className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-container tw-py-16"
             >
-                <div className="tw-flex tw-flex-wrap tw-px-4">
-                    <div className="tw-w-50 tw-px-2">
+                <div className="tw-grid tw-grid-cols-3 tw-px-4">
+                    <div className="tw-px-2 ">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -112,7 +111,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-w-50 tw-px-2">
+                    <div className="tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -128,7 +127,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-w-50 tw-px-2">
+                    <div className="tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -145,7 +144,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-w-50 tw-px-2">
+                    <div className="tw-px-2">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -162,7 +161,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-w-50 tw-px-2">
+                    <div className="tw-px-2">
                         <AuthInputs
                             type="password"
                             login={true}
@@ -179,7 +178,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-w-50 tw-px-2">
+                    <div className="tw-px-2">
                         <AuthInputs
                             type="password"
                             login={true}
@@ -207,7 +206,7 @@ const CreateUser = () => {
                     >
                         {!loading && (
                             <span className="indicator-label tw-text-white">
-                                ثبت
+                                ثبت کاربر
                             </span>
                         )}
                         {loading && (

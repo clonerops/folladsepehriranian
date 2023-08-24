@@ -138,7 +138,7 @@ const Login = () => {
                             </label> */}
                         </div>
                         <div className="tw-flex tw-justify-center tw-items-center">
-                            {/* <img
+                            <img
                                 src={`${toAbsoluteUrl(
                                     "/media/logos/bazarganilogo.png"
                                 )}`}
@@ -146,7 +146,7 @@ const Login = () => {
                                 height={300}
                                 alt="Sepehr Logo"
                                 className="mx-auto"
-                            /> */}
+                            />
                         </div>
                         <div className="tw-mt-auto" />
                     </div>

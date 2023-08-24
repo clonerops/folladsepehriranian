@@ -1,10 +1,10 @@
 export interface IProducts {
-    id: string
+    id?: string
     productName: string,
     productBrandId: number,
     productSize: string,
-    approximateWeight: number,
-    numberInPackage: number,
+    approximateWeight: number | string,
+    numberInPackage: number | string,
     size: string,
     standard: string,
     productState: string,

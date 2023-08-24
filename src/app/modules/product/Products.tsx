@@ -167,7 +167,7 @@ const Products = () => {
                                                 <div
                                                     onClick={() =>
                                                         handleDelete(
-                                                            item.productBrandId
+                                                            item?.productBrandId
                                                         )
                                                     }
                                                     className="tw-cursor-pointer tw-text-red-500"

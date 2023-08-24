@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import AuthInputs from "../../../_cloner/helpers/components/AuthInputs";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import { useRegisterUser } from "./core/_hooks";
+import SuccessText from "../../../_cloner/helpers/components/SuccessText";
 
 const CreateUser = () => {
     const loginSchema = Yup.object().shape({
@@ -67,7 +68,7 @@ const CreateUser = () => {
                             setIsError(true);
                             setLoading(false);
                         } else {
-                            setIsSuccess(true)
+                            setIsSuccess(true);
                             setIsError(false);
                             setLoading(false);
                         }
@@ -82,15 +83,14 @@ const CreateUser = () => {
         },
     });
 
-    console.log(isSuccess)
+    console.log(isSuccess);
 
     return (
         <Card6 image="" title="">
-            {data?.data?.Message || data?.message &&
-                <div className="tw-w-full tw-bg-green-500 tw-p-4 tw-rounded-md">
-                    <p className="tw-text-white">{data?.data?.Message || data?.message}</p>
-                </div>
-            }
+            {data?.data?.Message ||
+                (data?.message && (
+                    <SuccessText text={data?.data?.Message || data?.message} />
+                ))}
             <form
                 onSubmit={formik.handleSubmit}
                 className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-container tw-py-16"
@@ -107,7 +107,9 @@ const CreateUser = () => {
                             title="نام"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.FirstName && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.FirstName[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.FirstName[0]}
+                            </span>
                         )}
                     </div>
                     <div className="tw-w-50 tw-px-2">
@@ -121,7 +123,9 @@ const CreateUser = () => {
                             title="نام خانوادگی"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.LastName && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.LastName[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.LastName[0]}
+                            </span>
                         )}
                     </div>
                     <div className="tw-w-50 tw-px-2">
@@ -136,7 +140,9 @@ const CreateUser = () => {
                             title="ایمیل"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Email && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.Email[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.Email[0]}
+                            </span>
                         )}
                     </div>
                     <div className="tw-w-50 tw-px-2">
@@ -151,7 +157,9 @@ const CreateUser = () => {
                             title="نام کاربری"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.UserName && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.UserName[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.UserName[0]}
+                            </span>
                         )}
                     </div>
                     <div className="tw-w-50 tw-px-2">
@@ -166,7 +174,9 @@ const CreateUser = () => {
                             title="کلمه عبور"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Password && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.Password[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.Password[0]}
+                            </span>
                         )}
                     </div>
                     <div className="tw-w-50 tw-px-2">
@@ -181,7 +191,9 @@ const CreateUser = () => {
                             title="تکرار کلمه عبور"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.ConfirmPassword && (
-                            <span className="tw-text-red-500">{data?.data?.errors?.ConfirmPassword[0]}</span>
+                            <span className="tw-text-red-500">
+                                {data?.data?.errors?.ConfirmPassword[0]}
+                            </span>
                         )}
                     </div>
                 </div>
@@ -194,7 +206,9 @@ const CreateUser = () => {
                         disabled={formik.isSubmitting || !formik.isValid}
                     >
                         {!loading && (
-                            <span className="indicator-label tw-text-white">ثبت</span>
+                            <span className="indicator-label tw-text-white">
+                                ثبت
+                            </span>
                         )}
                         {loading && (
                             <span
@@ -208,9 +222,8 @@ const CreateUser = () => {
                     </button>
                 </div>
             </form>
-
         </Card6>
-    )
-}
+    );
+};
 
-export default CreateUser
+export default CreateUser;

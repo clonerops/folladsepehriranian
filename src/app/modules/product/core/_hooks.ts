@@ -20,7 +20,7 @@ const useRetrieveProductById = () => {
 
 const useUpdateProduct = () => {
     return useMutation((formdata: IProducts) => {
-        return api.updateProduct(formdata, formdata.productBrandId);
+        return api.updateProduct(formdata, formdata?.productBrandId);
     });
 };
 

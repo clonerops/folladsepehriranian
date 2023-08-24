@@ -3,7 +3,7 @@ import { IProducts } from "./core/_models";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
-import { useDeleteProduct } from "./core/_hooks";
+import { useDeleteProduct, useRetrieveProducts } from "./core/_hooks";
 
 const Products = () => {
     const fakeData = [
@@ -20,8 +20,10 @@ const Products = () => {
         },
     ];
 
+
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
+    const [itemForEdit, setItemForEdit] = useState<IProducts>();
 
     // const [selectedRows, setSelectedRows] = useState<IProduct>(); // Track selected row IDs
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -29,6 +31,7 @@ const Products = () => {
     const itemsPerPage = 20; // Number of items to show per page
     const [searchTerm, setSearchTerm] = useState<string>("");
 
+    const { data: products } = useRetrieveProducts();
     const { mutate } = useDeleteProduct();
 
     const filteredData = fakeData.filter((item) => {
@@ -52,8 +55,9 @@ const Products = () => {
         }
     };
 
-    const handleEdit = (id: number) => {
+    const handleEdit = (item: IProducts) => {
         setIsEditOpen(true);
+        setItemForEdit(item);
     };
     const handleDelete = (id: number) => {
         mutate(id);
@@ -63,7 +67,10 @@ const Products = () => {
         <>
             <div>
                 <div>
-                    <button onClick={() => setIsCreateOpen(true)} className="tw-bg-green-500 tw-px-16 tw-py-4 tw-rounded-md"> 
+                    <button
+                        onClick={() => setIsCreateOpen(true)}
+                        className="tw-bg-green-500 tw-px-16 tw-py-4 tw-rounded-md"
+                    >
                         <span className="tw-text-white">ایجاد محصول جدید</span>
                     </button>
                 </div>
@@ -103,98 +110,89 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.map((item: IProducts, index) => {
-                            return (
-                                <tr
-                                // className="tw-cursor-pointer hover:bg-gray-100"
-                                // key={item.id}
-                                // onClick={() => handleRowClick(item)}
-                                // className={
-                                //     selectedRows?.id === item.
-                                //         ? "bg-yellow-100"
-                                //         : "tw-cursor-pointer hover:bg-gray-100"
-                                // }
-                                >
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {startRowIndex + index + 1}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.productName}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.productBrandId}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.productSize}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.approximateWeight}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.numberInPackage}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.size}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.approximateWeight}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.standard}
-                                    </td>
-                                    <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        <div className="tw-flex tw-gap-4">
-                                            <div
-                                                onClick={() =>
-                                                    handleEdit(
-                                                        item.productBrandId
-                                                    )
-                                                }
-                                                className="tw-cursor-pointer tw-text-yellow-500"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    stroke="currentColor"
-                                                    className="w-6 h-6"
+                        {products?.data?.map(
+                            (item: IProducts, index: number) => {
+                                return (
+                                    <tr key={item.id}>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {startRowIndex + index + 1}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.productName}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.productBrandId}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.productSize}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.approximateWeight}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.numberInPackage}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.size}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.approximateWeight}
+                                        </td>
+                                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            {item.standard}
+                                        </td>
+                                        <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                            <div className="tw-flex tw-gap-4">
+                                                <div
+                                                    onClick={() =>
+                                                        handleEdit(item)
+                                                    }
+                                                    className="tw-cursor-pointer tw-text-yellow-500"
                                                 >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                                                    />
-                                                </svg>
-                                            </div>
-                                            <div
-                                                onClick={() =>
-                                                    handleDelete(
-                                                        item.productBrandId
-                                                    )
-                                                }
-                                                className="tw-cursor-pointer tw-text-red-500"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    stroke="currentColor"
-                                                    className="w-6 h-6"
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth="1.5"
+                                                        stroke="currentColor"
+                                                        className="tw-w-6 tw-h-6"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    onClick={() =>
+                                                        handleDelete(
+                                                            item.productBrandId
+                                                        )
+                                                    }
+                                                    className="tw-cursor-pointer tw-text-red-500"
                                                 >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                                    />
-                                                </svg>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth="1.5"
+                                                        stroke="currentColor"
+                                                        className="tw-w-6 tw-h-6"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                        />
+                                                    </svg>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                                        </td>
+                                    </tr>
+                                );
+                            }
+                        )}
                     </tbody>
                 </table>
                 <div>
@@ -219,11 +217,19 @@ const Products = () => {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)}>
+            <Modal
+                isOpen={isCreateOpen}
+                onClose={() => setIsCreateOpen(false)}
+                reqular={true}
+            >
                 <CreateProduct />
             </Modal>
-            <Modal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)}>
-                <EditProduct />
+            <Modal
+                isOpen={isEditOpen}
+                onClose={() => setIsEditOpen(false)}
+                reqular={true}
+            >
+                <EditProduct item={itemForEdit} />
             </Modal>
         </>
     );

@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .tw-btn-success {
+        @apply tw-bg-green-500 tw-text-white tw-px-16 tw-py-2 tw-rounded-md;
+    }
+    .tw-btn-danger {
+        @apply tw-bg-red-500 tw-text-white tw-px-16 tw-py-2 tw-rounded-md;
+    }
+    .tw-btn-warning {
+        @apply tw-bg-yellow-500 tw-text-white tw-px-16 tw-py-2 tw-rounded-md;
+    }
+    .tw-btn-info {
+        @apply tw-bg-blue-500 tw-text-white tw-px-16 tw-py-2 tw-rounded-md;
+    }
+}
 @font-face {
     font-family: Yekan_reqular;
     src: url("../fonts/YekanBakhFaNum-Regular.ttf");
@@ -123,6 +137,11 @@ tr {
     right: 0 !important;
     left: 0 !important;
 }
-.serach__product-lists li:nth-child(even){
-    background-color: rgba(0,0,0,0.1);
+.serach__product-lists li:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+input.customInput:focus {
+    box-shadow: 0px 0px 4px #000256;
+    border: 1px solid #000256;
 }

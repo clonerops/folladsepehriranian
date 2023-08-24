@@ -92,7 +92,6 @@ const Order = () => {
                     <div className="tw-min-w-[100%] tw-md:min-w-[50%] tw-my-2 tw-md:my-0">
                         <ProfessionalSelect placeholder="جستجو مشتری" />
                     </div>
-
                     <button
                         onClick={() => setIsOpen(true)}
                         className="tw-btn tw-btn-primary tw-my-2 tw-md:my-0"

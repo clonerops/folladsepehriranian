@@ -33,7 +33,7 @@ const Modal: FC<IProps> = ({isOpen, onClose, className, reqular, children}) => {
           </div>
         ) : (
           <div
-            className={`tw-inline-block tw-z-[200] tw-h-[40rem] tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all tw-sm:my-8 tw-sm:w-[80%] tw-sm:align-middle ${className}`}
+            className={`tw-inline-block tw-z-[200] tw-h-[40rem] tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all sm:tw-my-8 sm:tw-w-[80%] sm:tw-align-middle ${className}`}
             // className={`inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle ${className}`}
             role='dialog'
             aria-modal='true'

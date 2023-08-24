@@ -1,4 +1,5 @@
 export interface IProducts {
+    id: string
     productName: string,
     productBrandId: number,
     productSize: string,

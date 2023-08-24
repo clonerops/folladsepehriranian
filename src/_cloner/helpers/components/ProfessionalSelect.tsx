@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Select from 'react-select'
+import Select, { StylesConfig } from 'react-select'
 
 const ProfessionalSelect = (props: any) => {
 
@@ -24,12 +24,39 @@ const ProfessionalSelect = (props: any) => {
       return option.label.toLowerCase().includes(char)
     })
   }
+
+  const customStyles: StylesConfig = {
+  control: (provided: Record<string, unknown>, state: any) => ({
+    ...provided,
+    height: 18,
+    border: state.isFocused ? "1px solid #000256" : "1px solid rgba(0,0,0,0.5)",
+    boxShadow: state.isFocused ? "0px 0px 4px #000256" : "none",
+    // "&": {
+    //   border: "1px solid #cccccc",
+    //   boxShadow: "none"
+    // },
+    "&:hover": {
+      // border: "1px solid #ff8b67",
+      // boxShadow: "0px 0px 6px #ff8b67"
+    }
+    // "&:focus": {
+    //   border: "1px solid #ff8b67",
+    //   boxShadow: "0px 0px 6px #ff8b67"
+    // },
+    // "&:acitve": {
+    //   border: "1px solid #ff8b67",
+    //   boxShadow: "0px 0px 6px #ff8b67"
+    // }
+  })
+};
+
   return (
     <Select
       options={props.options}
+      styles={customStyles}
       onChange={props.onChange}
       defaultInputValue={props.defaultInputValue}
-      className='tw-h-full tw-rounded-md tw-text-md'
+      className='tw-h-full tw-rounded-md tw-text-md tw-text-right'
       defaultValue={props.defaultValue}
       value={props.value}
       placeholder={props.placeholder}

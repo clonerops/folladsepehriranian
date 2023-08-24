@@ -6,6 +6,7 @@ import { useState } from "react";
 import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
 import { useCreateProduct } from "../core/_hooks";
+import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 
 const CreateProduct = () => {
     // States
@@ -48,12 +49,13 @@ const CreateProduct = () => {
         },
     });
 
-    console.log(data)
-
     return (
         <>
             {data?.succeeded && (
-                <SuccessText text={"امحصول با موفقیت ایجاد گردید@!"} />
+                <SuccessText text={data?.message} />
+            )}
+            {data?.data?.status === 400 && (
+                <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
                 <div className="tw-grid md:tw-grid-cols-2 tw-gap-x-4 tw-my-8 tw-mx-auto">

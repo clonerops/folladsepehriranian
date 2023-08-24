@@ -20,12 +20,12 @@ const useRetrieveProductById = () => {
 
 const useUpdateProduct = () => {
     return useMutation((formdata: IProducts) => {
-        return api.updateProduct(formdata, formdata?.productBrandId);
+        return api.updateProduct(formdata);
     });
 };
 
 const useDeleteProduct = () => {
-    return useMutation((id: number) => {
+    return useMutation((id: string) => {
         return api.deleteProduct(id);
     });
 };

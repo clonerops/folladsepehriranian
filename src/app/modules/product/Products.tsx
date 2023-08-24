@@ -59,8 +59,8 @@ const Products = () => {
         setIsEditOpen(true);
         setItemForEdit(item);
     };
-    const handleDelete = (id: number) => {
-        mutate(id);
+    const handleDelete = (id: string | undefined) => {
+        if (id) mutate(id);
     };
 
     return (
@@ -69,8 +69,12 @@ const Products = () => {
                 <div>
                     <button
                         onClick={() => setIsCreateOpen(true)}
-                        className="tw-bg-green-500 tw-px-16 tw-py-4 tw-rounded-md"
+                        className="tw-bg-green-500 tw-px-16 tw-py-4 tw-rounded-md tw-flex tw-gap-x-2"
                     >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+
                         <span className="tw-text-white">ایجاد محصول جدید</span>
                     </button>
                 </div>
@@ -165,11 +169,7 @@ const Products = () => {
                                                     </svg>
                                                 </div>
                                                 <div
-                                                    onClick={() =>
-                                                        handleDelete(
-                                                            item?.productBrandId
-                                                        )
-                                                    }
+                                                    onClick={() => handleDelete(item?.id)}
                                                     className="tw-cursor-pointer tw-text-red-500"
                                                 >
                                                     <svg

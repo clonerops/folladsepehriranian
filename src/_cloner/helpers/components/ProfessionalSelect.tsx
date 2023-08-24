@@ -56,7 +56,7 @@ const ProfessionalSelect = (props: any) => {
       styles={customStyles}
       onChange={props.onChange}
       defaultInputValue={props.defaultInputValue}
-      className='tw-h-full tw-rounded-md tw-text-md tw-text-right'
+      className='tw-text-md tw-text-right'
       defaultValue={props.defaultValue}
       value={props.value}
       placeholder={props.placeholder}

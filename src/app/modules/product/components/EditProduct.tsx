@@ -3,7 +3,12 @@ import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
+import { createProductValidations } from "../validations/createProduct";
+import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
+import { useCreateProduct, useUpdateProduct } from "../core/_hooks";
+import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { IProducts } from "../core/_models";
+import EditText from "../../../../_cloner/helpers/components/EditText";
 
 const EditProduct = (props: {item: IProducts | undefined}) => {
     // States
@@ -19,7 +24,10 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
         setBrandSelected(selectedOption);
     };
 
+    const { mutate, data, isError, isLoading } = useUpdateProduct();
+
     const initialValues = {
+        id: props.item?.id,
         productName: props.item?.productName,
         productBrandId: props.item?.productBrandId,
         productSize: props.item?.productSize,
@@ -33,13 +41,25 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
 
     const formik = useFormik({
         initialValues,
+        validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
-            console.log(values);
+            try {
+                mutate(values);
+            } catch (error) {
+                setStatus("اطلاعات ویرایش محصول نادرست می باشد");
+                setSubmitting(false);
+            }
         },
     });
 
     return (
         <>
+            {data?.succeeded && (
+                <EditText text={data?.message} />
+            )}
+            {data?.data?.status === 400 && (
+                <ErrorText text={data?.data?.title} />
+            )}
             <form onSubmit={formik.handleSubmit} className="container">
                 <div className="tw-grid md:tw-grid-cols-2 tw-gap-x-4 tw-my-8 tw-mx-auto">
                     <div className="tw-w-full tw-my-2">
@@ -51,6 +71,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             touched={formik.touched.productName}
                             errors={formik.errors.productName}
                             name={"productName"}
+                            type="string"
                             formikInput={true}
                             placeholder=""
                         />
@@ -72,6 +93,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.productSize}
                             errors={formik.errors.productSize}
+                            type="string"
                             name={"productSize"}
                             formikInput={true}
                             placeholder=""
@@ -85,6 +107,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.approximateWeight}
                             errors={formik.errors.approximateWeight}
+                            type="number"
                             name={"approximateWeight"}
                             formikInput={true}
                             placeholder=""
@@ -98,6 +121,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.numberInPackage}
                             errors={formik.errors.numberInPackage}
+                            type="number"
                             name={"numberInPackage"}
                             formikInput={true}
                             placeholder=""
@@ -112,6 +136,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             touched={formik.touched.size}
                             errors={formik.errors.size}
                             name={"size"}
+                            type="string"
                             formikInput={true}
                             placeholder=""
                         />
@@ -125,6 +150,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             touched={formik.touched.standard}
                             errors={formik.errors.standard}
                             name={"standard"}
+                            type="string"
                             formikInput={true}
                             placeholder=""
                         />
@@ -138,6 +164,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             touched={formik.touched.productState}
                             errors={formik.errors.productState}
                             name={"productState"}
+                            type="string"
                             formikInput={true}
                             placeholder=""
                         />
@@ -157,8 +184,24 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                     </div>
                 </div>
                 <div className="">
-                    <button type="submit" className="tw-btn-warning tw-mb-2">
-                        <span>ویرایش محصول</span>
+                    <button
+                        type="submit"
+                        id="kt_sign_in_submit"
+                        className="tw-btn-warning tw-mb-2"
+                        disabled={formik.isSubmitting || !formik.isValid}
+                    >
+                        {!isLoading && (
+                            <span className="indicator-label">ویرایش محصول</span>
+                        )}
+                        {isLoading && (
+                            <span
+                                className="indicator-progress"
+                                style={{ display: "block" }}
+                            >
+                                درحال پردازش...
+                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        )}
                     </button>
                 </div>
             </form>

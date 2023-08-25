@@ -4,3 +4,9 @@ export interface IProduct {
     count: string;
     price: number;
 }
+
+export interface IProductOrder {
+    productName: string
+    count: number
+    price: number
+}

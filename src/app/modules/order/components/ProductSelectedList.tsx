@@ -1,8 +1,9 @@
 import { KTSVG } from "../../../../_cloner/helpers";
 import { IProducts } from "../../product/core/_models";
+import { IProductOrder } from "../core/_models";
 
 const ProductSelectedList = (props: {
-    orders: IProducts[] | undefined
+    orders: IProductOrder[] | undefined
     setOrders: any
 }) => {
 const handleDeleteFromList = (index: number) => {
@@ -36,7 +37,7 @@ const handleDeleteFromList = (index: number) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.orders?.map((item: IProducts, index: number) => {
+                    {props?.orders?.map((item: any, index: number) => {
                         return (
                             <tr
                                 className="tw-cursor-pointer tw-hover:bg-gray-100"
@@ -49,10 +50,10 @@ const handleDeleteFromList = (index: number) => {
                                     {item.productName}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.approximateWeight}
+                                    {item.count}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.numberInPackage} ریال
+                                    {item.price} ریال
                                 </td>
                                 <td onClick={() => handleDeleteFromList(index)} className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 tw-mx-auto">
                                     <KTSVG

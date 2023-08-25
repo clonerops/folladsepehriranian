@@ -13,6 +13,8 @@ import CusromRadioGroupButton from "../../../_cloner/helpers/components/CusromRa
 import ProductSelectedListInModal from "./components/ProductSelectedListInModal";
 import { useRetrieveProducts } from "../product/core/_hooks";
 import { IProducts } from "../product/core/_models";
+import { useFormik } from "formik";
+import { IProductOrder } from "./core/_models";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
@@ -26,7 +28,7 @@ const Order = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [showProducts, setShowProducts] = useState(false);
     const [filteredData, setFilteredData] = useState<IProducts[]>();
-    const [orders, setOrders] = useState<IProducts[]>([])
+    const [orders, setOrders] = useState<IProductOrder[]>([])
 
     useEffect(() => {
         setFilteredData(products?.data)
@@ -61,7 +63,7 @@ const Order = () => {
     const handleBlur = () => {
         setTimeout(() => {
             setShowProducts(false);
-        }, 100);
+        }, 500);
     };
 
     const handleProductSelect = (item: IProducts) => {
@@ -77,21 +79,43 @@ const Order = () => {
 
     }, [selectProductFromModal])
 
-    const handleOrders = () => {
-        const ord = [{
-            id: "wr",
-            productName: searchQuery,
-            productBrandId: 0,
-            productSize: "w",
-            approximateWeight: 0,
-            numberInPackage: 0,
-            size: "r",
-            standard: "r",
-            productState: "r",
-            description: "r"
-        }]
-        setOrders(ord)
+    const initialValues = {
+        productName: "",
+        count: 0,
+        price: 0
     }
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: async (values, {resetForm}) => {
+            const productOrder = {
+                productName: searchQuery,
+                count: values.count,
+                price: values.price
+         
+            }
+            
+            setOrders([...orders, productOrder])
+            resetForm()
+
+        }
+    })
+
+    // const handleOrders = () => {
+    //     const ord = [{
+    //         id: "wr",
+    //         productName: searchQuery,
+    //         productBrandId: 0,
+    //         productSize: "w",
+    //         approximateWeight: 0,
+    //         numberInPackage: 0,
+    //         size: "r",
+    //         standard: "r",
+    //         productState: "r",
+    //         description: "r"
+    //     }]
+    //     setOrders(ord)
+    // }
     return (
         <>
             <Card6 title="" image="">
@@ -205,7 +229,8 @@ const Order = () => {
                         </button>
                     </div> */}
                     </div>
-                    <div className="tw-flex tw-items-center tw-gap-x-8">
+
+                    <form onSubmit={formik.handleSubmit} className="tw-flex tw-items-center tw-gap-x-8">
                         <div className="tw-relative">
                             <input
                                 onFocus={handleFocuse}
@@ -255,13 +280,28 @@ const Order = () => {
                             )}
                         </div>
                         <div>
-                            <CustomInput placeholder="مقدار / تعداد" />
+                            <CustomInput
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.count}
+                                errors={formik.errors.count}
+                                name={"count"}
+                                type="number"
+                                placeholder="مقدار / تعداد"
+                                formikInput={true} />
                         </div>
                         <div>
-                            <CustomInput placeholder="قیمت" />
+                            <CustomInput
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.price}
+                                errors={formik.errors.price}
+                                name={"price"}
+                                type="number"
+                                placeholder="قیمت"
+                                formikInput={true} />
                         </div>
                         <div>
-                            <button onClick={handleOrders} className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
+                            {/* <button onClick={handleOrders} className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white"> */}
+                            <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -270,7 +310,7 @@ const Order = () => {
                                 </span>
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div className="tw-grid tw-grid-cols-3 tw-gap-8">

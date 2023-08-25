@@ -94,7 +94,7 @@ const CreateUser = () => {
             <form
                 onSubmit={formik.handleSubmit}
             >
-                <div className="tw-grid tw-grid-cols-3 tw-px-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-px-4">
                     <div className="tw-px-2 ">
                         <AuthInputs
                             type="text"

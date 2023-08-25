@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
-// import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import Modal from "../../../_cloner/helpers/components/Modal";
@@ -17,8 +15,6 @@ import { useFormik } from "formik";
 import { IProductOrder } from "./core/_models";
 import { sliceNumberPrice } from "../../../_cloner/helpers/sliceNumberPrice";
 import { convertToPersianWord } from "../../../_cloner/helpers/convertPersian";
-// import Inputs from "../../modules/auth/components/Inputs";
-// import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Order = () => {
     const { data: products, isLoading: productLoading, isError: productError } = useRetrieveProducts()

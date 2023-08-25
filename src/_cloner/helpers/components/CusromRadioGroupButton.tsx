@@ -16,7 +16,7 @@ const CusromRadioGroupButton = (props: {
                 return (
                     <label className="tw-ml-4" key={item.id}>
                         <input
-                            className="tw-mx-2 tw-w-[14px] tw-h-[14px]"
+                            className="tw-mx-2 tw-w-[14px] tw-h-[14px] tw-accent-violet-700"
                             type="radio"
                             value={item.id}
                             name={props.name}

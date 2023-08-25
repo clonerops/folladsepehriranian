@@ -1,5 +1,4 @@
 import { KTSVG } from "../../../../_cloner/helpers";
-import { IProducts } from "../../product/core/_models";
 import { IProductOrder } from "../core/_models";
 
 const ProductSelectedList = (props: {
@@ -41,7 +40,7 @@ const handleDeleteFromList = (index: number) => {
                         return (
                             <tr
                                 className="tw-cursor-pointer tw-hover:bg-gray-100"
-                                key={item.id}
+                                key={index}
                             >
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {index + 1}

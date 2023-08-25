@@ -15,6 +15,8 @@ import { useRetrieveProducts } from "../product/core/_hooks";
 import { IProducts } from "../product/core/_models";
 import { useFormik } from "formik";
 import { IProductOrder } from "./core/_models";
+import { sliceNumberPrice } from "../../../_cloner/helpers/sliceNumberPrice";
+import { convertToPersianWord } from "../../../_cloner/helpers/convertPersian";
 // import Inputs from "../../modules/auth/components/Inputs";
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
@@ -29,11 +31,25 @@ const Order = () => {
     const [showProducts, setShowProducts] = useState(false);
     const [filteredData, setFilteredData] = useState<IProducts[]>();
     const [orders, setOrders] = useState<IProductOrder[]>([])
+    const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
         setFilteredData(products?.data)
     }, [products?.data])
 
+    const factorType = [
+        { id: 1, title: "غیر رسمی" },
+        { id: 2, title: "رسمی سپهر" },
+        { id: 3, title: "رسمی مهفام" }
+    ]
+    const exitType = [
+        { id: 1, title: "عادی" },
+        { id: 2, title: "بعد از تسویه" },
+    ]
+    const sendType = [
+        { id: 1, title: "ارسال با مشتری" },
+        { id: 2, title: "ارسال توسط بازرگانی" },
+    ]
 
     // const [factorType, setFactorType] = useState<number>(1);
     // const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,35 +103,29 @@ const Order = () => {
 
     const formik = useFormik({
         initialValues,
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values, { resetForm }) => {
             const productOrder = {
                 productName: searchQuery,
                 count: values.count,
                 price: values.price
-         
+
             }
-            
+
             setOrders([...orders, productOrder])
             resetForm()
+            setSearchQuery("")
 
         }
     })
 
-    // const handleOrders = () => {
-    //     const ord = [{
-    //         id: "wr",
-    //         productName: searchQuery,
-    //         productBrandId: 0,
-    //         productSize: "w",
-    //         approximateWeight: 0,
-    //         numberInPackage: 0,
-    //         size: "r",
-    //         standard: "r",
-    //         productState: "r",
-    //         description: "r"
-    //     }]
-    //     setOrders(ord)
-    // }
+    useEffect(() => {
+        const prices = orders.map((obj) => Number(obj.price));
+        const newPrices = [...prices];
+        const newTotal = newPrices.reduce((acc: any, item) => acc + item, 0);
+        setTotalAmount(newTotal);
+    }, [orders]);
+
+
     return (
         <>
             <Card6 title="" image="">
@@ -169,65 +179,6 @@ const Order = () => {
                                     setSelectProductFromModal={setSelectProductFromModal} />
                             </Modal>
                         </div>
-                        {/* <div className="tw-relative">
-                            <input
-                                onFocus={handleFocuse}
-                                onBlur={handleBlur}
-                                value={searchQuery}
-                                onChange={handleInputChange}
-                                placeholder="کالا / محصول"
-                                type="text"
-                                className="border px-2 border-gray-400 rounded-md py-2 w-[306px]"
-                            />
-
-                            {showProducts && (
-                                <div className="border w-[340px] overflow-auto max-h-[250px] min-h-[48px] absolute top-[48px] box-border bg-white shadow-md">
-                                    <ul
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="serach__product-lists"
-                                    >
-                                        {filteredData.map((item, index) => {
-                                            return (
-                                                <li
-                                                    key={index}
-                                                    onClick={() =>
-                                                        handleProductSelect(item)
-                                                    }
-                                                    className="min-h-[67px] cursor-pointer"
-                                                >
-                                                    <div className="flex flex-row tw-justify-between items-center">
-                                                        <div className=" relative flex flex-col pt-4">
-                                                            <span className="text-sm px-4">
-                                                                {" "}
-                                                                {item.title}
-                                                            </span>
-                                                            <span className="text-red-500 text-xs px-4 absolute top-10 right-0 ">
-                                                                کیلوگرم
-                                                            </span>
-                                                        </div>
-                                                        <span className="text-xs px-4">
-                                                            {" "}
-                                                            کارخانه
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                            )}
-                        </div> */}
-                        {/* <div>
-                        <CustomInput placeholder="مقدار / تعداد" />
-                    </div>
-                    <div>
-                        <CustomInput placeholder="قیمت" />
-                    </div> */}
-                        {/* <div>
-                        <button className="border-2 border-blue-500 py-2 px-16 rounded-md">
-                            <span> + افزودن کالا</span>
-                        </button>
-                    </div> */}
                     </div>
 
                     <form onSubmit={formik.handleSubmit} className="tw-flex tw-items-center tw-gap-x-8">
@@ -300,7 +251,6 @@ const Order = () => {
                                 formikInput={true} />
                         </div>
                         <div>
-                            {/* <button onClick={handleOrders} className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white"> */}
                             <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
@@ -325,32 +275,34 @@ const Order = () => {
                             </div>
                         </div>
 
-                        {/* <div className="tw-pt-4">
+                        <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع فاکتور</label>
                             <div>
-                                <CusromRadioGroupButton items={factorType} />
+                                <CusromRadioGroupButton items={factorType} name="factorType" />
                             </div>
-                        </div> */}
-                        {/* <div className="tw-pt-4">
+                        </div>
+                        <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع خروج</label>
                             <div>
-                                <CusromRadioGroupButton items={exitType} />
+                                <CusromRadioGroupButton items={exitType} name="exitType" />
                             </div>
                         </div>
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع ارسال</label>
                             <div>
-                                <CusromRadioGroupButton items={sendType} />
+                                <CusromRadioGroupButton items={sendType} name="sendType" />
                             </div>
-                        </div> */}
+                        </div>
 
                         <div className="tw-flex tw-justify-between tw-pt-8">
                             <span className="tw-font-weight-bold">قیمت کل</span>
-                            <span className="tw-font-weight-bold">
+                            <span className="tw-font-weight-bold tw-text-2xl tw-text-green-500">
+                                {sliceNumberPrice(totalAmount)}
                             </span>
                         </div>
                         <div className="salefactor d-flex flex-column justify-content-between">
                             <span className="font-weight-bold">
+                                {convertToPersianWord(totalAmount)} تومان
                             </span>
                         </div>
                         <div className="d-flex justify-content-end tw-mt-5">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const CusromRadioGroupButton = (props: {
     items: any
+    name: string
 }) => {
 
     const [selected, setSelected] = useState<number>(1);
@@ -18,7 +19,7 @@ const CusromRadioGroupButton = (props: {
                             className="tw-mx-2 tw-w-[14px] tw-h-[14px]"
                             type="radio"
                             value={item.id}
-                            name="factorType"
+                            name={props.name}
                             checked={selected === item.id}
                             onChange={handleRadio}
                         />

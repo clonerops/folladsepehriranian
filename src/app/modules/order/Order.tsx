@@ -93,8 +93,8 @@ const Order = () => {
 
     const initialValues = {
         productName: "",
-        count: 0,
-        price: 0
+        count: "",
+        price: ""
     }
 
     const formik = useFormik({
@@ -150,8 +150,8 @@ const Order = () => {
                 >
                     <CreateUser />
                 </Modal>
-                <div className="tw-flex tw-justify-start tw-items-center tw-gap-x-4">
-                    <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-4 tw-my-8">
+                <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-gap-x-4">
+                    <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
                         <div>
                             <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
@@ -176,9 +176,8 @@ const Order = () => {
                             </Modal>
                         </div>
                     </div>
-
-                    <form onSubmit={formik.handleSubmit} className="tw-flex tw-items-center tw-gap-x-8">
-                        <div className="tw-relative">
+                    <form onSubmit={formik.handleSubmit} className="md:tw-flex md:tw-items-center md:tw-gap-x-8">
+                        <div className="tw-relative md:tw-w-[50%] tw-my-2">
                             <input
                                 onFocus={handleFocuse}
                                 onBlur={handleBlur}
@@ -186,7 +185,7 @@ const Order = () => {
                                 onChange={handleInputChange}
                                 placeholder="کالا / محصول"
                                 type="text"
-                                className="tw-border tw-px-2 tw-border-gray-500 tw-rounded-md tw-py-2 tw-w-[340px]"
+                                className="customInput tw-border tw-px-2 tw-border-gray-500 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
                             />
 
                             {showProducts && (
@@ -226,7 +225,7 @@ const Order = () => {
                                 </div>
                             )}
                         </div>
-                        <div>
+                        <div className="tw-my-2">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.count}
@@ -236,7 +235,7 @@ const Order = () => {
                                 placeholder="مقدار / تعداد"
                                 formikInput={true} />
                         </div>
-                        <div>
+                        <div className="tw-my-2">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.price}
@@ -246,7 +245,7 @@ const Order = () => {
                                 placeholder="قیمت"
                                 formikInput={true} />
                         </div>
-                        <div>
+                        <div className="tw-my-2 tw-flex tw-justify-end">
                             <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
@@ -259,8 +258,8 @@ const Order = () => {
                     </form>
                 </div>
 
-                <div className="tw-grid tw-grid-cols-3 tw-gap-8">
-                    <div className="tw-col-span-2">
+                <div className="md:tw-grid md:tw-grid-cols-3 tw-gap-8">
+                    <div className="tw-col-span-2 tw-mb-2">
                         <ProductSelectedList orders={orders} setOrders={setOrders} />
                     </div>
                     <div className="">
@@ -293,7 +292,7 @@ const Order = () => {
                         <div className="tw-flex tw-justify-between tw-pt-8">
                             <span className="tw-font-weight-bold">قیمت کل</span>
                             <span className="tw-font-weight-bold tw-text-2xl tw-text-green-500">
-                                {sliceNumberPrice(totalAmount)}
+                                {sliceNumberPrice(totalAmount)} ریال
                             </span>
                         </div>
                         <div className="salefactor d-flex flex-column justify-content-between">

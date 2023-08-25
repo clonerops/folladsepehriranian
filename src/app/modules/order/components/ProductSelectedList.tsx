@@ -14,8 +14,8 @@ const handleDeleteFromList = (index: number) => {
 }
 
     return (
-        <div>
-            <table className="tw-w-full">
+        <div className="tw-overflow-x-auto">
+            <table className="tw-w-full tw-table-auto">
                 <thead className="tw-bg-gray-200">
                     <tr>
                         <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">

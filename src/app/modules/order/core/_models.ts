@@ -7,6 +7,6 @@ export interface IProduct {
 
 export interface IProductOrder {
     productName: string
-    count: number
-    price: number
+    count: string
+    price: string
 }

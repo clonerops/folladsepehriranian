@@ -22,7 +22,7 @@ const CustomTextarea = (props: {
                     >
                         <textarea
                             {...props.getFieldProps(props.name)}
-                            className="tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500"
+                            className="customInput tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500 tw-outline-none"
                             name={props.name}
                             key={props.key}
                             placeholder={props.placeholder}
@@ -43,7 +43,7 @@ const CustomTextarea = (props: {
                         }}
                     >
                         <textarea
-                            className="tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500"
+                            className="customInput tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-500 tw-outline-none"
                             name={props.name}
                             key={props.key}
                             value={props.value}

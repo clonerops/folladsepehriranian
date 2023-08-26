@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const CusromRadioGroupButton = (props: {
     items: any
     name: string
+    selected: number 
+    handleRadio: any
 }) => {
 
-    const [selected, setSelected] = useState<number>(1);
-    const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSelected(Number(e.target.value));
-    };
+    // const [selected, setSelected] = useState<number>(1);
+    // const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSelected(Number(e.target.value));
+    // };
 
     return (
         <>
@@ -16,12 +18,12 @@ const CusromRadioGroupButton = (props: {
                 return (
                     <label className="tw-ml-4" key={item.id}>
                         <input
-                            className="tw-mx-2 tw-w-[14px] tw-h-[14px] tw-accent-violet-700"
+                            className="tw-mx-2 tw-w-[14px] tw-h-[14px] tw-accent-green-700"
                             type="radio"
                             value={item.id}
                             name={props.name}
-                            checked={selected === item.id}
-                            onChange={handleRadio}
+                            checked={props.selected === item.id}
+                            onChange={props.handleRadio}
                         />
                         <span className="">{item.title}</span>
                     </label>

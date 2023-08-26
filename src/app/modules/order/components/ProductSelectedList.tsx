@@ -1,17 +1,18 @@
 import { KTSVG } from "../../../../_cloner/helpers";
+import { IProducts } from "../../product/core/_models";
 import { IProductOrder } from "../core/_models";
 
 const ProductSelectedList = (props: {
-    orders: IProductOrder[] | undefined
+    orders: IProducts[] | undefined
     setOrders: any
 }) => {
-const handleDeleteFromList = (index: number) => {
-    if(props.orders) {
-        const cloneItems = [...props.orders]
-        cloneItems?.splice(index, 1)
-        props.setOrders(cloneItems)
+    const handleDeleteFromList = (index: number) => {
+        if (props.orders) {
+            const cloneItems = [...props.orders]
+            cloneItems?.splice(index, 1)
+            props.setOrders(cloneItems)
+        }
     }
-}
 
     return (
         <div className="tw-overflow-x-auto">
@@ -54,14 +55,17 @@ const handleDeleteFromList = (index: number) => {
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.price} ریال
                                 </td>
-                                <td onClick={() => handleDeleteFromList(index)} className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 tw-mx-auto">
-                                    <KTSVG
-                                        className="tw-text-red-500"
-                                        svgClassName=""
-                                        path={
-                                            "/media/icons/duotune/arrows/arr011.svg"
-                                        }
-                                    />
+                                <td onClick={() => handleDeleteFromList(index)} className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <div className="tw-flex tw-justify-center tw-items-center">
+                                        <KTSVG
+                                            className="tw-text-red-500 tw-text-center"
+                                            svgClassName=""
+                                            path={
+                                                "/media/icons/duotune/arrows/arr011.svg"
+                                            }
+                                        />
+                                    </div>
+
                                 </td>
                             </tr>
                         );

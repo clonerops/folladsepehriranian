@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import Modal from "../../../_cloner/helpers/components/Modal";
@@ -12,11 +12,26 @@ import ProductSelectedListInModal from "./components/ProductSelectedListInModal"
 import { useRetrieveProducts } from "../product/core/_hooks";
 import { IProducts } from "../product/core/_models";
 import { useFormik } from "formik";
-import { IProductOrder } from "./core/_models";
 import { sliceNumberPrice } from "../../../_cloner/helpers/sliceNumberPrice";
 import { convertToPersianWord } from "../../../_cloner/helpers/convertPersian";
+import { useCreateOrder } from "./core/_hooks";
+import moment from "moment-jalaali";
 
 const Order = () => {
+    const [input, dispatch] = useReducer(
+        (state: any, newState: any) => ({ ...state, ...newState }),
+        {
+            description: "",
+        }
+    );
+
+    const handleChangeValue = (event: any) => {
+        const inputName = event.target.name;
+        const inputValue = event.target.value;
+
+        dispatch({ [inputName]: inputValue });
+    };
+
     const { data: products, isLoading: productLoading, isError: productError } = useRetrieveProducts()
 
 
@@ -26,31 +41,41 @@ const Order = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [showProducts, setShowProducts] = useState(false);
     const [filteredData, setFilteredData] = useState<IProducts[]>();
-    const [orders, setOrders] = useState<IProductOrder[]>([])
+    const [orders, setOrders] = useState<IProducts[]>([])
     const [totalAmount, setTotalAmount] = useState(0);
+    const [settlementDate, setSettlementDate] = useState();
 
     useEffect(() => {
         setFilteredData(products?.data)
     }, [products?.data])
 
-    const factorType = [
+    const factor = [
         { id: 1, title: "غیر رسمی" },
         { id: 2, title: "رسمی سپهر" },
         { id: 3, title: "رسمی مهفام" }
     ]
-    const exitType = [
+    const exit = [
         { id: 1, title: "عادی" },
         { id: 2, title: "بعد از تسویه" },
     ]
-    const sendType = [
+    const send = [
         { id: 1, title: "ارسال با مشتری" },
         { id: 2, title: "ارسال توسط بازرگانی" },
     ]
 
+    const [factorType, setFactorType] = useState<number>(1);
+    const [exitType, setExitType] = useState<number>(1);
+    const [sendType, setSendType] = useState<number>(1);
     // const [factorType, setFactorType] = useState<number>(1);
-    // const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setFactorType(Number(e.target.value));
-    // };
+    const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFactorType(Number(e.target.value));
+    };
+    const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setExitType(Number(e.target.value));
+    };
+    const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSendType(Number(e.target.value));
+    };
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newInputValue = event.target.value;
@@ -101,9 +126,22 @@ const Order = () => {
         initialValues,
         onSubmit: async (values, { resetForm }) => {
             const productOrder = {
+                id: "",
                 productName: searchQuery,
-                count: values.count,
-                price: values.price
+                productBrandId: 0,
+                productCode: 0,
+                productSize: "",
+                approximateWeight: 0,
+                numberInPackage: 0,
+                statusId: 0,
+                size: "",
+                standard: "",
+                productState: "",
+                description: "",
+                brandName: ""
+                // productName: searchQuery,
+                // count: values.count,
+                // price: values.price
 
             }
 
@@ -115,17 +153,63 @@ const Order = () => {
     })
 
     useEffect(() => {
-        const prices = orders.map((obj) => Number(obj.price));
+        const prices = orders.map((obj) => Number(obj.productName));
         const newPrices = [...prices];
         const newTotal = newPrices.reduce((acc: any, item) => acc + item, 0);
         setTotalAmount(newTotal);
     }, [orders]);
 
+    const { mutate, data, isLoading, isError } = useCreateOrder()
+
+    console.log(exitType)
+
+    const handleCreateOrder = () => {
+        const formData = {
+            customerId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            totalAmount: totalAmount,
+            orderCode: 0,
+            confirmedStatus: true,
+            description: input.description,
+            exitType: exitType,
+            orderSendTypeId: sendType,
+            paymentTypeId: 0,
+            customerOfficialName: "string",
+            invoiceTypeId: factorType,
+            approvedDate: "string",
+            freightName: "string",
+            settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
+            dischargePlaceAddress: "string",
+            freightDriverName: "string",
+            carPlaque: "string",
+            details: orders?.map((item) => {
+                return {
+                    productId: item.productName
+                }
+            })
+            // details: [
+            //     {
+            //         rowId: 0,
+            //         productId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            //         warehouseId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            //         proximateAmount: 0,
+            //         numberInPackage: 0,
+            //         price: 0,
+            //         cargoSendDate: "string",
+            //         buyPrice: 0,
+            //         purchaseInvoiceType: 0,
+            //         purchaseSettlementDate: "string",
+            //         sellerCompanyRow: "string"
+            //     }
+            // ]
+        }
+        console.log("formData", formData)
+        // mutate(formData)
+    }
 
     return (
         <>
             <Card6 title="" image="">
-                {/* Search Customer */}
+                {/* Search Customer and Select Product */}
                 <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-gap-x-4">
                     <div
                         className="tw-w-full md:tw-w-[50%]"
@@ -201,16 +285,13 @@ const Order = () => {
                                                 <li
                                                     key={index}
                                                     onClick={() => handleProductSelect(item)}
-                                                    className="min-h-[67px] cursor-pointer"
+                                                    className="tw-min-h-[60px] tw-cursor-pointer"
                                                 >
                                                     <div className="tw-flex tw-flex-row tw-justify-between tw-items-center">
                                                         <div className=" tw-relative tw-flex tw-flex-col tw-pt-4">
                                                             <span className="tw-text-sm tw-px-4">
                                                                 {" "}
                                                                 {item.productName}
-                                                            </span>
-                                                            <span className="tw-text-red-500 tw-text-xs tw-px-4 tw-absolute tw-top-10 tw-right-0 ">
-                                                                کیلوگرم
                                                             </span>
                                                         </div>
                                                         <span className="tw-text-xs tw-px-4">
@@ -257,55 +338,117 @@ const Order = () => {
                         </div>
                     </form>
                 </div>
-
-                <div className="md:tw-grid md:tw-grid-cols-3 tw-gap-8">
-                    <div className="tw-col-span-2 tw-mb-2">
-                        <ProductSelectedList orders={orders} setOrders={setOrders} />
+                {/* Orders Submit UI2 */}
+                <div className="tw-col-span-2 tw-mb-2">
+                    <ProductSelectedList orders={orders} setOrders={setOrders} />
+                </div>
+                <div className="">
+                    <div className="tw-grid tw-grid-cols-3 tw-gap-4">
+                        <CustomDatepicker
+                            onChange={(d: any) => setSettlementDate(d.value)}
+                            placeholder="تاریخ تسویه" />
+                        <div className="tw-w-100 tw-col-span-2">
+                            <CustomTextarea
+                                name="description"
+                                value={input.description}
+                                onChange={handleChangeValue}
+                                placeholder="توضیحات" />
+                        </div>
                     </div>
-                    <div className="">
+
+                    <div className="tw-grid tw-grid-cols-3">
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع فاکتور</label>
+                            <div>
+                                <CusromRadioGroupButton selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
+                            </div>
+                        </div>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع خروج</label>
+                            <div>
+                                <CusromRadioGroupButton selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
+                            </div>
+                        </div>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع ارسال</label>
+                            <div>
+                                <CusromRadioGroupButton selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="tw-flex tw-justify-between tw-pt-8">
+                        <span className="tw-font-yekan_bold tw-text-2xl">قیمت کل</span>
+                        <span className="tw-font-yekan_bold tw-text-2xl tw-text-green-500">
+                            {sliceNumberPrice(totalAmount)} ریال
+                        </span>
+                    </div>
+                    <div className="salefactor d-flex flex-column justify-content-between">
+                        <span className="fonttw-font-yekan_bold">
+                            {convertToPersianWord(totalAmount)} تومان
+                        </span>
+                    </div>
+                    <div className="d-flex justify-content-end tw-mt-5">
+                        <button onClick={handleCreateOrder} className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
+                            ثبت سفارش
+                        </button>
+                    </div>
+                </div>
+                {/* Orders Submit UI1 */}
+                <div className="md:tw-grid md:tw-grid-cols-3 tw-gap-8">
+                    {/* <div className="tw-col-span-2 tw-mb-2">
+                        <ProductSelectedList orders={orders} setOrders={setOrders} />
+                    </div> */}
+                    {/* <div className="">
                         <div className="tw-flex tw-flex-col tw-gap-4">
-                            <CustomDatepicker placeholder="تاریخ تسویه" />
+                            <CustomDatepicker
+                                onChange={(d: any) => setSettlementDate(d.value)}
+                                placeholder="تاریخ تسویه" />
                             <div className="tw-w-100">
-                                <CustomTextarea placeholder="توضیحات" />
+                                <CustomTextarea
+                                    name="description"
+                                    value={input.description}
+                                    onChange={handleChangeValue}
+                                    placeholder="توضیحات" />
                             </div>
                         </div>
 
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع فاکتور</label>
                             <div>
-                                <CusromRadioGroupButton items={factorType} name="factorType" />
+                                <CusromRadioGroupButton selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
                             </div>
                         </div>
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع خروج</label>
                             <div>
-                                <CusromRadioGroupButton items={exitType} name="exitType" />
+                                <CusromRadioGroupButton selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
                             </div>
                         </div>
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold">نوع ارسال</label>
                             <div>
-                                <CusromRadioGroupButton items={sendType} name="sendType" />
+                                <CusromRadioGroupButton selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
                             </div>
                         </div>
 
                         <div className="tw-flex tw-justify-between tw-pt-8">
-                            <span className="tw-font-weight-bold">قیمت کل</span>
-                            <span className="tw-font-weight-bold tw-text-2xl tw-text-green-500">
+                            <span className="tw-font-yekan_bold tw-text-2xl">قیمت کل</span>
+                            <span className="tw-font-yekan_bold tw-text-2xl tw-text-green-500">
                                 {sliceNumberPrice(totalAmount)} ریال
                             </span>
                         </div>
                         <div className="salefactor d-flex flex-column justify-content-between">
-                            <span className="font-weight-bold">
+                            <span className="fonttw-font-yekan_bold">
                                 {convertToPersianWord(totalAmount)} تومان
                             </span>
                         </div>
                         <div className="d-flex justify-content-end tw-mt-5">
-                            <button className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
+                            <button onClick={handleCreateOrder} className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
                                 ثبت سفارش
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </Card6>
         </>

@@ -70,10 +70,10 @@ const ProductSelectedListInModal = (props: {
                                 انبار
                             </td>
                             <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                موجودی
+                                وزن تقریبی
                             </td>
                             <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                قیمت
+                                سایز
                             </td>
                         </tr>
                     </thead>
@@ -98,7 +98,7 @@ const ProductSelectedListInModal = (props: {
                                         {item.approximateWeight}
                                     </td>
                                     <td className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 mx-auto">
-                                        {item.productSize} ریال
+                                        {item.productSize}
                                     </td>
                                 </tr>
                             );

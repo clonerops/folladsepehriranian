@@ -339,15 +339,17 @@ const Order = () => {
                     </form>
                 </div>
                 {/* Orders Submit UI2 */}
-                <div className="tw-col-span-2 tw-mb-2">
+                {/* <div className="tw-col-span-2 tw-mb-2">
                     <ProductSelectedList orders={orders} setOrders={setOrders} />
                 </div>
                 <div className="">
-                    <div className="tw-grid tw-grid-cols-3 tw-gap-4">
-                        <CustomDatepicker
-                            onChange={(d: any) => setSettlementDate(d.value)}
-                            placeholder="تاریخ تسویه" />
-                        <div className="tw-w-100 tw-col-span-2">
+                    <div className="tw-grid tw-grid-cols-4 tw-gap-4">
+                        <div>
+                            <CustomDatepicker
+                                onChange={(d: any) => setSettlementDate(d.value)}
+                                placeholder="تاریخ تسویه" />
+                        </div>
+                        <div className="tw-w-100 tw-col-span-3">
                             <CustomTextarea
                                 name="description"
                                 value={input.description}
@@ -393,7 +395,65 @@ const Order = () => {
                             ثبت سفارش
                         </button>
                     </div>
+                </div> */}
+                {/* Orders Submit UI2 */}
+                <div className="tw-col-span-2 tw-mb-2">
+                    <ProductSelectedList orders={orders} setOrders={setOrders} />
                 </div>
+                {/* <div className="">
+                    <div className="tw-grid tw-grid-cols-4 tw-gap-4">
+                        <div>
+                            <CustomDatepicker
+                                onChange={(d: any) => setSettlementDate(d.value)}
+                                placeholder="تاریخ تسویه" />
+                        </div>
+                        <div className="tw-w-100 tw-col-span-3">
+                            <CustomTextarea
+                                name="description"
+                                value={input.description}
+                                onChange={handleChangeValue}
+                                placeholder="توضیحات" />
+                        </div>
+                    </div>
+
+                    <div className="tw-grid tw-grid-cols-3">
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع فاکتور</label>
+                            <div>
+                                <CusromRadioGroupButton selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
+                            </div>
+                        </div>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع خروج</label>
+                            <div>
+                                <CusromRadioGroupButton selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
+                            </div>
+                        </div>
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold">نوع ارسال</label>
+                            <div>
+                                <CusromRadioGroupButton selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="tw-flex tw-justify-between tw-pt-8">
+                        <span className="tw-font-yekan_bold tw-text-2xl">قیمت کل</span>
+                        <span className="tw-font-yekan_bold tw-text-2xl tw-text-green-500">
+                            {sliceNumberPrice(totalAmount)} ریال
+                        </span>
+                    </div>
+                    <div className="salefactor d-flex flex-column justify-content-between">
+                        <span className="fonttw-font-yekan_bold">
+                            {convertToPersianWord(totalAmount)} تومان
+                        </span>
+                    </div>
+                    <div className="d-flex justify-content-end tw-mt-5">
+                        <button onClick={handleCreateOrder} className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
+                            ثبت سفارش
+                        </button>
+                    </div>
+                </div> */}
                 {/* Orders Submit UI1 */}
                 <div className="md:tw-grid md:tw-grid-cols-3 tw-gap-8">
                     {/* <div className="tw-col-span-2 tw-mb-2">
@@ -451,6 +511,72 @@ const Order = () => {
                     </div> */}
                 </div>
             </Card6>
+
+            {/* UI 3 */}
+            <div className="tw-grid tw-grid-cols-5 tw-gap-x-4 tw-mt-4">
+                <Card6 image="" title="">
+                    <div className="tw-pt-4">
+                        <label className="tw-font-yekan_bold tw-text-2xl">نوع فاکتور</label>
+                        <div className="tw-mt-8">
+                            <CusromRadioGroupButton className="tw-my-4" selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
+                        </div>
+                    </div>
+                </Card6>
+                <Card6 image="" title="">
+                    <div className="tw-pt-4">
+                        <label className="tw-font-yekan_bold tw-text-2xl">نوع خروج</label>
+                        <div className="tw-mt-8">
+                            <CusromRadioGroupButton className="tw-my-4" selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
+                        </div>
+                    </div>
+                </Card6>
+                <Card6 image="" title="">
+                    <div className="tw-pt-4">
+                        <label className="tw-font-yekan_bold tw-text-2xl">نوع ارسال</label>
+                        <div className="tw-mt-8">
+                            <CusromRadioGroupButton className="tw-my-4" selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
+                        </div>
+                    </div>
+                </Card6>
+                <div className="tw-col-span-2">
+                    <Card6 image="" title="">
+                        <div className="tw-flex tw-flex-col">
+                            <div className="tw-my-1">
+                                <CustomDatepicker
+                                    onChange={(d: any) => setSettlementDate(d.value)}
+                                    placeholder="تاریخ تسویه" />
+                            </div>
+                            <div className="tw-w-100 tw-col-span-3 tw-my-1">
+                                <CustomTextarea
+                                    name="description"
+                                    value={input.description}
+                                    onChange={handleChangeValue}
+                                    placeholder="توضیحات" />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="tw-flex tw-justify-between tw-pt-8">
+                                <span className="tw-font-yekan_bold tw-text-2xl">قیمت کل</span>
+                                <span className="tw-font-yekan_bold tw-text-2xl tw-text-green-500">
+                                    {sliceNumberPrice(totalAmount)} ریال
+                                </span>
+                            </div>
+                            <div className="salefactor d-flex flex-column justify-content-between">
+                                <span className="fonttw-font-yekan_bold">
+                                    {convertToPersianWord(totalAmount)} تومان
+                                </span>
+                            </div>
+                            <div className="d-flex justify-content-end tw-mt-5">
+                                <button onClick={handleCreateOrder} className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md">
+                                    ثبت سفارش
+                                </button>
+                            </div>
+                        </div>
+                    </Card6>
+                </div>
+
+            </div>
+
         </>
     );
 };

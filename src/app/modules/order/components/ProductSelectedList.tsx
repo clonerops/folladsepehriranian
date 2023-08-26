@@ -26,6 +26,9 @@ const ProductSelectedList = (props: {
                             کالا / محصول
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            انبار
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             مقدار
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
@@ -48,6 +51,9 @@ const ProductSelectedList = (props: {
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.productName}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.count}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.count}

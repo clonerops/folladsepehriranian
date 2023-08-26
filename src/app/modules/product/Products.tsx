@@ -28,25 +28,25 @@ const Products = () => {
     // const [selectedRows, setSelectedRows] = useState<IProduct>(); // Track selected row IDs
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [startRowIndex, setStartRowIndex] = useState<number>(0); // Track starting index of current page
-    const itemsPerPage = 20; // Number of items to show per page
+    const itemsPerPage = 8; // Number of items to show per page
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     const { data: products, isLoading: productsLoading, isError: productsError } = useRetrieveProducts();
     const { mutate } = useDeleteProduct();
 
-    const filteredData = fakeData.filter((item) => {
+    const filteredData = products?.data?.filter((item: IProducts) => {
         const values = Object.values(item);
         return values.some((value) =>
             value.toString().toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
 
-    const totalItems = filteredData.length;
+    const totalItems = filteredData?.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const currentItems = filteredData.slice(startIndex, endIndex);
+    const currentItems = filteredData?.slice(startIndex, endIndex);
 
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
@@ -117,7 +117,7 @@ const Products = () => {
                         <tbody>
                             {productsLoading && <span>درحال بارگزاری</span>}
                             {productsError && <span>بارگزاری محصولات با خطا مواجه شده است!</span>}
-                            {products?.data?.map(
+                            {currentItems?.map(
                                 (item: IProducts, index: number) => {
                                     return (
                                         <tr key={item.id}>

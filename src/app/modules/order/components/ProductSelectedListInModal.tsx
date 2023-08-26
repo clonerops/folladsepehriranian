@@ -3,17 +3,23 @@ import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import { IProducts } from "../../product/core/_models";
 
 const ProductSelectedListInModal = (props: {
-    products: IProducts[] | undefined
-    productLoading: boolean
-    productError: boolean
-    setSelectedProductOpen: React.Dispatch<React.SetStateAction<boolean>>
-    setSelectProductFromModal: React.Dispatch<React.SetStateAction<IProducts | undefined>>
+    products: IProducts[] | undefined;
+    productLoading: boolean;
+    productError: boolean;
+    setSelectedProductOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectProductFromModal: React.Dispatch<
+        React.SetStateAction<IProducts | undefined>
+    >;
 }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [startRowIndex, setStartRowIndex] = useState<number>(0); // Track starting index of current page
+
+    const itemsPerPage = 7; // Number of items to show per page
 
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value)
-    }
+        setSearchTerm(e.target.value);
+    };
 
     const filteredData = props.products?.filter((item) => {
         const values = Object.values(item);
@@ -22,10 +28,24 @@ const ProductSelectedListInModal = (props: {
         );
     });
 
+    const totalItems: any = filteredData?.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const currentItems = filteredData?.slice(startIndex, endIndex);
+
+    const goToPage = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+            setStartRowIndex((page - 1) * itemsPerPage); // Update startRowIndex
+        }
+    };
+
     const handleSelectProduct = (item: IProducts) => {
-        props.setSelectedProductOpen(false)
-        props.setSelectProductFromModal(item)
-    }
+        props.setSelectedProductOpen(false);
+        props.setSelectProductFromModal(item);
+    };
 
     return (
         <div className="container tw-my-8">
@@ -33,10 +53,11 @@ const ProductSelectedListInModal = (props: {
                 <CustomInput
                     value={searchTerm}
                     onChange={handleSearchInput}
-                    placeholder="جستجو محصول / کالا" />
+                    placeholder="جستجو محصول / کالا"
+                />
             </div>
-            <div className="tw-overflow-x-auto">
-                <table className="tw-w-full">
+            <div className="tw-overflow-x-auto tw-h-[380px]">
+                <table className="tw-w-full ">
                     <thead className="tw-bg-gray-200">
                         <tr>
                             <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
@@ -57,7 +78,7 @@ const ProductSelectedListInModal = (props: {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData?.map((item: IProducts, index: number) => {
+                        {currentItems?.map((item: IProducts, index: number) => {
                             return (
                                 <tr
                                     className="tw-cursor-pointer hover:tw-bg-yellow-100"
@@ -65,7 +86,7 @@ const ProductSelectedListInModal = (props: {
                                     onClick={() => handleSelectProduct(item)}
                                 >
                                     <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {index + 1}
+                                        {startRowIndex + index + 1}
                                     </td>
                                     <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.productName}
@@ -84,6 +105,27 @@ const ProductSelectedListInModal = (props: {
                         })}
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <p>
+                    صفحه {currentPage} از {totalPages}
+                </p>
+                <div className="tw-flex tw-justify-between">
+                    <button
+                        disabled={currentPage === 1}
+                        onClick={() => goToPage(currentPage - 1)}
+                        className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
+                    >
+                        قبلی
+                    </button>
+                    <button
+                        disabled={currentPage === totalPages}
+                        onClick={() => goToPage(currentPage + 1)}
+                        className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
+                    >
+                        بعدی
+                    </button>
+                </div>
             </div>
         </div>
     );

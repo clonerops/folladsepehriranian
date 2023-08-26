@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { ICreateOrder } from "./_models"
 import * as api from './_requests'
 
@@ -8,6 +8,11 @@ const useCreateOrder = () => {
     })
 }
 
+const useRetrieveOrders = () => {
+    return useQuery(['orders'], () => api.retrieveOrders())
+}
+
 export {
-    useCreateOrder
+    useCreateOrder,
+    useRetrieveOrders
 }

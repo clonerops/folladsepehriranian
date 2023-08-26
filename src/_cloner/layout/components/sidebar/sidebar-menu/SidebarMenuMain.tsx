@@ -39,12 +39,13 @@ const SidebarMenuMain = () => {
         </div>
       </div>
       <SidebarMenuItemWithSub
-        to='/crafted/pages'
+        to='/order'
         title='مدیریت سفارشات'
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'
       >
         <SidebarMenuItem to='/dashboard/order' title='ثبت سفارش' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/order/lists' title='لیست سفارشات' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       <div className='menu-item'>
@@ -53,7 +54,7 @@ const SidebarMenuMain = () => {
         </div>
       </div>
       <SidebarMenuItemWithSub
-        to='/crafted/pages'
+        to='/user'
         title='مدیریت کاربران'
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'
@@ -67,7 +68,7 @@ const SidebarMenuMain = () => {
         </div>
       </div>
       <SidebarMenuItemWithSub
-        to='/crafted/pages'
+        to='/product'
         title='مدیریت محصولات'
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'

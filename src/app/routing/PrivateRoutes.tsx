@@ -4,6 +4,7 @@ import Dashboard from '../pages/dashboard/Dashboard'
 import Order from '../modules/order/Order'
 import CreateUser from '../modules/user/CreateUser'
 import Products from '../modules/product/Products'
+import OrderList from '../modules/order/OrderList'
 
 const PrivateRoutes = () => {
 
@@ -16,6 +17,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard' element={<Dashboard />} />
         {/* Orders */}
         <Route path='dashboard/order' element={<Order />} />
+        <Route path='dashboard/order/lists' element={<OrderList />} />
         {/* Users */}
         <Route path='dashboard/user/create' element={<CreateUser />} />
         {/* Products */}

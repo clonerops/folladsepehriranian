@@ -513,7 +513,7 @@ const Order = () => {
             </Card6>
 
             {/* UI 3 */}
-            <div className="tw-grid tw-grid-cols-5 tw-gap-x-4 tw-mt-4">
+            <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-5 tw-gap-4 tw-mt-4">
                 <Card6 image="" title="">
                     <div className="tw-pt-4">
                         <label className="tw-font-yekan_bold tw-text-2xl">نوع فاکتور</label>
@@ -538,7 +538,7 @@ const Order = () => {
                         </div>
                     </div>
                 </Card6>
-                <div className="tw-col-span-2">
+                <div className="md:tw-col-span-2">
                     <Card6 image="" title="">
                         <div className="tw-flex tw-flex-col">
                             <div className="tw-my-1">
@@ -574,9 +574,7 @@ const Order = () => {
                         </div>
                     </Card6>
                 </div>
-
             </div>
-
         </>
     );
 };

@@ -59,10 +59,22 @@ const deleteProduct = async (id: string) => {
     }
 };
 
+
+// Brands 
+const retrieveBrands = async () => {
+    try {
+        const { data } = await http.get('/v1/Product/GetProductBrands')
+        return data
+    } catch (error: any) {
+        return error.response
+    }
+}
+
 export {
     retrieveProducts,
     createProducts,
     retrieveProductById,
     updateProduct,
     deleteProduct,
+    retrieveBrands
 };

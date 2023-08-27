@@ -5,28 +5,25 @@ import ProfessionalSelect from "../../../../_cloner/helpers/components/Professio
 import { useState } from "react";
 import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct } from "../core/_hooks";
+import { useCreateProduct, useRetrieveBrands } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
+import { dropdownBrand } from "../helpers/dropdownConvert";
 
-const CreateProduct = () => {
+const CreateProduct = (props: { setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>, refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>> }) => {
     // States
-    const [brandSelected, setBrandSelected] = useState();
-
-    const brands = [
-        { value: 1, label: "سپهر" },
-        { value: 2, label: "فولاد مبارکه" },
-        { value: 3, label: "ذوب آهن" },
-    ];
+    const [brandSelected, setBrandSelected] = useState<{value: number, label: string}>();
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);
     };
 
     const { mutate, data, isError, isLoading } = useCreateProduct();
+    const { data: brands } = useRetrieveBrands();
 
     const initialValues = {
         productName: "",
-        productBrandId: 1,
+        warehouseId: 1,
         productSize: "",
         approximateWeight: "",
         numberInPackage: "",
@@ -41,7 +38,16 @@ const CreateProduct = () => {
         validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
-                mutate(values);
+                const formData = {
+                    ...values,
+                    productBrandId: brandSelected?.value
+                }
+                mutate(formData, {
+                    onSuccess: () => {
+                        props.refetch()
+                        props.setIsCreateOpen(false)
+                    }
+                });
             } catch (error) {
                 setStatus("اطلاعات ثبت محصول نادرست می باشد");
                 setSubmitting(false);
@@ -58,9 +64,9 @@ const CreateProduct = () => {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid md:tw-grid-cols-2 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام محصول
                         </label>
                         <CustomInput
@@ -74,16 +80,16 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">برند</label>
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label>
                         <ProfessionalSelect
-                            options={brands}
+                            options={dropdownBrand(brands)}
                             value={brandSelected}
                             onChange={handleBrandChange}
                             placeholder=""
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             سایز محصول
                         </label>
                         <CustomInput
@@ -97,7 +103,7 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             وزن تقریبی
                         </label>
                         <CustomInput
@@ -111,7 +117,7 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             تعداد بسته
                         </label>
                         <CustomInput
@@ -125,7 +131,7 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             اندازه
                         </label>
                         <CustomInput
@@ -139,7 +145,7 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             استاندارد
                         </label>
                         <CustomInput
@@ -153,7 +159,7 @@ const CreateProduct = () => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             حالت محصول
                         </label>
                         <CustomInput
@@ -166,8 +172,8 @@ const CreateProduct = () => {
                             placeholder=""
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
-                        <label className="tw-w-full tw-text-right">
+                    <div className="tw-w-full tw-my-2 tw-col-span-3">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             توضیحات
                         </label>
                         <CustomTextarea

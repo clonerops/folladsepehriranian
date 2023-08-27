@@ -30,10 +30,16 @@ const useDeleteProduct = () => {
     });
 };
 
+// Brands
+const useRetrieveBrands = () => {
+    return useQuery(["brands"], () => api.retrieveBrands());
+};
+
 export {
     useRetrieveProducts,
     useCreateProduct,
     useRetrieveProductById,
     useUpdateProduct,
     useDeleteProduct,
+    useRetrieveBrands
 };

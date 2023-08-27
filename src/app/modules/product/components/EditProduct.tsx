@@ -29,6 +29,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
     const initialValues = {
         id: props.item?.id,
         productName: props.item?.productName,
+        warehouseId: props.item?.warehouseId,
         productBrandId: props.item?.productBrandId,
         productSize: props.item?.productSize,
         approximateWeight: props.item?.approximateWeight,
@@ -41,7 +42,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
 
     const formik = useFormik({
         initialValues,
-        validationSchema: createProductValidations,
+        // validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
                 mutate(values);
@@ -61,9 +62,9 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid md:tw-grid-cols-2 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام محصول
                         </label>
                         <CustomInput
@@ -77,7 +78,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">برند</label>
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label>
                         <ProfessionalSelect
                             options={brands}
                             value={brandSelected}
@@ -86,7 +87,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             سایز محصول
                         </label>
                         <CustomInput
@@ -100,7 +101,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             وزن تقریبی
                         </label>
                         <CustomInput
@@ -114,7 +115,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             تعداد بسته
                         </label>
                         <CustomInput
@@ -128,7 +129,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             اندازه
                         </label>
                         <CustomInput
@@ -142,7 +143,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             استاندارد
                         </label>
                         <CustomInput
@@ -156,7 +157,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             حالت محصول
                         </label>
                         <CustomInput
@@ -169,8 +170,8 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                             placeholder=""
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
-                        <label className="tw-w-full tw-text-right">
+                    <div className="tw-w-full tw-my-2 tw-col-span-3">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             توضیحات
                         </label>
                         <CustomTextarea
@@ -189,6 +190,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                         id="kt_sign_in_submit"
                         className="tw-btn-warning tw-mb-2"
                         disabled={formik.isSubmitting || !formik.isValid}
+                        onClick={() => formik.handleSubmit()}
                     >
                         {!isLoading && (
                             <span className="indicator-label">ویرایش محصول</span>

@@ -4,23 +4,10 @@ import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
 import { useDeleteProduct, useRetrieveProducts } from "./core/_hooks";
+import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 
 const Products = () => {
-    const fakeData = [
-        {
-            productName: "asda",
-            productBrandId: 0,
-            productSize: "ad",
-            approximateWeight: 1,
-            numberInPackage: 2,
-            size: "sad",
-            standard: "sad",
-            productState: "asd",
-            description: "as",
-        },
-    ];
-
-
+    
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [itemForEdit, setItemForEdit] = useState<IProducts>();
@@ -31,8 +18,8 @@ const Products = () => {
     const itemsPerPage = 8; // Number of items to show per page
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const { data: products, isLoading: productsLoading, isError: productsError } = useRetrieveProducts();
-    const { mutate } = useDeleteProduct();
+    const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
+    const { mutate, isLoading: deleteLoading } = useDeleteProduct();
 
     const filteredData = products?.data?.filter((item: IProducts) => {
         const values = Object.values(item);
@@ -60,11 +47,16 @@ const Products = () => {
         setItemForEdit(item);
     };
     const handleDelete = (id: string | undefined) => {
-        if (id) mutate(id);
+        if (id) mutate(id, {
+            onSuccess: () => {
+                refetch()
+            }
+        });
     };
 
     return (
         <>
+            {deleteLoading || productsLoading && <Backdrop loading={deleteLoading || productsLoading} />}
             <div>
                 <div>
                     <button
@@ -79,7 +71,7 @@ const Products = () => {
                     </button>
                 </div>
                 <div className="tw-overflow-x-auto">
-                    <table className="tw-w-full tw-my-2"> 
+                    <table className="tw-w-full tw-my-2">
                         <thead className="tw-bg-gray-200">
                             <tr>
                                 <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
@@ -128,7 +120,7 @@ const Products = () => {
                                                 {item.productName}
                                             </td>
                                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                                {item.productBrandId}
+                                                {item.brandName}
                                             </td>
                                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                                 {item.productSize}
@@ -224,14 +216,12 @@ const Products = () => {
             <Modal
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
-                reqular={true}
             >
-                <CreateProduct />
+                <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
-                reqular={true}
             >
                 <EditProduct item={itemForEdit} />
             </Modal>

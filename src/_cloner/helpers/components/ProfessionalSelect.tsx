@@ -29,7 +29,7 @@ const ProfessionalSelect = (props: any) => {
   control: (provided: Record<string, unknown>, state: any) => ({
     ...provided,
     height: 18,
-    border: state.isFocused ? "1px solid #000256" : "1px solid rgba(0,0,0,0.5)",
+    border: state.isFocused ? "1px solid #d1d5db" : "1px solid #d1d5db",
     boxShadow: state.isFocused ? "0px 0px 4px #000256" : "none",
     // "&": {
     //   border: "1px solid #cccccc",

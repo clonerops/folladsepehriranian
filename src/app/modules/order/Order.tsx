@@ -59,8 +59,8 @@ const Order = () => {
         { id: 2, title: "بعد از تسویه" },
     ]
     const send = [
-        { id: 1, title: "ارسال با مشتری" },
-        { id: 2, title: "ارسال توسط بازرگانی" },
+        { id: 1, title: "توسط مشتری" },
+        { id: 2, title: "توسط بازرگانی" },
     ]
 
     const [factorType, setFactorType] = useState<number>(1);

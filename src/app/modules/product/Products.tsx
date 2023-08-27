@@ -79,7 +79,7 @@ const Products = () => {
                     </button>
                 </div>
                 <div className="tw-overflow-x-auto">
-                    <table className="tw-w-full tw-my-2">
+                    <table className="tw-w-full tw-my-2"> 
                         <thead className="tw-bg-gray-200">
                             <tr>
                                 <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">

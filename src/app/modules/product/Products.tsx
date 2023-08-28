@@ -56,7 +56,8 @@ const Products = () => {
 
     return (
         <>
-            {deleteLoading || productsLoading && <Backdrop loading={deleteLoading || productsLoading} />}
+            {deleteLoading && <Backdrop loading={deleteLoading} />}
+            {productsLoading && <Backdrop loading={productsLoading} />}
             <div>
                 <div>
                     <button
@@ -138,7 +139,7 @@ const Products = () => {
                                                 {item.approximateWeight}
                                             </td>
                                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                                {item.standard}
+                                                {item.description}
                                             </td>
                                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                                 <div className="tw-flex tw-gap-4">

@@ -248,7 +248,6 @@ const Order = () => {
                             <Modal
                                 isOpen={selectedProductOpen}
                                 onClose={() => setSelectedProductOpen(false)}
-                                reqular={true}
                                 className="tw-w-[800px]"
                             >
                                 <ProductSelectedListInModal
@@ -269,11 +268,11 @@ const Order = () => {
                                 onChange={handleInputChange}
                                 placeholder="کالا / محصول"
                                 type="text"
-                                className="customInput tw-border tw-px-2 tw-border-gray-500 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
+                                className="customInput tw-border tw-px-2 tw-border-gray-300 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
                             />
 
                             {showProducts && (
-                                <div className="tw-border tw-w-[340px] tw-overflow-auto tw-max-h-[250px] tw-min-h-[48px] tw-absolute tw-top-[48px] tw-box-border tw-bg-white tw-shadow-md">
+                                <div className="tw-border tw-w-[340px] tw-overflow-auto tw-max-h-[250px] tw-min-h-[48px] tw-absolute tw-top-[42px] tw-box-border tw-bg-white tw-shadow-md tw-z-[9999] tw-rounded-md">
                                     <ul
                                         onClick={(e) => e.stopPropagation()}
                                         className="serach__product-lists"

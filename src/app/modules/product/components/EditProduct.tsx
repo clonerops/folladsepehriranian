@@ -5,26 +5,29 @@ import ProfessionalSelect from "../../../../_cloner/helpers/components/Professio
 import { useState } from "react";
 import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useUpdateProduct } from "../core/_hooks";
+import { useCreateProduct, useRetrieveBrands, useUpdateProduct } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { IProducts } from "../core/_models";
 import EditText from "../../../../_cloner/helpers/components/EditText";
+import { dropdownBrand } from "../helpers/dropdownConvert";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 
-const EditProduct = (props: {item: IProducts | undefined}) => {
+const EditProduct = (props: {
+    item: IProducts | undefined,
+    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
+
+}) => {
     // States
     const [brandSelected, setBrandSelected] = useState();
 
-    const brands = [
-        { value: 1, label: "سپهر" },
-        { value: 2, label: "فولاد مبارکه" },
-        { value: 3, label: "ذوب آهن" },
-    ];
+    const { data: brands } = useRetrieveBrands();
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);
     };
 
     const { mutate, data, isError, isLoading } = useUpdateProduct();
+    console.log(props.item)
 
     const initialValues = {
         id: props.item?.id,
@@ -46,6 +49,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
                 mutate(values);
+                props.refetch()
             } catch (error) {
                 setStatus("اطلاعات ویرایش محصول نادرست می باشد");
                 setSubmitting(false);
@@ -56,7 +60,7 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
     return (
         <>
             {data?.succeeded && (
-                <EditText text={data?.message} />
+                <EditText text={"ویرایش با موفقیت انجام شد"} />
             )}
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
@@ -80,9 +84,10 @@ const EditProduct = (props: {item: IProducts | undefined}) => {
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label>
                         <ProfessionalSelect
-                            options={brands}
+                            options={dropdownBrand(brands)}
                             value={brandSelected}
                             onChange={handleBrandChange}
+                            defaultValue={{value: props.item?.productBrandId, label: props.item?.brandName}}
                             placeholder=""
                         />
                     </div>

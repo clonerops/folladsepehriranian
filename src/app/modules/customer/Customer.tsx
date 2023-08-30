@@ -23,9 +23,6 @@ const Customer = () => {
                                 آدرس
                             </td>
                             <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                نقش
-                            </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 تلفن
                             </td>
                             <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
@@ -60,11 +57,6 @@ const Customer = () => {
                                 تهران نسیم شهر خیایابن سوم کوچه صدوقی پلاک 13
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                <span className="tw-bg-green-500 tw-text-white tw-px-4 tw-rounded-md">
-                                    ادمین
-                                </span>
-                            </td>
-                            <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                 02156760981
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
@@ -96,11 +88,6 @@ const Customer = () => {
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                 تهران نسیم شهر خیایابن سوم کوچه صدوقی پلاک 13
-                            </td>
-                            <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                <span className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-rounded-md">
-                                    کاربر عادی
-                                </span>
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                 02156760981

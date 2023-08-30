@@ -10,9 +10,12 @@ import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { dropdownBrand } from "../helpers/dropdownConvert";
 
-const CreateProduct = (props: { setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>, refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>> }) => {
+const CreateProduct = (props: {
+    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
+}) => {
     // States
-    const [brandSelected, setBrandSelected] = useState<{value: number, label: string}>();
+    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);

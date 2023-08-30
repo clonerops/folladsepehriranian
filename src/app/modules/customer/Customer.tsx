@@ -1,3 +1,5 @@
+import { toAbsoluteUrl } from "../../../_cloner/helpers";
+
 const Customer = () => {
     return (
         <>
@@ -6,7 +8,7 @@ const Customer = () => {
                     <thead className="tw-bg-slate-200">
                         <tr>
                             <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                ردیف
+                                
                             </td>
                             <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 نام
@@ -34,10 +36,19 @@ const Customer = () => {
                     <tbody>
                         <tr>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                1
+                                <span>
+                                    <img
+                                        src={toAbsoluteUrl(
+                                            "/media/avatars/300-1.jpg"
+                                        )}
+                                        width={40}
+                                        height={40}
+                                        className="tw-rounded-full"
+                                    />
+                                </span>
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                ابوالفضل معصومی
+                                <span>ابوالفضل معصومی</span>
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                 6660089985
@@ -62,7 +73,17 @@ const Customer = () => {
                         </tr>
                         <tr>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                2
+                            <span>
+                                    <img
+                                        src={toAbsoluteUrl(
+                                            "/media/avatars/blank.png"
+                                        )}
+                                        width={40}
+                                        height={40}
+                                        className="tw-rounded-full"
+                                    />
+                                </span>
+
                             </td>
                             <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                 ابوالفضل معصومی

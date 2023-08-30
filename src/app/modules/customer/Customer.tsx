@@ -3,30 +3,30 @@ const Customer = () => {
         <>
             <div className="tw-overflow-auto">
                 <table className="tw-w-full ">
-                    <thead className="tw-bg-gray-200">
+                    <thead className="tw-bg-slate-200">
                         <tr>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 ردیف
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 نام
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 کدملی
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 موبایل
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 آدرس
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 نقش
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 تلفن
                             </td>
-                            <td className="tw-text-gray-500 tw-border tw-border-gray-300 tw-py-4 px-2 tw-text-center">
+                            <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                 نماینده
                             </td>
                         </tr>

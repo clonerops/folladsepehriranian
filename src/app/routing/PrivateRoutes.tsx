@@ -5,6 +5,7 @@ import Order from '../modules/order/Order'
 import CreateUser from '../modules/user/CreateUser'
 import Products from '../modules/product/Products'
 import OrderList from '../modules/order/OrderList'
+import Customer from '../modules/customer/Customer'
 
 const PrivateRoutes = () => {
 
@@ -22,6 +23,8 @@ const PrivateRoutes = () => {
         <Route path='dashboard/user/create' element={<CreateUser />} />
         {/* Products */}
         <Route path='dashboard/product/managment' element={<Products />} />
+        {/* Customer */}
+        <Route path='dashboard/customer/managment' element={<Customer />} />
 
         {/* Lazy Modules */}
         {/* Page Not Found */}

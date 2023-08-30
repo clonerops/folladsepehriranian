@@ -8,7 +8,6 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 
 const Products = () => {
-
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [itemForEdit, setItemForEdit] = useState<IProducts>();
@@ -179,7 +178,7 @@ const Products = () => {
                                                             </svg>
                                                         </div>
                                                     </div>
-                                                    <div onClick={() => handleDelete(item?.id)}  className="tw-bg-red-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                                    <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-8 tw-py-2 tw-cursor-pointer">
                                                         <div
                                                             className="tw-cursor-pointer tw-text-white"
                                                         >

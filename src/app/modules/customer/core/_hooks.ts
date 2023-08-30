@@ -13,7 +13,7 @@ const useGetCustomers = () => {
 };
 
 const useGetCustomer = () => {
-    return useMutation((id: number) => {
+    return useMutation((id: string) => {
         return api.getCustomer(id);
     });
 };
@@ -25,7 +25,7 @@ const useUpdateCustomer = () => {
 };
 
 const useDeleteCustomer = () => {
-    return useMutation((id: number) => {
+    return useMutation((id: string) => {
         return api.deleteCustomer(id);
     });
 };

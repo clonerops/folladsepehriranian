@@ -1,13 +1,13 @@
 export interface ICustomer {
-    id?: string
-    firstName: string;
-    lastName: string;
-    nationalId: string;
-    mobile: string;
-    address1: string;
-    customerType: number;
-    customerValidityId: number;
-    tel: string;
-    address2: string;
-    representative: string;
+    id?: string| undefined
+    firstName: string | undefined
+    lastName: string | undefined
+    nationalId: string | undefined
+    mobile: string | undefined
+    address1: string | undefined
+    customerType: number | undefined
+    customerValidityId: number | undefined
+    tel: string | undefined
+    address2: string | undefined
+    representative: string | undefined
 }

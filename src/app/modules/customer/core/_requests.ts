@@ -19,7 +19,7 @@ const getCustomers = async () => {
     }
 };
 
-const getCustomer = async (id: number) => {
+const getCustomer = async (id: string) => {
     try {
         const { data } = await http.get(`/v1/Customer/${id}`)
         return data
@@ -37,7 +37,7 @@ const updateCustomer = async (formData: ICustomer) => {
     }
 } 
 
-const deleteCustomer = async (id: number) => {
+const deleteCustomer = async (id: string) => {
     try {
         const { data } = await http.delete(`/v1/Customer/${id}`)
         return data

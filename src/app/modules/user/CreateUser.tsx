@@ -93,41 +93,45 @@ const CreateUser = () => {
                 ))}
             <form
                 onSubmit={formik.handleSubmit}
+                className="tw-w-full tw-mx-auto"
             >
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-px-4">
-                    <div className="tw-px-2 ">
-                        <AuthInputs
-                            type="text"
-                            login={true}
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.firstName}
-                            errors={formik.errors.firstName}
-                            name={"firstName"}
-                            title="نام"
-                        ></AuthInputs>
-                        {isError && data?.data?.errors?.FirstName && (
-                            <span className="tw-text-red-500">
-                                {data?.data?.errors?.FirstName[0]}
-                            </span>
-                        )}
+                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-4">
+                    <div className="tw-flex tw-w-[50%]">
+                        <div className="tw-px-2 tw-w-[50%]">
+                            <AuthInputs
+                                type="text"
+                                login={true}
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.firstName}
+                                errors={formik.errors.firstName}
+                                name={"firstName"}
+                                placeholder="نام"
+                            // title="نام"
+                            ></AuthInputs>
+                            {isError && data?.data?.errors?.FirstName && (
+                                <span className="tw-text-red-500">
+                                    {data?.data?.errors?.FirstName[0]}
+                                </span>
+                            )}
+                        </div>
+                        <div className="tw-px-2 tw-w-[50%]">
+                            <AuthInputs
+                                type="text"
+                                login={true}
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.lastName}
+                                errors={formik.errors.lastName}
+                                name={"lastName"}
+                                placeholder="نام خانوادگی"
+                            ></AuthInputs>
+                            {isError && data?.data?.errors?.LastName && (
+                                <span className="tw-text-red-500">
+                                    {data?.data?.errors?.LastName[0]}
+                                </span>
+                            )}
+                        </div>
                     </div>
-                    <div className="tw-px-2">
-                        <AuthInputs
-                            type="text"
-                            login={true}
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.lastName}
-                            errors={formik.errors.lastName}
-                            name={"lastName"}
-                            title="نام خانوادگی"
-                        ></AuthInputs>
-                        {isError && data?.data?.errors?.LastName && (
-                            <span className="tw-text-red-500">
-                                {data?.data?.errors?.LastName[0]}
-                            </span>
-                        )}
-                    </div>
-                    <div className="tw-px-2">
+                    <div className="tw-px-2 tw-w-[50%]">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -136,7 +140,8 @@ const CreateUser = () => {
                             errors={formik.errors.email}
                             isError={data?.data?.errors?.Email}
                             name={"email"}
-                            title="ایمیل"
+                            placeholder="آدرس ایمیل"
+                        // title="ایمیل"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Email && (
                             <span className="tw-text-red-500">
@@ -144,7 +149,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-px-2">
+                    <div className="tw-px-2 tw-w-[50%]">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -153,7 +158,8 @@ const CreateUser = () => {
                             errors={formik.errors.userName}
                             isError={data?.data?.errors?.UserName}
                             name={"userName"}
-                            title="نام کاربری"
+                            placeholder="نام کاربری"
+                        // title="نام کاربری"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.UserName && (
                             <span className="tw-text-red-500">
@@ -161,64 +167,66 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-px-2">
-                        <AuthInputs
-                            type="password"
-                            login={true}
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.password}
-                            errors={formik.errors.password}
-                            isError={data?.data?.errors?.Password}
-                            name={"password"}
-                            title="کلمه عبور"
-                        ></AuthInputs>
-                        {isError && data?.data?.errors?.Password && (
-                            <span className="tw-text-red-500">
-                                {data?.data?.errors?.Password[0]}
-                            </span>
-                        )}
+                    <div className="tw-flex tw-w-[50%]">
+                        <div className="tw-px-2 tw-w-[50%]">
+                            <AuthInputs
+                                type="password"
+                                login={true}
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.password}
+                                errors={formik.errors.password}
+                                isError={data?.data?.errors?.Password}
+                                name={"password"}
+                                placeholder="کلمه عبور"
+                            ></AuthInputs>
+                            {isError && data?.data?.errors?.Password && (
+                                <span className="tw-text-red-500">
+                                    {data?.data?.errors?.Password[0]}
+                                </span>
+                            )}
+                        </div>
+                        <div className="tw-px-2 tw-w-[50%]">
+                            <AuthInputs
+                                type="password"
+                                login={true}
+                                getFieldProps={formik.getFieldProps}
+                                touched={formik.touched.confirmPassword}
+                                errors={formik.errors.confirmPassword}
+                                isError={data?.data?.errors?.ConfirmPassword}
+                                name={"confirmPassword"}
+                                placeholder="تکرار کلمه عبور"
+                            ></AuthInputs>
+                            {isError && data?.data?.errors?.ConfirmPassword && (
+                                <span className="tw-text-red-500">
+                                    {data?.data?.errors?.ConfirmPassword[0]}
+                                </span>
+                            )}
+                        </div>
                     </div>
-                    <div className="tw-px-2">
-                        <AuthInputs
-                            type="password"
-                            login={true}
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.confirmPassword}
-                            errors={formik.errors.confirmPassword}
-                            isError={data?.data?.errors?.ConfirmPassword}
-                            name={"confirmPassword"}
-                            title="تکرار کلمه عبور"
-                        ></AuthInputs>
-                        {isError && data?.data?.errors?.ConfirmPassword && (
-                            <span className="tw-text-red-500">
-                                {data?.data?.errors?.ConfirmPassword[0]}
-                            </span>
-                        )}
+                    <div className="tw-w-[50%] tw-px-2 tw-flex tw-justify-start tw-items-center">
+                        <div />
+                        <button
+                            type="submit"
+                            id="kt_sign_in_submit"
+                            className="tw-bg-green-500 tw-py-4 tw-px-16 tw-rounded-lg tw-hover:bg-green-700 tw-transition"
+                            disabled={formik.isSubmitting || !formik.isValid}
+                        >
+                            {!loading && (
+                                <span className="indicator-label tw-text-white">
+                                    ثبت کاربر
+                                </span>
+                            )}
+                            {loading && (
+                                <span
+                                    className="indicator-progress tw-text-white"
+                                    style={{ display: "block" }}
+                                >
+                                    درحال پردازش...
+                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            )}
+                        </button>
                     </div>
-                </div>
-                <div className="tw-w-full tw-px-6 tw-flex tw-justify-between tw-items-center">
-                    <div />
-                    <button
-                        type="submit"
-                        id="kt_sign_in_submit"
-                        className="tw-bg-green-500 tw-py-4 tw-px-16 tw-rounded-lg tw-hover:bg-green-700 tw-transition"
-                        disabled={formik.isSubmitting || !formik.isValid}
-                    >
-                        {!loading && (
-                            <span className="indicator-label tw-text-white">
-                                ثبت کاربر
-                            </span>
-                        )}
-                        {loading && (
-                            <span
-                                className="indicator-progress tw-text-white"
-                                style={{ display: "block" }}
-                            >
-                                درحال پردازش...
-                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        )}
-                    </button>
                 </div>
             </form>
         </Card6>

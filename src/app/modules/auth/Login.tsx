@@ -72,7 +72,7 @@ const Login = () => {
                             <p className="tw-text-red-500">{data?.data?.Message}</p>
                         </div>
                     }
-                    <div className="tw-w-50">
+                    <div className="tw-w-[50%]">
                         <Inputs
                             type="text"
                             login={true}
@@ -83,7 +83,7 @@ const Login = () => {
                             title="نام کاربری"
                         ></Inputs>
                     </div>
-                    <div className="tw-w-50">
+                    <div className="tw-w-[50%]">
                         <Inputs
                             type="password"
                             login={true}
@@ -96,15 +96,15 @@ const Login = () => {
                     </div>
                     <div
                         onClick={() => setIsOpen(true)}
-                        className="tw-w-50 tw-mb-8 tw-cursor-pointer"
+                        className="tw-w-[50%] tw-mb-8 tw-cursor-pointer"
                     >
-                        <span>کلمه عبور خود را فراموش کرده ام!</span>
+                        <span className="tw-font-yekan_bold tw-text-lg tw-text-blue-600">فراموشی رمز عبور</span>
                     </div>
-                    <div className="tw-d-grid tw-mb-10 tw-w-50">
+                    <div className="tw-mb-10 tw-w-[50%]">
                         <button
                             type="submit"
                             id="kt_sign_in_submit"
-                            className="btn btn-primary"
+                            className="btn btn-primary tw-w-full"
                             disabled={formik.isSubmitting || !formik.isValid}
                         >
                             {!loading && (

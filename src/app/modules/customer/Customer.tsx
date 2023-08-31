@@ -125,7 +125,7 @@ const Customer = () => {
                                         <span>
                                             <img
                                                 src={toAbsoluteUrl(
-                                                    "/media/avatars/300-1.jpg"
+                                                    "/media/avatars/blank.png"
                                                 )}
                                                 width={40}
                                                 height={40}

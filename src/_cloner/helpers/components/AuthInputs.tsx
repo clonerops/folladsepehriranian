@@ -10,7 +10,7 @@ const AuthInputs = (props: any) => {
                 placeholder={props.placeholder}
                 {...props.getFieldProps(props.name)}
                 className={clsx(
-                    "form-control bg-transparent",
+                    "form-control bg-transparent tw-border tw-border-gray-400 hover:tw-border-blue-500",
                     {
                         "is-invalid": props.touched && props.errors || props.isError,
                     },

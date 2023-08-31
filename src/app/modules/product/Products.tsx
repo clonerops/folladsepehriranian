@@ -115,7 +115,7 @@ const Products = () => {
                                     توضیحات
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    عملیات
+                                    
                                 </td>
                             </tr>
                         </thead>

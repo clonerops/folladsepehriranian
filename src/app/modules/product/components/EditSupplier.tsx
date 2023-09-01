@@ -3,44 +3,44 @@ import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
-import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useRetrieveBrands, useUpdateProduct } from "../core/_hooks";
+import { useCreateProduct, useRetrieveBrands, useRetrieveProducts, useUpdateProduct, useUpdateSupplier } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { IProducts, ISuppliers } from "../core/_models";
 import EditText from "../../../../_cloner/helpers/components/EditText";
-import { dropdownBrand } from "../helpers/dropdownConvert";
+import { dropdownBrand, dropdownProduct } from "../helpers/dropdownConvert";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
+import { useGetCustomers } from "../../customer/core/_hooks";
+import { dropdownCustomer } from "../../order/helpers/dropdowns";
+import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker";
 
 const EditSupplier = (props: {
-    item: IProducts | undefined,
+    item: ISuppliers | undefined,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 
 }) => {
+    // Fetching Data
+    const { mutate, data, isError, isLoading } = useUpdateSupplier();
+    const { data: customers } = useGetCustomers()
+    const { data: products } = useRetrieveProducts()
     // States
-    const [brandSelected, setBrandSelected] = useState();
+    const [customerSelected, setCustomerSelected] = useState<any>()
+    const [productSelected, setProductSelected] = useState<any>()
+    const [priceDate, setPriceDate] = useState(props.item?.priceDate)
 
-    const { data: brands } = useRetrieveBrands();
+    const handleCustomerSelected = (selectedOption: any) => setCustomerSelected(selectedOption)
+    const handleProductSelected = (selectedOption: any) => setProductSelected(selectedOption)
 
-    const handleBrandChange = (selectedOption: any) => {
-        setBrandSelected(selectedOption);
-    };
-
-    const { mutate, data, isError, isLoading } = useUpdateProduct();
-    console.log(props.item)
 
     const initialValues = {
         id: props.item?.id,
-        productName: props.item?.productName,
-        warehouseId: props.item?.warehouseId,
-        productBrandId: props.item?.productBrandId,
-        productSize: props.item?.productSize,
-        approximateWeight: props.item?.approximateWeight,
-        numberInPackage: props.item?.numberInPackage,
-        size: props.item?.size,
-        standard: props.item?.standard,
-        productState: props.item?.productState,
-        description: props.item?.description,
+        customerId: props.item?.customerId,
+        productId: props.item?.productId,
+        price: props.item?.price,
+        rentAmount: props.item?.rentAmount,
+        overPrice: props.item?.overPrice,
+        priceDate: priceDate,
+        rate: props.item?.rate
     };
 
     const formik = useFormik({
@@ -66,124 +66,88 @@ const EditSupplier = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            نام محصول
+                            مشتری
                         </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.productName}
-                            errors={formik.errors.productName}
-                            name={"productName"}
-                            type="string"
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label>
                         <ProfessionalSelect
-                            options={dropdownBrand(brands)}
-                            value={brandSelected}
-                            onChange={handleBrandChange}
-                            defaultValue={{ value: props.item?.productBrandId, label: props.item?.brandName }}
+                            options={dropdownCustomer(customers?.data)}
+                            value={customerSelected}
+                            onChange={handleCustomerSelected}
+                            placeholder=""
+                        />
+
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">محصول</label>
+                        <ProfessionalSelect
+                            options={dropdownProduct(products?.data)}
+                            value={productSelected}
+                            onChange={handleProductSelected}
                             placeholder=""
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            سایز محصول
+                            قیمت
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.productSize}
-                            errors={formik.errors.productSize}
-                            type="string"
-                            name={"productSize"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            وزن تقریبی
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.approximateWeight}
-                            errors={formik.errors.approximateWeight}
+                            touched={formik.touched.price}
+                            errors={formik.errors.price}
                             type="number"
-                            name={"approximateWeight"}
+                            name={"price"}
                             formikInput={true}
                             placeholder=""
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تعداد بسته
+                            مبلغ اجاره
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.numberInPackage}
-                            errors={formik.errors.numberInPackage}
+                            touched={formik.touched.rentAmount}
+                            errors={formik.errors.rentAmount}
                             type="number"
-                            name={"numberInPackage"}
+                            name={"rentAmount"}
                             formikInput={true}
                             placeholder=""
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            اندازه
+                            بیش از قیمت
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.size}
-                            errors={formik.errors.size}
-                            name={"size"}
-                            type="string"
+                            touched={formik.touched.overPrice}
+                            errors={formik.errors.overPrice}
+                            type="number"
+                            name={"overPrice"}
                             formikInput={true}
                             placeholder=""
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            استاندارد
+                            تاریخ قیمت
                         </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.standard}
-                            errors={formik.errors.standard}
-                            name={"standard"}
-                            type="string"
-                            formikInput={true}
-                            placeholder=""
-                        />
+                        <CustomDatepicker
+                            onChange={(d: any) => setPriceDate(d.value)}
+                            placeholder="" />
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            حالت محصول
+                            نرخ
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.productState}
-                            errors={formik.errors.productState}
-                            name={"productState"}
+                            touched={formik.touched.rate}
+                            errors={formik.errors.rate}
+                            name={"rate"}
                             type="string"
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-3">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            توضیحات
-                        </label>
-                        <CustomTextarea
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.description}
-                            errors={formik.errors.description}
-                            name={"description"}
                             formikInput={true}
                             placeholder=""
                         />
@@ -195,10 +159,9 @@ const EditSupplier = (props: {
                         id="kt_sign_in_submit"
                         className="tw-btn-warning tw-mb-2"
                         disabled={formik.isSubmitting || !formik.isValid}
-                        onClick={() => formik.handleSubmit()}
                     >
                         {!isLoading && (
-                            <span className="indicator-label">ویرایش محصول</span>
+                            <span className="indicator-label">ویرایش</span>
                         )}
                         {isLoading && (
                             <span

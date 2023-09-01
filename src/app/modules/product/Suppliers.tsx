@@ -232,7 +232,7 @@ const Suppliers = () => {
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
             >
-                {/* <EditSupplier refetch={refetch} item={itemForEdit} /> */}
+                <EditSupplier refetch={refetch} item={itemForEdit} />
             </Modal>
         </>
     );

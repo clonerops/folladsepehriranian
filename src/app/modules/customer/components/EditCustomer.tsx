@@ -16,7 +16,8 @@ const EditCustomer = (props: {
 
 }) => {
     // States
-console.log(props.item)
+    const [isSupplier, setIsSupplier] = useState(false)
+
     const { mutate, data, isError, isLoading } = useUpdateCustomer();
 
     const initialValues = {
@@ -31,6 +32,7 @@ console.log(props.item)
         address2: props.item?.address2,
         customerType: props.item?.customerType,
         customerValidityId: props.item?.customerValidityId,
+        isSupplier: props.item?.isSupplier ? props.item?.isSupplier : isSupplier
     };
 
     const formik = useFormik({
@@ -45,7 +47,7 @@ console.log(props.item)
             }
         },
     });
-
+    
     return (
         <>
             {data?.succeeded && (
@@ -140,6 +142,13 @@ console.log(props.item)
                             placeholder=""
                         />
                     </div>
+                    <div>
+                        <label>
+                            <input checked={isSupplier} onChange={(e) => setIsSupplier(e.target.checked)} type="checkbox" className="tw-accent-slate-800 tw-w-[14px] tw-h-[14px]" />
+                            <span className="tw-px-4">آیا تامین کننده می باشد؟</span>
+                        </label>
+                    </div>
+
                     <div className="tw-w-full tw-my-2 tw-col-span-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             آدرس
@@ -153,6 +162,17 @@ console.log(props.item)
                             placeholder=""
                         />
                     </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        <CustomTextarea
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.address2}
+                            errors={formik.errors.address2}
+                            name={"address2"}
+                            formikInput={true}
+                            placeholder="آدرس 2"
+                        />
+                    </div>
+
                 </div>
                 <div className="tw-flex">
                     <button

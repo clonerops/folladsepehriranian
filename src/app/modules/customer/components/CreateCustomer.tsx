@@ -13,11 +13,7 @@ const CreateCustomer = (props: {
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     // States
-    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
-
-    const handleBrandChange = (selectedOption: any) => {
-        setBrandSelected(selectedOption);
-    };
+    const [isSupplier, setIsSupplier] = useState(false)
 
     const { mutate, data, isError, isLoading } = useCreateCustomer();
 
@@ -40,7 +36,7 @@ const CreateCustomer = (props: {
             try {
                 const formData = {
                     ...values,
-                    isSupplier: true
+                    isSupplier: isSupplier
                 }
                 mutate(formData, {
                     onSuccess: () => {
@@ -149,17 +145,30 @@ const CreateCustomer = (props: {
                             placeholder="تلفن"
                         />
                     </div>
+                    <div>
+                        <label>
+                            <input onChange={(e) => setIsSupplier(e.target.checked)} type="checkbox" className="tw-accent-slate-800 tw-w-[14px] tw-h-[14px]" />
+                            <span className="tw-px-4">آیا تامین کننده می باشد؟</span>
+                        </label>
+                    </div>
                     <div className="tw-w-full tw-my-2 tw-col-span-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            آدرس
-                        </label> */}
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address1}
                             errors={formik.errors.address1}
                             name={"address1"}
                             formikInput={true}
-                            placeholder="آدرس"
+                            placeholder="ادرس 1"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        <CustomTextarea
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.address2}
+                            errors={formik.errors.address2}
+                            name={"address2"}
+                            formikInput={true}
+                            placeholder="آدرس 2"
                         />
                     </div>
                 </div>

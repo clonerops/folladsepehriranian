@@ -22,6 +22,7 @@ import { dropdownBrand } from "../product/helpers/dropdownConvert";
 import { dropdownCustomer } from "./helpers/dropdowns";
 import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 import { exit, factor, purchaseInvoiceType, rent, send, stores } from "./helpers/fakeData";
+import { ICreateOrderDetails } from "./core/_models";
 
 const Order = () => {
     // Fetching Data
@@ -113,7 +114,7 @@ const Order = () => {
 
     const initialValues = {
         productName: "",
-        count: "",
+        proximateAmount: "",
         price: "",
         productDesc: "",
         sellerCompanyRow: "",
@@ -137,7 +138,7 @@ const Order = () => {
                 purchaseInvoiceTypeId: purchaseInvoiceTypeSelected?.value,
                 purchaseInvoiceTypeName: purchaseInvoiceTypeSelected?.label,
                 sellerCompanyRow: values.sellerCompanyRow,
-                count: values.count,
+                proximateAmount: values.proximateAmount,
                 price: values.price,
                 rowId: values.rowId
             }
@@ -155,7 +156,7 @@ const Order = () => {
 
     const handleCreateOrder = () => {
         const formData = {
-            customerId: customerSelect?.value,
+            customerId: customerSelect?.value?.toString(),
             totalAmount: totalAmount,
             orderCode: 0,
             confirmedStatus: true,
@@ -171,25 +172,27 @@ const Order = () => {
             dischargePlaceAddress: "string",
             freightDriverName: "string",
             carPlaque: "string",
-            details: orders?.map((item: any) => {
+            details: orders?.map((item: ICreateOrderDetails) => {
                 return {
                     rowId: item.rowId,
                     productId: item.productId,
-                    warehouseId: item.warehouseId,
-                    proximateAmount: item.proximateAmount,
-                    numberInPackage: item.numberInPackage,
-                    price: item.price,
-                    cargoSendDate: item.cargoSendDate,
-                    buyPrice: item.buyPrice,
+                    // warehouseId: item.warehouseId,
+                    warehouseId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    proximateAmount: Number(item.proximateAmount),
+                    numberInPackage: Number(item.proximateAmount),
+                    price: Number(item.price),
+                    cargoSendDate: "string",
+                    buyPrice: Number(item.buyPrice),
                     purchaseInvoiceType: item.purchaseInvoiceType,
-                    purchaseSettlementDate: item.purchaseSettlementDate,
+                    purchaseSettlementDate: "string",
                     sellerCompanyRow: item.sellerCompanyRow,
                 }
             })
         }
-        console.log("formData", formData)
-        // mutate(formData)
+        mutate(formData)
     }
+
+    console.log("orders", orders)
 
     return (
         <>
@@ -206,7 +209,7 @@ const Order = () => {
                     </div>
                 </div>
                 {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-6 tw-gap-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-4">
                     <div className="md:tw-col-span-2">
                         <Card6 image="" title="">
                             <div className="tw-pt-4">
@@ -384,9 +387,9 @@ const Order = () => {
                         <div className="tw-my-2 md:tw-w-[20%]">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
-                                touched={formik.touched.count}
-                                errors={formik.errors.count}
-                                name={"count"}
+                                touched={formik.touched.proximateAmount}
+                                errors={formik.errors.proximateAmount}
+                                name={"proximateAmount"}
                                 type="text"
                                 placeholder="مقدار / تعداد"
                                 formikInput={true} />

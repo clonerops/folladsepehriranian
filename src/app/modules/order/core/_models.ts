@@ -12,35 +12,35 @@ export interface IProductOrder {
 }
 
 export interface ICreateOrder {
-    customerId: string
-    totalAmount: number
-    orderCode: number
-    confirmedStatus: boolean
-    description: string
-    exitType: number
-    orderSendTypeId: number
-    paymentTypeId: number
-    customerOfficialName: string
-    invoiceTypeId: number
-    approvedDate: string
-    freightName: string
-    settlementDate: string
-    dischargePlaceAddress: string
-    freightDriverName: string
-    carPlaque: string
-    details: ICreateOrderDetails[]
+    customerId: string | undefined | null
+    totalAmount: number | undefined | null
+    orderCode: number | undefined | null
+    confirmedStatus: boolean | undefined | null
+    description: string | undefined | null
+    exitType: number | undefined | null
+    orderSendTypeId: number | undefined | null 
+    paymentTypeId: number | undefined | null
+    customerOfficialName: string | undefined | null
+    invoiceTypeId: number | undefined | null
+    approvedDate: string | undefined | null
+    freightName: string | undefined | null
+    settlementDate: string | undefined | null
+    dischargePlaceAddress: string | undefined | null
+    freightDriverName: string | undefined | null
+    carPlaque: string | undefined | null
+    details: ICreateOrderDetails[] | undefined | null
 }
 
 export interface ICreateOrderDetails {
-    rowId: number
-    productId: string
-    warehouseId: string
-    proximateAmount: number
-    numberInPackage: number
-    price: number
-    cargoSendDate: string
-    buyPrice: number
-    purchaseInvoiceType: number
-    purchaseSettlementDate: string
-    sellerCompanyRow: string
+    rowId: number | undefined | null
+    productId: string | undefined | null
+    warehouseId: string | undefined | null
+    proximateAmount: number | undefined | null
+    numberInPackage: number | undefined | null
+    price: number | undefined | null
+    cargoSendDate: string | undefined | null
+    buyPrice: number | undefined | null
+    purchaseInvoiceType: number | undefined | null
+    purchaseSettlementDate: string | undefined | null
+    sellerCompanyRow: string | undefined | null
 }

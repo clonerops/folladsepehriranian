@@ -1,4 +1,7 @@
+import { useRetrieveOrders } from "./core/_hooks"
+
 const OrderList = () => {
+    const { data: orders } = useRetrieveOrders()
     return (
         <>
             <table className="tw-w-full tw-my-2">

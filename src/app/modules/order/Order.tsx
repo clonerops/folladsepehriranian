@@ -20,6 +20,7 @@ import CreateCustomer from "../customer/components/CreateCustomer";
 import { useGetCustomers } from "../customer/core/_hooks";
 import { dropdownBrand } from "../product/helpers/dropdownConvert";
 import { dropdownCustomer } from "./helpers/dropdowns";
+import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Order = () => {
     // Fetching Data
@@ -235,7 +236,7 @@ const Order = () => {
                     </div>
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="tw-flex tw-my-2 md:tw-my-0 tw-bg-gray-600 tw-p-3 tw-rounded-sm tw-text-white"
+                        className="tw-flex tw-my-2 md:tw-my-0 tw-bg-green-600 tw-p-3 tw-rounded-md tw-text-white"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -243,14 +244,13 @@ const Order = () => {
                         <span>افزودن مشتری</span>
                     </button>
                 </div>
-                <Modal
+                <MyModal
+                    title="ایجاد مشتری جدید"
                     isOpen={isOpen}
-                    onClose={() => setIsOpen(false)}
-                    reqular={true}
-                    className="tw-w-[800px]"
+                    setIsOpen={setIsOpen}
                 >
                     <CreateCustomer refetch={refetch} setIsCreateOpen={setIsOpen} />
-                </Modal>
+                </MyModal>
                 {/* <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-gap-x-4">
                     <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
                         <div>

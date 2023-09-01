@@ -7,6 +7,7 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateCustomer from "./components/CreateCustomer";
 import EditCustomer from "./components/EditCustomer";
+import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Customer = () => {
     const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
@@ -105,16 +106,16 @@ const Customer = () => {
                                     موبایل
                                 </td>
                                 <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    آدرس
-                                </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     تلفن
                                 </td>
                                 <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    نماینده
+                                    تامین کننده می باشد؟
                                 </td>
                                 <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    تامین کننده می باشد؟
+                                    آدرس
+                                </td>
+                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    نماینده
                                 </td>
                                 <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
 
@@ -148,18 +149,18 @@ const Customer = () => {
                                         {item.mobile}
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                        {item.address1 + " " + item.address2}
-                                    </td>
-                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         {item.tel}
-                                    </td>
-                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                        {item.representative}
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>
                                             {item.isSupplier ? <span className="tw-bg-green-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">بله</span> : <span className="tw-bg-red-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">خیر</span>}
                                         </span>
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        {item.address1 + " " + item.address2}
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        {item.representative}
                                     </td>
                                     <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                         <div className="tw-flex tw-gap-4">
@@ -234,18 +235,20 @@ const Customer = () => {
                 </div>
 
             </div>
-            <Modal
+            <MyModal
+                title="ایجاد مشتری جدید"
                 isOpen={isCreateOpen}
-                onClose={() => setIsCreateOpen(false)}
+                setIsOpen={setIsCreateOpen}
             >
                 <CreateCustomer refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </Modal>
-            <Modal
+            </MyModal>
+            <MyModal
+                title="ویرایش مشتری"
                 isOpen={isEditOpen}
-                onClose={() => setIsEditOpen(false)}
+                setIsOpen={setIsEditOpen}
             >
-                <EditCustomer refetch={refetch} item={itemForEdit} />   
-            </Modal>
+                <EditCustomer refetch={refetch} item={itemForEdit} />
+            </MyModal>
 
         </>
     );

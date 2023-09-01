@@ -8,12 +8,12 @@ import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useCreateCustomer } from "../core/_hooks";
 
-const CreateCustomer = (props: { 
-    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>, 
-    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>> 
+const CreateCustomer = (props: {
+    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     // States
-    const [brandSelected, setBrandSelected] = useState<{value: number, label: string}>();
+    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);
@@ -64,11 +64,11 @@ const CreateCustomer = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.firstName}
@@ -76,13 +76,13 @@ const CreateCustomer = (props: {
                             name={"firstName"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="نام"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام خانوادگی
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.lastName}
@@ -90,13 +90,13 @@ const CreateCustomer = (props: {
                             type="string"
                             name={"lastName"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="نام خانوادگی"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             کدملی
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.nationalId}
@@ -104,41 +104,13 @@ const CreateCustomer = (props: {
                             type="text"
                             name={"nationalId"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="کدملی"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            موبایل
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.mobile}
-                            errors={formik.errors.mobile}
-                            type="text"
-                            name={"mobile"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تلفن
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.tel}
-                            errors={formik.errors.tel}
-                            type="text"
-                            name={"tel"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نماینده شرکت
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.representative}
@@ -146,24 +118,52 @@ const CreateCustomer = (props: {
                             name={"representative"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="نماینده شرکت"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-3">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            موبایل
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.mobile}
+                            errors={formik.errors.mobile}
+                            type="text"
+                            name={"mobile"}
+                            formikInput={true}
+                            placeholder="موبایل"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            تلفن
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.tel}
+                            errors={formik.errors.tel}
+                            type="text"
+                            name={"tel"}
+                            formikInput={true}
+                            placeholder="تلفن"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             آدرس
-                        </label>
+                        </label> */}
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address1}
                             errors={formik.errors.address1}
                             name={"address1"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="آدرس"
                         />
                     </div>
                 </div>
-                <div className="">
+                <div className="tw-flex">
                     <button
                         type="submit"
                         id="kt_sign_in_submit"
@@ -184,7 +184,7 @@ const CreateCustomer = (props: {
                         )}
                     </button>
                 </div>
-            </form>
+            </form >
         </>
     );
 };

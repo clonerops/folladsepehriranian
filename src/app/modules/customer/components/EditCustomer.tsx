@@ -16,7 +16,7 @@ const EditCustomer = (props: {
 
 }) => {
     // States
-
+console.log(props.item)
     const { mutate, data, isError, isLoading } = useUpdateCustomer();
 
     const initialValues = {
@@ -35,7 +35,6 @@ const EditCustomer = (props: {
 
     const formik = useFormik({
         initialValues,
-        // validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
                 mutate(values);
@@ -56,11 +55,11 @@ const EditCustomer = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.firstName}
@@ -72,9 +71,9 @@ const EditCustomer = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام خانوادگی
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.lastName}
@@ -85,10 +84,10 @@ const EditCustomer = (props: {
                             placeholder=""
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             کدملی
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.nationalId}
@@ -99,10 +98,24 @@ const EditCustomer = (props: {
                             placeholder=""
                         />
                     </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            نماینده شرکت
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.representative}
+                            errors={formik.errors.representative}
+                            name={"representative"}
+                            type="string"
+                            formikInput={true}
+                            placeholder=""
+                        />
+                    </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             موبایل
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.mobile}
@@ -114,9 +127,9 @@ const EditCustomer = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             تلفن
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.tel}
@@ -127,10 +140,10 @@ const EditCustomer = (props: {
                             placeholder=""
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-3">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             آدرس
-                        </label>
+                        </label> */}
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address1}
@@ -141,7 +154,7 @@ const EditCustomer = (props: {
                         />
                     </div>
                 </div>
-                <div className="">
+                <div className="tw-flex">
                     <button
                         type="submit"
                         id="kt_sign_in_submit"

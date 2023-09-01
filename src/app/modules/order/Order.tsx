@@ -196,9 +196,9 @@ const Order = () => {
 
     return (
         <>
-            <Card6 title="" image="">
+            <>
                 {/* Product Number and Submit Date */}
-                <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-y-3 tw-justify-between">
+                {/* <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-y-3 tw-justify-between">
                     <div className="tw-font-bold tw-font-yekan_bold tw-text-2xl">
                         <span className="tw-px-2">شماره سفارش</span>
                         <span className="tw-px-2 tw-text-green-700">35789</span>
@@ -207,11 +207,12 @@ const Order = () => {
                         <span className="tw-px-2">تاریخ سفارش</span>
                         <span className="tw-px-2 tw-text-slate-500">{moment(Date.now()).format("jYYYY/jMM/jDD").toString()}</span>
                     </div>
-                </div>
+                </div> */}
                 {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-3 tw-gap-4">
-                    <div className="md:tw-col-span-2">
-                        <Card6 image="" title="">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
+                    {/* <div className="tw-col-span-2"> */}
+                    <Card6 image="" title="">
+                        <div className="tw-flex tw-justify-between tw-flex-col">
                             <div className="tw-pt-4">
                                 <label className="tw-font-yekan_bold tw-text-lg">مشتری و تاریخ تسویه</label>
                                 <div className="tw-mt-8">
@@ -256,20 +257,67 @@ const Order = () => {
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
                                 />
                             </div>
+                            {/* <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2"> */}
+                            {/* <div className="tw-pt-4">
+                                <div>
+                                    <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
 
-                        </Card6>
-                    </div>
+
+                                        <span>انتخاب کالا</span>
+                                    </button>
+                                    <Modal
+                                        isOpen={selectedProductOpen}
+                                        onClose={() => setSelectedProductOpen(false)}
+                                        className="tw-w-[800px]"
+                                    >
+                                        <ProductSelectedListInModal
+                                            products={products?.data}
+                                            productLoading={productLoading}
+                                            productError={productError}
+                                            setSelectedProductOpen={setSelectedProductOpen}
+                                            setSelectProductFromModal={setSelectProductFromModal} />
+                                    </Modal>
+                                </div>
+                            </div> */}
+
+                        </div>
+                    </Card6>
+                    {/* </div> */}
 
                     <Card6 image="" title="">
-                        <div className="tw-pt-4">
-                            <label className="tw-font-yekan_bold tw-text-lg">نوع فاکتور</label>
-                            <div className="tw-mt-8">
-                                <CusromRadioGroupButton className="tw-my-4" selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
+                        <div className="tw-flex tw-justify-between tw-flex-wrap">
+                            <div className="tw-pt-4">
+                                <label className="tw-font-yekan_bold tw-text-lg">نوع فاکتور</label>
+                                <div className="tw-mt-8">
+                                    <CusromRadioGroupButton className="tw-my-4" selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
+                                </div>
                             </div>
+                            <div className="tw-pt-4">
+                                <label className="tw-font-yekan_bold tw-text-lg">نوع خروج</label>
+                                <div className="tw-mt-8">
+                                    <CusromRadioGroupButton className="tw-my-4" selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
+                                </div>
+                            </div>
+                            <div className="tw-pt-4">
+                                <label className="tw-font-yekan_bold tw-text-lg">نوع ارسال</label>
+                                <div className="tw-mt-8">
+                                    <CusromRadioGroupButton className="tw-my-4" selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
+                                </div>
+                            </div>
+                            <div className="tw-pt-4">
+                                <label className="tw-font-yekan_bold tw-text-lg">نوع کرایه</label>
+                                <div className="tw-mt-8">
+                                    <CusromRadioGroupButton className="tw-my-4" selected={rentType} handleRadio={handleRentRadio} items={rent} name="rent" />
+                                </div>
+                            </div>
+
                         </div>
                     </Card6>
 
-                    <Card6 image="" title="">
+                    {/* <Card6 image="" title="">
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold tw-text-lg">نوع خروج</label>
                             <div className="tw-mt-8">
@@ -277,28 +325,55 @@ const Order = () => {
                             </div>
                         </div>
                     </Card6>
-
-                    <Card6 image="" title="">
+ */}
+                    {/* <Card6 image="" title="">
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold tw-text-lg">نوع ارسال</label>
                             <div className="tw-mt-8">
                                 <CusromRadioGroupButton className="tw-my-4" selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
                             </div>
                         </div>
-                    </Card6>
+                    </Card6> */}
 
-                    <Card6 image="" title="">
+                    {/* <Card6 image="" title="">
                         <div className="tw-pt-4">
                             <label className="tw-font-yekan_bold tw-text-lg">نوع کرایه</label>
                             <div className="tw-mt-8">
                                 <CusromRadioGroupButton className="tw-my-4" selected={rentType} handleRadio={handleRentRadio} items={rent} name="rent" />
                             </div>
                         </div>
-                    </Card6>
+                    </Card6> */}
                 </div>
                 {/* Selected Products */}
-                <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-flex-wrap tw-gap-x-4">
-                    <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
+                <div className="tw-mt-8">
+                    <Card6 image="" title="">
+                        <div >
+                            <div>
+                                <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+
+
+                                    <span>انتخاب کالا</span>
+                                </button>
+                                <Modal
+                                    isOpen={selectedProductOpen}
+                                    onClose={() => setSelectedProductOpen(false)}
+                                    className="tw-w-[800px]"
+                                >
+                                    <ProductSelectedListInModal
+                                        products={products?.data}
+                                        productLoading={productLoading}
+                                        productError={productError}
+                                        setSelectedProductOpen={setSelectedProductOpen}
+                                        setSelectProductFromModal={setSelectProductFromModal} />
+                                </Modal>
+                            </div>
+                        </div>
+
+                        <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-flex-wrap tw-gap-x-4">
+                            {/* <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
                         <div>
                             <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
@@ -321,112 +396,112 @@ const Order = () => {
                                     setSelectProductFromModal={setSelectProductFromModal} />
                             </Modal>
                         </div>
-                    </div>
-                    <form onSubmit={formik.handleSubmit} className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8">
-                        <div className="tw-relative md:tw-w-[20%] tw-my-2">
-                            <input
-                                onFocus={handleFocuse}
-                                onBlur={handleBlur}
-                                value={searchQuery}
-                                onChange={handleInputChange}
-                                placeholder="کالا / محصول"
-                                type="text"
-                                className="customInput tw-border tw-px-2 tw-border-gray-300 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
-                            />
+                    </div> */}
+                            <form onSubmit={formik.handleSubmit} className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8">
+                                <div className="tw-relative md:tw-w-[20%] tw-my-2">
+                                    <input
+                                        onFocus={handleFocuse}
+                                        onBlur={handleBlur}
+                                        value={searchQuery}
+                                        onChange={handleInputChange}
+                                        placeholder="کالا / محصول"
+                                        type="text"
+                                        className="customInput tw-border tw-px-2 tw-border-gray-300 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
+                                    />
 
-                            {showProducts && (
-                                <div className="tw-border tw-w-[340px] tw-overflow-auto tw-max-h-[250px] tw-min-h-[48px] tw-absolute tw-top-[42px] tw-box-border tw-bg-white tw-shadow-md tw-z-[9999] tw-rounded-md">
-                                    <ul
-                                        onClick={(e) => e.stopPropagation()}
-                                        className="serach__product-lists"
-                                    >
-                                        {productLoading && <span>درحال بارگزاری محصولات</span>}
-                                        {productError && <span>خطا هنگام بارگزاری محصولات رخ داده است!</span>}
-                                        {filteredData?.map((item: IProducts, index: number) => {
-                                            return (
-                                                <li
-                                                    key={index}
-                                                    onClick={() => handleProductSelect(item)}
-                                                    className="tw-min-h-[60px] tw-cursor-pointer"
-                                                >
-                                                    <div className="tw-flex tw-flex-row tw-justify-between tw-items-center">
-                                                        <div className=" tw-relative tw-flex tw-flex-col tw-pt-4">
-                                                            <span className="tw-text-sm tw-px-4">
-                                                                {" "}
-                                                                {item.productName}
-                                                            </span>
-                                                        </div>
-                                                        <span className="tw-text-xs tw-px-4">
-                                                            {" "}
-                                                            کارخانه
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
+                                    {showProducts && (
+                                        <div className="tw-border tw-w-[340px] tw-overflow-auto tw-max-h-[250px] tw-min-h-[48px] tw-absolute tw-top-[42px] tw-box-border tw-bg-white tw-shadow-md tw-z-[9999] tw-rounded-md">
+                                            <ul
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="serach__product-lists"
+                                            >
+                                                {productLoading && <span>درحال بارگزاری محصولات</span>}
+                                                {productError && <span>خطا هنگام بارگزاری محصولات رخ داده است!</span>}
+                                                {filteredData?.map((item: IProducts, index: number) => {
+                                                    return (
+                                                        <li
+                                                            key={index}
+                                                            onClick={() => handleProductSelect(item)}
+                                                            className="tw-min-h-[60px] tw-cursor-pointer"
+                                                        >
+                                                            <div className="tw-flex tw-flex-row tw-justify-between tw-items-center">
+                                                                <div className=" tw-relative tw-flex tw-flex-col tw-pt-4">
+                                                                    <span className="tw-text-sm tw-px-4">
+                                                                        {" "}
+                                                                        {item.productName}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="tw-text-xs tw-px-4">
+                                                                    {" "}
+                                                                    کارخانه
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                        <div className="md:tw-w-[20%] tw-my-2">
-                            <ProfessionalSelect
-                                options={dropdownBrand(brands)}
-                                value={brandSelected}
-                                onChange={handleBrandChange}
-                                placeholder="برند"
-                            />
-                        </div>
-                        <div className="md:tw-w-[20%] tw-my-2">
-                            <ProfessionalSelect
-                                options={stores}
-                                value={storeSelected}
-                                onChange={handleStoreChange}
-                                placeholder="انبار"
-                            />
-                        </div>
-                        <div className="tw-my-2 md:tw-w-[20%]">
-                            <CustomInput
-                                getFieldProps={formik.getFieldProps}
-                                touched={formik.touched.proximateAmount}
-                                errors={formik.errors.proximateAmount}
-                                name={"proximateAmount"}
-                                type="text"
-                                placeholder="مقدار / تعداد"
-                                formikInput={true} />
-                        </div>
-                        <div className="tw-my-2 md:tw-w-[20%]">
-                            <CustomInput
-                                getFieldProps={formik.getFieldProps}
-                                touched={formik.touched.price}
-                                errors={formik.errors.price}
-                                name={"price"}
-                                type="text"
-                                placeholder="قیمت"
-                                formikInput={true} />
-                        </div>
-                        <div className="tw-my-2 md:tw-w-[20%]">
-                            <CustomInput
-                                getFieldProps={formik.getFieldProps}
-                                touched={formik.touched.productDesc}
-                                errors={formik.errors.productDesc}
-                                name={"productDesc"}
-                                type="text"
-                                placeholder="توضیحات"
-                                formikInput={true} />
-                        </div>
-                        <div className="tw-my-2 md:tw-w-[20%]">
-                            <CustomInput
-                                getFieldProps={formik.getFieldProps}
-                                touched={formik.touched.rowId}
-                                errors={formik.errors.rowId}
-                                name={"rowId"}
-                                type="text"
-                                placeholder="ردیف فروش"
-                                formikInput={true} />
-                        </div>
-                        {storeSelected?.value === 1 &&
-                            <>
-                                {/* <div className="tw-my-2 tw-w-[20%]">
+                                <div className="md:tw-w-[20%] tw-my-2">
+                                    <ProfessionalSelect
+                                        options={dropdownBrand(brands)}
+                                        value={brandSelected}
+                                        onChange={handleBrandChange}
+                                        placeholder="برند"
+                                    />
+                                </div>
+                                <div className="md:tw-w-[20%] tw-my-2">
+                                    <ProfessionalSelect
+                                        options={stores}
+                                        value={storeSelected}
+                                        onChange={handleStoreChange}
+                                        placeholder="انبار"
+                                    />
+                                </div>
+                                <div className="tw-my-2 md:tw-w-[20%]">
+                                    <CustomInput
+                                        getFieldProps={formik.getFieldProps}
+                                        touched={formik.touched.proximateAmount}
+                                        errors={formik.errors.proximateAmount}
+                                        name={"proximateAmount"}
+                                        type="text"
+                                        placeholder="مقدار / تعداد"
+                                        formikInput={true} />
+                                </div>
+                                <div className="tw-my-2 md:tw-w-[20%]">
+                                    <CustomInput
+                                        getFieldProps={formik.getFieldProps}
+                                        touched={formik.touched.price}
+                                        errors={formik.errors.price}
+                                        name={"price"}
+                                        type="text"
+                                        placeholder="قیمت"
+                                        formikInput={true} />
+                                </div>
+                                <div className="tw-my-2 md:tw-w-[20%]">
+                                    <CustomInput
+                                        getFieldProps={formik.getFieldProps}
+                                        touched={formik.touched.productDesc}
+                                        errors={formik.errors.productDesc}
+                                        name={"productDesc"}
+                                        type="text"
+                                        placeholder="توضیحات"
+                                        formikInput={true} />
+                                </div>
+                                <div className="tw-my-2 md:tw-w-[20%]">
+                                    <CustomInput
+                                        getFieldProps={formik.getFieldProps}
+                                        touched={formik.touched.rowId}
+                                        errors={formik.errors.rowId}
+                                        name={"rowId"}
+                                        type="text"
+                                        placeholder="ردیف فروش"
+                                        formikInput={true} />
+                                </div>
+                                {storeSelected?.value === 1 &&
+                                    <>
+                                        {/* <div className="tw-my-2 tw-w-[20%]">
                                     <CustomInput
                                         getFieldProps={formik.getFieldProps}
                                         touched={formik.touched.sellerCompanyRow}
@@ -436,59 +511,61 @@ const Order = () => {
                                         placeholder="خرید از"
                                         formikInput={true} />
                                 </div> */}
-                                <div className="tw-my-2 md:tw-w-[20%]">
-                                    <CustomInput
-                                        getFieldProps={formik.getFieldProps}
-                                        touched={formik.touched.buyPrice}
-                                        errors={formik.errors.buyPrice}
-                                        name={"buyPrice"}
-                                        type="text"
-                                        placeholder="قیمت خرید"
-                                        formikInput={true} />
-                                </div>
+                                        <div className="tw-my-2 md:tw-w-[20%]">
+                                            <CustomInput
+                                                getFieldProps={formik.getFieldProps}
+                                                touched={formik.touched.buyPrice}
+                                                errors={formik.errors.buyPrice}
+                                                name={"buyPrice"}
+                                                type="text"
+                                                placeholder="قیمت خرید"
+                                                formikInput={true} />
+                                        </div>
 
-                                <div className="tw-my-2 md:tw-w-[20%]">
-                                    <CustomDatepicker
-                                        onChange={(d: any) => setPurchaseSettlementDate(d.value)}
-                                        placeholder="تاریخ تسویه خرید" />
-                                </div>
-                                <div className="md:tw-w-[20%] tw-my-2">
-                                    <ProfessionalSelect
-                                        options={purchaseInvoiceType}
-                                        value={purchaseInvoiceTypeSelected}
-                                        onChange={handlepurchaseInvoiceTypeChange}
-                                        placeholder="نوع فاکتور خرید"
-                                    />
-                                </div>
-                                <div className="tw-my-2 md:tw-w-[20%]">
-                                    <CustomInput
-                                        getFieldProps={formik.getFieldProps}
-                                        touched={formik.touched.sellerCompanyRow}
-                                        errors={formik.errors.sellerCompanyRow}
-                                        name={"sellerCompanyRow"}
-                                        type="text"
-                                        placeholder="ردیف بنگاه فروشگاه"
-                                        formikInput={true} />
-                                </div>
+                                        <div className="tw-my-2 md:tw-w-[20%]">
+                                            <CustomDatepicker
+                                                onChange={(d: any) => setPurchaseSettlementDate(d.value)}
+                                                placeholder="تاریخ تسویه خرید" />
+                                        </div>
+                                        <div className="md:tw-w-[20%] tw-my-2">
+                                            <ProfessionalSelect
+                                                options={purchaseInvoiceType}
+                                                value={purchaseInvoiceTypeSelected}
+                                                onChange={handlepurchaseInvoiceTypeChange}
+                                                placeholder="نوع فاکتور خرید"
+                                            />
+                                        </div>
+                                        <div className="tw-my-2 md:tw-w-[20%]">
+                                            <CustomInput
+                                                getFieldProps={formik.getFieldProps}
+                                                touched={formik.touched.sellerCompanyRow}
+                                                errors={formik.errors.sellerCompanyRow}
+                                                name={"sellerCompanyRow"}
+                                                type="text"
+                                                placeholder="ردیف بنگاه فروشگاه"
+                                                formikInput={true} />
+                                        </div>
 
-                            </>
-                        }
-                        <div className="tw-my-2 tw-flex tw-justify-end">
-                            <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
-                                <span>
-                                    {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
+                                    </>
+                                }
+                                <div className="tw-my-2 tw-flex tw-justify-end">
+                                    <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
+                                        <span>
+                                            {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg> */}
-                                    افزودن
-                                </span>
-                            </button>
+                                            افزودن
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                        <div className="tw-col-span-2 tw-mb-2">
+                            <ProductSelectedList orders={orders} setOrders={setOrders} />
+                        </div>
+                    </Card6>
                 </div>
-                <div className="tw-col-span-2 tw-mb-2">
-                    <ProductSelectedList orders={orders} setOrders={setOrders} />
-                </div>
-            </Card6>
+            </>
 
             <div className="tw-mt-8">
                 <Card6 image="" title="">

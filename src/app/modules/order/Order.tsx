@@ -16,195 +16,210 @@ import { sliceNumberPrice } from "../../../_cloner/helpers/sliceNumberPrice";
 import { convertToPersianWord } from "../../../_cloner/helpers/convertPersian";
 import { useCreateOrder } from "./core/_hooks";
 import moment from "moment-jalaali";
+import CreateCustomer from "../customer/components/CreateCustomer";
+import { useGetCustomers } from "../customer/core/_hooks";
+import { dropdownBrand } from "../product/helpers/dropdownConvert";
+import { dropdownCustomer } from "./helpers/dropdowns";
 
 const Order = () => {
-    const [input, dispatch] = useReducer(
-        (state: any, newState: any) => ({ ...state, ...newState }),
-        {
-            description: "",
-        }
-    );
-
-    const handleChangeValue = (event: any) => {
-        const inputName = event.target.name;
-        const inputValue = event.target.value;
-
-        dispatch({ [inputName]: inputValue });
-    };
-
+    // Fetching Data
+    const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
     const { data: products, isLoading: productLoading, isError: productError } = useRetrieveProducts()
 
-
+    // States
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [selectedProductOpen, setSelectedProductOpen] = useState<boolean>(false);
-    const [selectProductFromModal, setSelectProductFromModal] = useState<IProducts>()
-    const [searchQuery, setSearchQuery] = useState("");
-    const [showProducts, setShowProducts] = useState(false);
-    const [filteredData, setFilteredData] = useState<IProducts[]>();
-    const [orders, setOrders] = useState<IProducts[]>([])
-    const [totalAmount, setTotalAmount] = useState(0);
-    const [settlementDate, setSettlementDate] = useState();
 
-    useEffect(() => {
-        setFilteredData(products?.data)
-    }, [products?.data])
 
-    const factor = [
-        { id: 1, title: "غیر رسمی" },
-        { id: 2, title: "رسمی سپهر" },
-        { id: 3, title: "رسمی مهفام" }
-    ]
-    const exit = [
-        { id: 1, title: "عادی" },
-        { id: 2, title: "بعد از تسویه" },
-    ]
-    const send = [
-        { id: 1, title: "توسط مشتری" },
-        { id: 2, title: "توسط بازرگانی" },
-    ]
 
-    const [factorType, setFactorType] = useState<number>(1);
-    const [exitType, setExitType] = useState<number>(1);
-    const [sendType, setSendType] = useState<number>(1);
+
+
+
+
+    // const [input, dispatch] = useReducer(
+    //     (state: any, newState: any) => ({ ...state, ...newState }),
+    //     {
+    //         description: "",
+    //     }
+    // );
+
+    // const handleChangeValue = (event: any) => {
+    //     const inputName = event.target.name;
+    //     const inputValue = event.target.value;
+
+    //     dispatch({ [inputName]: inputValue });
+    // };
+
+
+
+    // const [selectedProductOpen, setSelectedProductOpen] = useState<boolean>(false);
+    // const [selectProductFromModal, setSelectProductFromModal] = useState<IProducts>()
+    // const [searchQuery, setSearchQuery] = useState("");
+    // const [showProducts, setShowProducts] = useState(false);
+    // const [filteredData, setFilteredData] = useState<IProducts[]>();
+    // const [orders, setOrders] = useState<IProducts[]>([])
+    // const [totalAmount, setTotalAmount] = useState(0);
+    // const [settlementDate, setSettlementDate] = useState();
+
+    // useEffect(() => {
+    //     setFilteredData(products?.data)
+    // }, [products?.data])
+
+    // const factor = [
+    //     { id: 1, title: "غیر رسمی" },
+    //     { id: 2, title: "رسمی سپهر" },
+    //     { id: 3, title: "رسمی مهفام" }
+    // ]
+    // const exit = [
+    //     { id: 1, title: "عادی" },
+    //     { id: 2, title: "بعد از تسویه" },
+    // ]
+    // const send = [
+    //     { id: 1, title: "توسط مشتری" },
+    //     { id: 2, title: "توسط بازرگانی" },
+    // ]
+
     // const [factorType, setFactorType] = useState<number>(1);
-    const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFactorType(Number(e.target.value));
-    };
-    const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setExitType(Number(e.target.value));
-    };
-    const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSendType(Number(e.target.value));
-    };
+    // const [exitType, setExitType] = useState<number>(1);
+    // const [sendType, setSendType] = useState<number>(1);
+    // // const [factorType, setFactorType] = useState<number>(1);
+    // const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setFactorType(Number(e.target.value));
+    // };
+    // const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setExitType(Number(e.target.value));
+    // };
+    // const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSendType(Number(e.target.value));
+    // };
 
-    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const newInputValue = event.target.value;
-        setSearchQuery(newInputValue);
+    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    //     const newInputValue = event.target.value;
+    //     setSearchQuery(newInputValue);
 
-        const searchWords = newInputValue.trim().toLowerCase().split(/\s+/); // Split into words
+    //     const searchWords = newInputValue.trim().toLowerCase().split(/\s+/); // Split into words
 
-        const newProduct = products?.data.filter((item: any) => {
-            return searchWords.every((word: any) =>
-                item.productName.toLowerCase().includes(word)
-            );
-        });
+    //     const newProduct = products?.data.filter((item: any) => {
+    //         return searchWords.every((word: any) =>
+    //             item.productName.toLowerCase().includes(word)
+    //         );
+    //     });
 
-        setFilteredData(newProduct);
+    //     setFilteredData(newProduct);
 
-        setShowProducts(true);
-    }
+    //     setShowProducts(true);
+    // }
 
-    const handleFocuse = () => {
-        setShowProducts(true);
-    };
-    const handleBlur = () => {
-        setTimeout(() => {
-            setShowProducts(false);
-        }, 500);
-    };
+    // const handleFocuse = () => {
+    //     setShowProducts(true);
+    // };
+    // const handleBlur = () => {
+    //     setTimeout(() => {
+    //         setShowProducts(false);
+    //     }, 500);
+    // };
 
-    const handleProductSelect = (item: IProducts) => {
-        if (item.productName) {
-            setSearchQuery(item?.productName.toString());
-            setShowProducts(false);
-        }
-    };
+    // const handleProductSelect = (item: IProducts) => {
+    //     if (item.productName) {
+    //         setSearchQuery(item?.productName.toString());
+    //         setShowProducts(false);
+    //     }
+    // };
 
-    useEffect(() => {
-        if (selectProductFromModal?.productName)
-            setSearchQuery(selectProductFromModal?.productName);
+    // useEffect(() => {
+    //     if (selectProductFromModal?.productName)
+    //         setSearchQuery(selectProductFromModal?.productName);
 
-    }, [selectProductFromModal])
+    // }, [selectProductFromModal])
 
-    const initialValues = {
-        productName: "",
-        count: "",
-        price: ""
-    }
+    // const initialValues = {
+    //     productName: "",
+    //     count: "",
+    //     price: ""
+    // }
 
-    const formik = useFormik({
-        initialValues,
-        onSubmit: async (values, { resetForm }) => {
-            const productOrder = {
-                id: "",
-                productName: searchQuery,
-                productBrandId: 0,
-                productCode: 0,
-                productSize: "",
-                approximateWeight: 0,
-                numberInPackage: 0,
-                statusId: 0,
-                size: "",
-                standard: "",
-                productState: "",
-                description: "",
-                brandName: ""
-                // productName: searchQuery,
-                // count: values.count,
-                // price: values.price
+    // const formik = useFormik({
+    //     initialValues,
+    //     onSubmit: async (values, { resetForm }) => {
+    //         const productOrder = {
+    //             id: "",
+    //             productName: searchQuery,
+    //             productBrandId: 0,
+    //             productCode: 0,
+    //             productSize: "",
+    //             approximateWeight: 0,
+    //             numberInPackage: 0,
+    //             statusId: 0,
+    //             size: "",
+    //             standard: "",
+    //             productState: "",
+    //             description: "",
+    //             brandName: ""
+    //             // productName: searchQuery,
+    //             // count: values.count,
+    //             // price: values.price
 
-            }
+    //         }
 
-            setOrders([...orders, productOrder])
-            resetForm()
-            setSearchQuery("")
+    //         setOrders([...orders, productOrder])
+    //         resetForm()
+    //         setSearchQuery("")
 
-        }
-    })
+    //     }
+    // })
 
-    useEffect(() => {
-        const prices = orders.map((obj) => Number(obj.productName));
-        const newPrices = [...prices];
-        const newTotal = newPrices.reduce((acc: any, item) => acc + item, 0);
-        setTotalAmount(newTotal);
-    }, [orders]);
+    // useEffect(() => {
+    //     const prices = orders.map((obj) => Number(obj.productName));
+    //     const newPrices = [...prices];
+    //     const newTotal = newPrices.reduce((acc: any, item) => acc + item, 0);
+    //     setTotalAmount(newTotal);
+    // }, [orders]);
 
-    const { mutate, data, isLoading, isError } = useCreateOrder()
+    // const { mutate, data, isLoading, isError } = useCreateOrder()
 
-    console.log(exitType)
+    // console.log(exitType)
 
-    const handleCreateOrder = () => {
-        const formData = {
-            customerId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            totalAmount: totalAmount,
-            orderCode: 0,
-            confirmedStatus: true,
-            description: input.description,
-            exitType: exitType,
-            orderSendTypeId: sendType,
-            paymentTypeId: 0,
-            customerOfficialName: "string",
-            invoiceTypeId: factorType,
-            approvedDate: "string",
-            freightName: "string",
-            settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
-            dischargePlaceAddress: "string",
-            freightDriverName: "string",
-            carPlaque: "string",
-            details: orders?.map((item) => {
-                return {
-                    productId: item.productName
-                }
-            })
-            // details: [
-            //     {
-            //         rowId: 0,
-            //         productId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            //         warehouseId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            //         proximateAmount: 0,
-            //         numberInPackage: 0,
-            //         price: 0,
-            //         cargoSendDate: "string",
-            //         buyPrice: 0,
-            //         purchaseInvoiceType: 0,
-            //         purchaseSettlementDate: "string",
-            //         sellerCompanyRow: "string"
-            //     }
-            // ]
-        }
-        console.log("formData", formData)
-        // mutate(formData)
-    }
+    // const handleCreateOrder = () => {
+    //     const formData = {
+    //         customerId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //         totalAmount: totalAmount,
+    //         orderCode: 0,
+    //         confirmedStatus: true,
+    //         description: input.description,
+    //         exitType: exitType,
+    //         orderSendTypeId: sendType,
+    //         paymentTypeId: 0,
+    //         customerOfficialName: "string",
+    //         invoiceTypeId: factorType,
+    //         approvedDate: "string",
+    //         freightName: "string",
+    //         settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
+    //         dischargePlaceAddress: "string",
+    //         freightDriverName: "string",
+    //         carPlaque: "string",
+    //         details: orders?.map((item) => {
+    //             return {
+    //                 productId: item.productName
+    //             }
+    //         })
+    //         // details: [
+    //         //     {
+    //         //         rowId: 0,
+    //         //         productId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //         //         warehouseId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //         //         proximateAmount: 0,
+    //         //         numberInPackage: 0,
+    //         //         price: 0,
+    //         //         cargoSendDate: "string",
+    //         //         buyPrice: 0,
+    //         //         purchaseInvoiceType: 0,
+    //         //         purchaseSettlementDate: "string",
+    //         //         sellerCompanyRow: "string"
+    //         //     }
+    //         // ]
+    //     }
+    //     console.log("formData", formData)
+    //     // mutate(formData)
+    // }
 
     return (
         <>
@@ -214,7 +229,9 @@ const Order = () => {
                     <div
                         className="tw-w-full md:tw-w-[50%]"
                     >
-                        <ProfessionalSelect placeholder="جستجو مشتری" />
+                        <ProfessionalSelect
+                            options={dropdownCustomer(customers?.data)}
+                            placeholder="جستجو مشتری" />
                     </div>
                     <button
                         onClick={() => setIsOpen(true)}
@@ -232,9 +249,9 @@ const Order = () => {
                     reqular={true}
                     className="tw-w-[800px]"
                 >
-                    <CreateUser />
+                    <CreateCustomer refetch={refetch} setIsCreateOpen={setIsOpen} />
                 </Modal>
-                <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-gap-x-4">
+                {/* <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-gap-x-4">
                     <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
                         <div>
                             <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
@@ -336,7 +353,7 @@ const Order = () => {
                             </button>
                         </div>
                     </form>
-                </div>
+                </div> */}
                 {/* Orders Submit UI2 */}
                 {/* <div className="tw-col-span-2 tw-mb-2">
                     <ProductSelectedList orders={orders} setOrders={setOrders} />
@@ -396,9 +413,9 @@ const Order = () => {
                     </div>
                 </div> */}
                 {/* Orders Submit UI2 */}
-                <div className="tw-col-span-2 tw-mb-2">
+                {/* <div className="tw-col-span-2 tw-mb-2">
                     <ProductSelectedList orders={orders} setOrders={setOrders} />
-                </div>
+                </div> */}
                 {/* <div className="">
                     <div className="tw-grid tw-grid-cols-4 tw-gap-4">
                         <div>
@@ -512,7 +529,7 @@ const Order = () => {
             </Card6>
 
             {/* UI 3 */}
-            <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-5 tw-gap-4 tw-mt-4">
+            {/* <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 md:tw-grid-cols-5 tw-gap-4 tw-mt-4">
                 <Card6 image="" title="">
                     <div className="tw-pt-4">
                         <label className="tw-font-yekan_bold tw-text-2xl">نوع فاکتور</label>
@@ -573,7 +590,7 @@ const Order = () => {
                         </div>
                     </Card6>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

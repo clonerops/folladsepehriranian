@@ -53,7 +53,11 @@ const Customer = () => {
     };
 
     const handleDelete = (id: string | undefined) => {
-        if (id) mutate(id);
+        if (id) mutate(id, {
+            onSuccess: () => {
+                refetch()
+            }
+        });
     };
 
 
@@ -110,6 +114,9 @@ const Customer = () => {
                                     نماینده
                                 </td>
                                 <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    تامین کننده می باشد؟
+                                </td>
+                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
 
                                 </td>
                             </tr>
@@ -148,6 +155,11 @@ const Customer = () => {
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         {item.representative}
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        <span>
+                                            {item.isSupplier ? <span className="tw-bg-green-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">بله</span> : <span className="tw-bg-red-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">خیر</span>}
+                                        </span>
                                     </td>
                                     <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                         <div className="tw-flex tw-gap-4">

@@ -40,6 +40,7 @@ const CreateCustomer = (props: {
             try {
                 const formData = {
                     ...values,
+                    isSupplier: true
                 }
                 mutate(formData, {
                     onSuccess: () => {
@@ -100,7 +101,7 @@ const CreateCustomer = (props: {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.nationalId}
                             errors={formik.errors.nationalId}
-                            type="number"
+                            type="text"
                             name={"nationalId"}
                             formikInput={true}
                             placeholder=""
@@ -114,7 +115,7 @@ const CreateCustomer = (props: {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.mobile}
                             errors={formik.errors.mobile}
-                            type="number"
+                            type="text"
                             name={"mobile"}
                             formikInput={true}
                             placeholder=""
@@ -128,7 +129,7 @@ const CreateCustomer = (props: {
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.tel}
                             errors={formik.errors.tel}
-                            type="number"
+                            type="text"
                             name={"tel"}
                             formikInput={true}
                             placeholder=""

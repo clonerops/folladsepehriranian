@@ -10,4 +10,5 @@ export interface ICustomer {
     tel: string | undefined
     address2: string | undefined
     representative: string | undefined
+    isSupplier?: boolean | undefined
 }

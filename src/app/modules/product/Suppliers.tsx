@@ -8,6 +8,7 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateSupplier from "./components/CreateSupplier";
 import EditSupplier from "./components/EditSupplier";
+import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Suppliers = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
@@ -114,7 +115,7 @@ const Suppliers = () => {
                                     نرخ
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    
+
                                 </td>
                             </tr>
                         </thead>
@@ -222,18 +223,20 @@ const Suppliers = () => {
                     </div>
                 </div>
             </div>
-            <Modal
+            <MyModal
+                title="ایجاد تامین کننده جدید"
                 isOpen={isCreateOpen}
-                onClose={() => setIsCreateOpen(false)}
+                setIsOpen={setIsCreateOpen}
             >
                 <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </Modal>
-            <Modal
+            </MyModal>
+            <MyModal
+                title="ویرایش تامین کننده"
                 isOpen={isEditOpen}
-                onClose={() => setIsEditOpen(false)}
+                setIsOpen={setIsEditOpen}
             >
                 <EditSupplier refetch={refetch} item={itemForEdit} />
-            </Modal>
+            </MyModal>
         </>
     );
 };

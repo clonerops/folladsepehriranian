@@ -70,7 +70,7 @@ const CreateSupplier = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             مشتری
@@ -108,6 +108,14 @@ const CreateSupplier = (props: {
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            تاریخ قیمت
+                        </label>
+                        <CustomDatepicker
+                            onChange={(d: any) => setPriceDate(d.value)}
+                            placeholder="" />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             مبلغ اجاره
                         </label>
                         <CustomInput
@@ -136,14 +144,6 @@ const CreateSupplier = (props: {
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تاریخ قیمت
-                        </label>
-                        <CustomDatepicker
-                            onChange={(d: any) => setPriceDate(d.value)}
-                            placeholder="" />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نرخ
                         </label>
                         <CustomInput
@@ -151,34 +151,34 @@ const CreateSupplier = (props: {
                             touched={formik.touched.rate}
                             errors={formik.errors.rate}
                             name={"rate"}
-                            type="string"
+                            type="number"
                             formikInput={true}
                             placeholder=""
                         />
                     </div>
+                    <div className="w-w-full tw-my-6">
+                        <button
+                            type="submit"
+                            id="kt_sign_in_submit"
+                            className="tw-btn-success tw-mb-2 tw-py-4"
+                            disabled={formik.isSubmitting || !formik.isValid}
+                        >
+                            {!isLoading && (
+                                <span className="indicator-label">ثبت تامبن کننده</span>
+                            )}
+                            {isLoading && (
+                                <span
+                                    className="indicator-progress"
+                                    style={{ display: "block" }}
+                                >
+                                    درحال پردازش...
+                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            )}
+                        </button>
+                    </div>
                 </div>
-                <div className="">
-                    <button
-                        type="submit"
-                        id="kt_sign_in_submit"
-                        className="tw-btn-success tw-mb-2"
-                        disabled={formik.isSubmitting || !formik.isValid}
-                    >
-                        {!isLoading && (
-                            <span className="indicator-label">ثبت تامبن کننده</span>
-                        )}
-                        {isLoading && (
-                            <span
-                                className="indicator-progress"
-                                style={{ display: "block" }}
-                            >
-                                درحال پردازش...
-                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        )}
-                    </button>
-                </div>
-            </form>
+            </form >
         </>
     );
 };

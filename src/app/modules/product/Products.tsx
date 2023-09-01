@@ -6,6 +6,7 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
+import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Products = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
@@ -229,18 +230,20 @@ const Products = () => {
                     </div>
                 </div>
             </div>
-            <Modal
+            <MyModal
+                title="ایجاد محصول جدید"
                 isOpen={isCreateOpen}
-                onClose={() => setIsCreateOpen(false)}
+                setIsOpen={setIsCreateOpen}
             >
                 <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </Modal>
-            <Modal
+            </MyModal>
+            <MyModal
+                title="ویرایش محصول"
                 isOpen={isEditOpen}
-                onClose={() => setIsEditOpen(false)}
+                setIsOpen={setIsEditOpen}
             >
                 <EditProduct refetch={refetch} item={itemForEdit} />
-            </Modal>
+            </MyModal>
         </>
     );
 };

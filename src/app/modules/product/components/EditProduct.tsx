@@ -66,7 +66,7 @@ const EditProduct = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام محصول
@@ -91,6 +91,8 @@ const EditProduct = (props: {
                             placeholder=""
                         />
                     </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             سایز محصول
@@ -189,7 +191,7 @@ const EditProduct = (props: {
                         />
                     </div>
                 </div>
-                <div className="">
+                <div className="tw-flex">
                     <button
                         type="submit"
                         id="kt_sign_in_submit"
@@ -211,7 +213,7 @@ const EditProduct = (props: {
                         )}
                     </button>
                 </div>
-            </form>
+            </form >
         </>
     );
 };

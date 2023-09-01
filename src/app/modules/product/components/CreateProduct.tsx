@@ -10,12 +10,12 @@ import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { dropdownBrand } from "../helpers/dropdownConvert";
 
-const CreateProduct = (props: { 
-    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>, 
-    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>> 
+const CreateProduct = (props: {
+    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     // States
-    const [brandSelected, setBrandSelected] = useState<{value: number, label: string}>();
+    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);
@@ -67,7 +67,7 @@ const CreateProduct = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4 tw-my-8 tw-mx-auto">
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام محصول
@@ -91,6 +91,8 @@ const CreateProduct = (props: {
                             placeholder=""
                         />
                     </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             سایز محصول
@@ -189,7 +191,7 @@ const CreateProduct = (props: {
                         />
                     </div>
                 </div>
-                <div className="">
+                <div className="tw-flex">
                     <button
                         type="submit"
                         id="kt_sign_in_submit"
@@ -210,7 +212,7 @@ const CreateProduct = (props: {
                         )}
                     </button>
                 </div>
-            </form>
+            </form >
         </>
     );
 };

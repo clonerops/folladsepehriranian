@@ -1,3 +1,4 @@
+import moment from "moment-jalaali";
 import { KTSVG } from "../../../../_cloner/helpers";
 import { IProducts } from "../../product/core/_models";
 import { IProductOrder } from "../core/_models";
@@ -14,6 +15,8 @@ const ProductSelectedList = (props: {
         }
     }
 
+    console.log(props.orders)
+
     return (
         <div className="tw-overflow-x-auto">
             <table className="tw-w-full tw-table-auto">
@@ -26,6 +29,9 @@ const ProductSelectedList = (props: {
                             کالا / محصول
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            برند
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             انبار
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
@@ -33,6 +39,27 @@ const ProductSelectedList = (props: {
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             قیمت
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            توضیحات
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            ردیف فروش
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            خرید از
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            قیمت خرید
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            تاریخ تسویه خرید
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            نوع فاکتور خرید
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            ردیف بنگاه فروشگاه
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             حذف
@@ -53,13 +80,37 @@ const ProductSelectedList = (props: {
                                     {item.productName}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.count}
+                                    {item.productBrandName}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.warehouseName}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.count}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.price} ریال
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.productDesc}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.rowId}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.buyPrice}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.buyPrice}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {moment(item.purchaseSettlementDate).format("jYYYY/jMM/jDD")}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.purchaseInvoiceTypeName}
+                                </td>
+                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    {item.sellerCompanyRow}
                                 </td>
                                 <td onClick={() => handleDeleteFromList(index)} className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     <div className="tw-flex tw-justify-center tw-items-center">

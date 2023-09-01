@@ -14,6 +14,10 @@ const CreateProduct = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
+    // Fetchig 
+    const { mutate, data, isError, isLoading } = useCreateProduct();
+    const { data: brands } = useRetrieveBrands();
+
     // States
     const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
 
@@ -21,8 +25,6 @@ const CreateProduct = (props: {
         setBrandSelected(selectedOption);
     };
 
-    const { mutate, data, isError, isLoading } = useCreateProduct();
-    const { data: brands } = useRetrieveBrands();
 
     const initialValues = {
         productName: "",

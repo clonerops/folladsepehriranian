@@ -5,7 +5,8 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import ResetPassword from "./components/ResetPassword";
 import { toAbsoluteUrl } from "../../../_cloner/helpers";
-import { useLoginUser } from "./core/_hooks";
+import { useGetCaptcha, useLoginUser } from "./core/_hooks";
+import Captcha from "./components/Captcha";
 
 const Login = () => {
     const loginSchema = Yup.object().shape({
@@ -17,11 +18,14 @@ const Login = () => {
             .min(3, "تعداد کاراکتر کمتر از 3 مجاز نمی باشد")
             .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
             .required("رمز عبور الزامی است"),
+        captchaCode: Yup.string()
+            .required("کد امنیتی الزامی است"),
     });
 
     const initialValues = {
         userName: "clonerops",
         password: "aBo217767345@",
+        captchaCode: ""
     };
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -29,6 +33,7 @@ const Login = () => {
     const [isError, setIsError] = useState<boolean>(false)
 
     const { mutate, data } = useLoginUser()
+    const { data: captcha, refetch } = useGetCaptcha()
 
     const formik = useFormik({
         initialValues,
@@ -38,7 +43,10 @@ const Login = () => {
             const userData = {
                 userName: values.userName,
                 password: values.password,
+                captchaCode: values.captchaCode,
+                captchaKey: captcha?.data?.key
             };
+            console.log(userData)
             try {
                 mutate(userData, {
                     onSuccess: (loginData) => {
@@ -92,6 +100,19 @@ const Login = () => {
                             errors={formik.errors.password}
                             name={"password"}
                             title="کلمه عبور"
+                        ></Inputs>
+                    </div>
+                    <div className="tw-w-[50%]">
+
+                        <Captcha captcha={captcha?.data?.cImage} refetch={refetch} />
+                        <Inputs
+                            type="text"
+                            login={true}
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.captchaCode}
+                            errors={formik.errors.captchaCode}
+                            name={"captchaCode"}
+                            title="کد امنیتی"
                         ></Inputs>
                     </div>
                     <div

@@ -40,9 +40,19 @@ const confirmEmailUser = async (formData: IConfirmEmail) => {
     return data;
 };
 
+const getCaptcha = async () => {
+    try {
+        const { data } = await http.get('/v1/Captcha')
+        return data    
+    } catch (error: any) {
+        return error.response
+    }
+}
+
 export {
     loginUser,
     forgetPasswordUser,
     resetPasswordUser,
     confirmEmailUser,
+    getCaptcha
 };

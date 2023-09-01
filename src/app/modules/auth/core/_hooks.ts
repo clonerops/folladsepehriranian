@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import * as api from "./_requests";
 import {
     IConfirmEmail,
@@ -32,9 +32,14 @@ const useConfirmEmail = () => {
     });
 };
 
+const useGetCaptcha = () => {
+    return useQuery(['captcha'], () => api.getCaptcha())
+}
+
 export {
     useLoginUser,
     useForgetPasswordUser,
     useResetPasswordUser,
     useConfirmEmail,
+    useGetCaptcha
 };

@@ -5,8 +5,6 @@ import { useDeleteCustomer, useGetCustomers } from "./core/_hooks";
 import { ICustomer } from "./core/_models";
 import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import Modal from "../../../_cloner/helpers/components/Modal";
-import CreateProduct from "../product/components/CreateProduct";
-import EditProduct from "../product/components/EditProduct";
 import CreateCustomer from "./components/CreateCustomer";
 import EditCustomer from "./components/EditCustomer";
 

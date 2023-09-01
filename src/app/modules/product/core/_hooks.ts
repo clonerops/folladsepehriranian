@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as api from "./_requests";
-import { IProducts } from "./_models";
+import { IProducts, ISuppliers } from "./_models";
 
 const useRetrieveProducts = () => {
     return useQuery(["products"], () => api.retrieveProducts());
@@ -35,11 +35,46 @@ const useRetrieveBrands = () => {
     return useQuery(["brands"], () => api.retrieveBrands());
 };
 
+// Suppliers
+const useRetrieveSuppliers = () => {
+    return useQuery(["suppliers"], () => api.retrieveSuppliers());
+};
+
+const useCreateSupplier = () => {
+    return useMutation((formData: ISuppliers) => {
+        return api.createSuppliers(formData);
+    });
+};
+
+const useRetrieveSupplierById = () => {
+    return useMutation((id: number) => {
+        return api.retrieveSupplierById(id);
+    });
+};
+
+const useUpdateSupplier = () => {
+    return useMutation((formdata: ISuppliers) => {
+        return api.updateSupplier(formdata);
+    });
+};
+
+const useDeleteSupplier = () => {
+    return useMutation((id: string) => {
+        return api.deleteSupplier(id);
+    });
+};
+
+
 export {
     useRetrieveProducts,
     useCreateProduct,
     useRetrieveProductById,
     useUpdateProduct,
     useDeleteProduct,
-    useRetrieveBrands
+    useRetrieveBrands,
+    useRetrieveSuppliers,
+    useCreateSupplier,
+    useRetrieveSupplierById,
+    useUpdateSupplier,
+    useDeleteSupplier,
 };

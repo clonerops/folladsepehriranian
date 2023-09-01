@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { IProducts } from "./core/_models";
+import { IProducts, ISuppliers } from "./core/_models";
 import Modal from "../../../_cloner/helpers/components/Modal";
-import { useDeleteProduct, useRetrieveProducts } from "./core/_hooks";
-import Backdrop from "../../../_cloner/helpers/components/Backdrop";
-import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
+import { useDeleteProduct, useDeleteSupplier, useRetrieveProducts, useRetrieveSuppliers } from "./core/_hooks";
+import Backdrop from "../../../_cloner/helpers/components/Backdrop";
+import CustomInput from "../../../_cloner/helpers/components/CustomInput";
+import CreateSupplier from "./components/CreateSupplier";
+import EditSupplier from "./components/EditSupplier";
 
-const Products = () => {
+const Suppliers = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
-    const [itemForEdit, setItemForEdit] = useState<IProducts>();
+    const [itemForEdit, setItemForEdit] = useState<ISuppliers>();
 
     // const [selectedRows, setSelectedRows] = useState<IProduct>(); // Track selected row IDs
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -18,10 +20,10 @@ const Products = () => {
     const itemsPerPage = 8; // Number of items to show per page
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
-    const { mutate, isLoading: deleteLoading } = useDeleteProduct();
+    const { data: suppliers, isLoading: suppliersLoading, isError: suppliersError, refetch } = useRetrieveSuppliers();
+    const { mutate, isLoading: deleteLoading } = useDeleteSupplier();
 
-    const filteredData = products?.data?.filter((item: IProducts) => {
+    const filteredData = suppliers?.data?.filter((item: ISuppliers) => {
         const values = Object.values(item);
         return values.some((value) =>
             value.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -47,7 +49,7 @@ const Products = () => {
     };
 
 
-    const handleEdit = (item: IProducts) => {
+    const handleEdit = (item: ISuppliers) => {
         setIsEditOpen(true);
         setItemForEdit(item);
     };
@@ -62,14 +64,14 @@ const Products = () => {
     return (
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
-            {productsLoading && <Backdrop loading={productsLoading} />}
+            {suppliersLoading && <Backdrop loading={suppliersLoading} />}
             <div>
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-[40%]">
                         <CustomInput
                             value={searchTerm}
                             onChange={handleSearchInput}
-                            placeholder="جستجو محصول / کالا"
+                            placeholder="جستجو تامین کنندگان"
                         />
 
                     </div>
@@ -94,25 +96,19 @@ const Products = () => {
                                     نام محصول
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    برند محصول
+                                    قیمت
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    سایز محصول
+                                    مبلغ اجاره
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    وزن تقریبی
+                                    بیش از قیمت
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    تعداد در بسته
+                                    تاریخ قیمت
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    اندازه
-                                </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    استاندارد
-                                </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    توضیحات
+                                    نرخ
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     
@@ -120,41 +116,32 @@ const Products = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {productsLoading && <span>درحال بارگزاری</span>}
-                            {productsError && <span>بارگزاری محصولات با خطا مواجه شده است!</span>}
+                            {suppliersLoading && <span>درحال بارگزاری</span>}
+                            {suppliersError && <span>بارگزاری محصولات با خطا مواجه شده است!</span>}
                             {currentItems?.map(
-                                (item: IProducts, index: number) => {
+                                (item: ISuppliers, index: number) => {
                                     return (
                                         <tr key={item.id}>
                                             <td className="tw-text-center tw-py-4">
                                                 {startRowIndex + index + 1}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.productName}
+                                                {item.productId}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.brandName}
+                                                {item.price}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.productSize}
+                                                {item.rentAmount}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.approximateWeight}
+                                                {item.overPrice}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.numberInPackage}
+                                                {item.priceDate}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.size}
-                                            </td>
-                                            <td className="tw-text-center tw-py-4">
-                                                {item.standard}
-                                            </td>
-                                            <td className="tw-text-center tw-py-4 tw-hidden">
-                                                {item.productState}
-                                            </td>
-                                            <td className="tw-text-center tw-py-4">
-                                                {item.description}
+                                                {item.rate}
                                             </td>
                                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                                 <div className="tw-flex tw-gap-4">
@@ -233,16 +220,16 @@ const Products = () => {
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
             >
-                <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
+                {/* <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} /> */}
             </Modal>
             <Modal
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
             >
-                <EditProduct refetch={refetch} item={itemForEdit} />
+                {/* <EditSupplier refetch={refetch} item={itemForEdit} /> */}
             </Modal>
         </>
     );
 };
 
-export default Products;
+export default Suppliers;

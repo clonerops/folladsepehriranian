@@ -6,6 +6,7 @@ import CreateUser from '../modules/user/CreateUser'
 import Products from '../modules/product/Products'
 import OrderList from '../modules/order/OrderList'
 import Customer from '../modules/customer/Customer'
+import Suppliers from '../modules/product/Suppliers'
 
 const PrivateRoutes = () => {
 
@@ -17,12 +18,13 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<Dashboard />} />
         {/* Orders */}
-        <Route path='dashboard/order' element={<Order />} />
+        <Route path='dashboard/order/managment' element={<Order />} />
         <Route path='dashboard/order/lists' element={<OrderList />} />
         {/* Users */}
         <Route path='dashboard/user/create' element={<CreateUser />} />
         {/* Products */}
         <Route path='dashboard/product/managment' element={<Products />} />
+        <Route path='dashboard/product/supplier' element={<Suppliers />} />
         {/* Customer */}
         <Route path='dashboard/customer/managment' element={<Customer />} />
 

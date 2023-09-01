@@ -20,3 +20,14 @@ export interface IBrands {
     status: number | undefined
     id: number | undefined
 }
+
+export interface ISuppliers {
+    id?: string | undefined
+    customerId: string,
+    productId: string,
+    price: number,
+    rentAmount: number,
+    overPrice: number,
+    priceDate: string,
+    rate: number
+  }

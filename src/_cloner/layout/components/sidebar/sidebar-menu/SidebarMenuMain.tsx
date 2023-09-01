@@ -44,7 +44,7 @@ const SidebarMenuMain = () => {
         fontIcon='bi-archive'
         icon='/media/icons/duotune/general/gen022.svg'
       >
-        <SidebarMenuItem to='/dashboard/order' title='ثبت سفارش' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/order/managment' title='ثبت سفارش' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/order/lists' title='لیست سفارشات' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
@@ -74,6 +74,7 @@ const SidebarMenuMain = () => {
         icon='/media/icons/duotune/general/gen022.svg'
       >
         <SidebarMenuItem to='/dashboard/product/managment' title='لیست محصولات' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/product/supplier' title='لیست تامین کنندگان' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       <div className='menu-item'>

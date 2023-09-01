@@ -195,19 +195,19 @@ const Order = () => {
         <>
             <Card6 title="" image="">
                 {/* Product Number and Submit Date */}
-                <div className="tw-flex tw-justify-between">
+                <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-y-3 tw-justify-between">
                     <div className="tw-font-bold tw-font-yekan_bold tw-text-2xl">
                         <span className="tw-px-2">شماره سفارش</span>
                         <span className="tw-px-2 tw-text-green-700">35789</span>
                     </div>
-                    <div className="tw-font-bold tw-font-yekan_bold tw-text-xl">
+                    <div className="tw-font-bold tw-font-yekan_bold tw-text-2xl">
                         <span className="tw-px-2">تاریخ سفارش</span>
-                        <span className="tw-px-2">{moment(Date.now()).format("jYYYY/jMM/jDD").toString()}</span>
+                        <span className="tw-px-2 tw-text-slate-500">{moment(Date.now()).format("jYYYY/jMM/jDD").toString()}</span>
                     </div>
                 </div>
                 {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
-                <div className="tw-grid tw-grid-cols-6 tw-gap-x-4">
-                    <div className="tw-col-span-2">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 lg:tw-grid-cols-6 tw-gap-4">
+                    <div className="md:tw-col-span-2">
                         <Card6 image="" title="">
                             <div className="tw-pt-4">
                                 <label className="tw-font-yekan_bold tw-text-lg">مشتری و تاریخ تسویه</label>
@@ -320,7 +320,7 @@ const Order = () => {
                         </div>
                     </div>
                     <form onSubmit={formik.handleSubmit} className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8">
-                        <div className="tw-relative tw-w-[20%] tw-my-2">
+                        <div className="tw-relative md:tw-w-[20%] tw-my-2">
                             <input
                                 onFocus={handleFocuse}
                                 onBlur={handleBlur}
@@ -365,7 +365,7 @@ const Order = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="tw-w-[20%] tw-my-2">
+                        <div className="md:tw-w-[20%] tw-my-2">
                             <ProfessionalSelect
                                 options={dropdownBrand(brands)}
                                 value={brandSelected}
@@ -373,7 +373,7 @@ const Order = () => {
                                 placeholder="برند"
                             />
                         </div>
-                        <div className="tw-w-[20%] tw-my-2">
+                        <div className="md:tw-w-[20%] tw-my-2">
                             <ProfessionalSelect
                                 options={stores}
                                 value={storeSelected}
@@ -381,7 +381,7 @@ const Order = () => {
                                 placeholder="انبار"
                             />
                         </div>
-                        <div className="tw-my-2 tw-w-[20%]">
+                        <div className="tw-my-2 md:tw-w-[20%]">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.count}
@@ -391,7 +391,7 @@ const Order = () => {
                                 placeholder="مقدار / تعداد"
                                 formikInput={true} />
                         </div>
-                        <div className="tw-my-2 tw-w-[20%]">
+                        <div className="tw-my-2 md:tw-w-[20%]">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.price}
@@ -401,7 +401,7 @@ const Order = () => {
                                 placeholder="قیمت"
                                 formikInput={true} />
                         </div>
-                        <div className="tw-my-2 tw-w-[20%]">
+                        <div className="tw-my-2 md:tw-w-[20%]">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.productDesc}
@@ -411,7 +411,7 @@ const Order = () => {
                                 placeholder="توضیحات"
                                 formikInput={true} />
                         </div>
-                        <div className="tw-my-2 tw-w-[20%]">
+                        <div className="tw-my-2 md:tw-w-[20%]">
                             <CustomInput
                                 getFieldProps={formik.getFieldProps}
                                 touched={formik.touched.rowId}
@@ -433,7 +433,7 @@ const Order = () => {
                                         placeholder="خرید از"
                                         formikInput={true} />
                                 </div> */}
-                                <div className="tw-my-2 tw-w-[20%]">
+                                <div className="tw-my-2 md:tw-w-[20%]">
                                     <CustomInput
                                         getFieldProps={formik.getFieldProps}
                                         touched={formik.touched.buyPrice}
@@ -444,12 +444,12 @@ const Order = () => {
                                         formikInput={true} />
                                 </div>
 
-                                <div className="tw-my-2 tw-w-[20%]">
+                                <div className="tw-my-2 md:tw-w-[20%]">
                                     <CustomDatepicker
                                         onChange={(d: any) => setPurchaseSettlementDate(d.value)}
                                         placeholder="تاریخ تسویه خرید" />
                                 </div>
-                                <div className="tw-w-[20%] tw-my-2">
+                                <div className="md:tw-w-[20%] tw-my-2">
                                     <ProfessionalSelect
                                         options={purchaseInvoiceType}
                                         value={purchaseInvoiceTypeSelected}
@@ -457,7 +457,7 @@ const Order = () => {
                                         placeholder="نوع فاکتور خرید"
                                     />
                                 </div>
-                                <div className="tw-my-2 tw-w-[20%]">
+                                <div className="tw-my-2 md:tw-w-[20%]">
                                     <CustomInput
                                         getFieldProps={formik.getFieldProps}
                                         touched={formik.touched.sellerCompanyRow}

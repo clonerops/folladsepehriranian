@@ -93,7 +93,10 @@ const Suppliers = () => {
                                     ردیف
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    نام محصول
+                                    تامین کننده
+                                </td>
+                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                    محصول / کالا
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     قیمت
@@ -124,6 +127,9 @@ const Suppliers = () => {
                                         <tr key={item.id}>
                                             <td className="tw-text-center tw-py-4">
                                                 {startRowIndex + index + 1}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4">
+                                                {item.customerId}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
                                                 {item.productId}
@@ -220,7 +226,7 @@ const Suppliers = () => {
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
             >
-                {/* <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} /> */}
+                <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
                 isOpen={isEditOpen}

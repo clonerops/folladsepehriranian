@@ -23,11 +23,11 @@ export interface IBrands {
 
 export interface ISuppliers {
     id?: string | undefined
-    customerId: string,
-    productId: string,
-    price: number,
-    rentAmount: number,
-    overPrice: number,
-    priceDate: string,
-    rate: number
+    customerId: string | undefined,
+    productId: string | undefined,
+    price: number | undefined,
+    rentAmount: number | undefined,
+    overPrice: number | undefined,
+    priceDate: string | undefined,
+    rate: number | undefined
   }

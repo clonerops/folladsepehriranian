@@ -7,3 +7,12 @@ export const dropdownBrand = (data: any) => {
         })
     );
 };
+export const dropdownProduct = (data: any) => {
+    return (
+        data &&
+        data?.map((obj: { id: any; productName: any }): any => {
+            const { id, productName } = obj;
+            return { value: id, label: productName };
+        })
+    );
+};

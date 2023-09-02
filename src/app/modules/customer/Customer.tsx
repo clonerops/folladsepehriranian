@@ -159,12 +159,12 @@ const Customer = () => {
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>
-                                            {item.customerType === 0 ? <span className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقیقی</span> : <span className="tw-bg-indigo-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقیقی</span> }
+                                            {item.customerType === 0 ? <span className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقیقی</span> : <span className="tw-bg-indigo-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقوقی</span>}
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>
-                                            {item.customerValidityId === 0 ? "عادی" : item.customerValidityId === 1 ? "VIP" : "سیاه" }
+                                            {item.customerValidityId === 0 ? "عادی" : item.customerValidityId === 1 ? "VIP" : "سیاه"}
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
@@ -265,13 +265,14 @@ const Customer = () => {
             >
                 <CreateCustomer refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
-            <MyModal
-                title="ویرایش مشتری"
+            <Modal
+                // title="ویرایش مشتری"
                 isOpen={isEditOpen}
-                setIsOpen={setIsEditOpen}
+                onClose={() => setIsEditOpen(false)}
+            // setIsOpen={setIsEditOpen}
             >
                 <EditCustomer refetch={refetch} item={itemForEdit} />
-            </MyModal>
+            </Modal>
 
         </>
     );

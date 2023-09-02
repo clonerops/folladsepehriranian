@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const CusromRadioGroupButton = (props: {
     items: any
     name: string
-    selected: number
+    selected: number | undefined
     handleRadio: any
     className?: string
 }) => {

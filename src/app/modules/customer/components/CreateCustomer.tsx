@@ -51,7 +51,6 @@ const CreateCustomer = (props: {
                     customerValidityId: customerValidity,
                     isSupplier: isSupplier
                 }
-                console.log(formData)
                 mutate(formData, {
                     onSuccess: () => {
                         props.refetch()

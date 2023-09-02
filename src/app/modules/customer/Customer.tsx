@@ -235,13 +235,14 @@ const Customer = () => {
                 </div>
 
             </div>
-            <MyModal
-                title="ایجاد مشتری جدید"
+            <Modal
+                // title="ایجاد مشتری جدید"
                 isOpen={isCreateOpen}
-                setIsOpen={setIsCreateOpen}
+                onClose={() => setIsCreateOpen(false)}
+                // setIsOpen={setIsCreateOpen}
             >
                 <CreateCustomer refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </MyModal>
+            </Modal>
             <MyModal
                 title="ویرایش مشتری"
                 isOpen={isEditOpen}

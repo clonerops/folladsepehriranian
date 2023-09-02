@@ -7,25 +7,36 @@ import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useCreateCustomer } from "../core/_hooks";
+import CusromRadioGroupButton from "../../../../_cloner/helpers/components/CusromRadioGroupButton";
+import { customerTypeData, customerValidityData } from "../helpers/fakeData";
 
 const CreateCustomer = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
+    const { mutate, data, isError, isLoading } = useCreateCustomer();
     // States
     const [isSupplier, setIsSupplier] = useState(false)
+    const [customerType, setCustomerType] = useState<number>(0);
+    const [customerValidity, setCustomerValidity] = useState<number>(0);
 
-    const { mutate, data, isError, isLoading } = useCreateCustomer();
+    const handleCustomerRadio = (e: React.ChangeEvent<HTMLInputElement>) => setCustomerType(Number(e.target.value));
+    const handleCustomerValidityRadio = (e: React.ChangeEvent<HTMLInputElement>) => setCustomerValidity(Number(e.target.value));
+
 
     const initialValues = {
         firstName: "",
         lastName: "",
+        fatherName: "",
         nationalId: "",
+        nationalId2: "",
         mobile: "",
         address1: "",
+        officialName: "",
         customerType: 1,
         customerValidityId: 1,
         tel: "",
+        tel2: "",
         address2: "",
         representative: "",
     };
@@ -36,8 +47,11 @@ const CreateCustomer = (props: {
             try {
                 const formData = {
                     ...values,
+                    customerType: customerType,
+                    customerValidityId: customerValidity,
                     isSupplier: isSupplier
                 }
+                console.log(formData)
                 mutate(formData, {
                     onSuccess: () => {
                         props.refetch()
@@ -60,7 +74,7 @@ const CreateCustomer = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام
@@ -89,7 +103,49 @@ const CreateCustomer = (props: {
                             placeholder="نام خانوادگی"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            نام خانوادگی
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.fatherName}
+                            errors={formik.errors.fatherName}
+                            type="string"
+                            name={"fatherName"}
+                            formikInput={true}
+                            placeholder="نام پدر"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            نام خانوادگی
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.officialName}
+                            errors={formik.errors.officialName}
+                            type="string"
+                            name={"officialName"}
+                            formikInput={true}
+                            placeholder="اسم رسمی مشتری"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            کدملی
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.nationalId2}
+                            errors={formik.errors.nationalId2}
+                            type="text"
+                            name={"nationalId2"}
+                            formikInput={true}
+                            placeholder="شناسه ملی"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             کدملی
                         </label> */}
@@ -103,7 +159,9 @@ const CreateCustomer = (props: {
                             placeholder="کدملی"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                </div>
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                    <div className="tw-w-full tw-my-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نماینده شرکت
                         </label> */}
@@ -114,7 +172,7 @@ const CreateCustomer = (props: {
                             name={"representative"}
                             type="string"
                             formikInput={true}
-                            placeholder="نماینده شرکت"
+                            placeholder="معرف"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
@@ -142,16 +200,44 @@ const CreateCustomer = (props: {
                             type="text"
                             name={"tel"}
                             formikInput={true}
-                            placeholder="تلفن"
+                            placeholder="تلفن 1"
                         />
                     </div>
-                    <div>
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            تلفن
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.tel2}
+                            errors={formik.errors.tel2}
+                            type="text"
+                            name={"tel2"}
+                            formikInput={true}
+                            placeholder="تلفن 2"
+                        />
+                    </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
+                    <div className="tw-w-full tw-my-2 tw-text-right">
                         <label>
                             <input onChange={(e) => setIsSupplier(e.target.checked)} type="checkbox" className="tw-accent-slate-800 tw-w-[14px] tw-h-[14px]" />
-                            <span className="tw-px-4">آیا تامین کننده می باشد؟</span>
+                            <span className="tw-px-4 tw-font-bold tw-text-lg">آیا تامین کننده می باشد؟</span>
                         </label>
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                    <div className="tw-w-full tw-my-2 tw-text-right">
+                        <label className="tw-font-yekan_bold tw-text-lg">نوع مشتری</label>
+                        <div className="tw-flex tw-justify-start tw-items-center">
+                            <CusromRadioGroupButton className="tw-my-4" selected={customerType} handleRadio={handleCustomerRadio} items={customerTypeData} name="customerType" />
+                        </div>
+                    </div>
+                    <div className="tw-w-full tw-my-2 tw-text-right">
+                        <label className="tw-font-yekan_bold tw-text-lg">نوع اعتبار</label>
+                        <div className="tw-flex tw-justify-start tw-items-center">
+                            <CusromRadioGroupButton className="tw-my-4" selected={customerValidity} handleRadio={handleCustomerValidityRadio} items={customerValidityData} name="customerValidity" />
+                        </div>
+                    </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-3">
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address1}
@@ -161,7 +247,7 @@ const CreateCustomer = (props: {
                             placeholder="ادرس 1"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-2">
+                    <div className="tw-w-full tw-my-2 tw-col-span-3">
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address2}

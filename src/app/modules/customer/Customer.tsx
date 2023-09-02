@@ -89,35 +89,44 @@ const Customer = () => {
                     </button>
                 </div>
 
-                <div className="tw-overflow-auto">
+                <div className="tw-overflow-x-auto tw-min-w-full">
                     <table className="tw-w-full ">
                         <thead className="tw-bg-slate-200">
                             <tr>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[40px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
 
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     نام
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    نام خانوادگی
+                                </td>
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     کدملی
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    نوع مشتری
+                                </td>
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    نوع اعتبار
+                                </td>
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     موبایل
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     تلفن
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     تامین کننده می باشد؟
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[360px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     آدرس
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    نماینده
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    معرف
                                 </td>
-                                <td className="tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
 
                                 </td>
                             </tr>
@@ -140,10 +149,23 @@ const Customer = () => {
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                        <span>{item.firstName + " " + item.lastName}</span>
+                                        <span>{item.firstName}</span>
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        <span>{item.lastName}</span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         {item.nationalId}
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        <span>
+                                            {item.customerType === 0 ? <span className="tw-bg-yellow-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقیقی</span> : <span className="tw-bg-indigo-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">حقیقی</span> }
+                                        </span>
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        <span>
+                                            {item.customerValidityId === 0 ? "عادی" : item.customerValidityId === 1 ? "VIP" : "سیاه" }
+                                        </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         {item.mobile}
@@ -153,7 +175,7 @@ const Customer = () => {
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>
-                                            {item.isSupplier ? <span className="tw-bg-green-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">بله</span> : <span className="tw-bg-red-500 tw-text-white tw-rounded-full tw-px-4 tw-py-1">خیر</span>}
+                                            {item.isSupplier ? <span className="tw-bg-green-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">بله</span> : <span className="tw-bg-red-500 tw-text-white tw-px-4 tw-py-1 tw-rounded-md">خیر</span>}
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
@@ -164,7 +186,7 @@ const Customer = () => {
                                     </td>
                                     <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                         <div className="tw-flex tw-gap-4">
-                                            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                 <div
                                                     className="tw-cursor-pointer tw-text-white"
                                                 >
@@ -184,7 +206,7 @@ const Customer = () => {
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                            <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                 <div
                                                     className="tw-cursor-pointer tw-text-white"
                                                 >
@@ -239,7 +261,7 @@ const Customer = () => {
                 // title="ایجاد مشتری جدید"
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
-                // setIsOpen={setIsCreateOpen}
+            // setIsOpen={setIsCreateOpen}
             >
                 <CreateCustomer refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>

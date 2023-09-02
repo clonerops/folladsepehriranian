@@ -16,7 +16,7 @@ const CustomInput = (props: {
                     <input
                         {...props.getFieldProps(props.name)}
                         type={props.type}
-                        className="customInput tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
+                        className="customInput tw-p-[8px] tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
                         placeholder={props.placeholder}
                         name={props.name}
                     />
@@ -30,7 +30,7 @@ const CustomInput = (props: {
                 <>
                     <input
                         type="text"
-                        className="customInput tw-p-2 tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
+                        className="customInput tw-p-[8px] tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
                         value={props.value}
                         onChange={props.onChange}
                         placeholder={props.placeholder}

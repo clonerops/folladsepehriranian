@@ -18,7 +18,7 @@ const CustomDatepicker: FC<IProps> = ({ title, placeholder, onChange, defaultVal
             defaultValue={defaultValue}
             inputAttributes={{
                 placeholder: placeholder,
-                style:{paddingLeft: 20, paddingRight:20}
+                style:{paddingLeft: 8, paddingRight:8}
             }}
         />
         );

@@ -30,7 +30,7 @@ const Customer = () => {
     const filteredData = customers?.data?.filter((item: ICustomer) => {
         const values = Object.values(item);
         return values.some((value) =>
-            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+            value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
 

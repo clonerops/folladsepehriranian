@@ -19,7 +19,7 @@ const CreateProduct = (props: {
     const { data: brands } = useRetrieveBrands();
 
     // States
-    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string }>();
+    const [brandSelected, setBrandSelected] = useState<{ value: number, label: string } | null>(null);
 
     const handleBrandChange = (selectedOption: any) => {
         setBrandSelected(selectedOption);
@@ -71,9 +71,9 @@ const CreateProduct = (props: {
             <form onSubmit={formik.handleSubmit} className="container">
                 <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام محصول
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.productName}
@@ -81,24 +81,24 @@ const CreateProduct = (props: {
                             name={"productName"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="نام کالا"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label>
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">برند</label> */}
                         <ProfessionalSelect
                             options={dropdownBrand(brands)}
                             value={brandSelected}
                             onChange={handleBrandChange}
-                            placeholder=""
+                            placeholder="برند"
                         />
                     </div>
                 </div>
                 <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             سایز محصول
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.productSize}
@@ -106,13 +106,13 @@ const CreateProduct = (props: {
                             type="string"
                             name={"productSize"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="سایز"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             وزن تقریبی
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.approximateWeight}
@@ -120,13 +120,13 @@ const CreateProduct = (props: {
                             type="number"
                             name={"approximateWeight"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="وزن تقریبی"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             تعداد بسته
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.numberInPackage}
@@ -134,13 +134,13 @@ const CreateProduct = (props: {
                             type="number"
                             name={"numberInPackage"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="تعداد در بسته"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             اندازه
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.size}
@@ -148,13 +148,13 @@ const CreateProduct = (props: {
                             name={"size"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="اندازه"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             استاندارد
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.standard}
@@ -162,13 +162,13 @@ const CreateProduct = (props: {
                             name={"standard"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="استاندارد"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             حالت محصول
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.productState}
@@ -176,20 +176,35 @@ const CreateProduct = (props: {
                             name={"productState"}
                             type="string"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="حالت"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2 tw-col-span-3">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             توضیحات
-                        </label>
+                        </label> */}
+                        <CustomTextarea
+                            // value={formik.values.productName + " " + brandSelected?.label}
+                            value={
+                                formik.values.productName + " " +
+                                formik.values.productSize + " " +
+                                formik.values.standard + " " +
+                                formik.values.productState
+                            }
+                            placeholder="شرح کامل کالا"
+                        />
+                    </div>
+                    <div className="tw-w-full tw-my-2 tw-col-span-3">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            توضیحات
+                        </label> */}
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.description}
                             errors={formik.errors.description}
                             name={"description"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="توضیحات"
                         />
                     </div>
                 </div>

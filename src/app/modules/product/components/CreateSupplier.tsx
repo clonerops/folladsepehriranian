@@ -32,10 +32,10 @@ const CreateSupplier = (props: {
 
 
     const initialValues = {
-        price: 0,
-        rentAmount: 0,
-        overPrice: 0,
-        rate: 0,
+        price: "",
+        rentAmount: "",
+        overPrice: "",
+        rate: "",
     };
 
     const formik = useFormik({
@@ -44,6 +44,10 @@ const CreateSupplier = (props: {
             try {
                 const formData = {
                     ...values,
+                    price: Number(values.price),
+                    rentAmount: Number(values.rentAmount),
+                    overPrice: Number(values.overPrice),
+                    rate: Number(values.rate),
                     customerId: customerSelected.value,
                     productId: productSelected.value,
                     priceDate: priceDate
@@ -72,111 +76,115 @@ const CreateSupplier = (props: {
             <form onSubmit={formik.handleSubmit} className="container">
                 <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            مشتری
-                        </label>
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                                مشتری
+                        </label> */}
                         <ProfessionalSelect
                             options={dropdownCustomer(customers?.data)}
                             value={customerSelected}
                             onChange={handleCustomerSelected}
-                            placeholder=""
+                            placeholder="مشتری"
                         />
 
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">محصول</label>
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">محصول</label> */}
                         <ProfessionalSelect
                             options={dropdownProduct(products?.data)}
                             value={productSelected}
                             onChange={handleProductSelected}
-                            placeholder=""
+                            placeholder="کالا"
                         />
                     </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             قیمت
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.price}
                             errors={formik.errors.price}
-                            type="number"
+                            type="text"
                             name={"price"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="قیمت"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             تاریخ قیمت
-                        </label>
+                        </label> */}
                         <CustomDatepicker
                             onChange={(d: any) => setPriceDate(d.value)}
-                            placeholder="" />
+                            placeholder="تاریخ قیمت" />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            مبلغ اجاره
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.rentAmount}
-                            errors={formik.errors.rentAmount}
-                            type="number"
-                            name={"rentAmount"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             بیش از قیمت
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.overPrice}
                             errors={formik.errors.overPrice}
-                            type="number"
+                            type="text"
                             name={"overPrice"}
                             formikInput={true}
-                            placeholder=""
+                            placeholder="قیمت تمام شده"
+                        />
+                    </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                    <div className="tw-w-full tw-my-2">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            مبلغ اجاره
+                        </label> */}
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.rentAmount}
+                            errors={formik.errors.rentAmount}
+                            type="text"
+                            name={"rentAmount"}
+                            formikInput={true}
+                            placeholder="کرایه"
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نرخ
-                        </label>
+                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.rate}
                             errors={formik.errors.rate}
                             name={"rate"}
-                            type="number"
+                            type="text"
                             formikInput={true}
-                            placeholder=""
+                            placeholder="امتیاز"
                         />
                     </div>
-                    <div className="w-w-full tw-my-6">
-                        <button
-                            type="submit"
-                            id="kt_sign_in_submit"
-                            className="tw-btn-success tw-mb-2 tw-py-4"
-                            disabled={formik.isSubmitting || !formik.isValid}
-                        >
-                            {!isLoading && (
-                                <span className="indicator-label">ثبت تامبن کننده</span>
-                            )}
-                            {isLoading && (
-                                <span
-                                    className="indicator-progress"
-                                    style={{ display: "block" }}
-                                >
-                                    درحال پردازش...
-                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                </span>
-                            )}
-                        </button>
-                    </div>
+                </div>
+                <div className="w-w-full tw-my-6">
+                    <button
+                        type="submit"
+                        id="kt_sign_in_submit"
+                        className="tw-btn-success tw-mb-2 tw-py-4"
+                        disabled={formik.isSubmitting || !formik.isValid}
+                    >
+                        {!isLoading && (
+                            <span className="indicator-label">ثبت تامبن کننده</span>
+                        )}
+                        {isLoading && (
+                            <span
+                                className="indicator-progress"
+                                style={{ display: "block" }}
+                            >
+                                درحال پردازش...
+                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        )}
+                    </button>
                 </div>
             </form >
         </>

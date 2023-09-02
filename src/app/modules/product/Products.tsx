@@ -22,10 +22,14 @@ const Products = () => {
     const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
     const { mutate, isLoading: deleteLoading } = useDeleteProduct();
 
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    };
+
     const filteredData = products?.data?.filter((item: IProducts) => {
         const values = Object.values(item);
         return values.some((value) =>
-            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+            value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
 
@@ -43,9 +47,6 @@ const Products = () => {
         }
     };
 
-    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
-    };
 
 
     const handleEdit = (item: IProducts) => {
@@ -70,7 +71,7 @@ const Products = () => {
                         <CustomInput
                             value={searchTerm}
                             onChange={handleSearchInput}
-                            placeholder="جستجو محصول / کالا"
+                            placeholder="جستجو کالا"
                         />
 
                     </div>
@@ -92,13 +93,13 @@ const Products = () => {
                                     ردیف
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    نام محصول
+                                    نام کالا
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    برند محصول
+                                    برند کالا
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    سایز محصول
+                                    سایز کالا
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     وزن تقریبی
@@ -122,7 +123,7 @@ const Products = () => {
                         </thead>
                         <tbody>
                             {productsLoading && <span>درحال بارگزاری</span>}
-                            {productsError && <span>بارگزاری محصولات با خطا مواجه شده است!</span>}
+                            {productsError && <span>بارگزاری کالاات با خطا مواجه شده است!</span>}
                             {currentItems?.map(
                                 (item: IProducts, index: number) => {
                                     return (
@@ -159,7 +160,7 @@ const Products = () => {
                                             </td>
                                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                                 <div className="tw-flex tw-gap-4">
-                                                    <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                                    <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                         <div
                                                             className="tw-cursor-pointer tw-text-white"
                                                         >
@@ -179,7 +180,7 @@ const Products = () => {
                                                             </svg>
                                                         </div>
                                                     </div>
-                                                    <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                                    <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                         <div
                                                             className="tw-cursor-pointer tw-text-white"
                                                         >
@@ -230,20 +231,22 @@ const Products = () => {
                     </div>
                 </div>
             </div>
-            <MyModal
-                title="ایجاد محصول جدید"
+            <Modal
+                // title="ایجاد کالا جدید"
                 isOpen={isCreateOpen}
-                setIsOpen={setIsCreateOpen}
+                onClose={() => setIsCreateOpen(false)}
+                // setIsOpen={setIsCreateOpen}
             >
                 <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </MyModal>
-            <MyModal
-                title="ویرایش محصول"
+            </Modal>
+            <Modal
+                // title="ویرایش کالا"
                 isOpen={isEditOpen}
-                setIsOpen={setIsEditOpen}
+                onClose={() => setIsEditOpen(false)}
+                // setIsOpen={setIsEditOpen}
             >
                 <EditProduct refetch={refetch} item={itemForEdit} />
-            </MyModal>
+            </Modal>
         </>
     );
 };

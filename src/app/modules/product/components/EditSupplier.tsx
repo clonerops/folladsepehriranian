@@ -80,7 +80,7 @@ const EditSupplier = (props: {
 
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">محصول</label>
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">کالا</label>
                         <ProfessionalSelect
                             options={dropdownProduct(products?.data)}
                             value={productSelected}
@@ -88,6 +88,8 @@ const EditSupplier = (props: {
                             placeholder=""
                         />
                     </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             قیمت
@@ -104,7 +106,31 @@ const EditSupplier = (props: {
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            مبلغ اجاره
+                            تاریخ قیمت
+                        </label>
+                        <CustomDatepicker
+                            onChange={(d: any) => setPriceDate(d.value)}
+                            placeholder="" />
+                    </div>
+                    <div className="tw-w-full tw-my-2">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            قیمت تمام شده
+                        </label>
+                        <CustomInput
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.overPrice}
+                            errors={formik.errors.overPrice}
+                            type="number"
+                            name={"overPrice"}
+                            formikInput={true}
+                            placeholder=""
+                        />
+                    </div>
+                </div>
+                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                    <div className="tw-w-full tw-my-2">
+                        <label className="tw-w-full tw-text-right tw-text-gray-500">
+                            کرایه
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
@@ -118,29 +144,7 @@ const EditSupplier = (props: {
                     </div>
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            بیش از قیمت
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.overPrice}
-                            errors={formik.errors.overPrice}
-                            type="number"
-                            name={"overPrice"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تاریخ قیمت
-                        </label>
-                        <CustomDatepicker
-                            onChange={(d: any) => setPriceDate(d.value)}
-                            placeholder="" />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            نرخ
+                            امتیاز
                         </label>
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
@@ -152,27 +156,27 @@ const EditSupplier = (props: {
                             placeholder=""
                         />
                     </div>
-                    <div className="w-w-full tw-my-6">
-                        <button
-                            type="submit"
-                            id="kt_sign_in_submit"
-                            className="tw-btn-warning tw-mb-2 tw-py-4"
-                            disabled={formik.isSubmitting || !formik.isValid}
-                        >
-                            {!isLoading && (
-                                <span className="indicator-label">ویرایش</span>
-                            )}
-                            {isLoading && (
-                                <span
-                                    className="indicator-progress"
-                                    style={{ display: "block" }}
-                                >
-                                    درحال پردازش...
-                                    <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                </span>
-                            )}
-                        </button>
-                    </div>
+                </div>
+                <div className="w-w-full tw-my-6">
+                    <button
+                        type="submit"
+                        id="kt_sign_in_submit"
+                        className="tw-btn-warning tw-mb-2 tw-py-4"
+                        disabled={formik.isSubmitting || !formik.isValid}
+                    >
+                        {!isLoading && (
+                            <span className="indicator-label">ویرایش</span>
+                        )}
+                        {isLoading && (
+                            <span
+                                className="indicator-progress"
+                                style={{ display: "block" }}
+                            >
+                                درحال پردازش...
+                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        )}
+                    </button>
                 </div>
             </form >
         </>

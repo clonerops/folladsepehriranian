@@ -103,16 +103,16 @@ const Suppliers = () => {
                                     قیمت
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    مبلغ اجاره
+                                    کرایه
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    بیش از قیمت
+                                    قیمت تمام شده
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     تاریخ قیمت
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    نرخ
+                                    امتیاز
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
 
@@ -152,7 +152,7 @@ const Suppliers = () => {
                                             </td>
                                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">
                                                 <div className="tw-flex tw-gap-4">
-                                                    <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                                    <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                         <div
                                                             className="tw-cursor-pointer tw-text-white"
                                                         >
@@ -172,7 +172,7 @@ const Suppliers = () => {
                                                             </svg>
                                                         </div>
                                                     </div>
-                                                    <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-8 tw-py-2 tw-cursor-pointer">
+                                                    <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                                                         <div
                                                             className="tw-cursor-pointer tw-text-white"
                                                         >
@@ -223,20 +223,22 @@ const Suppliers = () => {
                     </div>
                 </div>
             </div>
-            <MyModal
-                title="ایجاد تامین کننده جدید"
+            <Modal
+                // title="ایجاد تامین کننده جدید"
                 isOpen={isCreateOpen}
-                setIsOpen={setIsCreateOpen}
-            >
+                onClose={() => setIsCreateOpen(false)}
+                // setIsOpen={setIsCreateOpen}
+                >
                 <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
-            </MyModal>
-            <MyModal
-                title="ویرایش تامین کننده"
+            </Modal>
+            <Modal
+                // title="ویرایش تامین کننده"
                 isOpen={isEditOpen}
-                setIsOpen={setIsEditOpen}
+                onClose={() => setIsEditOpen(false)}
+                // setIsOpen={setIsEditOpen}
             >
                 <EditSupplier refetch={refetch} item={itemForEdit} />
-            </MyModal>
+            </Modal>
         </>
     );
 };

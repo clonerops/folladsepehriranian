@@ -236,13 +236,14 @@ const Order = () => {
                                             {/* <span>افزودن مشتری</span> */}
                                         </button>
                                     </div>
-                                    <MyModal
-                                        title="ایجاد مشتری جدید"
+                                    <Modal
+                                        // title="ایجاد مشتری جدید"
                                         isOpen={isOpen}
-                                        setIsOpen={setIsOpen}
+                                        onClose={() => setIsOpen(false)}
+                                        // setIsOpen={setIsOpen}
                                     >
                                         <CreateCustomer refetch={refetch} setIsCreateOpen={setIsOpen} />
-                                    </MyModal>
+                                    </Modal>
                                 </div>
                             </div>
                             <div className="tw-pt-4">

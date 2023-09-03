@@ -1,16 +1,15 @@
 import { useFormik } from "formik";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
-import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
-import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import EditText from "../../../../_cloner/helpers/components/EditText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { ICustomer } from "../core/_models";
 import { useUpdateCustomer } from "../core/_hooks";
 import CusromRadioGroupButton from "../../../../_cloner/helpers/components/CusromRadioGroupButton";
-import { customerTypeData, customerValidityData } from "../helpers/fakeData";
+import { customerTypeData } from "../helpers/fakeData";
+import { useGetCustomerValidities } from "../../../../_cloner/helpers/_hooks";
 
 const EditCustomer = (props: {
     item: ICustomer | undefined,
@@ -18,6 +17,7 @@ const EditCustomer = (props: {
 
 }) => {
     const { mutate, data, isError, isLoading } = useUpdateCustomer();
+    const { data: customerValidityData } = useGetCustomerValidities()
 
     // States
     const [isSupplier, setIsSupplier] = useState(false)

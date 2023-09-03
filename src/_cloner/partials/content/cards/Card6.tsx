@@ -9,7 +9,7 @@ type Props = {
 
 const Card6: FC<Props> = ({title, children}) => {
   return (
-    <div className='card h-100 tw-shadow-lg'>
+    <div className='card h-100 tw-shadow-md'>
       {/* <div className='card-header flex-nowrap border-0 pt-9'>
         <div className='card-title m-0'>
           <div className='symbol symbol-45px w-45px bg-light me-5'>

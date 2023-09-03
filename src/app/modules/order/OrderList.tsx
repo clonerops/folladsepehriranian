@@ -1,4 +1,5 @@
 import { useRetrieveOrders } from "./core/_hooks"
+import { IOrder } from "./core/_models"
 
 const OrderList = () => {
     const { data: orders } = useRetrieveOrders()
@@ -37,35 +38,38 @@ const OrderList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr key="{id}">
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            ddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            dddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            dddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            dddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            ddddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            dddddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            ddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            ddddddd
-                        </td>
-                        <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                            dddddddddd
-                        </td>
-                    </tr>
+                    {orders?.data?.map((item: IOrder, index: number) => {
+                        return <tr key="{id}">
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                {index + 1}
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                dddddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                dddddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                dddddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                ddddddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                dddddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                ddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                ddddddd
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                dddddddddd
+                            </td>
+                        </tr>
+                    })}
+
                 </tbody>
             </table>
 

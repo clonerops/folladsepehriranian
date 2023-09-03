@@ -1,20 +1,21 @@
 import { useFormik } from "formik";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
-import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useCreateCustomer } from "../core/_hooks";
 import CusromRadioGroupButton from "../../../../_cloner/helpers/components/CusromRadioGroupButton";
-import { customerTypeData, customerValidityData } from "../helpers/fakeData";
+import { customerTypeData } from "../helpers/fakeData";
+import { useGetCustomerValidities } from "../../../../_cloner/helpers/_hooks";
 
 const CreateCustomer = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     const { mutate, data, isError, isLoading } = useCreateCustomer();
+    const { data: customerValidityData } = useGetCustomerValidities()
     // States
     const [isSupplier, setIsSupplier] = useState(false)
     const [customerType, setCustomerType] = useState<number>(0);

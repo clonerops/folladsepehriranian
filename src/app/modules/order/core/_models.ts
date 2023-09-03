@@ -22,7 +22,6 @@ export interface ICreateOrder {
     paymentTypeId: number | undefined | null
     customerOfficialName: string | undefined | null
     invoiceTypeId: number | undefined | null
-    approvedDate: string | undefined | null
     freightName: string | undefined | null
     settlementDate: string | undefined | null
     dischargePlaceAddress: string | undefined | null
@@ -32,6 +31,7 @@ export interface ICreateOrder {
 }
 
 export interface ICreateOrderDetails {
+    id?: string | undefined
     rowId: number | undefined | null
     productId: string | undefined | null
     warehouseId: string | undefined | null
@@ -41,6 +41,12 @@ export interface ICreateOrderDetails {
     cargoSendDate: string | undefined | null
     buyPrice: number | undefined | null
     purchaseInvoiceType: number | undefined | null
+    purchaserCustomerId: string  | undefined | null
     purchaseSettlementDate: string | undefined | null
     sellerCompanyRow: string | undefined | null
 }
+
+export interface IOrder extends ICreateOrder {
+    id: number | undefined
+}
+

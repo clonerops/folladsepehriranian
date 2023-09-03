@@ -19,16 +19,22 @@ import moment from "moment-jalaali";
 import CreateCustomer from "../customer/components/CreateCustomer";
 import { useGetCustomers } from "../customer/core/_hooks";
 import { dropdownBrand } from "../product/helpers/dropdownConvert";
-import { dropdownCustomer } from "./helpers/dropdowns";
+import { dropdownCustomer, dropdownExitType, dropdownInvoiceType, dropdownOrderSendType, dropdownPurchaseInvoice, dropdownRentPaymentType, dropdownWarehouseType } from "./helpers/dropdowns";
 import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
-import { exit, factor, purchaseInvoiceType, rent, send, stores } from "./helpers/fakeData";
+import { exit } from "./helpers/fakeData";
 import { ICreateOrderDetails } from "./core/_models";
+import { useGetInvoiceType, useGetPaymentTypes, useGetPurchaseInvoice, useGetSendTypes, useGetWarehouseTypes } from "../../../_cloner/helpers/_hooks";
 
 const Order = () => {
     // Fetching Data
     const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
     const { data: products, isLoading: productLoading, isError: productError } = useRetrieveProducts()
     const { data: brands } = useRetrieveBrands();
+    const { data: orderSendType } = useGetSendTypes()
+    const { data: rent } = useGetPaymentTypes()
+    const { data: purchaseInvoiceType } = useGetPurchaseInvoice()
+    const { data: factor } = useGetInvoiceType()
+    const { data: stores } = useGetWarehouseTypes()
 
     // States
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,6 +48,7 @@ const Order = () => {
     const [selectedProductOpen, setSelectedProductOpen] = useState<boolean>(false);
     const [selectProductFromModal, setSelectProductFromModal] = useState<IProducts>()
     const [searchQuery, setSearchQuery] = useState("");
+    const [productSelected, setProductSelected] = useState<any>("");
     const [showProducts, setShowProducts] = useState(false);
     const [filteredData, setFilteredData] = useState<IProducts[]>();
     const [orders, setOrders] = useState<any>([])
@@ -49,18 +56,29 @@ const Order = () => {
     const [brandSelected, setBrandSelected] = useState<{ value: number | null, label: string | null }>();
     const [storeSelected, setStoreSelected] = useState<{ value: number | null, label: string | null }>();
     const [customerSelect, setCustomerSelected] = useState<{ value: number | null, label: string | null }>();
-    const [purchaseInvoiceTypeSelected, setPurchaseInvoiceTypeSelected] = useState<{ value: number | null, label: string | null }>();
+
+    const [orderSendTypeSelect, setOrderSendTypeSelected] = useState<{ value: number | null, label: string | null }>();
+    const [invoiceSelect, setInvoiceSelected] = useState<{ value: number | null, label: string | null }>();
+    const [purchaseInvoiceSelect, setPurchaseInvoiceSelected] = useState<{ value: number | null, label: string | null }>();
+    const [rentPaymentSelect, setRentPaymentSelected] = useState<{ value: number | null, label: string | null }>();
+    const [exitSelect, setExitSelected] = useState<{ value: number | null, label: string | null }>();
 
 
 
-    const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => setFactorType(Number(e.target.value));
-    const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => setExitType(Number(e.target.value));
-    const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => setSendType(Number(e.target.value));
-    const handleRentRadio = (e: React.ChangeEvent<HTMLInputElement>) => setRentType(Number(e.target.value));
+    // const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => setFactorType(Number(e.target.value));
+    // const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => setExitType(Number(e.target.value));
+    // const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => setSendType(Number(e.target.value));
+    // const handleRentRadio = (e: React.ChangeEvent<HTMLInputElement>) => setRentType(Number(e.target.value));
     const handleBrandChange = (selectedOption: any) => setBrandSelected(selectedOption);
     const handleStoreChange = (selectedOption: any) => setStoreSelected(selectedOption);
     const handleCustomerChange = (selectedOption: any) => setCustomerSelected(selectedOption);
-    const handlepurchaseInvoiceTypeChange = (selectedOption: any) => setPurchaseInvoiceTypeSelected(selectedOption);
+
+    const handleOrderSendType = (selectedOption: any) => setOrderSendTypeSelected(selectedOption);
+    const handleInvoiceSelect = (selectedOption: any) => setInvoiceSelected(selectedOption);
+    const handlePurchaseInvoice = (selectedOption: any) => setPurchaseInvoiceSelected(selectedOption);
+    const handleRentPayment = (selectedOption: any) => setRentPaymentSelected(selectedOption);
+    const handleExit = (selectedOption: any) => setExitSelected(selectedOption);
+
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newInputValue = event.target.value;
@@ -98,6 +116,7 @@ const Order = () => {
     useEffect(() => {
         if (selectProductFromModal?.productName)
             setSearchQuery(selectProductFromModal?.productName);
+        setProductSelected(selectProductFromModal?.id)
 
     }, [selectProductFromModal])
 
@@ -126,7 +145,7 @@ const Order = () => {
         initialValues,
         onSubmit: async (values, { resetForm }) => {
             const productOrder = {
-                id: "",
+                id: productSelected,
                 productName: searchQuery,
                 productBrandId: brandSelected?.value,
                 productBrandName: brandSelected?.label,
@@ -135,8 +154,8 @@ const Order = () => {
                 productDesc: values.productDesc,
                 buyPrice: values.buyPrice,
                 purchaseSettlementDate: purchaseSettlementDate,
-                purchaseInvoiceTypeId: purchaseInvoiceTypeSelected?.value,
-                purchaseInvoiceTypeName: purchaseInvoiceTypeSelected?.label,
+                purchaseInvoiceTypeId: purchaseInvoiceSelect?.value,
+                purchaseInvoiceTypeName: purchaseInvoiceSelect?.label,
                 sellerCompanyRow: values.sellerCompanyRow,
                 proximateAmount: values.proximateAmount,
                 price: values.price,
@@ -161,12 +180,11 @@ const Order = () => {
             orderCode: 0,
             confirmedStatus: true,
             description: description,
-            exitType: exitType,
-            orderSendTypeId: sendType,
-            paymentTypeId: 0,
-            customerOfficialName: customerSelect?.label,
-            invoiceTypeId: factorType,
-            approvedDate: "string",
+            exitType: exitSelect?.value,
+            orderSendTypeId: orderSendTypeSelect?.value,
+            paymentTypeId: rentPaymentSelect?.value,
+            customerOfficialName: "string",
+            invoiceTypeId: invoiceSelect?.value,
             freightName: "string",
             settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
             dischargePlaceAddress: "string",
@@ -174,26 +192,24 @@ const Order = () => {
             carPlaque: "string",
             details: orders?.map((item: ICreateOrderDetails) => {
                 return {
-                    rowId: item.rowId,
-                    productId: item.productId,
-                    // warehouseId: item.warehouseId,
-                    warehouseId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    rowId: 0,
+                    productId: item.id,
+                    warehouseId: Number(item.warehouseId),
                     proximateAmount: Number(item.proximateAmount),
                     numberInPackage: Number(item.proximateAmount),
                     price: Number(item.price),
-                    cargoSendDate: "string",
+                    cargoSendDate: "1402/02/02",
                     buyPrice: Number(item.buyPrice),
-                    purchaseInvoiceType: item.purchaseInvoiceType,
-                    purchaseSettlementDate: "string",
-                    sellerCompanyRow: item.sellerCompanyRow,
+                    purchaseInvoiceType: 1,
+                    purchaserCustomerId: customerSelect?.value?.toString(),
+                    purchaseSettlementDate: "1402/02/02",
+                    sellerCompanyRow: "string",
                 }
             })
         }
         mutate(formData)
     }
-
-    console.log("orders", orders)
-
+   
     return (
         <>
             <>
@@ -240,7 +256,7 @@ const Order = () => {
                                         // title="ایجاد مشتری جدید"
                                         isOpen={isOpen}
                                         onClose={() => setIsOpen(false)}
-                                        // setIsOpen={setIsOpen}
+                                    // setIsOpen={setIsOpen}
                                     >
                                         <CreateCustomer refetch={refetch} setIsCreateOpen={setIsOpen} />
                                     </Modal>
@@ -250,13 +266,6 @@ const Order = () => {
                                 <CustomDatepicker
                                     onChange={(d: any) => setSettlementDate(d.value)}
                                     placeholder="تاریخ تسویه" />
-                            </div>
-                            <div className="tw-pt-4">
-                                <CustomInput
-                                    placeholder="توضیحات"
-                                    value={description}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
-                                />
                             </div>
                             {/* <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2"> */}
                             {/* <div className="tw-pt-4">
@@ -289,7 +298,47 @@ const Order = () => {
                     {/* </div> */}
 
                     <Card6 image="" title="">
-                        <div className="tw-flex tw-justify-between tw-flex-wrap">
+                        <label className="tw-font-yekan_bold tw-text-lg tw-py-4">مشخصه سفارش</label>
+                        <div className="tw-grid tw-grid-cols-2 tw-gap-4">
+                            <div>
+                                <ProfessionalSelect
+                                    options={dropdownOrderSendType(orderSendType)}
+                                    value={orderSendTypeSelect}
+                                    onChange={handleOrderSendType}
+                                    placeholder="نوع ارسال" />
+                            </div>
+                            <div>
+                                <ProfessionalSelect
+                                    options={dropdownInvoiceType(factor)}
+                                    value={invoiceSelect}
+                                    onChange={handleInvoiceSelect}
+                                    placeholder="نوع فاکتور" />
+                            </div>
+                            <div>
+                                <ProfessionalSelect
+                                    options={dropdownRentPaymentType(rent)}
+                                    value={rentPaymentSelect}
+                                    onChange={handleRentPayment}
+                                    placeholder="نوع کرایه" />
+                            </div>
+                            <div>
+                                <ProfessionalSelect
+                                    options={dropdownExitType(exit)}
+                                    value={exitSelect}
+                                    onChange={handleExit}
+                                    placeholder="نوع خروج" />
+                            </div>
+                            <div className="tw-col-span-2">
+                                <CustomInput
+                                    placeholder="توضیحات"
+                                    value={description}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+
+                        {/* <div className="tw-flex tw-justify-between tw-flex-wrap">
                             <div className="tw-pt-4">
                                 <label className="tw-font-yekan_bold tw-text-lg">نوع فاکتور</label>
                                 <div className="tw-mt-8">
@@ -315,7 +364,7 @@ const Order = () => {
                                 </div>
                             </div>
 
-                        </div>
+                        </div> */}
                     </Card6>
 
                     {/* <Card6 image="" title="">
@@ -374,30 +423,6 @@ const Order = () => {
                         </div>
 
                         <div className="md:tw-flex md:tw-justify-start md:tw-items-center tw-flex-wrap tw-gap-x-4">
-                            {/* <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2">
-                        <div>
-                            <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                </svg>
-
-
-                                <span>انتخاب کالا</span>
-                            </button>
-                            <Modal
-                                isOpen={selectedProductOpen}
-                                onClose={() => setSelectedProductOpen(false)}
-                                className="tw-w-[800px]"
-                            >
-                                <ProductSelectedListInModal
-                                    products={products?.data}
-                                    productLoading={productLoading}
-                                    productError={productError}
-                                    setSelectedProductOpen={setSelectedProductOpen}
-                                    setSelectProductFromModal={setSelectProductFromModal} />
-                            </Modal>
-                        </div>
-                    </div> */}
                             <form onSubmit={formik.handleSubmit} className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8">
                                 <div className="tw-relative md:tw-w-[20%] tw-my-2">
                                     <input
@@ -454,21 +479,24 @@ const Order = () => {
                                 </div>
                                 <div className="md:tw-w-[20%] tw-my-2">
                                     <ProfessionalSelect
-                                        options={stores}
+                                        options={dropdownWarehouseType(stores)}
                                         value={storeSelected}
                                         onChange={handleStoreChange}
                                         placeholder="انبار"
                                     />
                                 </div>
                                 <div className="tw-my-2 md:tw-w-[20%]">
-                                    <CustomInput
-                                        getFieldProps={formik.getFieldProps}
-                                        touched={formik.touched.proximateAmount}
-                                        errors={formik.errors.proximateAmount}
-                                        name={"proximateAmount"}
-                                        type="text"
-                                        placeholder="مقدار / تعداد"
-                                        formikInput={true} />
+                                    <div className="tw-flex tw-justify-center tw-items-center ">
+                                        <CustomInput
+                                            getFieldProps={formik.getFieldProps}
+                                            touched={formik.touched.proximateAmount}
+                                            errors={formik.errors.proximateAmount}
+                                            name={"proximateAmount"}
+                                            type="text"
+                                            placeholder="مقدار"
+                                            formikInput={true} />
+                                        <span className="tw-text-sm tw-text-red-500 tw-pr-2">کیلوگرم</span>
+                                    </div>
                                 </div>
                                 <div className="tw-my-2 md:tw-w-[20%]">
                                     <CustomInput
@@ -502,16 +530,6 @@ const Order = () => {
                                 </div>
                                 {storeSelected?.value === 1 &&
                                     <>
-                                        {/* <div className="tw-my-2 tw-w-[20%]">
-                                    <CustomInput
-                                        getFieldProps={formik.getFieldProps}
-                                        touched={formik.touched.sellerCompanyRow}
-                                        errors={formik.errors.sellerCompanyRow}
-                                        name={"sellerCompanyRow"}
-                                        type="text"
-                                        placeholder="خرید از"
-                                        formikInput={true} />
-                                </div> */}
                                         <div className="tw-my-2 md:tw-w-[20%]">
                                             <CustomInput
                                                 getFieldProps={formik.getFieldProps}
@@ -530,9 +548,9 @@ const Order = () => {
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
                                             <ProfessionalSelect
-                                                options={purchaseInvoiceType}
-                                                value={purchaseInvoiceTypeSelected}
-                                                onChange={handlepurchaseInvoiceTypeChange}
+                                                options={dropdownPurchaseInvoice(purchaseInvoiceType)}
+                                                value={purchaseInvoiceSelect}
+                                                onChange={handlePurchaseInvoice}
                                                 placeholder="نوع فاکتور خرید"
                                             />
                                         </div>
@@ -552,9 +570,6 @@ const Order = () => {
                                 <div className="tw-my-2 tw-flex tw-justify-end">
                                     <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
                                         <span>
-                                            {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg> */}
                                             افزودن
                                         </span>
                                     </button>

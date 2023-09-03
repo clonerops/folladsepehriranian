@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const CusromRadioGroupButton = (props: {
     items: any
     name: string
@@ -7,15 +5,9 @@ const CusromRadioGroupButton = (props: {
     handleRadio: any
     className?: string
 }) => {
-
-    // const [selected, setSelected] = useState<number>(1);
-    // const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setSelected(Number(e.target.value));
-    // };
-
     return (
         <>
-            {props.items.map((item: { id: number; title: string }) => {
+            {props.items?.map((item: { id: number, desc: string, validityDesc: string, description: string, typeDesc: string, title: string }) => {
                 return (
                     <div className={props.className}>
                         <label className="tw-ml-4" key={item.id}>
@@ -27,7 +19,21 @@ const CusromRadioGroupButton = (props: {
                                 checked={props.selected === item.id}
                                 onChange={props.handleRadio}
                             />
-                            <span className="">{item.title}</span>
+                            {item.desc &&
+                                <span className="">{item.desc}</span>
+                            }
+                            {item.description &&
+                                <span className="">{item.description}</span>
+                            }
+                            {item.typeDesc &&
+                                <span className="">{item.typeDesc}</span>
+                            }
+                            {item.title &&
+                                <span className="">{item.title}</span>
+                            }
+                            {item.validityDesc &&
+                                <span className="">{item.validityDesc}</span>
+                            }
                         </label>
                     </div>
                 );

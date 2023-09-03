@@ -1,7 +1,6 @@
 import moment from "moment-jalaali";
 import { KTSVG } from "../../../../_cloner/helpers";
 import { IProducts } from "../../product/core/_models";
-import { IProductOrder } from "../core/_models";
 
 const ProductSelectedList = (props: {
     orders: IProducts[] | undefined

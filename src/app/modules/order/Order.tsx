@@ -24,6 +24,7 @@ import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 import { exit } from "./helpers/fakeData";
 import { ICreateOrderDetails } from "./core/_models";
 import { useGetInvoiceType, useGetPaymentTypes, useGetPurchaseInvoice, useGetSendTypes, useGetWarehouseTypes } from "../../../_cloner/helpers/_hooks";
+import Swal from 'sweetalert2'
 
 const Order = () => {
     // Fetching Data
@@ -200,16 +201,36 @@ const Order = () => {
                     price: Number(item.price),
                     cargoSendDate: "1402/02/02",
                     buyPrice: Number(item.buyPrice),
-                    purchaseInvoiceType: 1,
+                    purchaseInvoiceTypeId: item.purchaseInvoiceType ? Number(item.purchaseInvoiceType) : 0,
                     purchaserCustomerId: customerSelect?.value?.toString(),
                     purchaseSettlementDate: "1402/02/02",
                     sellerCompanyRow: "string",
                 }
             })
         }
-        mutate(formData)
+        mutate(formData, {
+            onSuccess: (orderData) => {
+                console.log(orderData)
+                !orderData.data.Succeeded ?
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: orderData.data.Message,
+                        showConfirmButton: false,
+                        timer: 8500
+                    })
+                    :
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: orderData.data.Message,
+                        showConfirmButton: false,
+                        timer: 8500
+                    })
+            }
+        })
     }
-   
+
     return (
         <>
             <>

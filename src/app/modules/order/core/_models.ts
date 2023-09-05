@@ -35,6 +35,7 @@ export interface ICreateOrderDetails {
     rowId: number | undefined | null
     productId: string | undefined | null
     warehouseId: string | undefined | null
+    warehouseTypeId: string | undefined | null
     proximateAmount: number | undefined | null
     numberInPackage: number | undefined | null
     price: number | undefined | null

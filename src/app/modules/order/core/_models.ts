@@ -40,7 +40,8 @@ export interface ICreateOrderDetails {
     price: number | undefined | null
     cargoSendDate: string | undefined | null
     buyPrice: number | undefined | null
-    purchaseInvoiceType: number | undefined | null
+    purchaseInvoiceType: string | undefined | null
+    purchaseInvoiceTypeId: number | undefined | null
     purchaserCustomerId: string  | undefined | null
     purchaseSettlementDate: string | undefined | null
     sellerCompanyRow: string | undefined | null

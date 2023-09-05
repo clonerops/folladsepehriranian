@@ -83,8 +83,6 @@ const CreateUser = () => {
         },
     });
 
-    console.log(isSuccess);
-
     return (
         <Card6 image="" title="">
             {data?.data?.Message ||

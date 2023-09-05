@@ -19,6 +19,9 @@ const useGetCustomerValidities = () => {
 const useGetWarehouseTypes = () => {
     return useQuery(['warehouseTypes'], () => api.getWarehouseTypes())
 }
+const useGetWarehouses = () => {
+    return useQuery(['warehouses'], () => api.getWarehouses())
+}
 
 export {
     useGetSendTypes,
@@ -26,5 +29,6 @@ export {
     useGetPurchaseInvoice,
     useGetInvoiceType,
     useGetCustomerValidities,
-    useGetWarehouseTypes
+    useGetWarehouseTypes,
+    useGetWarehouses
 }

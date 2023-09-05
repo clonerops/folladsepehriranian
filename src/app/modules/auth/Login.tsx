@@ -46,7 +46,6 @@ const Login = () => {
                 captchaCode: values.captchaCode,
                 captchaKey: captcha?.data?.key
             };
-            console.log(userData)
             try {
                 mutate(userData, {
                     onSuccess: (loginData) => {

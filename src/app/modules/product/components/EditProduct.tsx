@@ -27,8 +27,6 @@ const EditProduct = (props: {
     };
 
     const { mutate, data, isError, isLoading } = useUpdateProduct();
-    console.log(props.item)
-
     const initialValues = {
         id: props.item?.id,
         productName: props.item?.productName,

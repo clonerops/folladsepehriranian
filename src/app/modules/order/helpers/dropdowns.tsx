@@ -52,6 +52,15 @@ export const dropdownWarehouseType = (data: any) => {
         })
     );
 };
+export const dropdownWarehouses = (data: any) => {
+    return (
+        data &&
+        data?.map((obj: { id: number, name:string, warehouseTypeId: number }): any => {
+            const { name, id, warehouseTypeId } = obj;
+            return { value: id, label: name, warehouseTypeId: warehouseTypeId };
+        })
+    );
+};
 export const dropdownExitType = (data: any) => {
     return (
         data &&

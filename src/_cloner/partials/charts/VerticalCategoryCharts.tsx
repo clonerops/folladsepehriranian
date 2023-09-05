@@ -182,7 +182,6 @@ const VerticalCategoryCharts: FC<IProps> = ({
             formatter: function (
                 this: Highcharts.TooltipFormatterContextObject
             ) {
-                console.log(this)
                 if (this.series.name === "شکایت/درخواست") {
                     return `<b> ${this.x} <br /> شکایت/درخواست: ${this.y} </b>`;
                 } else if (this.series.name === "تعداد مختومگی") {

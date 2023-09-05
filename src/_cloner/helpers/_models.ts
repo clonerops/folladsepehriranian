@@ -22,3 +22,10 @@ export interface IWarehouseTypes {
     validityDesc: string
     id: number
 }
+export interface IWarehouse {
+    name: string | null,
+    warehouseTypeId: number | null,
+    warehouseType: string | number | null,
+    products: string | number | null,
+    id: number | null,
+}

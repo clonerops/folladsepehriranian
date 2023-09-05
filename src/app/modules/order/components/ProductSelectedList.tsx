@@ -13,9 +13,6 @@ const ProductSelectedList = (props: {
             props.setOrders(cloneItems)
         }
     }
-
-    console.log(props.orders)
-
     return (
         <div className="tw-overflow-x-auto">
             <table className="tw-w-full tw-table-auto">

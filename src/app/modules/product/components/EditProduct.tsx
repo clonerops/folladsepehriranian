@@ -3,9 +3,7 @@ import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
-import { createProductValidations } from "../validations/createProduct";
-import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useRetrieveBrands, useUpdateProduct } from "../core/_hooks";
+import { useRetrieveBrands, useUpdateProduct } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { IProducts } from "../core/_models";
 import EditText from "../../../../_cloner/helpers/components/EditText";
@@ -43,7 +41,6 @@ const EditProduct = (props: {
 
     const formik = useFormik({
         initialValues,
-        // validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
                 mutate(values);

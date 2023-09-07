@@ -40,8 +40,6 @@ const Order = () => {
     // Fetching Data
     const {
         data: customers,
-        isLoading: customersLoading,
-        isError: customersError,
         refetch,
     } = useGetCustomers();
     const {
@@ -218,7 +216,7 @@ const Order = () => {
         },
     });
 
-    const { mutate, data, isLoading, isError } = useCreateOrder();
+    const { mutate, isLoading } = useCreateOrder();
 
     const handleCreateOrder = () => {
         if (orders.length === 0) {

@@ -6,17 +6,15 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
-import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Products = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [itemForEdit, setItemForEdit] = useState<IProducts>();
 
-    // const [selectedRows, setSelectedRows] = useState<IProduct>(); // Track selected row IDs
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [startRowIndex, setStartRowIndex] = useState<number>(0); // Track starting index of current page
-    const itemsPerPage = 8; // Number of items to show per page
+    const [startRowIndex, setStartRowIndex] = useState<number>(0);
+    const itemsPerPage = 8; 
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
@@ -46,8 +44,6 @@ const Products = () => {
             setStartRowIndex((page - 1) * itemsPerPage); // Update startRowIndex
         }
     };
-
-
 
     const handleEdit = (item: IProducts) => {
         setIsEditOpen(true);
@@ -232,18 +228,14 @@ const Products = () => {
                 </div>
             </div>
             <Modal
-                // title="ایجاد کالا جدید"
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
-                // setIsOpen={setIsCreateOpen}
             >
                 <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
-                // title="ویرایش کالا"
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
-                // setIsOpen={setIsEditOpen}
             >
                 <EditProduct refetch={refetch} item={itemForEdit} />
             </Modal>

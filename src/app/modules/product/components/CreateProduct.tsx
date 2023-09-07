@@ -15,7 +15,7 @@ const CreateProduct = (props: {
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     // Fetchig 
-    const { mutate, data, isError, isLoading } = useCreateProduct();
+    const { mutate, data, isLoading } = useCreateProduct();
     const { data: brands } = useRetrieveBrands();
 
     // States
@@ -96,9 +96,6 @@ const CreateProduct = (props: {
                 </div>
                 <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            سایز محصول
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.productSize}
@@ -110,9 +107,6 @@ const CreateProduct = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            وزن تقریبی
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.approximateWeight}
@@ -124,9 +118,6 @@ const CreateProduct = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تعداد بسته
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.numberInPackage}

@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
     QueryObserverResult,
     RefetchOptions,
@@ -13,7 +13,7 @@ interface IProps {
     ) => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const Captcha: FC<IProps> = ({ captcha, refetch }) => {
+const Captcha: FC<IProps> = ({ captcha }) => {
     const queryClient = useQueryClient();
     const refetchData = () => {
         queryClient.invalidateQueries(["captcha"]);
@@ -28,15 +28,6 @@ const Captcha: FC<IProps> = ({ captcha, refetch }) => {
         getCaptchaIsOnMount();
         // eslint-disable-next-line
     }, [captcha]);
-
-    // const getCaptcha = async () => {
-    //     try {
-    //         const res = await recpatchaImageUser()
-    //         setCaptcha("data:image/jpeg;base64," + res?.image)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // };
 
     return (
         <>

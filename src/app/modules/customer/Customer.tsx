@@ -7,7 +7,6 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateCustomer from "./components/CreateCustomer";
 import EditCustomer from "./components/EditCustomer";
-import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Customer = () => {
     const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
@@ -20,7 +19,6 @@ const Customer = () => {
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [itemForEdit, setItemForEdit] = useState<ICustomer>();
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [startRowIndex, setStartRowIndex] = useState<number>(0); // Track starting index of current page
     const itemsPerPage = 8; // Number of items to show per page
 
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +42,6 @@ const Customer = () => {
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
-            setStartRowIndex((page - 1) * itemsPerPage); // Update startRowIndex
         }
     };
 
@@ -144,6 +141,7 @@ const Customer = () => {
                                                 )}
                                                 width={40}
                                                 height={40}
+                                                alt="user"
                                                 className="tw-rounded-full"
                                             />
                                         </span>
@@ -258,18 +256,14 @@ const Customer = () => {
 
             </div>
             <Modal
-                // title="ایجاد مشتری جدید"
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
-            // setIsOpen={setIsCreateOpen}
             >
                 <CreateCustomer refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
-                // title="ویرایش مشتری"
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
-            // setIsOpen={setIsEditOpen}
             >
                 <EditCustomer refetch={refetch} item={itemForEdit} />
             </Modal>

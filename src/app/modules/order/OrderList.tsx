@@ -1,5 +1,5 @@
 import { useRetrieveOrders } from "./core/_hooks"
-import { IOrder, IOrderDetail } from "./core/_models"
+import { IOrderDetail } from "./core/_models"
 import Modal from "../../../_cloner/helpers/components/Modal"
 import { useState } from "react"
 import OrderDetials from "./components/OrderDetials"

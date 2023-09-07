@@ -1,14 +1,12 @@
 import { useFormik } from "formik";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
-import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useRetrieveBrands, useRetrieveProducts, useUpdateProduct, useUpdateSupplier } from "../core/_hooks";
+import {  useRetrieveProducts, useUpdateSupplier } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
-import { IProducts, ISuppliers } from "../core/_models";
+import { ISuppliers } from "../core/_models";
 import EditText from "../../../../_cloner/helpers/components/EditText";
-import { dropdownBrand, dropdownProduct } from "../helpers/dropdownConvert";
+import { dropdownProduct } from "../helpers/dropdownConvert";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useGetCustomers } from "../../customer/core/_hooks";
 import { dropdownCustomer } from "../../order/helpers/dropdowns";
@@ -20,7 +18,7 @@ const EditSupplier = (props: {
 
 }) => {
     // Fetching Data
-    const { mutate, data, isError, isLoading } = useUpdateSupplier();
+    const { mutate, data, isLoading } = useUpdateSupplier();
     const { data: customers } = useGetCustomers()
     const { data: products } = useRetrieveProducts()
     // States
@@ -45,7 +43,6 @@ const EditSupplier = (props: {
 
     const formik = useFormik({
         initialValues,
-        // validationSchema: createProductValidations,
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             try {
                 mutate(values);

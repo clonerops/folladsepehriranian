@@ -14,7 +14,7 @@ const CreateCustomer = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
-    const { mutate, data, isError, isLoading } = useCreateCustomer();
+    const { mutate, data, isLoading } = useCreateCustomer();
     const { data: customerValidityData } = useGetCustomerValidities()
     // States
     const [isSupplier, setIsSupplier] = useState(false)

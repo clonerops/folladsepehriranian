@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { IProducts, ISuppliers } from "./core/_models";
+import { ISuppliers } from "./core/_models";
 import Modal from "../../../_cloner/helpers/components/Modal";
-import CreateProduct from "./components/CreateProduct";
-import EditProduct from "./components/EditProduct";
-import { useDeleteProduct, useDeleteSupplier, useRetrieveProducts, useRetrieveSuppliers } from "./core/_hooks";
+import { useDeleteSupplier, useRetrieveSuppliers } from "./core/_hooks";
 import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateSupplier from "./components/CreateSupplier";
 import EditSupplier from "./components/EditSupplier";
-import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 
 const Suppliers = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);

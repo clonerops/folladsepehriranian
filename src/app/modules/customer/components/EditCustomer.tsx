@@ -16,7 +16,7 @@ const EditCustomer = (props: {
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 
 }) => {
-    const { mutate, data, isError, isLoading } = useUpdateCustomer();
+    const { mutate, data, isLoading } = useUpdateCustomer();
     const { data: customerValidityData } = useGetCustomerValidities()
 
     // States

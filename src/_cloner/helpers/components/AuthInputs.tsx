@@ -12,10 +12,10 @@ const AuthInputs = (props: any) => {
                 className={clsx(
                     "form-control bg-transparent tw-border tw-border-gray-400 hover:tw-border-blue-500",
                     {
-                        "is-invalid": props.touched && props.errors || props.isError,
+                        "is-invalid": (props.touched && props.errors) || (props.isError),
                     },
                     {
-                        "is-valid": props.touched && !props.errors || props.isError,
+                        "is-valid": (props.touched && !props.errors) || (props.isError),
                     }
                 )}
                 type={props.type}
@@ -23,7 +23,7 @@ const AuthInputs = (props: any) => {
                 name={props.name}
                 autoComplete="off"
             />
-            {props.touched && props.errors && (
+            {(props.touched && props.errors) && (
                 <div className="fv-plugins-message-container tw-w-full tw-text-right">
                     <span role="alert">{props.errors}</span>
                 </div>

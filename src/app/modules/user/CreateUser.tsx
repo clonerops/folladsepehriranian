@@ -45,13 +45,12 @@ const CreateUser = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
     const { mutate, data } = useRegisterUser();
 
     const formik = useFormik({
         initialValues,
         validationSchema: loginSchema,
-        onSubmit: async (values, { setStatus, setSubmitting, resetForm }) => {
+        onSubmit: async (values, { setStatus, setSubmitting }) => {
             setLoading(true);
             const userData = {
                 userName: values.userName,
@@ -68,7 +67,6 @@ const CreateUser = () => {
                             setIsError(true);
                             setLoading(false);
                         } else {
-                            setIsSuccess(true);
                             setIsError(false);
                             setLoading(false);
                         }

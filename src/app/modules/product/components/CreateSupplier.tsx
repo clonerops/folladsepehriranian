@@ -1,14 +1,12 @@
 import { useFormik } from "formik";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
 import { useState } from "react";
-import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useCreateSupplier, useRetrieveBrands, useRetrieveProducts } from "../core/_hooks";
+import { useCreateSupplier, useRetrieveProducts } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
-import { dropdownBrand, dropdownProduct } from "../helpers/dropdownConvert";
+import { dropdownProduct } from "../helpers/dropdownConvert";
 import { dropdownCustomer } from "../../order/helpers/dropdowns";
 import { useGetCustomers } from "../../customer/core/_hooks";
 import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker";
@@ -18,7 +16,7 @@ const CreateSupplier = (props: {
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
     // fetching Data
-    const { mutate, data, isError, isLoading } = useCreateSupplier();
+    const { mutate, data, isLoading } = useCreateSupplier();
     const { data: customers } = useGetCustomers()
     const { data: products } = useRetrieveProducts()
 
@@ -76,9 +74,6 @@ const CreateSupplier = (props: {
             <form onSubmit={formik.handleSubmit} className="container">
                 <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                                مشتری
-                        </label> */}
                         <ProfessionalSelect
                             options={dropdownCustomer(customers?.data)}
                             value={customerSelected}
@@ -88,7 +83,6 @@ const CreateSupplier = (props: {
 
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">محصول</label> */}
                         <ProfessionalSelect
                             options={dropdownProduct(products?.data)}
                             value={productSelected}
@@ -99,9 +93,6 @@ const CreateSupplier = (props: {
                 </div>
                 <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            قیمت
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.price}
@@ -113,17 +104,11 @@ const CreateSupplier = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تاریخ قیمت
-                        </label> */}
                         <CustomDatepicker
                             onChange={(d: any) => setPriceDate(d.value)}
                             placeholder="تاریخ قیمت" />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            بیش از قیمت
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.overPrice}
@@ -137,9 +122,6 @@ const CreateSupplier = (props: {
                 </div>
                 <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            مبلغ اجاره
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.rentAmount}
@@ -151,9 +133,6 @@ const CreateSupplier = (props: {
                         />
                     </div>
                     <div className="tw-w-full tw-my-2">
-                        {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            نرخ
-                        </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.rate}

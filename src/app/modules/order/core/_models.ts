@@ -52,3 +52,17 @@ export interface IOrder extends ICreateOrder {
     id: number | undefined
 }
 
+export interface IOrderDetail extends IOrder {
+    customerName: string | null | undefined
+    orderSendTypeDesc: string | null | undefined
+    paymentTypeDesc: string | null | undefined
+    invoiceTypeDesc: string | null | undefined
+    customerFirstName: string | null | undefined
+    customerLastName: string | null | undefined
+    productName: string | null | undefined
+    warehouseName: string | null | undefined
+    purchaseInvoiceTypeDesc: string | null | undefined
+    purchaserCustomerName: string | null | undefined
+    
+}
+

@@ -12,7 +12,7 @@ const createOrder = async (formData: ICreateOrder) => {
 
 const retrieveOrders = async () => {
     try {
-        const { data } = await http.get(`/v1/Order`)
+        const { data } = await http.get(`/v1/Order?PageNumber=1&PageSize=60`)
         return data
     } catch (error: any) {
         return error.response

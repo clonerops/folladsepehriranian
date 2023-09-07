@@ -24,7 +24,7 @@ const Modal: FC<IProps> = ({ isOpen, onClose, className, reqular, children }) =>
         ></span>
         {reqular ? (
           <div
-            className={`tw-inline-block tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all  tw-sm:align-middle ${className}`}
+            className={`tw-inline-block tw-transform tw-overflow-auto tw-rounded-lg tw-bg-white tw-text-left tw-align-bottom tw-shadow-xl tw-transition-all sm:my-8 sm:tw-my-8 sm:tw-w-[50%] tw-sm:align-middle ${className}`}
             role='dialog'
             aria-modal='true'
             aria-labelledby='modal-headline'

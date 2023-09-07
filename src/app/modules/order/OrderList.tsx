@@ -1,8 +1,27 @@
 import { useRetrieveOrders } from "./core/_hooks"
-import { IOrder } from "./core/_models"
+import { IOrder, IOrderDetail } from "./core/_models"
+import Modal from "../../../_cloner/helpers/components/Modal"
+import { useState } from "react"
+import OrderDetials from "./components/OrderDetials"
+import CustomInput from "../../../_cloner/helpers/components/CustomInput"
+
 
 const OrderList = () => {
     const { data: orders } = useRetrieveOrders()
+    // States 
+    const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false)
+    const [isOpenConfirm, setIsOpenConfirm] = useState<boolean>(false)
+    const [orderDetails, setOrderDetails] = useState<IOrderDetail>()
+
+    // functions
+    const openDetails = (item: IOrderDetail) => {
+        setOrderDetails(item)
+        setIsOpenDetail(true)
+    }
+    const openConfirm = (item: IOrderDetail) => {
+        setOrderDetails(item)
+        setIsOpenConfirm(true)
+    }
     return (
         <>
             <table className="tw-w-full tw-my-2">
@@ -18,60 +37,102 @@ const OrderList = () => {
                             تاریخ سفارش
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            سایز محصول
+                            سفارش دهنده
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            وزن تقریبی
+                            نحوه ارسال
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            تعداد در بسته
+                            نحوه پرداخت
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            اندازه
+                            نوع فاکتور
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            استاندارد
+                            مبلغ کل
+                        </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            نوع خروج
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             توضیحات
                         </td>
+                        <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
-                    {orders?.data?.map((item: IOrder, index: number) => {
+                    {orders?.data?.map((item: IOrderDetail, index: number) => {
+                        console.log(item)
                         return <tr key="{id}">
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                 {index + 1}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                dddddddddd
+                                {item.orderCode}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                 dddddddddd
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                dddddddddd
+                                {item.customerFirstName + " " + item.customerLastName}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                ddddddddddd
+                                {item.orderSendTypeDesc}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                dddddddddd
+                                {item.paymentTypeDesc}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                ddd
+                                {item.invoiceTypeDesc}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                ddddddd
+                                {item.totalAmount}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                dddddddddd
+                                {item.exitType === 1 ? "عادی" : "بعد از تسویه"}
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                {item.description}
+                            </td>
+                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                <button onClick={() => openDetails(item)} className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2">
+                                    جزئیات
+                                </button>
+                                <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2">
+                                    تایید
+                                </button>
                             </td>
                         </tr>
                     })}
-
                 </tbody>
             </table>
+            <Modal
+                isOpen={isOpenDetail}
+                onClose={() => setIsOpenDetail(false)}
+            >
+                <OrderDetials item={orderDetails} />
+            </Modal>
+            <Modal
+                isOpen={isOpenConfirm}
+                onClose={() => setIsOpenConfirm(false)}
+                reqular
+            >
+                <div className="container">
+                    <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4">تایید سفارش {orderDetails?.orderCode}</h3>
+                    <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                        <span className="tw-text-center tw-font-yekan_bold tw-font-bold tw-text-lg tw-py-4">آیا شفارش شماره {orderDetails?.orderCode} مورد تایید می باشد؟</span>
+                        <CustomInput placeholder="توضیحات" />
+                    </div>
+
+                    <div>
+                        <button className="tw-bg-green-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white">تایید سفارش</button>
+                        <button className="tw-bg-red-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white">عدم تایید سفارش</button>
+                    </div>
+                </div>
+            </Modal>
+
 
         </>
     )

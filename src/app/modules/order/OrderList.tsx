@@ -34,7 +34,7 @@ const OrderList = () => {
                             شماره سفارش
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            تاریخ سفارش
+                            تاریخ ثبت سفارش
                         </td>
                         <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             سفارش دهنده
@@ -97,10 +97,10 @@ const OrderList = () => {
                                 {item.description}
                             </td>
                             <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                <button onClick={() => openDetails(item)} className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2">
+                                <button onClick={() => openDetails(item)} className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
                                     جزئیات
                                 </button>
-                                <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2">
+                                <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
                                     تایید
                                 </button>
                             </td>
@@ -127,8 +127,8 @@ const OrderList = () => {
                     </div>
 
                     <div>
-                        <button className="tw-bg-green-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white">تایید سفارش</button>
-                        <button className="tw-bg-red-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white">عدم تایید سفارش</button>
+                        <button className="tw-bg-green-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">تایید سفارش</button>
+                        <button className="tw-bg-red-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">عدم تایید سفارش</button>
                     </div>
                 </div>
             </Modal>

@@ -67,13 +67,22 @@ const ProductSelectedListInModal = (props: {
                                 کالا / محصول
                             </td>
                             <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                انبار
+                                شرح کالا
                             </td>
                             <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 وزن تقریبی
                             </td>
                             <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                سایز
+                                برند
+                            </td>
+                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                                انبار
+                            </td>
+                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                                موجودی
+                            </td>
+                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                                قیمت
                             </td>
                         </tr>
                     </thead>
@@ -97,8 +106,17 @@ const ProductSelectedListInModal = (props: {
                                     <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    <td className="tw-flex tw-justify-center tw-items-center tw-py-4 tw-border tw-border-gray-300 mx-auto">
-                                        {item.productSize}
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                        {item.brandName}
+                                    </td>
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                        {item.numberInPackage}
+                                    </td>
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                        {item.numberInPackage}
+                                    </td>
+                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                        {item.numberInPackage}
                                     </td>
                                 </tr>
                             );

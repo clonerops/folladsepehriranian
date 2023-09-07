@@ -130,10 +130,10 @@ const Suppliers = () => {
                                                 {startRowIndex + index + 1}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.customerId}
+                                                {item.customerFirstName + " " + item.customerLastName}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
-                                                {item.productId}
+                                                {item.productName}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
                                                 {item.price}

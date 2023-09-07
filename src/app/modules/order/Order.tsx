@@ -1,13 +1,10 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
-import CreateUser from "../user/CreateUser";
 import ProductSelectedList from "./components/ProductSelectedList";
-import CustomTextarea from "../../../_cloner/helpers/components/CustomTextarea";
 import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepicker";
-import CusromRadioGroupButton from "../../../_cloner/helpers/components/CusromRadioGroupButton";
 import ProductSelectedListInModal from "./components/ProductSelectedListInModal";
 import { useRetrieveBrands, useRetrieveProducts } from "../product/core/_hooks";
 import { IProducts } from "../product/core/_models";
@@ -26,10 +23,8 @@ import {
     dropdownOrderSendType,
     dropdownPurchaseInvoice,
     dropdownRentPaymentType,
-    dropdownWarehouseType,
     dropdownWarehouses,
 } from "./helpers/dropdowns";
-import MyModal from "../../../_cloner/helpers/components/HeadlessModal";
 import { exit } from "./helpers/fakeData";
 import { ICreateOrderDetails } from "./core/_models";
 import {
@@ -37,7 +32,6 @@ import {
     useGetPaymentTypes,
     useGetPurchaseInvoice,
     useGetSendTypes,
-    useGetWarehouseTypes,
     useGetWarehouses,
 } from "../../../_cloner/helpers/_hooks";
 import Swal from "sweetalert2";
@@ -65,10 +59,6 @@ const Order = () => {
 
     // States
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [factorType, setFactorType] = useState<number>(1);
-    const [exitType, setExitType] = useState<number>(1);
-    const [sendType, setSendType] = useState<number>(1);
-    const [rentType, setRentType] = useState<number>(1);
     const [settlementDate, setSettlementDate] = useState();
     const [description, setDescription] = useState("");
     const [purchaseSettlementDate, setPurchaseSettlementDate] = useState();
@@ -117,10 +107,6 @@ const Order = () => {
         label: string | null;
     }>();
 
-    // const handleFactorRadio = (e: React.ChangeEvent<HTMLInputElement>) => setFactorType(Number(e.target.value));
-    // const handleExitRadio = (e: React.ChangeEvent<HTMLInputElement>) => setExitType(Number(e.target.value));
-    // const handleSendRadio = (e: React.ChangeEvent<HTMLInputElement>) => setSendType(Number(e.target.value));
-    // const handleRentRadio = (e: React.ChangeEvent<HTMLInputElement>) => setRentType(Number(e.target.value));
     const handleBrandChange = (selectedOption: any) =>
         setBrandSelected(selectedOption);
     const handleStoreChange = (selectedOption: any) =>
@@ -235,7 +221,7 @@ const Order = () => {
     const { mutate, data, isLoading, isError } = useCreateOrder();
 
     const handleCreateOrder = () => {
-        if(orders.length === 0) {
+        if (orders.length === 0) {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -282,19 +268,19 @@ const Order = () => {
                 onSuccess: (orderData) => {
                     orderData.succeeded === true
                         ? Swal.fire({
-                              position: "top-end",
-                              icon: "success",
-                              title: orderData.message,
-                              showConfirmButton: false,
-                              timer: 8500,
-                          })
+                            position: "top-end",
+                            icon: "success",
+                            title: orderData.message,
+                            showConfirmButton: false,
+                            timer: 8500,
+                        })
                         : Swal.fire({
-                              position: "top-end",
-                              icon: "error",
-                              title: orderData.data.Message,
-                              showConfirmButton: false,
-                              timer: 8500,
-                          });
+                            position: "top-end",
+                            icon: "error",
+                            title: orderData.data.Message,
+                            showConfirmButton: false,
+                            timer: 8500,
+                        });
                 },
             });
         }
@@ -315,7 +301,6 @@ const Order = () => {
                 </div> */}
                 {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
-                    {/* <div className="tw-col-span-2"> */}
                     <Card6 image="" title="">
                         <div className="tw-flex tw-justify-between tw-flex-col">
                             <div className="tw-pt-4">
@@ -352,14 +337,11 @@ const Order = () => {
                                                     d="M12 4.5v15m7.5-7.5h-15"
                                                 />
                                             </svg>
-                                            {/* <span>افزودن مشتری</span> */}
                                         </button>
                                     </div>
                                     <Modal
-                                        // title="ایجاد مشتری جدید"
                                         isOpen={isOpen}
                                         onClose={() => setIsOpen(false)}
-                                        // setIsOpen={setIsOpen}
                                     >
                                         <CreateCustomer
                                             refetch={refetch}
@@ -376,34 +358,8 @@ const Order = () => {
                                     placeholder="تاریخ تسویه"
                                 />
                             </div>
-                            {/* <div className="tw-flex tw-justify-center tw-items-center tw-flex-row tw-flex-wrap tw-gap-4 md:tw-my-8 tw-mb-2"> */}
-                            {/* <div className="tw-pt-4">
-                                <div>
-                                    <button onClick={() => setSelectedProductOpen(true)} className="tw-flex tw-justify-center tw-bg-yellow-500 tw-rounded-md tw-px-16 tw-py-[8px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="tw-w-6 tw-h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                        </svg>
-
-
-                                        <span>انتخاب کالا</span>
-                                    </button>
-                                    <Modal
-                                        isOpen={selectedProductOpen}
-                                        onClose={() => setSelectedProductOpen(false)}
-                                        className="tw-w-[800px]"
-                                    >
-                                        <ProductSelectedListInModal
-                                            products={products?.data}
-                                            productLoading={productLoading}
-                                            productError={productError}
-                                            setSelectedProductOpen={setSelectedProductOpen}
-                                            setSelectProductFromModal={setSelectProductFromModal} />
-                                    </Modal>
-                                </div>
-                            </div> */}
                         </div>
                     </Card6>
-                    {/* </div> */}
 
                     <Card6 image="" title="">
                         <label className="tw-font-yekan_bold tw-text-lg tw-py-4">
@@ -454,62 +410,7 @@ const Order = () => {
                                 />
                             </div>
                         </div>
-
-                        {/* <div className="tw-flex tw-justify-between tw-flex-wrap">
-                            <div className="tw-pt-4">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع فاکتور</label>
-                                <div className="tw-mt-8">
-                                    <CusromRadioGroupButton className="tw-my-4" selected={factorType} handleRadio={handleFactorRadio} items={factor} name="factor" />
-                                </div>
-                            </div>
-                            <div className="tw-pt-4">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع خروج</label>
-                                <div className="tw-mt-8">
-                                    <CusromRadioGroupButton className="tw-my-4" selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
-                                </div>
-                            </div>
-                            <div className="tw-pt-4">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع ارسال</label>
-                                <div className="tw-mt-8">
-                                    <CusromRadioGroupButton className="tw-my-4" selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
-                                </div>
-                            </div>
-                            <div className="tw-pt-4">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع کرایه</label>
-                                <div className="tw-mt-8">
-                                    <CusromRadioGroupButton className="tw-my-4" selected={rentType} handleRadio={handleRentRadio} items={rent} name="rent" />
-                                </div>
-                            </div>
-
-                        </div> */}
                     </Card6>
-
-                    {/* <Card6 image="" title="">
-                        <div className="tw-pt-4">
-                            <label className="tw-font-yekan_bold tw-text-lg">نوع خروج</label>
-                            <div className="tw-mt-8">
-                                <CusromRadioGroupButton className="tw-my-4" selected={exitType} handleRadio={handleExitRadio} items={exit} name="exit" />
-                            </div>
-                        </div>
-                    </Card6>
- */}
-                    {/* <Card6 image="" title="">
-                        <div className="tw-pt-4">
-                            <label className="tw-font-yekan_bold tw-text-lg">نوع ارسال</label>
-                            <div className="tw-mt-8">
-                                <CusromRadioGroupButton className="tw-my-4" selected={sendType} handleRadio={handleSendRadio} items={send} name="send" />
-                            </div>
-                        </div>
-                    </Card6> */}
-
-                    {/* <Card6 image="" title="">
-                        <div className="tw-pt-4">
-                            <label className="tw-font-yekan_bold tw-text-lg">نوع کرایه</label>
-                            <div className="tw-mt-8">
-                                <CusromRadioGroupButton className="tw-my-4" selected={rentType} handleRadio={handleRentRadio} items={rent} name="rent" />
-                            </div>
-                        </div>
-                    </Card6> */}
                 </div>
                 {/* Selected Products */}
                 <div className="tw-mt-8">
@@ -620,7 +521,9 @@ const Order = () => {
                                                                     </div>
                                                                     <span className="tw-text-xs tw-px-4">
                                                                         {" "}
-                                                                        کارخانه
+                                                                        {
+                                                                            item.brandName
+                                                                        }
                                                                     </span>
                                                                 </div>
                                                             </li>
@@ -760,7 +663,21 @@ const Order = () => {
                                     </>
                                 )}
                                 <div className="tw-my-2 tw-flex tw-justify-end">
-                                    <button className="tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
+                                    <button className="tw-flex tw-gap-x-2 tw-py-2 tw-px-4 tw-rounded-md tw-bg-green-500 tw-text-white">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth="1.5"
+                                            stroke="currentColor"
+                                            className="tw-w-6 tw-h-6"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M12 4.5v15m7.5-7.5h-15"
+                                            />
+                                        </svg>
                                         <span>افزودن</span>
                                     </button>
                                 </div>
@@ -778,31 +695,32 @@ const Order = () => {
 
             <div className="tw-mt-8">
                 <Card6 image="" title="">
-                    <div>
-                        <div className="tw-flex tw-justify-between tw-pt-8">
-                            <span className="tw-font-yekan_bold tw-text-2xl">
-                                قیمت کل
-                            </span>
-                            <span className="tw-font-yekan_bold tw-text-2xl tw-text-green-500">
-                                {sliceNumberPrice(totalAmount)} ریال
+                    <div className="tw-grid tw-grid-cols-3">
+                        <div className="tw-border-l-2 tw-border-gray-300">
+                            <span className="tw-font-yekan_bold tw-text-xl">
+                                قیمت کل: <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">{sliceNumberPrice(totalAmount)} ریال</span>
                             </span>
                         </div>
-                        <div className="salefactor d-flex flex-column justify-content-between">
-                            <span className="fonttw-font-yekan_bold">
-                                {convertToPersianWord(totalAmount)} تومان
+                        <div className="tw-border-l-2 tw-border-gray-300 tw-pr-8">
+                            <span className="tw-font-yekan_bold tw-text-xl">
+                                قیمت به حروف: <span className="tw-text-green-500 tw-text-sm tw-font-bold tw-px-8">{convertToPersianWord(totalAmount)} تومان</span>
                             </span>
                         </div>
-
-                        <div className="d-flex justify-content-end tw-mt-5">
-                            <button
-                                onClick={handleCreateOrder}
-                                className="tw-bg-green-600 tw-text-white tw-px-8 tw-py-2 tw-rounded-md"
-                            >
-                                ثبت سفارش
-                            </button>
+                        <div className="tw-pr-8">
+                            <span className="tw-font-yekan_bold tw-text-xl">
+                                قابل پرداخت: <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">{sliceNumberPrice(totalAmount)} ریال</span>
+                            </span>
                         </div>
                     </div>
                 </Card6>
+                <div className="d-flex justify-content-end tw-mt-5">
+                    <button
+                        onClick={handleCreateOrder}
+                        className="tw-bg-green-600 tw-text-white tw-px-28 tw-py-6 tw-rounded-md tw-text-xl"
+                    >
+                       {isLoading ? "درحال پردازش" : "ثبت سفارش"}
+                    </button>
+                </div>
             </div>
         </>
     );

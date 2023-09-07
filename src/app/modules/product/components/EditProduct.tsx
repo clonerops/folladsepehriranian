@@ -24,7 +24,7 @@ const EditProduct = (props: {
         setBrandSelected(selectedOption);
     };
 
-    const { mutate, data, isError, isLoading } = useUpdateProduct();
+    const { mutate, data, isLoading } = useUpdateProduct();
     const initialValues = {
         id: props.item?.id,
         productName: props.item?.productName,

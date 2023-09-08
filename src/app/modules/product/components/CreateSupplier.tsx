@@ -72,7 +72,7 @@ const CreateSupplier = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <ProfessionalSelect
                             options={dropdownCustomer(customers?.data)}
@@ -91,7 +91,7 @@ const CreateSupplier = (props: {
                         />
                     </div>
                 </div>
-                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
@@ -120,7 +120,7 @@ const CreateSupplier = (props: {
                         />
                     </div>
                 </div>
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-2 md:tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <CustomInput
                             getFieldProps={formik.getFieldProps}

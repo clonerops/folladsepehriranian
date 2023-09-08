@@ -65,7 +65,7 @@ const Suppliers = () => {
             {suppliersLoading && <Backdrop loading={suppliersLoading} />}
             <div>
                 <div className="tw-flex tw-justify-between tw-items-center">
-                    <div className="tw-w-[40%]">
+                    <div className="tw-w-80 md:tw-w-[40%]">
                         <CustomInput
                             value={searchTerm}
                             onChange={handleSearchInput}
@@ -87,28 +87,28 @@ const Suppliers = () => {
                     <table className="tw-w-full tw-my-2">
                         <thead className="tw-bg-gray-200">
                             <tr>
-                                <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[40px] tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     ردیف
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     تامین کننده
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     محصول / کالا
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     قیمت
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     کرایه
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     قیمت تمام شده
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     تاریخ قیمت
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     امتیاز
                                 </td>
                                 <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">

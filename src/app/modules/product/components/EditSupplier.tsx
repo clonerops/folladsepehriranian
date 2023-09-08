@@ -63,7 +63,7 @@ const EditSupplier = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             مشتری
@@ -86,7 +86,7 @@ const EditSupplier = (props: {
                         />
                     </div>
                 </div>
-                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         <label className="tw-w-full tw-text-right tw-text-gray-500">
                             قیمت

@@ -91,8 +91,8 @@ const CreateUser = () => {
                 onSubmit={formik.handleSubmit}
                 className="tw-w-full tw-mx-auto"
             >
-                <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-px-4">
-                    <div className="tw-flex tw-w-[50%]">
+                <div className="tw-flex tw-flex-wrap tw-flex-col tw-justify-center tw-items-center tw-px-4">
+                    <div className="tw-flex md:tw-w-[50%]">
                         <div className="tw-px-2 tw-w-[50%]">
                             <AuthInputs
                                 type="text"
@@ -127,7 +127,7 @@ const CreateUser = () => {
                             )}
                         </div>
                     </div>
-                    <div className="tw-px-2 tw-w-[50%]">
+                    <div className="tw-px-2 md:tw-w-[50%]">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -145,7 +145,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-px-2 tw-w-[50%]">
+                    <div className="tw-px-2 md:tw-w-[50%]">
                         <AuthInputs
                             type="text"
                             login={true}
@@ -163,7 +163,7 @@ const CreateUser = () => {
                             </span>
                         )}
                     </div>
-                    <div className="tw-flex tw-w-[50%]">
+                    <div className="tw-flex md:tw-w-[50%]">
                         <div className="tw-px-2 tw-w-[50%]">
                             <AuthInputs
                                 type="password"
@@ -199,7 +199,7 @@ const CreateUser = () => {
                             )}
                         </div>
                     </div>
-                    <div className="tw-w-[50%] tw-px-2 tw-flex tw-justify-start tw-items-center">
+                    <div className="md:tw-w-[50%] tw-px-2 tw-flex tw-justify-start tw-items-center">
                         <div />
                         <button
                             type="submit"

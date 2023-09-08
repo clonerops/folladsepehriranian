@@ -69,7 +69,7 @@ const Login = () => {
     });
     return (
         <>
-            <div className="tw-grid tw-grid-cols-2 tw-h-screen">
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-h-screen">
                 <form
                     onSubmit={formik.handleSubmit}
                     className="tw-flex tw-justify-center tw-items-center tw-flex-col"
@@ -79,7 +79,7 @@ const Login = () => {
                             <p className="tw-text-red-500">{data?.data?.Message}</p>
                         </div>
                     }
-                    <div className="tw-w-[50%]">
+                    <div className="md:tw-w-[50%]">
                         <Inputs
                             type="text"
                             login={true}
@@ -90,7 +90,7 @@ const Login = () => {
                             title="نام کاربری"
                         ></Inputs>
                     </div>
-                    <div className="tw-w-[50%]">
+                    <div className="md:tw-w-[50%]">
                         <Inputs
                             type="password"
                             login={true}
@@ -101,7 +101,7 @@ const Login = () => {
                             title="کلمه عبور"
                         ></Inputs>
                     </div>
-                    <div className="tw-w-[50%]">
+                    <div className="md:tw-w-[50%]">
 
                         <Captcha captcha={captcha?.data?.cImage} refetch={refetch} />
                         <Inputs
@@ -116,7 +116,7 @@ const Login = () => {
                     </div>
                     <div
                         onClick={() => setIsOpen(true)}
-                        className="tw-w-[50%] tw-mb-8 tw-cursor-pointer"
+                        className="md:tw-w-[50%] tw-mb-8 tw-cursor-pointer"
                     >
                         <span className="tw-font-yekan_bold tw-text-lg tw-text-blue-600">فراموشی رمز عبور</span>
                     </div>
@@ -143,7 +143,7 @@ const Login = () => {
                     </div>
                 </form>
                 <ResetPassword isOpen={isOpen} setIsOpen={setIsOpen} />
-                <div>
+                <div className="tw-hidden md:tw-block">
                     <div
                         className="tw-h-full tw-w-full tw-flex tw-flex-col"
                         style={{

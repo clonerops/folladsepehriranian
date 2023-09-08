@@ -56,32 +56,32 @@ const ProductSelectedListInModal = (props: {
                     placeholder="جستجو محصول / کالا"
                 />
             </div>
-            <div className="tw-overflow-x-auto tw-h-[380px]">
+            <div className="tw-overflow-x-auto tw-w-full md:tw-h-[380px]">
                 <table className="tw-w-full ">
                     <thead className="tw-bg-gray-200">
                         <tr>
                             <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 ردیف
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 کالا / محصول
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 شرح کالا
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 وزن تقریبی
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 برند
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 انبار
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 موجودی
                             </td>
-                            <td className="tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 قیمت
                             </td>
                         </tr>
@@ -94,28 +94,28 @@ const ProductSelectedListInModal = (props: {
                                     key={item.id}
                                     onClick={() => handleSelectProduct(item)}
                                 >
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {startRowIndex + index + 1}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.productName}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.standard}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.brandName}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.numberInPackage}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.numberInPackage}
                                     </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.numberInPackage}
                                     </td>
                                 </tr>

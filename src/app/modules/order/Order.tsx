@@ -693,18 +693,18 @@ const Order = () => {
 
             <div className="tw-mt-8">
                 <Card6 image="" title="">
-                    <div className="tw-grid tw-grid-cols-3">
-                        <div className="tw-border-l-2 tw-border-gray-300">
+                    <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">
+                        <div className="md:tw-border-l-2 md:tw-border-gray-300">
                             <span className="tw-font-yekan_bold tw-text-xl">
                                 قیمت کل: <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">{sliceNumberPrice(totalAmount)} ریال</span>
                             </span>
                         </div>
-                        <div className="tw-border-l-2 tw-border-gray-300 tw-pr-8">
+                        <div className="md:tw-border-l-2 md:tw-border-gray-300 md:tw-pr-8">
                             <span className="tw-font-yekan_bold tw-text-xl">
                                 قیمت به حروف: <span className="tw-text-green-500 tw-text-sm tw-font-bold tw-px-8">{convertToPersianWord(totalAmount)} تومان</span>
                             </span>
                         </div>
-                        <div className="tw-pr-8">
+                        <div className="md:tw-pr-8">
                             <span className="tw-font-yekan_bold tw-text-xl">
                                 قابل پرداخت: <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">{sliceNumberPrice(totalAmount)} ریال</span>
                             </span>

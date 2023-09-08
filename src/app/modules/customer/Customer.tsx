@@ -67,7 +67,7 @@ const Customer = () => {
 
             <div>
                 <div className="tw-flex tw-justify-between tw-items-center">
-                    <div className="tw-w-[40%]">
+                    <div className="tw-w-80 md:tw-w-[40%]">
                         <CustomInput
                             value={searchTerm}
                             onChange={handleSearchInput}

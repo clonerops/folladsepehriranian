@@ -74,7 +74,7 @@ const CreateCustomer = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نام
@@ -160,7 +160,7 @@ const CreateCustomer = (props: {
                         />
                     </div>
                 </div>
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2">
                         {/* <label className="tw-w-full tw-text-right tw-text-gray-500">
                             نماینده شرکت
@@ -218,7 +218,7 @@ const CreateCustomer = (props: {
                         />
                     </div>
                 </div>
-                <div className="tw-grid tw-grid-cols-3 tw-gap-x-4">
+                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                     <div className="tw-w-full tw-my-2 tw-text-right">
                         <label>
                             <input onChange={(e) => setIsSupplier(e.target.checked)} type="checkbox" className="tw-accent-slate-800 tw-w-[14px] tw-h-[14px]" />
@@ -237,7 +237,7 @@ const CreateCustomer = (props: {
                             <CusromRadioGroupButton className="tw-my-4" selected={customerValidity} handleRadio={handleCustomerValidityRadio} items={customerValidityData} name="customerValidity" />
                         </div>
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-3">
+                    <div className="tw-w-full tw-my-2 md:tw-col-span-3">
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address1}
@@ -247,7 +247,7 @@ const CreateCustomer = (props: {
                             placeholder="ادرس 1"
                         />
                     </div>
-                    <div className="tw-w-full tw-my-2 tw-col-span-3">
+                    <div className="tw-w-full tw-my-2 md:tw-col-span-3">
                         <CustomTextarea
                             getFieldProps={formik.getFieldProps}
                             touched={formik.touched.address2}

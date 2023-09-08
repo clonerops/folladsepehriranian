@@ -63,7 +63,7 @@ const Products = () => {
             {productsLoading && <Backdrop loading={productsLoading} />}
             <div>
                 <div className="tw-flex tw-justify-between tw-items-center">
-                    <div className="tw-w-[40%]">
+                    <div className="tw-w-80 md:tw-w-[40%]">
                         <CustomInput
                             value={searchTerm}
                             onChange={handleSearchInput}
@@ -88,31 +88,31 @@ const Products = () => {
                                 <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     ردیف
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     نام کالا
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     برند کالا
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     سایز کالا
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[80px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     وزن تقریبی
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     تعداد در بسته
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     اندازه
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     استاندارد
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     توضیحات
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     
                                 </td>
                             </tr>

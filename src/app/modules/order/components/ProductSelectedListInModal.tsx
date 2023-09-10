@@ -72,9 +72,9 @@ const ProductSelectedListInModal = (props: {
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 وزن تقریبی
                             </td>
-                            <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                            {/* <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 برند
-                            </td>
+                            </td> */}
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 انبار
                             </td>
@@ -106,9 +106,9 @@ const ProductSelectedListInModal = (props: {
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
+                                    {/* <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.brandName}
-                                    </td>
+                                    </td> */}
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.numberInPackage}
                                     </td>

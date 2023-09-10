@@ -91,9 +91,9 @@ const Products = () => {
                                 <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     نام کالا
                                 </td>
-                                <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
+                                {/* <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     برند کالا
-                                </td>
+                                </td> */}
                                 <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     سایز کالا
                                 </td>
@@ -102,9 +102,6 @@ const Products = () => {
                                 </td>
                                 <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     تعداد در بسته
-                                </td>
-                                <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
-                                    اندازه
                                 </td>
                                 <td className="tw-min-w-[100px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-slate-100">
                                     استاندارد
@@ -130,9 +127,9 @@ const Products = () => {
                                             <td className="tw-text-center tw-py-4">
                                                 {item.productName}
                                             </td>
-                                            <td className="tw-text-center tw-py-4">
+                                            {/* <td className="tw-text-center tw-py-4">
                                                 {item.brandName}
-                                            </td>
+                                            </td> */}
                                             <td className="tw-text-center tw-py-4">
                                                 {item.productSize}
                                             </td>
@@ -141,9 +138,6 @@ const Products = () => {
                                             </td>
                                             <td className="tw-text-center tw-py-4">
                                                 {item.numberInPackage}
-                                            </td>
-                                            <td className="tw-text-center tw-py-4">
-                                                {item.size}
                                             </td>
                                             <td className="tw-text-center tw-py-4">
                                                 {item.standard}

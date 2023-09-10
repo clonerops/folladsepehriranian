@@ -118,7 +118,10 @@ const Customer = () => {
                                     تامین کننده می باشد؟
                                 </td>
                                 <td className="tw-min-w-[360px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    آدرس
+                                    آدرس یک
+                                </td>
+                                <td className="tw-min-w-[360px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    آدرس دو
                                 </td>
                                 <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     معرف
@@ -162,7 +165,7 @@ const Customer = () => {
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>
-                                            {item.customerValidityId === 0 ? "عادی" : item.customerValidityId === 1 ? "VIP" : "سیاه"}
+                                            {item.customerValidityId === 1 ? "عادی" : item.customerValidityId === 2 ? "VIP" : "سیاه"}
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
@@ -177,7 +180,10 @@ const Customer = () => {
                                         </span>
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                        {item.address1 + " " + item.address2}
+                                        {item.address1}
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        {item.address2}
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         {item.representative}

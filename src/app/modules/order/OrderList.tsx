@@ -74,7 +74,7 @@ const OrderList = () => {
                                     {item.orderCode}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    dddddddddd
+                                    {item.registerDate}
                                 </td>
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.customerFirstName + " " + item.customerLastName}

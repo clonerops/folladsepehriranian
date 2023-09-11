@@ -54,9 +54,7 @@ const CargoConfirm = () => {
                             <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 قیمت خرید
                             </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                نوع فاکتور خرید
-                            </td>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -86,9 +84,7 @@ const CargoConfirm = () => {
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.buyPrice}
                                 </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.purchaseInvoiceTypeDesc}
-                                </td>
+                                
                             </tr>
                         })}
                     </tbody>

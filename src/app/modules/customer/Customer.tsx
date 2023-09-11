@@ -112,7 +112,10 @@ const Customer = () => {
                                     موبایل
                                 </td>
                                 <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
-                                    تلفن
+                                    تلفن یک
+                                </td>
+                                <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
+                                    تلفن دو
                                 </td>
                                 <td className="tw-min-w-[160px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center">
                                     تامین کننده می باشد؟
@@ -172,7 +175,10 @@ const Customer = () => {
                                         {item.mobile}
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
-                                        {item.tel}
+                                        {item.tel1}
+                                    </td>
+                                    <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
+                                        {item.tel2}
                                     </td>
                                     <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center">
                                         <span>

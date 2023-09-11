@@ -10,7 +10,8 @@ export interface ICustomer {
     address1: string | undefined
     customerType: number | undefined
     customerValidityId: number | undefined
-    tel: string | undefined
+    tel?: string | undefined
+    tel1?: string | undefined
     tel2: string | undefined
     address2: string | undefined
     representative: string | undefined

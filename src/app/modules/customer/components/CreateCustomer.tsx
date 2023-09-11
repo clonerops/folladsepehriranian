@@ -36,7 +36,7 @@ const CreateCustomer = (props: {
         officialName: "",
         customerType: 1,
         customerValidityId: 1,
-        tel: "",
+        tel1: "",
         tel2: "",
         address2: "",
         representative: "",
@@ -195,10 +195,10 @@ const CreateCustomer = (props: {
                         </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.tel}
-                            errors={formik.errors.tel}
+                            touched={formik.touched.tel1}
+                            errors={formik.errors.tel1}
                             type="text"
-                            name={"tel"}
+                            name={"tel1"}
                             formikInput={true}
                             placeholder="تلفن 1"
                         />

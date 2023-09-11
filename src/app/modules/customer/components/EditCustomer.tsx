@@ -37,7 +37,7 @@ const EditCustomer = (props: {
         nationalId: props.item?.nationalId,
         nationalId2: props.item?.nationalId2,
         mobile: props.item?.mobile,
-        tel: props.item?.tel,
+        tel1: props.item?.tel1,
         tel2: props.item?.tel2,
         representative: props.item?.representative,
         address1: props.item?.address1,
@@ -196,9 +196,9 @@ const EditCustomer = (props: {
                         </label> */}
                         <CustomInput
                             getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.tel}
-                            errors={formik.errors.tel}
-                            name={"tel"}
+                            touched={formik.touched.tel1}
+                            errors={formik.errors.tel1}
+                            name={"tel1"}
                             type="string"
                             formikInput={true}
                             placeholder="تلفن 1"

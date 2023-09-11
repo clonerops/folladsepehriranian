@@ -46,6 +46,7 @@ const SidebarMenuMain = () => {
       >
         <SidebarMenuItem to='/dashboard/order/managment' title='ثبت سفارش' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/order/lists' title='لیست سفارشات' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/order/cargo' title='اعلام بار' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       <div className='menu-item'>

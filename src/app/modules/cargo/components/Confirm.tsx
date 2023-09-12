@@ -4,6 +4,17 @@ import { Card6 } from "../../../../_cloner/partials/content/cards/Card6"
 import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker"
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect"
 import { useRetrieveOrder } from "../../order/core/_hooks"
+import { Form, Formik, useFormik } from "formik"
+import FormikInput from "../../../../_cloner/helpers/components/FormikInput"
+import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker"
+
+const initialValues = {
+    driver: "",
+    approvedUserName: "",
+    carPlaque: "",
+    driverMobile: "",
+    approvedDate: new Date()
+}
 
 const Confirm = () => {
     const { id } = useParams()
@@ -13,6 +24,7 @@ const Confirm = () => {
         { value: 1, label: "نقدی" },
         { value: 2, label: "ماهیانه باربری" }
     ]
+
     return (
         <>
             <Card6 image="" title="">
@@ -90,66 +102,40 @@ const Confirm = () => {
                     </tbody>
                 </table>
 
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 mt-8">
-                    <CustomInput
-                        // getFieldProps={formik.getFieldProps}
-                        // touched={formik.touched.tel1}
-                        // errors={formik.errors.tel1}
-                        name={"driver"}
-                        type="string"
-                        placeholder="راننده"
-                    />
-                    <CustomInput
-                        // getFieldProps={formik.getFieldProps}
-                        // touched={formik.touched.tel1}
-                        // errors={formik.errors.tel1}
-                        name={"driver"}
-                        type="string"
-                        placeholder="باربری"
-                    />
-                    <CustomInput
-                        // getFieldProps={formik.getFieldProps}
-                        // touched={formik.touched.tel1}
-                        // errors={formik.errors.tel1}
-                        name={"driver"}
-                        type="string"
-                        placeholder="پلاک خودرو"
-                    />
-                    <CustomInput
-                        // getFieldProps={formik.getFieldProps}
-                        // touched={formik.touched.tel1}
-                        // errors={formik.errors.tel1}
-                        name={"driver"}
-                        type="string"
-                        placeholder="شماره همراه راننده"
-                    />
-                    <CustomDatepicker
-                        // onChange={(d: any) =>
-                        //     setSettlementDate(d.value)
-                        // }
-                        placeholder="تاریخ حمل"
-                    />
-                    <ProfessionalSelect
-                        options={paymentInfo}
-                        // options={dropdownCustomer(
-                        //     customers?.data
-                        // )}
-                        // value={customerSelect}
-                        // onChange={handleCustomerChange}
-                        placeholder="نوع پرداخت کرایه"
-                    />
-                </div>
 
-                <div className="d-flex justify-content-end tw-mt-5">
-                    <button
-                        // onClick={handleCreateOrder}
-                        className="tw-bg-green-600 tw-text-white tw-px-20 tw-py-4 tw-rounded-md tw-text-lg"
-                    >
-                        {/* {isLoading ? "درحال پردازش" : "ثبت سفارش"} */}
-                        ثبت اعلام بار
-                    </button>
-                </div>
+                <Formik initialValues={initialValues} onSubmit={(values) => console.log(values)}>
+                    {({ handleSubmit }) => {
+                        return <Form onSubmit={handleSubmit}>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 mt-8">
+                                <FormikInput name="driverName" placeholder="راننده" type="text" />
+                                <FormikInput name="approvedUserName" placeholder="باربری" type="text" />
+                                <FormikInput name="carPlaque" placeholder="پلاک خودرو" type="text" />
+                                <FormikInput name="driverMobile " placeholder="شماره همراه راننده" type="text" />
+                                {/* <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" type="text" /> */}
+                                <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" type="text" />
 
+                                <ProfessionalSelect
+                                    options={paymentInfo}
+                                    // options={dropdownCustomer(
+                                    //     customers?.data
+                                    // )}
+                                    // value={customerSelect}
+                                    // onChange={handleCustomerChange}
+                                    placeholder="نوع پرداخت کرایه"
+                                />
+                            </div>
+                            <div className="d-flex justify-content-end tw-mt-5">
+                                <button
+                                    type="submit"
+                                    className="tw-bg-green-600 tw-text-white tw-px-20 tw-py-4 tw-rounded-md tw-text-lg"
+                                >
+                                    {/* {isLoading ? "درحال پردازش" : "ثبت سفارش"} */}
+                                    ثبت اعلام بار
+                                </button>
+                            </div>
+                        </Form>
+                    }}
+                </Formik>
             </Card6>
         </>
     )

@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './_cloner/assets/sass/style.react.scss'
 import './_cloner/assets/css/style.rtl.css'
 import './_cloner/assets/css/tailwindcss.css'
+import '@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css'
 import {AppRoutes} from './app/routing/AppRoutes'
 Chart.register(...registerables)
 

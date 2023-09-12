@@ -1,11 +1,11 @@
-import { useLocation, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput"
 import { Card6 } from "../../../../_cloner/partials/content/cards/Card6"
-import { useRetrieveOrder } from "../core/_hooks"
 import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker"
 import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect"
+import { useRetrieveOrder } from "../../order/core/_hooks"
 
-const CargoConfirm = () => {
+const Confirm = () => {
     const { id } = useParams()
     const { data } = useRetrieveOrder(id)
 
@@ -54,7 +54,7 @@ const CargoConfirm = () => {
                             <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 قیمت خرید
                             </td>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +84,7 @@ const CargoConfirm = () => {
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.buyPrice}
                                 </td>
-                                
+
                             </tr>
                         })}
                     </tbody>
@@ -145,8 +145,8 @@ const CargoConfirm = () => {
                         // onClick={handleCreateOrder}
                         className="tw-bg-green-600 tw-text-white tw-px-20 tw-py-4 tw-rounded-md tw-text-lg"
                     >
-                       {/* {isLoading ? "درحال پردازش" : "ثبت سفارش"} */}
-                       ثبت اعلام بار
+                        {/* {isLoading ? "درحال پردازش" : "ثبت سفارش"} */}
+                        ثبت اعلام بار
                     </button>
                 </div>
 
@@ -155,4 +155,4 @@ const CargoConfirm = () => {
     )
 }
 
-export default CargoConfirm
+export default Confirm

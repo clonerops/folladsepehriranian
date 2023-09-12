@@ -7,8 +7,8 @@ import Products from '../modules/product/Products'
 import OrderList from '../modules/order/OrderList'
 import Customer from '../modules/customer/Customer'
 import Suppliers from '../modules/product/Suppliers'
-import Cargo from '../modules/order/Cargo'
 import CargoConfirm from '../modules/order/components/CargoConfirm'
+import Cargo from '../modules/cargo/Cargo'
 
 const PrivateRoutes = () => {
 
@@ -22,7 +22,7 @@ const PrivateRoutes = () => {
         {/* Orders */}
         <Route path='dashboard/order/managment' element={<Order />} />
         <Route path='dashboard/order/lists' element={<OrderList />} />
-        <Route path='dashboard/order/Cargo' element={<Cargo />} />
+        <Route path='dashboard/cargo/managment' element={<Cargo />} />
         <Route path='dashboard/order/Cargo/:id' element={<CargoConfirm />} />
         {/* Users */}
         <Route path='dashboard/user/create' element={<CreateUser />} />

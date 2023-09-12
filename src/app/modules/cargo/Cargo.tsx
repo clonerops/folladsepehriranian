@@ -1,11 +1,9 @@
-import { useRetrievesNotSendedOrder } from "./core/_hooks"
-import { IOrderDetail } from "./core/_models"
 import Modal from "../../../_cloner/helpers/components/Modal"
 import { useState } from "react"
-import OrderDetials from "./components/OrderDetials"
 import CustomInput from "../../../_cloner/helpers/components/CustomInput"
-import CargoConfirm from "./components/CargoConfirm"
 import { Link } from "react-router-dom"
+import { IOrderDetail } from "../order/core/_models"
+import { useRetrievesNotSendedOrder } from "./core/_hooks"
 
 
 const Cargo = () => {

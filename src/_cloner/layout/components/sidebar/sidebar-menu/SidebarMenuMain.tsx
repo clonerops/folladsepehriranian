@@ -46,7 +46,20 @@ const SidebarMenuMain = () => {
       >
         <SidebarMenuItem to='/dashboard/order/managment' title='ثبت سفارش' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/order/lists' title='لیست سفارشات' hasBullet={true} />
-        <SidebarMenuItem to='/dashboard/order/cargo' title='اعلام بار' hasBullet={true} />
+
+      </SidebarMenuItemWithSub>
+      <div className='menu-item'>
+        <div className='menu-content pt-8 pb-2'>
+          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>اعلام بار</span>
+        </div>
+      </div>
+      <SidebarMenuItemWithSub
+        to='/order'
+        title='مدیریت اعلام بار'
+        fontIcon='bi-archive'
+        icon='/media/icons/duotune/general/gen022.svg'
+      >
+        <SidebarMenuItem to='/dashboard/cargo/managment' title='سفارشات اعلام بار نشده' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       <div className='menu-item'>

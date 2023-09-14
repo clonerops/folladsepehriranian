@@ -9,7 +9,7 @@ const CusromRadioGroupButton = (props: {
         <>
             {props.items?.map((item: { id: number, desc: string, validityDesc: string, description: string, typeDesc: string, title: string }) => {
                 return (
-                    <div className={props.className}>
+                    <div key={item.id} className={props.className}>
                         <label className="tw-ml-4" key={item.id}>
                             <input
                                 className="tw-mx-2 tw-w-[14px] tw-h-[14px] tw-accent-green-700"

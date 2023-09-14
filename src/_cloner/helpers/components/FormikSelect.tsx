@@ -2,7 +2,7 @@ import { useField, useFormikContext } from 'formik';
 import React, { useState } from 'react'
 import Select, { StylesConfig } from 'react-select'
 import { getFormikFieldValidationProps } from '../GetFormikFieldValidationProp';
-const ProfessionalSelect = (props: any) => {
+const FormikSelect = (props: any) => {
 
     const [inputValue, setInputValue] = useState("");
 
@@ -58,29 +58,33 @@ const ProfessionalSelect = (props: any) => {
         props.name
     );
 
-
     return (
-        <Select
-            {...field}
-            {...props.rest}
-            {...validationProps}
-            options={props.options}
-            styles={customStyles}
-            onChange={(option: any) => formikProps.setFieldValue(field.name, option.value)}
-            defaultInputValue={props.defaultInputValue}
-            className='tw-text-md tw-text-right'
-            defaultValue={props.defaultValue}
-            value={props.value}
-            placeholder={props.placeholder}
-            inputValue={inputValue}
-            name={field.name}
-            onInputChange={handleInputChange}
-            autoFocus={props.autoFocus}
-            onKeyDown={handleKeyDown}
-            filterOption={customFilterOption}
-            isSearchable
-        />
+        <>
+            <Select
+                {...field}
+                {...props.rest}
+                {...validationProps}
+                options={props.options}
+                styles={customStyles}
+                onChange={(option: any) => formikProps.setFieldValue(field.name, option.value)}
+                defaultInputValue={props.defaultInputValue}
+                className='tw-text-md tw-text-right'
+                defaultValue={props.defaultValue}
+                value={props.value}
+                placeholder={props.placeholder}
+                inputValue={inputValue}
+                name={field.name}
+                onInputChange={handleInputChange}
+                autoFocus={props.autoFocus}
+                onKeyDown={handleKeyDown}
+                filterOption={customFilterOption}
+                isSearchable
+            />
+            {validationProps.error && <div className="tw-text-red-500 tw-text-right tw-text-sm">{validationProps.helperText}</div>}
+
+        </>
+
     )
 }
 
-export default ProfessionalSelect
+export default FormikSelect

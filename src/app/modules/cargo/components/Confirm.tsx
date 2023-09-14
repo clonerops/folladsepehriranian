@@ -1,26 +1,32 @@
 import { useParams } from "react-router-dom"
-import CustomInput from "../../../../_cloner/helpers/components/CustomInput"
 import { Card6 } from "../../../../_cloner/partials/content/cards/Card6"
-import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker"
-import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect"
 import { useRetrieveOrder } from "../../order/core/_hooks"
-import { Form, Formik, useFormik } from "formik"
+import { Form, Formik } from "formik"
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput"
 import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker"
 import { confirmValidation } from "../validations/confirm"
 import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect"
+import ReusableTable from "../../../../_cloner/helpers/components/Table"
+import { columns } from "../helpers/orderColumns"
+import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton"
+import { useCreateCargo } from "../core/_hooks"
+import moment from "moment-jalaali"
+import Swal from "sweetalert2";
+import Backdrop from "../../../../_cloner/helpers/components/Backdrop"
 
 const initialValues = {
-    driver: "",
+    driverName: "",
     approvedUserName: "",
     carPlaque: "",
     driverMobile: "",
-    approvedDate: new Date()
+    approvedDate: new Date(),
+    rentAmount: 1
 }
 
 const Confirm = () => {
     const { id } = useParams()
-    const { data } = useRetrieveOrder(id)
+    const { data, isLoading: orderLoading, isError: orderError } = useRetrieveOrder(id)
+    const { mutate, isLoading } = useCreateCargo()
 
     const paymentInfo = [
         { value: 1, label: "نقدی" },
@@ -29,6 +35,8 @@ const Confirm = () => {
 
     return (
         <>
+            {isLoading && <Backdrop loading={isLoading} />}
+
             <Card6 image="" title="">
                 <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4">جزئیات سفارش {data?.data?.orderCode}</h3>
 
@@ -41,71 +49,39 @@ const Confirm = () => {
                     <div className="py-4">تاریخ تسویه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.settlementDate}</span></div>
                 </div>
 
-                <table className="tw-w-full tw-my-2">
-                    <thead className="tw-bg-indigo-200">
-                        <tr>
-                            <td className="tw-py-4 tw-px-4 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                ردیف
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                نام محصول
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                شماره ردیف
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                شماره انبار
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                مقدار تقریبی
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                تعداد در بسته
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                قیمت
-                            </td>
-                            <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                قیمت خرید
-                            </td>
+                <ReusableTable columns={columns} data={data?.data?.details} isError={orderError} isLoading={orderLoading} renderActions={() => { return <></> }} />
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data?.data?.details?.map((item: any, index: number) => {
-                            return <tr key="{id}">
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {index + 1}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.productName}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.rowId}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.warehouseName}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.proximateAmount}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.numberInPackage}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.price}
-                                </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                    {item.buyPrice}
-                                </td>
+                <Formik initialValues={initialValues} validationSchema={confirmValidation} onSubmit={
+                    async (values, { setStatus, setSubmitting }) => {
+                        try {
+                            const formData = {
+                                orderId: id,
+                                unloadingPlaceAddress: "",
+                                driverName: values.driverName,
+                                carPlaque: values.carPlaque,
+                                driverMobile: values.driverMobile,
+                                approvedUserName: values.approvedUserName,
+                                approvedDate: moment(values.approvedDate).format("jYYYY/jMM/jDD"),
+                                rentAmount: values.rentAmount
+                            }
+                            mutate(formData, {
+                                onSuccess: () => {
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "اعلام بار با موفقیت ثبت گردید.",
+                                        showConfirmButton: false,
+                                        timer: 8500,
+                                    })
+                                }
+                            })
+                        } catch (error) {
+                            setStatus("اطلاعات ثبت اعلام بار نادرست می باشد");
+                            setSubmitting(false);
 
-                            </tr>
-                        })}
-                    </tbody>
-                </table>
-
-
-                <Formik initialValues={initialValues} validationSchema={confirmValidation} onSubmit={(values) => console.log(values)}>
+                        }
+                    }
+                }>
                     {({ handleSubmit, setFieldValue }) => {
                         return <Form onSubmit={handleSubmit}>
                             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 mt-8">
@@ -114,16 +90,10 @@ const Confirm = () => {
                                 <FormikInput name="carPlaque" placeholder="پلاک خودرو" type="text" />
                                 <FormikInput name="driverMobile " placeholder="شماره همراه راننده" type="text" />
                                 <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" setFieldValue={setFieldValue} boxClassName="tw-w-full" />
-                                <FormikSelect name="payment" label="payment" options={paymentInfo} />
+                                <FormikSelect name="rentAmount" label="rentAmount" placeholder="نوع تسویه باربری" options={paymentInfo} />
                             </div>
-                            <div className="d-flex justify-content-end tw-mt-5">
-                                <button
-                                    type="submit"
-                                    className="tw-bg-green-600 tw-text-white tw-px-20 tw-py-4 tw-rounded-md tw-text-lg"
-                                >
-                                    {/* {isLoading ? "درحال پردازش" : "ثبت سفارش"} */}
-                                    ثبت اعلام بار
-                                </button>
+                            <div className="tw-flex tw-justify-end tw-my-8">
+                                <SubmitButton title="ثبت اعلام بار" isLoading={isLoading} />
                             </div>
                         </Form>
                     }}

@@ -1,43 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toAbsoluteUrl } from "../../../_cloner/helpers";
-import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import { useDeleteCustomer, useGetCustomers } from "./core/_hooks";
 import { ICustomer } from "./core/_models";
 import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateCustomer from "./components/CreateCustomer";
 import EditCustomer from "./components/EditCustomer";
+import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 
 const Customer = () => {
     const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
     const { mutate, isLoading: deleteLoading } = useDeleteCustomer()
+    const [results, setResults] = useState<ICustomer[]>([])
 
+    useEffect(() => {
+        setResults(customers?.data)
+     }, [customers])
 
-
-    const [searchTerm, setSearchTerm] = useState<string>("");
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
     const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
     const [itemForEdit, setItemForEdit] = useState<ICustomer>();
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const itemsPerPage = 8; // Number of items to show per page
+    const itemsPerPage = 8;
 
-    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
-    };
-
-    const filteredData = customers?.data?.filter((item: ICustomer) => {
-        const values = Object.values(item);
-        return values.some((value) =>
-            value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    });
-
-    const totalItems = filteredData?.length;
+    const totalItems = results?.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const currentItems = filteredData?.slice(startIndex, endIndex);
+    const currentItems = results?.slice(startIndex, endIndex);
 
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
@@ -58,8 +49,6 @@ const Customer = () => {
         });
     };
 
-
-
     return (
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
@@ -68,12 +57,7 @@ const Customer = () => {
             <div>
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
-                        <CustomInput
-                            value={searchTerm}
-                            onChange={handleSearchInput}
-                            placeholder="جستجو مشتری"
-                        />
-
+                        <FuseSearch keys={['firstName', 'lastName']} placeholder="جستجو مشتری" data={customers?.data} threshold={0.5} setResults={setResults} />
                     </div>
                     <button
                         onClick={() => setIsCreateOpen(true)}

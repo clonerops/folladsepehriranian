@@ -7,6 +7,8 @@ import { useRetrieveOrder } from "../../order/core/_hooks"
 import { Form, Formik, useFormik } from "formik"
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput"
 import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker"
+import { confirmValidation } from "../validations/confirm"
+import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect"
 
 const initialValues = {
     driver: "",
@@ -103,26 +105,16 @@ const Confirm = () => {
                 </table>
 
 
-                <Formik initialValues={initialValues} onSubmit={(values) => console.log(values)}>
-                    {({ handleSubmit }) => {
+                <Formik initialValues={initialValues} validationSchema={confirmValidation} onSubmit={(values) => console.log(values)}>
+                    {({ handleSubmit, setFieldValue }) => {
                         return <Form onSubmit={handleSubmit}>
                             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 mt-8">
                                 <FormikInput name="driverName" placeholder="راننده" type="text" />
                                 <FormikInput name="approvedUserName" placeholder="باربری" type="text" />
                                 <FormikInput name="carPlaque" placeholder="پلاک خودرو" type="text" />
                                 <FormikInput name="driverMobile " placeholder="شماره همراه راننده" type="text" />
-                                {/* <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" type="text" /> */}
-                                <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" type="text" />
-
-                                <ProfessionalSelect
-                                    options={paymentInfo}
-                                    // options={dropdownCustomer(
-                                    //     customers?.data
-                                    // )}
-                                    // value={customerSelect}
-                                    // onChange={handleCustomerChange}
-                                    placeholder="نوع پرداخت کرایه"
-                                />
+                                <FormikDatepicker name="approvedDate " placeholder="تاریخ حمل" setFieldValue={setFieldValue} boxClassName="tw-w-full" />
+                                <FormikSelect name="payment" label="payment" options={paymentInfo} />
                             </div>
                             <div className="d-flex justify-content-end tw-mt-5">
                                 <button

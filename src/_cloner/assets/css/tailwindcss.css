@@ -156,3 +156,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.rmdp-container {
+    width: 100%;
+}

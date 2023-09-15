@@ -1,7 +1,4 @@
-import { useFormik } from "formik";
-import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
-import { useState } from "react";
+import { Form, Formik } from "formik";
 import {  useRetrieveProducts, useUpdateSupplier } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { ISuppliers } from "../core/_models";
@@ -10,26 +7,20 @@ import { dropdownProduct } from "../helpers/dropdownConvert";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useGetCustomers } from "../../customer/core/_hooks";
 import { dropdownCustomer } from "../../order/helpers/dropdowns";
-import CustomDatepicker from "../../../../_cloner/helpers/components/CustomDatepicker";
+import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
+import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
+import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker";
+import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 
 const EditSupplier = (props: {
     item: ISuppliers | undefined,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
-
 }) => {
     // Fetching Data
     const { mutate, data, isLoading } = useUpdateSupplier();
     const { data: customers } = useGetCustomers()
     const { data: products } = useRetrieveProducts()
     // States
-    const [customerSelected, setCustomerSelected] = useState<any>()
-    const [productSelected, setProductSelected] = useState<any>()
-    const [priceDate, setPriceDate] = useState(props.item?.priceDate)
-
-    const handleCustomerSelected = (selectedOption: any) => setCustomerSelected(selectedOption)
-    const handleProductSelected = (selectedOption: any) => setProductSelected(selectedOption)
-
-
     const initialValues = {
         id: props.item?.id,
         customerId: props.item?.customerId,
@@ -37,23 +28,9 @@ const EditSupplier = (props: {
         price: props.item?.price,
         rentAmount: props.item?.rentAmount,
         overPrice: props.item?.overPrice,
-        priceDate: priceDate,
+        priceDate: props.item?.priceDate,
         rate: props.item?.rate
     };
-
-    const formik = useFormik({
-        initialValues,
-        onSubmit: async (values, { setStatus, setSubmitting }) => {
-            try {
-                mutate(values);
-                props.refetch()
-            } catch (error) {
-                setStatus("اطلاعات ویرایش محصول نادرست می باشد");
-                setSubmitting(false);
-            }
-        },
-    });
-
     return (
         <>
             {data?.succeeded && (
@@ -62,120 +39,39 @@ const EditSupplier = (props: {
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
-            <form onSubmit={formik.handleSubmit} className="container">
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-4">
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            مشتری
-                        </label>
-                        <ProfessionalSelect
-                            options={dropdownCustomer(customers?.data)}
-                            value={customerSelected}
-                            onChange={handleCustomerSelected}
-                            placeholder=""
-                        />
-
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">کالا</label>
-                        <ProfessionalSelect
-                            options={dropdownProduct(products?.data)}
-                            value={productSelected}
-                            onChange={handleProductSelected}
-                            placeholder=""
-                        />
-                    </div>
-                </div>
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            قیمت
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.price}
-                            errors={formik.errors.price}
-                            type="number"
-                            name={"price"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            تاریخ قیمت
-                        </label>
-                        <CustomDatepicker
-                            onChange={(d: any) => setPriceDate(d.value)}
-                            placeholder="" />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            قیمت تمام شده
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.overPrice}
-                            errors={formik.errors.overPrice}
-                            type="number"
-                            name={"overPrice"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                </div>
-                <div className="tw-grid tw-grid-cols-2 tw-gap-x-4">
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            کرایه
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.rentAmount}
-                            errors={formik.errors.rentAmount}
-                            type="number"
-                            name={"rentAmount"}
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                    <div className="tw-w-full tw-my-2">
-                        <label className="tw-w-full tw-text-right tw-text-gray-500">
-                            امتیاز
-                        </label>
-                        <CustomInput
-                            getFieldProps={formik.getFieldProps}
-                            touched={formik.touched.rate}
-                            errors={formik.errors.rate}
-                            name={"rate"}
-                            type="string"
-                            formikInput={true}
-                            placeholder=""
-                        />
-                    </div>
-                </div>
-                <div className="w-w-full tw-my-6">
-                    <button
-                        type="submit"
-                        id="kt_sign_in_submit"
-                        className="tw-btn-warning tw-mb-2 tw-py-4"
-                        disabled={formik.isSubmitting || !formik.isValid}
-                    >
-                        {!isLoading && (
-                            <span className="indicator-label">ویرایش</span>
-                        )}
-                        {isLoading && (
-                            <span
-                                className="indicator-progress"
-                                style={{ display: "block" }}
-                            >
-                                درحال پردازش...
-                                <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        )}
-                    </button>
-                </div>
-            </form >
+            <Formik initialValues={initialValues} onSubmit={
+                async (values, { setStatus, setSubmitting }) => {
+                    try {
+                        mutate(values, {
+                            onSuccess: () => {
+                                props.refetch()
+                            }
+                        });
+                    } catch (error) {
+                        setStatus("اطلاعات ویرایش محصول نادرست می باشد");
+                        setSubmitting(false);
+                    }
+                }
+            }>
+                {({ handleSubmit, setFieldValue }) => {
+                    return <Form onSubmit={handleSubmit} className="container">
+                        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8 tw-my-4">
+                            <FormikSelect name={"customerId"} placeholder="مشتری" options={dropdownCustomer(customers?.data)} />
+                            <FormikSelect name={"productId"} placeholder="کالا" options={dropdownProduct(products?.data)} />
+                        </div>
+                        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8 tw-my-4">
+                            <FormikInput name="price" placeholder="قیمت" type="text" />
+                            <FormikDatepicker name="priceDate" placeholder="تاریخ قیمت" setFieldValue={setFieldValue} />
+                            <FormikInput name="overPrice" placeholder="قیمت تمام شده" type="text" />
+                        </div>
+                        <div className="tw-grid tw-grid-cols-2 md:tw-grid-cols-2 tw-gap-8 tw-my-4">
+                            <FormikInput name="rentAmount" placeholder="کرایه" type="text" />
+                            <FormikInput name="rate" placeholder="امتیاز" type="text" />
+                        </div>
+                        <SubmitButton title="ویرایش تامین کننده" isLoading={isLoading} isUpdate />
+                    </Form>
+                }}
+            </Formik>
         </>
     );
 };

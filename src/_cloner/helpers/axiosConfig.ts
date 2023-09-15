@@ -17,6 +17,13 @@ export const http = axios.create({
         Authorization: `Bearer ${Cookies.get("token")}`,
     },
 });
+export const httpFormData = axios.create({
+    baseURL: "https://iraniansepehr.com/api/",
+    headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+});
 
 dashboardHttp.interceptors.response.use(
     (response) => response,

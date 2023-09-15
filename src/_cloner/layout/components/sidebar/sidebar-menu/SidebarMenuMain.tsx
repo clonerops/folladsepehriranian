@@ -50,6 +50,21 @@ const SidebarMenuMain = () => {
       </SidebarMenuItemWithSub>
       <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
+          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>پرداختها</span>
+        </div>
+      </div>
+      <SidebarMenuItemWithSub
+        to='/customer'
+        title='مدیریت پرداخت ها'
+        fontIcon='bi-archive'
+        icon='/media/icons/duotune/general/gen022.svg'
+      >
+        <SidebarMenuItem to='/dashboard/payment/managment' title='دریافت و پرداخت' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/payment/accounting' title='ثبت حسابداری دریافت و پرداخت' hasBullet={true} />
+
+      </SidebarMenuItemWithSub>
+      <div className='menu-item'>
+        <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>اعلام بار</span>
         </div>
       </div>
@@ -105,6 +120,8 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/dashboard/customer/managment' title='لیست مشتریان' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
+
+
       {/* <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'

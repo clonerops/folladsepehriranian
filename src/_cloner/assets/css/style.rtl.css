@@ -52957,3 +52957,62 @@
     }
   }
   
+  /* Example CSS to style react-dropzone */
+.dropzone {
+    border: 2px dashed #cccccc; /* Add a dashed border */
+    padding: 20px; /* Add some padding for a better appearance */
+    text-align: center; /* Center align the content */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  /* Change the border color on hover */
+  .dropzone:hover {
+    border-color: #007bff; /* Replace with your desired hover color */
+  }
+  
+  /* Style the file input label */
+  .dropzone p {
+    margin: 0;
+  }
+  
+  /* Style the list of uploaded files */
+  .uploaded-files {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style each uploaded file item */
+  .uploaded-files li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    margin-top: 5px;
+  }
+  
+  /* Style the remove button */
+  .uploaded-files li button {
+    background-color: #ff0000; /* Red background color for the button */
+    color: #ffffff; /* White text color for the button */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Style the upload button */
+  .upload-button {
+    background-color: #007bff; /* Blue background color for the button */
+    color: #ffffff; /* White text color for the button */
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  /* Change the upload button color on hover */
+  .upload-button:hover {
+    background-color: #0056b3; /* Replace with your desired hover color */
+  }
+  

@@ -9,6 +9,8 @@ import Customer from '../modules/customer/Customer'
 import Suppliers from '../modules/product/Suppliers'
 import Cargo from '../modules/cargo/Cargo'
 import Confirm from '../modules/cargo/components/Confirm'
+import RecievePayment from '../modules/payment/RecievePayment'
+import PaymentAccounting from '../modules/payment/PaymentAccounting'
 
 const PrivateRoutes = () => {
 
@@ -31,6 +33,10 @@ const PrivateRoutes = () => {
         <Route path='dashboard/product/supplier' element={<Suppliers />} />
         {/* Customer */}
         <Route path='dashboard/customer/managment' element={<Customer />} />
+        {/* Payment */}
+        <Route path='dashboard/payment/managment' element={<RecievePayment />} />
+        <Route path='dashboard/payment/accounting' element={<PaymentAccounting />} />
+
 
         {/* Lazy Modules */}
         {/* Page Not Found */}

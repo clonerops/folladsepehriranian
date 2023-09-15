@@ -15,9 +15,15 @@ const useRetrieveOrders = () => {
 const useRetrieveOrder = (id: string | undefined) => {
     return useQuery(['order'], () => api.retrieveOrder(id))
 }
+const useConfirmOrder = () => {
+    return useMutation((id: string) => {
+        return api.confirmOrder(id)
+    })
+}
 
 export {
     useCreateOrder,
     useRetrieveOrders,
-    useRetrieveOrder
+    useRetrieveOrder,
+    useConfirmOrder
 }

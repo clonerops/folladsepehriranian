@@ -1,13 +1,16 @@
-import { useRetrieveOrders } from "./core/_hooks"
+import { useConfirmOrder, useRetrieveOrders } from "./core/_hooks"
 import { IOrderDetail } from "./core/_models"
 import Modal from "../../../_cloner/helpers/components/Modal"
 import { useState } from "react"
 import OrderDetials from "./components/OrderDetials"
 import CustomInput from "../../../_cloner/helpers/components/CustomInput"
-
+import Swal from 'sweetalert2'
+import SubmitButton from "../../../_cloner/helpers/components/SubmitButton"
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
 
 const OrderList = () => {
     const { data: orders } = useRetrieveOrders()
+    const { mutate, isLoading } = useConfirmOrder()
     // States 
     const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false)
     const [isOpenConfirm, setIsOpenConfirm] = useState<boolean>(false)
@@ -22,8 +25,25 @@ const OrderList = () => {
         setOrderDetails(item)
         setIsOpenConfirm(true)
     }
+
+    const handleConfirmOrder = () => {
+        if (orderDetails?.id)
+            mutate(orderDetails?.id, {
+                onSuccess: () => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "تایید سفارش با موفقیت ثبت گردید.",
+                        showConfirmButton: false,
+                        timer: 8500,
+                    })
+                    setIsOpenConfirm(false)
+                }
+            })
+    }
     return (
         <>
+        <Card7 image="" title="">
             <div className="tw-w-full tw-overflow-auto">
                 <table className="tw-w-full tw-my-2">
                     <thead className="tw-bg-gray-200">
@@ -65,7 +85,6 @@ const OrderList = () => {
                     </thead>
                     <tbody>
                         {orders?.data?.map((item: IOrderDetail, index: number) => {
-                            console.log(item)
                             return <tr key="{id}">
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {index + 1}
@@ -110,6 +129,8 @@ const OrderList = () => {
                     </tbody>
                 </table>
             </div>
+        </Card7>
+
             <Modal
                 isOpen={isOpenDetail}
                 onClose={() => setIsOpenDetail(false)}
@@ -125,12 +146,14 @@ const OrderList = () => {
                     <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4">تایید سفارش {orderDetails?.orderCode}</h3>
                     <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                         <span className="tw-text-center tw-font-yekan_bold tw-font-bold tw-text-lg tw-py-4">آیا شفارش شماره {orderDetails?.orderCode} مورد تایید می باشد؟</span>
-                        <CustomInput placeholder="توضیحات" />
+                        {/* <CustomInput placeholder="توضیحات" /> */}
                     </div>
 
                     <div>
-                        <button className="tw-bg-green-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">تایید سفارش</button>
-                        <button className="tw-bg-red-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">عدم تایید سفارش</button>
+                        <button onClick={handleConfirmOrder} className="tw-bg-green-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">
+                            {!isLoading ? "تایید سفارش" : "در حال پردازش ..."}
+                        </button>
+                        <button onClick={() => setIsOpenConfirm(false)} className="tw-bg-red-500 tw-m-4 tw-px-4 tw-py-2 tw-text-white tw-rounded-md">عدم تایید سفارش</button>
                     </div>
                 </div>
             </Modal>

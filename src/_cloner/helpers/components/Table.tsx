@@ -16,6 +16,21 @@ interface Props {
 
 const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, renderActions }) => {
 
+    const getValueFromNestedKey = (item: any, key: string) => {
+        const keys = key.split('.');
+        let value = item;
+
+        for (const nestedKey of keys) {
+            if (value && value.hasOwnProperty(nestedKey)) {
+                value = value[nestedKey];
+            } else {
+                return null;
+            }
+        }
+        return value;
+    };
+
+
     { isLoading && <div>درحال بارگزاری</div> }
     { isError && <div>بارگزاری محصولات با خطا مواجه شده است!</div> }
 
@@ -32,11 +47,12 @@ const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, ren
                     </tr>
                 </thead>
                 <tbody>
-
                     {data?.map((item, index) => (
                         <tr key={index}>
                             {columns?.map((column) => (
-                                <td className="tw-text-black tw-font-yekan_bold  tw-py-4 tw-text-center" key={column.key}>{item[column.key]}</td>
+                                <td className="tw-text-black tw-font-yekan_bold tw-py-4 tw-text-center" key={column.key}>
+                                    {getValueFromNestedKey(item, column.key)}
+                                </td>
                             ))}
                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">{renderActions(item)}</td>
                         </tr>

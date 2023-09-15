@@ -50,7 +50,7 @@ export interface ICreateOrderDetails {
 }
 
 export interface IOrder extends ICreateOrder {
-    id: number | undefined
+    id: string | undefined
 }
 
 export interface IOrderDetail extends IOrder {

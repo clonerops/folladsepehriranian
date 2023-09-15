@@ -1,17 +1,17 @@
-import {useEffect} from 'react'
-import {Outlet, useLocation} from 'react-router-dom'
-import {HeaderWrapper} from './components/header'
-import {ScrollTop} from './components/scroll-top'
-import {Content} from './components/content'
-import {FooterWrapper} from './components/footer'
-import {Sidebar} from './components/sidebar'
+import { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
+import { HeaderWrapper } from './components/header'
+import { ScrollTop } from './components/scroll-top'
+import { Content } from './components/content'
+import { FooterWrapper } from './components/footer'
+import { Sidebar } from './components/sidebar'
 import {
   DrawerMessenger,
   ActivityDrawer,
   ThemeModeProvider,
 } from '../partials'
-import {PageDataProvider} from './core'
-import {reInitMenu} from '../helpers'
+import { PageDataProvider } from './core'
+import { reInitMenu, toAbsoluteUrl } from '../helpers'
 import { ToolbarWrapper } from './components/toolbar'
 
 const MasterLayout = () => {
@@ -28,14 +28,15 @@ const MasterLayout = () => {
             <HeaderWrapper />
             <div className='app-wrapper flex-column flex-row-fluid' id='kt_app_wrapper'>
               <Sidebar />
-              <div className='app-main flex-column flex-row-fluid' id='kt_app_main'>
+              <div
+                className='app-main flex-column flex-row-fluid' id='kt_app_main'>
                 <div className='d-flex flex-column flex-column-fluid'>
                   <ToolbarWrapper />
                   <Content>
                     <Outlet />
                   </Content>
                 </div>
-                <FooterWrapper />
+                {/* <FooterWrapper /> */}
               </div>
             </div>
           </div>
@@ -52,4 +53,4 @@ const MasterLayout = () => {
   )
 }
 
-export {MasterLayout}
+export { MasterLayout }

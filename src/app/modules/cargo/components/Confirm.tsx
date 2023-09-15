@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import { Card6 } from "../../../../_cloner/partials/content/cards/Card6"
 import { useRetrieveOrder } from "../../order/core/_hooks"
 import { Form, Formik } from "formik"
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput"
@@ -13,6 +12,7 @@ import { useCreateCargo } from "../core/_hooks"
 import moment from "moment-jalaali"
 import Swal from "sweetalert2";
 import Backdrop from "../../../../_cloner/helpers/components/Backdrop"
+import { Card7 } from "../../../../_cloner/partials/content/cards/Card7"
 
 const initialValues = {
     driverName: "",
@@ -36,8 +36,8 @@ const Confirm = () => {
     return (
         <>
             {isLoading && <Backdrop loading={isLoading} />}
-
-            <Card6 image="" title="">
+            {orderLoading && <Backdrop loading={orderLoading} />}
+            <Card7 image="" title="">
                 <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4">جزئیات سفارش {data?.data?.orderCode}</h3>
 
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-text-right p-4">
@@ -98,7 +98,7 @@ const Confirm = () => {
                         </Form>
                     }}
                 </Formik>
-            </Card6>
+            </Card7>
         </>
     )
 }

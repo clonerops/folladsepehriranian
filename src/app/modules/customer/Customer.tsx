@@ -9,6 +9,7 @@ import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/customerColumn";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 
 const Customer = () => {
     const { data: customers, isLoading: customersLoading, isError: customersError, refetch } = useGetCustomers()
@@ -103,7 +104,7 @@ const Customer = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {customersLoading && <Backdrop loading={customersLoading} />}
-            <div>
+            <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
                         <FuseSearch keys={['firstName', 'lastName', 'nationalId', 'customerType', 'customerValidityId', 'mobile', 'tel1', 'tel2', 'isSupplier', 'address1', 'address2', 'representative']} placeholder="جستجو مشتری" data={customers?.data} threshold={0.5} setResults={setResults} />
@@ -133,7 +134,7 @@ const Customer = () => {
                     </div>
                 </div>
 
-            </div>
+            </Card7>
             <Modal
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}

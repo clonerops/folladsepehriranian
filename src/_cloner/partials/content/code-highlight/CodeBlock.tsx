@@ -4,7 +4,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import {CopyToClipboard} from 'react-copy-to-clipboard'
 import Highlight, {defaultProps, Language} from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/shadesOfPurple'
-import {OverlayTrigger, Tooltip} from 'react-bootstrap'
+// import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 type Props = {
   code: string
@@ -39,7 +39,7 @@ const CodeBlock: React.FC<Props> = ({code, language}) => {
   return (
     <div className='py-5'>
       <div className='highlight'>
-        <OverlayTrigger
+        {/* <OverlayTrigger
           key='copy-to-clipboard'
           placement='top'
           overlay={<Tooltip id='tooltip-copy-to-clipboard'>Copy Code</Tooltip>}
@@ -47,7 +47,7 @@ const CodeBlock: React.FC<Props> = ({code, language}) => {
           <CopyToClipboard text={code} onCopy={() => setCopied(true)}>
             <a className='highlight-copy btn'>{copied ? 'copied' : 'copy'}</a>
           </CopyToClipboard>
-        </OverlayTrigger>
+        </OverlayTrigger> */}
 
         <div className='highlight-code' ref={codeRef}>
           <Highlight {...defaultProps} theme={theme} code={code} language={language}>

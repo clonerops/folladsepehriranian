@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { useRetrievesNotSendedOrder } from "./core/_hooks"
 import ReusableTable from "../../../_cloner/helpers/components/Table"
 import { columns } from "./helpers/notSendedColumn"
+import { Card6 } from "../../../_cloner/partials/content/cards/Card6"
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
 
 
 const Cargo = () => {
@@ -15,10 +17,10 @@ const Cargo = () => {
         </Link>
     }
 
-    return (    
-        <>
+    return (
+        <Card7 image="" title="">
             <ReusableTable columns={columns} data={cargoNotSended} isError={isError} isLoading={isLoading} renderActions={renderAction} />
-        </>
+        </Card7>
     )
 }
 

@@ -27,10 +27,20 @@ const retrieveOrder = async (id: string | undefined) => {
     }
 }
 
-// Cargo Annoncment
+const confirmOrder = async (id: string) => {
+    try {
+        const { data } = await http.put(`/v1/Order/ConfirmOrder/${id}`, JSON.stringify({orderId: id}))
+        return data
+    } catch (error: any) {
+        return error.response
+    }
+}
+
+
 
 export {
     createOrder,
     retrieveOrders,
-    retrieveOrder,   
+    retrieveOrder,
+    confirmOrder 
 }

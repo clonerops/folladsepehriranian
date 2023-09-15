@@ -6,6 +6,7 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CustomInput from "../../../_cloner/helpers/components/CustomInput";
 import CreateSupplier from "./components/CreateSupplier";
 import EditSupplier from "./components/EditSupplier";
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 
 const Suppliers = () => {
     const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
@@ -63,7 +64,7 @@ const Suppliers = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {suppliersLoading && <Backdrop loading={suppliersLoading} />}
-            <div>
+            <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
                         <CustomInput
@@ -219,7 +220,7 @@ const Suppliers = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </Card7>
             <Modal
                 // title="ایجاد تامین کننده جدید"
                 isOpen={isCreateOpen}

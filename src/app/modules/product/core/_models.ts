@@ -8,11 +8,16 @@ export interface IProducts {
     approximateWeight: number | string | undefined
     numberInPackage: number | string | undefined
     statusId?: number | string | undefined
-    size: string | undefined
-    standard: string | undefined
-    productState: string | undefined
     description: string | undefined
     brandName?: string | undefined
+    productDetail?: IProductDetails
+}
+
+export interface IProductDetails {
+    size: number | string | undefined
+    standard: number | string | undefined
+    productState: number | string | undefined
+    productIntegratedName: string | undefined
 }
 
 export interface IBrands {
@@ -33,4 +38,4 @@ export interface ISuppliers {
     overPrice: number | undefined,
     priceDate: string | undefined,
     rate: number | undefined
-  }
+}

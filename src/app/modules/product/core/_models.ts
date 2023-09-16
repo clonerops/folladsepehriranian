@@ -39,3 +39,10 @@ export interface ISuppliers {
     priceDate: string | undefined,
     rate: number | undefined
 }
+
+export interface IProductPrice {
+    id?: string | undefined,
+    price: number | undefined,
+    productId: string | undefined,
+    productBrandId: number | undefined
+}

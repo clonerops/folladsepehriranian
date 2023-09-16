@@ -11,6 +11,7 @@ import Cargo from '../modules/cargo/Cargo'
 import Confirm from '../modules/cargo/components/Confirm'
 import RecievePayment from '../modules/payment/RecievePayment'
 import PaymentAccounting from '../modules/payment/PaymentAccounting'
+import ProductPrice from '../modules/product/ProductPrice'
 
 const PrivateRoutes = () => {
 
@@ -30,6 +31,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard/user/create' element={<CreateUser />} />
         {/* Products */}
         <Route path='dashboard/product/managment' element={<Products />} />
+        <Route path='dashboard/product/price' element={<ProductPrice />} />
         <Route path='dashboard/product/supplier' element={<Suppliers />} />
         {/* Customer */}
         <Route path='dashboard/customer/managment' element={<Customer />} />

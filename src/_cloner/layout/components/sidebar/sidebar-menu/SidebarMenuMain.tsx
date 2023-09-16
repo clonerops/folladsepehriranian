@@ -103,6 +103,7 @@ const SidebarMenuMain = () => {
         icon='/media/icons/duotune/general/gen022.svg'
       >
         <SidebarMenuItem to='/dashboard/product/managment' title='لیست محصولات' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/product/price' title='قیمت محصولات' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/product/supplier' title='لیست تامین کنندگان' hasBullet={true} />
 
       </SidebarMenuItemWithSub>

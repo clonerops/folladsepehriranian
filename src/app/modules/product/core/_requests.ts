@@ -1,5 +1,5 @@
 import { http } from "../../../../_cloner/helpers/axiosConfig";
-import { IProducts, ISuppliers } from "./_models";
+import { IProductPrice, IProducts, ISuppliers } from "./_models";
 
 const retrieveProducts = async (
     PageNumber: number | null | string = "",
@@ -126,6 +126,63 @@ const deleteSupplier = async (id: string) => {
     }
 };
 
+// Product Price
+const retrieveProductPrice = async (PageNumber: number | null | string = "", PageSize: number | null | string = "") => {
+    let url: string = ``;
+
+    if (PageNumber || PageSize === "") {
+        url = `/v${1}/ProductPrice`;
+    } else {
+        url = `/v${1}/ProductPrice?PageNumber=${PageNumber}&PageSize=${PageSize}`;
+    }
+
+    const { data } = await http.get(url);
+    return data;
+};
+
+const createProductPrice = async (formData: IProductPrice) => {
+    try {
+        const { data } = await http.post(
+            `/v${1}/ProductPrice`,
+            JSON.stringify(formData)
+        );
+        return data;
+    } catch (error: any) {
+        return error.response;
+    }
+};
+
+const retrieveProductPriceById = async (id: number) => {
+    try {
+        const { data } = await http.get(`/v${1}/ProductPrice/${id}`);
+        return data;
+    } catch (error: any) {
+        return error?.response;
+    }
+};
+
+const updateProductPrice = async (formData: IProductPrice) => {
+    try {
+        const { data } = await http.put(
+            `/v${1}/ProductPrice/${formData.id}`,
+            JSON.stringify(formData)
+        );
+        return data;
+    } catch (error: any) {
+        return error?.response;
+    }
+};
+
+const deleteProductPrice = async (id: string) => {
+    try {
+        const { data } = await http.delete(`/v${1}/ProductPrice/${id}`);
+        return data;
+    } catch (error: any) {
+        return error.response;
+    }
+};
+
+
 
 export {
     retrieveProducts,
@@ -140,4 +197,10 @@ export {
     retrieveSupplierById,
     updateSupplier,
     deleteSupplier,
+    // ProductPrice
+    retrieveProductPrice,
+    createProductPrice,
+    retrieveProductPriceById,
+    updateProductPrice,
+    deleteProductPrice
 };

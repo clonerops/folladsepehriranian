@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as api from "./_requests";
-import { IProducts, ISuppliers } from "./_models";
+import { IProductPrice, IProducts, ISuppliers } from "./_models";
 
 const useRetrieveProducts = () => {
     return useQuery(["products"], () => api.retrieveProducts());
@@ -63,6 +63,34 @@ const useDeleteSupplier = () => {
         return api.deleteSupplier(id);
     });
 };
+// Product Price
+const useRetrieveProductPrice = () => {
+    return useQuery(["productPrice"], () => api.retrieveProductPrice());
+};
+
+const useCreateProductPrice = () => {
+    return useMutation((formData: IProductPrice) => {
+        return api.createProductPrice(formData);
+    });
+};
+
+const useRetrieveProductPriceById = () => {
+    return useMutation((id: number) => {
+        return api.retrieveProductPriceById(id);
+    });
+};
+
+const useUpdateProductPrice = () => {
+    return useMutation((formdata: IProductPrice) => {
+        return api.updateProductPrice(formdata);
+    });
+};
+
+const useDeleteProductPrice = () => {
+    return useMutation((id: string) => {
+        return api.deleteProductPrice(id);
+    });
+};
 
 
 export {
@@ -77,4 +105,9 @@ export {
     useRetrieveSupplierById,
     useUpdateSupplier,
     useDeleteSupplier,
+    useRetrieveProductPrice,
+    useCreateProductPrice,
+    useRetrieveProductPriceById,
+    useUpdateProductPrice,
+    useDeleteProductPrice
 };

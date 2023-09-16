@@ -101,7 +101,7 @@ const ProductSelectedListInModal = (props: {
                                         {item.productName}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.productDetail?.standard}
+                                        {item.productDetail?.productIntegratedName}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.approximateWeight}

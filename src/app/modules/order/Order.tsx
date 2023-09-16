@@ -149,15 +149,15 @@ const Order = () => {
     };
 
     const handleProductSelect = (item: IProducts) => {
-        if (item.productName) {
-            setSearchQuery(item?.productName.toString());
+        if (item.productDetail?.productIntegratedName) {
+            setSearchQuery(item?.productDetail.productIntegratedName.toString());
             setShowProducts(false);
         }
     };
 
     useEffect(() => {
-        if (selectProductFromModal?.productName)
-            setSearchQuery(selectProductFromModal?.productName);
+        if (selectProductFromModal?.productDetail?.productIntegratedName)
+            setSearchQuery(selectProductFromModal?.productDetail?.productIntegratedName);
         setProductSelected(selectProductFromModal?.id);
     }, [selectProductFromModal]);
 
@@ -513,14 +513,14 @@ const Order = () => {
                                                                         <span className="tw-text-sm tw-px-4">
                                                                             {" "}
                                                                             {
-                                                                                item.productName
+                                                                                item.productDetail?.productIntegratedName
                                                                             }
                                                                         </span>
                                                                     </div>
                                                                     <span className="tw-text-xs tw-px-4">
                                                                         {" "}
                                                                         {
-                                                                            item.brandName
+                                                                            item.productDetail?.productState
                                                                         }
                                                                     </span>
                                                                 </div>

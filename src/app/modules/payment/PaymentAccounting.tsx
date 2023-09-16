@@ -6,14 +6,12 @@ import { useGetRecievePaymentByApproved } from "./core/_hooks"
 import { columns } from "./helpers/paymentAccountingColumns"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import { IPayment } from "./core/_models"
-import Modal from "../../../_cloner/helpers/components/Modal"
-import { DownloadFile } from "../../../_cloner/helpers/DownloadFiles"
-import { saveAs } from 'file-saver';
+import { DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
 
 const approvied = [
     { value: "0", label: "تایید نشده" },
     { value: "1", label: "تایید شده" },
-    { value: "2", label: "تکمیل شده" }
+    // { value: "2", label: "تکمیل شده" }
 ]
 
 const PaymentAccounting = () => {
@@ -29,16 +27,39 @@ const PaymentAccounting = () => {
     }
 
 
+    var signatures: any = {
+        JVBERi0: "application/pdf",
+        R0lGODdh: "image/gif",
+        R0lGODlh: "image/gif",
+        iVBORw0KGgo: "image/png",
+        "/9j/": "image/jpg"
+    };
+
+    function detectMimeType(b64: any) {
+        for (var s in signatures) {
+            if (b64.indexOf(s) === 0) {
+                return signatures[s];
+            }
+        }
+    }
     const handleEdit = (item: IPayment) => {
-        console.log(item)
-        console.log()
         setLoadingDownloadFile(true)
-        const outputFilename = `filesattachments${Date.now()}`;
         item?.attachments?.forEach(element => {
-            console.log(typeof(element.fileData))
-            DownloadFile(element.fileData, outputFilename)
-            setLoadingDownloadFile(false)
-        });    
+            switch (detectMimeType(element.fileData)) {
+                case "application/pdf":
+                    const outputFilenamePdf = `filesattachments${Date.now()}.pdf`;
+                    DownloadFilePDF(element.fileData, outputFilenamePdf)
+                    break;
+                case "image/png":
+                    const outputFilenamePng = `filesattachments${Date.now()}.png`;
+                    DownloadFilePNG(element.fileData, outputFilenamePng)        
+                    break;
+            
+                default:
+                    break;
+            }
+            setLoadingDownloadFile(false)        
+        });
     };
 
     const renderActions = (item: any) => {

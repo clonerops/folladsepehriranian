@@ -21,8 +21,6 @@
     "bootstrap-icons": "^1.5.0",
     "chart.js": "3.7.1",
     "clsx": "1.1.1",
-    "file-saver": "^2.0.5",
-    "file-type": "^18.5.0",
     "formik": "2.2.9",
     "fuse.js": "^6.6.2",
     "highcharts": "^11.1.0",

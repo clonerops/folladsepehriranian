@@ -15,5 +15,5 @@ export interface IPayment {
 
 export interface IAttachment {
     id: string | null | undefined
-    fileData: string | null | undefined
+    fileData: string 
 }

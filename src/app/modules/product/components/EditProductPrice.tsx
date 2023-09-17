@@ -17,6 +17,8 @@ const EditProductPrice = (props: Props) => {
     const { data: brands } = useRetrieveBrands();
     const { mutate, isLoading } = useUpdateProductPrice()
 
+    console.log(props.item)
+
     const initialValues = {
         price: props.item?.price,
         productId: props.item?.productId,

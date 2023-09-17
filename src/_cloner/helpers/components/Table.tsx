@@ -1,4 +1,3 @@
-// ReusableTable.tsx
 import React from 'react';
 
 interface TableColumn {
@@ -39,7 +38,7 @@ const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, ren
         <div className='tw-overflow-x-auto tw-min-w-full'>
             <table className="tw-w-full">
                 <thead className="tw-bg-slate-200">
-                    <tr >
+                    <tr>
                         {columns?.map((column) => (
                             <th className="tw-min-w-[140px] tw-text-gray-500 tw-border tw-border-gray-100 tw-py-4 px-2 tw-text-center" key={column.key}>{column.title}</th>
                         ))}

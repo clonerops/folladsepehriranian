@@ -16,6 +16,7 @@ const EditSupplier = (props: {
     item: ISuppliers | undefined,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
+    console.log(props.item)
     // Fetching Data
     const { mutate, data, isLoading } = useUpdateSupplier();
     const { data: customers } = useGetCustomers()

@@ -13,6 +13,7 @@ import moment from "moment-jalaali"
 import Swal from "sweetalert2";
 import Backdrop from "../../../../_cloner/helpers/components/Backdrop"
 import { Card7 } from "../../../../_cloner/partials/content/cards/Card7"
+import Detail from "../../order/components/Detail"
 
 const initialValues = {
     driverName: "",
@@ -38,19 +39,7 @@ const Confirm = () => {
             {isLoading && <Backdrop loading={isLoading} />}
             {orderLoading && <Backdrop loading={orderLoading} />}
             <Card7 image="" title="">
-                <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4">جزئیات سفارش {data?.data?.orderCode}</h3>
-
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-text-right p-4">
-                    <div className="py-4">نوع فاکتور: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.invoiceTypeDesc}</span></div>
-                    <div className="py-4">نوع خروج: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.exitType === 1 ? "عادی" : "بعد از تسویه"}</span></div>
-                    <div className="py-4">نوع ارسال: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.orderSendTypeDesc}</span></div>
-                    <div className="py-4">نحوه پرداخت کرایه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.paymentTypeDesc}</span></div>
-                    <div className="py-4">اسم رسمی: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.customerOfficialName}</span></div>
-                    <div className="py-4">تاریخ تسویه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-lg">{data?.data?.settlementDate}</span></div>
-                </div>
-
-                <ReusableTable columns={columns} data={data?.data?.details} isError={orderError} isLoading={orderLoading} renderActions={() => { return <></> }} />
-
+                <Detail data={data} isError={orderError} isLoading={orderLoading} />
                 <Formik initialValues={initialValues} validationSchema={confirmValidation} onSubmit={
                     async (values, { setStatus, setSubmitting }) => {
                         try {

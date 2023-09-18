@@ -10,6 +10,7 @@ import { customerType } from "../helpers/customerType";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { convertValueLabelCustomerValidaty } from "../helpers/convertValueLabel";
 import { createValiadtion } from "../validation/createValidation";
+import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
 
 const CreateCustomer = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -17,7 +18,6 @@ const CreateCustomer = (props: {
 }) => {
     const { mutate, data, isLoading } = useCreateCustomer();
     const { data: customerValidityData } = useGetCustomerValidities()
-
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -81,19 +81,8 @@ const CreateCustomer = (props: {
                                     <span className="tw-px-4 tw-font-bold tw-text-lg">آیا تامین کننده می باشد؟</span>
                                 </label>
                             </div>
-
-                            <div className="tw-w-full tw-my-2 tw-text-right">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع مشتری</label>
-                                <div className="tw-flex tw-justify-start tw-items-center">
-                                    <FormikRadioGroup divClassName="tw-w-full tw-my-2" name="customerType" options={customerType} />
-                                </div>
-                            </div>
-                            <div className="tw-w-full tw-my-2 tw-text-right">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع اعتبار</label>
-                                <div className="tw-flex tw-justify-start tw-items-center">
-                                    <FormikRadioGroup divClassName="tw-w-full tw-my-2" name="customerValidityId" options={convertValueLabelCustomerValidaty(customerValidityData)} />
-                                </div>
-                            </div>
+                            <FormikSelect options={customerType} name="customerType" placeholder="نوع مشتری" />
+                            <FormikSelect options={convertValueLabelCustomerValidaty(customerValidityData)} name="customerValidityId" placeholder="نوع اعتبار" />
                         </div>
                         <div className="tw-w-full tw-my-2 md:tw-col-span-3">
                             <FormikInput divClassName="tw-w-full tw-my-2" name="address1" placeholder="آدرس 1" type="text" />

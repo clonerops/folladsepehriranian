@@ -15,6 +15,7 @@ import FormikRadioGroup from "../../../../_cloner/helpers/components/ForminkRadi
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { convertValueLabelCustomerValidaty } from "../helpers/convertValueLabel";
 import { customerType } from "../helpers/customerType";
+import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
 
 const EditCustomer = (props: {
     item: ICustomer | undefined,
@@ -42,9 +43,7 @@ const EditCustomer = (props: {
         address1: props.item?.address1,
         address2: props.item?.address2,
     };
-
-    console.log(props.item?.customerType)
-
+console.log({value: props.item?.customerType, label: props.item?.customerType == 0 ? "حقیقی": "حقوقی"})
     return (
         <>
             {data?.succeeded && (
@@ -91,19 +90,8 @@ const EditCustomer = (props: {
                                     <span className="tw-px-4 tw-font-bold tw-text-lg">آیا تامین کننده می باشد؟</span>
                                 </label>
                             </div>
-
-                            <div className="tw-w-full tw-my-2 tw-text-right">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع مشتری</label>
-                                <div className="tw-flex tw-justify-start tw-items-center">
-                                    <FormikRadioGroup divClassName="tw-w-full tw-my-2" name="customerType" options={customerType} />
-                                </div>
-                            </div>
-                            <div className="tw-w-full tw-my-2 tw-text-right">
-                                <label className="tw-font-yekan_bold tw-text-lg">نوع اعتبار</label>
-                                <div className="tw-flex tw-justify-start tw-items-center">
-                                    <FormikRadioGroup divClassName="tw-w-full tw-my-2" name="customerValidityId" options={convertValueLabelCustomerValidaty(customerValidityData)} />
-                                </div>
-                            </div>
+                            <FormikSelect defaultValue={{value: props.item?.customerType, label: props.item?.customerType == 0 ? "حقیقی": "حقوقی"}} options={customerType} name="customerType" placeholder="نوع مشتری" />
+                            <FormikSelect defaultValue={{value: props.item?.customerValidityId, label: props.item?.customerValidityId == 1 ? "عادی" : props.item?.customerValidityId == 2 ? "VIP" : "سیاه"}}  options={convertValueLabelCustomerValidaty(customerValidityData)} name="customerValidityId" placeholder="نوع اعتبار" />
                         </div>
                         <div className="tw-w-full tw-my-2 md:tw-col-span-3">
                             <FormikInput divClassName="tw-w-full tw-my-2" name="address1" placeholder="آدرس 1" type="text" />

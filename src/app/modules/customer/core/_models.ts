@@ -8,8 +8,8 @@ export interface ICustomer {
     nationalId: string | undefined
     mobile: string | undefined
     address1: string | undefined
-    customerType: number | undefined
-    customerValidityId: number | undefined
+    customerType: any
+    customerValidityId: any
     tel?: string | undefined
     tel1?: string | undefined
     tel2: string | undefined

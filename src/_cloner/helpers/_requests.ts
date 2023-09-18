@@ -28,6 +28,10 @@ const getWarehouses = async () => {
     const { data } = await http.get('/v1/GenericApi/GetWarehouses')
     return data
 }
+const getReceivePaymentSources = async () => {
+    const { data } = await http.get('/v1/GenericApi/GetReceivePaymentSources')
+    return data
+}
 
 export {
     getSendTypes,
@@ -36,5 +40,6 @@ export {
     getInvoiceType,
     getCustomerValidities,
     getWarehouseTypes,
-    getWarehouses
+    getWarehouses,
+    getReceivePaymentSources
 }

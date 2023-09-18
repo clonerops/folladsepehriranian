@@ -22,6 +22,9 @@ const useGetWarehouseTypes = () => {
 const useGetWarehouses = () => {
     return useQuery(['warehouses'], () => api.getWarehouses())
 }
+const useGetReceivePaymentSources = () => {
+    return useQuery(['receivePaymentSources'], () => api.getReceivePaymentSources())
+}
 
 export {
     useGetSendTypes,
@@ -30,5 +33,6 @@ export {
     useGetInvoiceType,
     useGetCustomerValidities,
     useGetWarehouseTypes,
-    useGetWarehouses
+    useGetWarehouses,
+    useGetReceivePaymentSources
 }

@@ -8,6 +8,9 @@ import { usePostRecievePayment } from './core/_hooks'
 import SubmitButton from '../../../_cloner/helpers/components/SubmitButton'
 import Swal from 'sweetalert2'
 import Backdrop from '../../../_cloner/helpers/components/Backdrop'
+import FormikSelect from '../../../_cloner/helpers/components/FormikSelect'
+import { useGetReceivePaymentSources } from '../../../_cloner/helpers/_hooks'
+import { dropdownReceivePaymentResource } from './helpers/dropdownConvert'
 
 const initialValues = {
     ReceivedFrom: "",
@@ -23,6 +26,7 @@ const initialValues = {
 const RecievePayment = () => {
 
     const { mutate, isLoading } = usePostRecievePayment()
+    const { data: paymentResource } = useGetReceivePaymentSources()
 
     const [files, setFiles] = useState<File[]>([]);
 
@@ -65,8 +69,10 @@ const RecievePayment = () => {
                         {({ handleSubmit }) => {
                             return <Form onSubmit={handleSubmit}>
                                 <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 tw-my-4'>
-                                    <FormikInput name='ReceivedFrom' placeholder='دریافت از' type='text' />
-                                    <FormikInput name='PayTo' placeholder='پرداخت به' type='text' />
+                                    <FormikSelect name='ReceivedFrom' placeholder='دریافت از' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    <FormikSelect name='PayTo' placeholder='پرداخت به' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    {/* <FormikInput name='ReceivedFrom' placeholder='دریافت از' type='text' /> */}
+                                    {/* <FormikInput name='PayTo' placeholder='پرداخت به' type='text' /> */}
                                     <FormikInput name='AccountOwner' placeholder='صاحب حساب' type='text' />
                                 </div>
                                 <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-4 tw-my-4'>

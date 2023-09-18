@@ -79,7 +79,7 @@ const EditCustomer = (props: {
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                             <div className="tw-w-full tw-my-2 tw-text-right">
                                 <label className="tw-flex">
-                                    <FormikInput divClassName="tw-my-2" name="isSupplier" placeholder="" type="checkbox" />
+                                    <FormikInput defaultChecked={props.item?.isSupplier} divClassName="tw-my-2" name="isSupplier" placeholder="" type="checkbox" />
                                     <span className="tw-px-4 tw-font-bold tw-text-lg">آیا تامین کننده می باشد؟</span>
                                 </label>
                             </div>

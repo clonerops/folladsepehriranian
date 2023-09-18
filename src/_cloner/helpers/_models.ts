@@ -29,3 +29,4 @@ export interface IWarehouse {
     products: string | number | null,
     id: number | null,
 }
+export interface IReceivePaymentSources extends IPurchaseInvoice {}

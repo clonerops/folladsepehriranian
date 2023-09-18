@@ -6,12 +6,13 @@ type Props = {
     placeholder: string;
     name: string;
     value?: string;
-    divClassName?: string
+    divClassName?: string;
+    defaultChecked?: boolean
 }
 
 const FormikInput = (props: Props) => {
 
-    const { type, placeholder, name, divClassName, value, ...rest } = props;
+    const { type, placeholder, name, divClassName, value, defaultChecked, ...rest } = props;
 
     const [field] = useField({ name, value })
 
@@ -25,6 +26,7 @@ const FormikInput = (props: Props) => {
                     className="customInput tw-p-[8px] tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
                     placeholder={placeholder}
                     id={name}
+                    defaultChecked={defaultChecked}
                     {...getFormikFieldValidationProps(formikProps, name)}
                     {...field}
                     {...rest}

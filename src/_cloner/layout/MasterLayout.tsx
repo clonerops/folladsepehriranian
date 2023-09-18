@@ -23,7 +23,14 @@ const MasterLayout = () => {
   return (
     <PageDataProvider>
       <ThemeModeProvider>
-        <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
+        <div style={{
+          minHeight:"100vh",
+          width: "100%",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundOrigin: "cover",
+          backgroundImage: `url(${toAbsoluteUrl('/media/LOGOS/blob-scene-haikei.svg')})`
+        }} className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
             <HeaderWrapper />
             <div className='app-wrapper flex-column flex-row-fluid' id='kt_app_wrapper'>

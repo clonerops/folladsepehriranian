@@ -1,16 +1,10 @@
-import { Form, Formik, useFormik } from "formik";
-import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import CustomTextarea from "../../../../_cloner/helpers/components/CustomTextarea";
-import ProfessionalSelect from "../../../../_cloner/helpers/components/ProfessionalSelect";
-import { useState } from "react";
+import { Form, Formik } from "formik";
 import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
-import { useCreateProduct, useRetrieveBrands } from "../core/_hooks";
+import { useCreateProduct } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
-import { dropdownBrand } from "../helpers/dropdownConvert";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
-import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 
 const CreateProduct = (props: {
@@ -19,19 +13,10 @@ const CreateProduct = (props: {
 }) => {
     // Fetchig 
     const { mutate, data, isLoading } = useCreateProduct();
-    const { data: brands } = useRetrieveBrands();
-
     // States
-    // const [brandSelected, setBrandSelected] = useState<{ value: number, label: string } | null>(null);
-
-    // const handleBrandChange = (selectedOption: any) => {
-    //     setBrandSelected(selectedOption);
-    // };
-
     const initialValues = {
         productName: "",
         warehouseId: 1,
-        // productBrandId: 1,
         productSize: "",
         approximateWeight: "",
         numberInPackage: "",
@@ -40,28 +25,6 @@ const CreateProduct = (props: {
         productState: "",
         description: "",
     };
-
-    // const formik = useFormik({
-    //     initialValues,
-    //     validationSchema: createProductValidations,
-    //     onSubmit: async (values, { setStatus, setSubmitting }) => {
-    //         try {
-    //             const formData = {
-    //                 ...values,
-    //                 // productBrandId: brandSelected?.value
-    //             }
-    //             mutate(formData, {
-    //                 onSuccess: () => {
-    //                     props.refetch()
-    //                     props.setIsCreateOpen(false)
-    //                 }
-    //             });
-    //         } catch (error) {
-    //             setStatus("اطلاعات ثبت محصول نادرست می باشد");
-    //             setSubmitting(false);
-    //         }
-    //     },
-    // });
 
     return (
         <>

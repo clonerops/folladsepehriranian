@@ -20,7 +20,7 @@ export const columns = [
     key: 'isSupplier', 
     title: 'تامین کننده؟',
     className: "tw-bg-purple-500 tw-px-8 tw-py-2 tw-rounded-lg tw-text-white",
-    customText: (value: any) => (value == false ? 'خیر' : "بله")
+    customText: (value: any) => (value === false ? 'خیر' : "بله")
  },
   { key: 'address1', title: 'آدرس یک' },
   { key: 'address2', title: 'آدرس دو' },

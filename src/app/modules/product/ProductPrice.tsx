@@ -1,10 +1,5 @@
-import { Form, Formik } from "formik"
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
-import FormikSelect from "../../../_cloner/helpers/components/FormikSelect"
-import { useCreateProductPrice, useDeleteProductPrice, useRetrieveBrands, useRetrieveProductPrice, useRetrieveProducts } from "./core/_hooks"
-import { dropdownBrand, dropdownProduct } from "./helpers/dropdownConvert"
-import FormikInput from "../../../_cloner/helpers/components/FormikInput"
-import SubmitButton from "../../../_cloner/helpers/components/SubmitButton"
+import { useDeleteProductPrice, useRetrieveProductPrice } from "./core/_hooks"
 import ReusableTable from "../../../_cloner/helpers/components/Table"
 import { columns } from "./helpers/productPriceColumns"
 import { IProductPrice } from "./core/_models"
@@ -34,7 +29,6 @@ const ProductPrice = () => {
             }
         });
     };
-
 
     const renderAction = (item: any) => {
         return <div className="tw-flex tw-gap-4">

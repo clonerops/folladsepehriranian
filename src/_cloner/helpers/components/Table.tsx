@@ -31,12 +31,7 @@ const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, ren
 
         return value;
     };
-
-
-    { isLoading && <div>درحال بارگزاری</div> }
-    { isError && <div>بارگزاری محصولات با خطا مواجه شده است!</div> }
-
-
+    
     return (
         <div className='tw-overflow-x-auto tw-min-w-full'>
             <table className="tw-w-full">

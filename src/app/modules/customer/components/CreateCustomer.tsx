@@ -5,7 +5,6 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanst
 import { useCreateCustomer } from "../core/_hooks";
 import { useGetCustomerValidities } from "../../../../_cloner/helpers/_hooks";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
-import FormikRadioGroup from "../../../../_cloner/helpers/components/ForminkRadioGroup";
 import { customerType } from "../helpers/customerType";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { convertValueLabelCustomerValidaty } from "../helpers/convertValueLabel";

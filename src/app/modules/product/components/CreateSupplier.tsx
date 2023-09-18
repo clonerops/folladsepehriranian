@@ -11,6 +11,7 @@ import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import moment from "moment-jalaali";
+import { createSupplierValidations } from "../validations/createSupplier";
 
 const CreateSupplier = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -38,7 +39,7 @@ const CreateSupplier = (props: {
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
-            <Formik initialValues={initialValues} onSubmit={
+            <Formik validationSchema={createSupplierValidations} initialValues={initialValues} onSubmit={
                 async (values, { setStatus, setSubmitting }) => {
                     try {
                         const formData = {
@@ -50,6 +51,7 @@ const CreateSupplier = (props: {
                             productId: values.productId,
                             priceDate: moment(values.priceDate).format("jYYYY/jMM/jDD")
                         }
+
                         mutate(formData, {
                             onSuccess: () => {
                                 props.refetch()

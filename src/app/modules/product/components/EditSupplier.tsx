@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import {  useRetrieveProducts, useUpdateSupplier } from "../core/_hooks";
+import { useRetrieveProducts, useUpdateSupplier } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { ISuppliers } from "../core/_models";
 import EditText from "../../../../_cloner/helpers/components/EditText";
@@ -16,7 +16,6 @@ const EditSupplier = (props: {
     item: ISuppliers | undefined,
     refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
 }) => {
-    console.log(props.item)
     // Fetching Data
     const { mutate, data, isLoading } = useUpdateSupplier();
     const { data: customers } = useGetCustomers()
@@ -57,8 +56,8 @@ const EditSupplier = (props: {
                 {({ handleSubmit, setFieldValue }) => {
                     return <Form onSubmit={handleSubmit} className="container">
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8 tw-my-4">
-                            <FormikSelect name={"customerId"} placeholder="مشتری" options={dropdownCustomer(customers?.data)} />
-                            <FormikSelect name={"productId"} placeholder="کالا" options={dropdownProduct(products?.data)} />
+                            <FormikSelect defaultValue={{ value: props.item?.customerId, label: `${props.item?.customerFirstName + " " + props.item?.customerLastName}` }} name={"customerId"} placeholder="مشتری" options={dropdownCustomer(customers?.data)} />
+                            <FormikSelect defaultValue={{value: props.item?.productId, label: props.item?.productName}} name={"productId"} placeholder="کالا" options={dropdownProduct(products?.data)} />
                         </div>
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8 tw-my-4">
                             <FormikInput name="price" placeholder="قیمت" type="text" />

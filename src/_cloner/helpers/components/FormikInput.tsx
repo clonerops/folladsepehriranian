@@ -16,7 +16,7 @@ const FormikInput = (props: Props) => {
     const [field] = useField({ name, value })
 
     const formikProps = useFormikContext()
-    const { error, helperText, ...otherProps } = getFormikFieldValidationProps(formikProps, name);
+    const { error, helperText } = getFormikFieldValidationProps(formikProps, name);
     return (
         <>
             <div className={divClassName}>

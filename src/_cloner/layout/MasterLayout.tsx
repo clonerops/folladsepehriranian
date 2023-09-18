@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { HeaderWrapper } from './components/header'
 import { ScrollTop } from './components/scroll-top'
 import { Content } from './components/content'
-import { FooterWrapper } from './components/footer'
 import { Sidebar } from './components/sidebar'
 import {
   DrawerMessenger,

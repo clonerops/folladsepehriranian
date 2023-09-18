@@ -1,7 +1,7 @@
 export interface IProducts {
     id?: string | undefined
     productName: string | undefined
-    productBrandId: number | undefined
+    // productBrandId: number | undefined
     productCode?: number | undefined
     warehouseId?: number | undefined
     productSize: string | undefined
@@ -45,4 +45,6 @@ export interface IProductPrice {
     price: number | undefined,
     productId: string | undefined,
     productBrandId: number | undefined
+    brandName?: number | undefined
+    product?: IProducts | undefined
 }

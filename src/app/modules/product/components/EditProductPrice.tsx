@@ -25,12 +25,12 @@ const EditProductPrice = (props: Props) => {
         productBrandId: props.item?.productBrandId
     }
     
-    
   return (
     <Formik initialValues={initialValues} onSubmit={
         async (values, { setStatus, setSubmitting }) => {
             try {
                 const formData = {
+                    id: props.item?.id,
                     price: Number(values.price),
                     productId: values.productId,
                     productBrandId: values.productBrandId
@@ -49,8 +49,8 @@ const EditProductPrice = (props: Props) => {
         {({ handleSubmit }) => {
             return <Form onSubmit={handleSubmit}>
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4">
-                    <FormikSelect name="productId" label="productId" options={dropdownProduct(products?.data)} placeholder="محصول" />
-                    <FormikSelect name="productBrandId" label="productBrandId" options={dropdownBrand(brands)} placeholder="برند" />
+                    <FormikSelect defaultValue={{value: props.item?.product?.id, label: props.item?.product?.productName}}  name="productId" label="productId" options={dropdownProduct(products?.data)} placeholder="محصول" />
+                    <FormikSelect defaultValue={{value: props.item?.productBrandId, label: props.item?.brandName}} name="productBrandId" label="productBrandId" options={dropdownBrand(brands)} placeholder="برند" />
                     <FormikInput name="price" type="text" placeholder="قیمت" />
                 </div>
                 <div className="tw-flex tw-justify-end tw-mt-4">

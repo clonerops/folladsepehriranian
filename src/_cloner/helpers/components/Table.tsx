@@ -3,6 +3,8 @@ import React from 'react';
 interface TableColumn {
     key: string;
     title: string;
+    className?: string
+    customText?: any
 }
 
 interface Props {
@@ -26,6 +28,7 @@ const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, ren
                 return null;
             }
         }
+
         return value;
     };
 
@@ -49,8 +52,12 @@ const ReusableTable: React.FC<Props> = ({ columns, data, isLoading, isError, ren
                     {data?.map((item, index) => (
                         <tr key={index}>
                             {columns?.map((column) => (
-                                <td className="tw-text-black tw-font-yekan_bold tw-py-4 tw-text-center" key={column.key}>
-                                    {getValueFromNestedKey(item, column.key)}
+                                <td className={
+                                    `tw-text-black tw-font-yekan_bold tw-py-4 tw-text-center `
+                                } key={column.key}>
+                                    <span className={column.className}>
+                                        {column.customText ? column.customText(getValueFromNestedKey(item, column.key)) : getValueFromNestedKey(item, column.key)}
+                                    </span>
                                 </td>
                             ))}
                             <td className="tw-flex tw-justify-center tw-items-center tw-text-center tw-py-4">{renderActions(item)}</td>

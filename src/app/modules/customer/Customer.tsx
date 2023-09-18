@@ -39,8 +39,6 @@ const Customer = () => {
         }
     };
 
-
-
     const handleEdit = (item: ICustomer) => {
         setIsEditOpen(true);
         setItemForEdit(item);

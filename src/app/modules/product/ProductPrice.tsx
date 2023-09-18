@@ -3,11 +3,12 @@ import { useDeleteProductPrice, useRetrieveProductPrice } from "./core/_hooks"
 import ReusableTable from "../../../_cloner/helpers/components/Table"
 import { columns } from "./helpers/productPriceColumns"
 import { IProductPrice } from "./core/_models"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import MyModal from "../../../_cloner/helpers/components/HeadlessModal"
 import CreateProductPrice from "./components/CreateProductPrice"
 import EditProductPrice from "./components/EditProductPrice"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
+import FuseSearch from "../../../_cloner/helpers/FuseSearch"
 
 
 const ProductPrice = () => {
@@ -16,6 +17,11 @@ const ProductPrice = () => {
     // State
     const [itemForEdit, setItemForEdit] = useState<IProductPrice | undefined>();
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [results, setResults] = useState<IProductPrice[]>([])
+
+    useEffect(() => {
+        setResults(productPrice?.data)
+    }, [productPrice])
 
     const handleEdit = (item: IProductPrice | undefined) => {
         setIsOpen(true)
@@ -81,7 +87,10 @@ const ProductPrice = () => {
             {productPriceLoading && <Backdrop loading={productPriceLoading} />}
             <Card7 image="" title="">
                 <CreateProductPrice refetch={refetch} />
-                <ReusableTable columns={columns} data={productPrice?.data} isLoading={productPriceLoading} isError={productPriceError} renderActions={renderAction} />
+                <div className="tw-w-80 md:tw-w-[40%] tw-mb-2">
+                    <FuseSearch keys={['product.productName', 'brandName', 'price',]} placeholder="جستجو" data={productPrice?.data} threshold={0.5} setResults={setResults} />
+                </div>
+                <ReusableTable columns={columns} data={results} isLoading={productPriceLoading} isError={productPriceError} renderActions={renderAction} />
                 <MyModal title="ویرایش قیمت محصول" isOpen={isOpen} setIsOpen={setIsOpen}>
                     <EditProductPrice refetch={refetch} item={itemForEdit} />
                 </MyModal>

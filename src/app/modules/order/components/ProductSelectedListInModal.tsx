@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import { IProducts } from "../../product/core/_models";
+import { IProductInventories, IProducts } from "../../product/core/_models";
 
 const ProductSelectedListInModal = (props: {
     products: IProducts[] | undefined;
@@ -101,7 +101,7 @@ const ProductSelectedListInModal = (props: {
                                         {item.productName}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.productDetail?.productIntegratedName}
+                                        {item?.productIntegratedName}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
@@ -109,14 +109,15 @@ const ProductSelectedListInModal = (props: {
                                     {/* <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.brandName}
                                     </td> */}
-                                    <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.numberInPackage}
+                                    <td className="tw-flex tw-text-center tw-py-2 tw-border tw-border-gray-300">
+                                        {item.productInventories?.map((i) => i.warehouseType)}
+                                        {/* // {item.productInventories?.warehouseType} */}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.numberInPackage}
+                                        {item.productInventories?.map((i) => i.approximateInventory)}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.numberInPackage}
+                                        {item.productInventories?.map((i) => i.thickness)}
                                     </td>
                                 </tr>
                             );

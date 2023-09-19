@@ -10,14 +10,23 @@ export interface IProducts {
     statusId?: number | string | undefined
     description: string | undefined
     brandName?: string | undefined
-    productDetail?: IProductDetails
+    productIntegratedName?: string | undefined
+    size?: number | string | undefined
+    standard?: number | string | undefined
+    productState?: number | string | undefined
+    productInventories?: IProductInventories[]
+
 }
 
-export interface IProductDetails {
-    size: number | string | undefined
-    standard: number | string | undefined
-    productState: number | string | undefined
-    productIntegratedName: string | undefined
+export interface IProductInventories {
+    warehouseId: number | undefined
+    warehouseType: string | undefined
+    productBrandId: number | undefined
+    thickness: number | undefined
+    approximateInventory: number | undefined
+    floorInventory: number | undefined
+    maxInventory: number | undefined
+    minInventory: number | undefined
 }
 
 export interface IBrands {

@@ -21,10 +21,10 @@ const EditProduct = (props: {
         productSize: props.item?.productSize,
         approximateWeight: props.item?.approximateWeight,
         numberInPackage: props.item?.numberInPackage,
-        size: props.item?.productDetail?.size,
-        standard: props.item?.productDetail?.standard,
-        productState: props.item?.productDetail?.productState,
-        productIntegratedName: props.item?.productDetail?.productIntegratedName,
+        size: props.item?.size,
+        standard: props.item?.standard,
+        productState: props.item?.productState,
+        productIntegratedName: props.item?.productIntegratedName,
         description: props.item?.description,
     };
 

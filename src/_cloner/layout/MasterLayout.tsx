@@ -24,11 +24,11 @@ const MasterLayout = () => {
       <ThemeModeProvider>
         <div style={{
           minHeight:"100vh",
-          width: "100%",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundOrigin: "cover",
-          backgroundImage: `url(${toAbsoluteUrl('/media/LOGOS/blob-scene-haikei.svg')})`
+          // width: "100%",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
+          // backgroundOrigin: "cover",
+          // backgroundImage: `url(${toAbsoluteUrl('/media/LOGOS/blob-scene-haikei.svg')})`
         }} className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
             <HeaderWrapper />

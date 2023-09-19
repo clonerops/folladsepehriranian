@@ -149,15 +149,15 @@ const Order = () => {
     };
 
     const handleProductSelect = (item: IProducts) => {
-        if (item.productDetail?.productIntegratedName) {
-            setSearchQuery(item?.productDetail.productIntegratedName.toString());
+        if (item?.productIntegratedName) {
+            setSearchQuery(item?.productIntegratedName.toString());
             setShowProducts(false);
         }
     };
 
     useEffect(() => {
-        if (selectProductFromModal?.productDetail?.productIntegratedName)
-            setSearchQuery(selectProductFromModal?.productDetail?.productIntegratedName);
+        if (selectProductFromModal?.productIntegratedName)
+            setSearchQuery(selectProductFromModal?.productIntegratedName);
         setProductSelected(selectProductFromModal?.id);
     }, [selectProductFromModal]);
 
@@ -513,14 +513,14 @@ const Order = () => {
                                                                         <span className="tw-text-sm tw-px-4">
                                                                             {" "}
                                                                             {
-                                                                                item.productDetail?.productIntegratedName
+                                                                                item?.productIntegratedName
                                                                             }
                                                                         </span>
                                                                     </div>
                                                                     <span className="tw-text-xs tw-px-4">
                                                                         {" "}
                                                                         {
-                                                                            item.productDetail?.productState
+                                                                            item?.productState
                                                                         }
                                                                     </span>
                                                                 </div>

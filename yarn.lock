@@ -5467,7 +5467,7 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
 
 fuse.js@^6.6.2:
   version "6.6.2"
-  resolved "https://registry.npmjs.org/fuse.js/-/fuse.js-6.6.2.tgz"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-6.6.2.tgz#fe463fed4b98c0226ac3da2856a415576dc9a111"
   integrity sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==
 
 gensync@^1.0.0-beta.2:
@@ -8597,7 +8597,7 @@ react-dom@18.0.0:
 
 react-dropzone@^14.2.3:
   version "14.2.3"
-  resolved "https://registry.npmjs.org/react-dropzone/-/react-dropzone-14.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.2.3.tgz#0acab68308fda2d54d1273a1e626264e13d4e84b"
   integrity sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==
   dependencies:
     attr-accept "^2.2.2"
@@ -8649,7 +8649,7 @@ react-is@^18.0.0:
 
 react-multi-date-picker@^4.3.1:
   version "4.3.1"
-  resolved "https://registry.npmjs.org/react-multi-date-picker/-/react-multi-date-picker-4.3.1.tgz"
+  resolved "https://registry.yarnpkg.com/react-multi-date-picker/-/react-multi-date-picker-4.3.1.tgz#7027b1dc8ec338e2fe287152512963abee8d0b4f"
   integrity sha512-FBL7U9Ee3njRb3KAYijo4ySQDFWFZBKCrFd+FyXPHHoA4gPoY3yPk/gnKPX1M2/LetKVIM5bo8Moh7UJgDVX5g==
   dependencies:
     react-date-object "^2.1.5"

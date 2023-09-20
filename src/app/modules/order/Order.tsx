@@ -8,7 +8,7 @@ import CustomDatepicker from "../../../_cloner/helpers/components/CustomDatepick
 import ProductSelectedListInModal from "./components/ProductSelectedListInModal";
 import { useRetrieveBrands, useRetrieveProducts } from "../product/core/_hooks";
 import { IProducts } from "../product/core/_models";
-import { useFormik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 import { sliceNumberPrice } from "../../../_cloner/helpers/sliceNumberPrice";
 import { convertToPersianWord } from "../../../_cloner/helpers/convertPersian";
 import { useCreateOrder } from "./core/_hooks";
@@ -35,13 +35,13 @@ import {
     useGetWarehouses,
 } from "../../../_cloner/helpers/_hooks";
 import Swal from "sweetalert2";
+import FormikSelect from "../../../_cloner/helpers/components/FormikSelect";
+import FormikDatepicker from "../../../_cloner/helpers/components/FormikDatepicker";
+import SubmitButton from "../../../_cloner/helpers/components/SubmitButton";
 
 const Order = () => {
     // Fetching Data
-    const {
-        data: customers,
-        refetch,
-    } = useGetCustomers();
+    const { data: customers, refetch } = useGetCustomers();
     const {
         data: products,
         isLoading: productLoading,
@@ -172,246 +172,348 @@ const Order = () => {
         setTotalAmount(newTotal);
     }, [orders]);
 
+    // const initialValues = {
+    //     productName: "",
+    //     proximateAmount: "",
+    //     price: "",
+    //     productDesc: "",
+    //     sellerCompanyRow: "",
+    //     buyPrice: "",
+    //     rowId: "",
+    // };
     const initialValues = {
-        productName: "",
+        customerId: 0,
+        totalAmount: 0,
+        orderCode: 0,
+        confirmedStatus: true,
+        description: "",
+        exitType: 0,
+        orderSendTypeId: 0,
+        paymentTypeId: 0,
+        customerOfficialName: "",
+        invoiceTypeId: 0,
+        freightName: "",
+        settlementDate: "",
+        dischargePlaceAddress: "",
+        freightDriverName: "",
+        carPlaque: "",
+        rowId: 0,
+        productId: "",
+        warehouseId: "",
+        warehouseTypeId: "",
         proximateAmount: "",
+        numberInPackage: "",
         price: "",
-        productDesc: "",
-        sellerCompanyRow: "",
+        cargoSendDate: "",
         buyPrice: "",
-        rowId: "",
+        purchaseInvoiceTypeId: "",
+        purchaserCustomerId: "",
+        purchaseSettlementDate: "",
+        sellerCompanyRow: "",
     };
 
-    const formik = useFormik({
-        initialValues,
-        onSubmit: async (values, { resetForm }) => {
-            const productOrder = {
-                id: productSelected,
-                productName: searchQuery,
-                productBrandId: brandSelected?.value,
-                productBrandName: brandSelected?.label,
-                warehouseId: storeSelected?.value,
-                warehouseTypeId: storeSelected?.warehouseTypeId,
-                warehouseName: storeSelected?.label,
-                productDesc: values.productDesc,
-                buyPrice: values.buyPrice,
-                purchaseSettlementDate: purchaseSettlementDate,
-                purchaseInvoiceTypeId: purchaseInvoiceSelect?.value,
-                purchaseInvoiceTypeName: purchaseInvoiceSelect?.label,
-                sellerCompanyRow: values.sellerCompanyRow,
-                proximateAmount: values.proximateAmount,
-                price: values.price,
-                rowId: values.rowId,
-            };
+    // const formik = useFormik({
+    //     initialValues,
+    //     onSubmit: async (values, { resetForm }) => {
+    //         const productOrder = {
+    //             id: productSelected,
+    //             productName: searchQuery,
+    //             productBrandId: brandSelected?.value,
+    //             productBrandName: brandSelected?.label,
+    //             warehouseId: storeSelected?.value,
+    //             warehouseTypeId: storeSelected?.warehouseTypeId,
+    //             warehouseName: storeSelected?.label,
+    //             productDesc: values.productDesc,
+    //             buyPrice: values.buyPrice,
+    //             purchaseSettlementDate: purchaseSettlementDate,
+    //             purchaseInvoiceTypeId: purchaseInvoiceSelect?.value,
+    //             purchaseInvoiceTypeName: purchaseInvoiceSelect?.label,
+    //             sellerCompanyRow: values.sellerCompanyRow,
+    //             proximateAmount: values.proximateAmount,
+    //             price: values.price,
+    //             rowId: values.rowId,
+    //         };
 
-            setOrders([...orders, productOrder]);
-            resetForm();
-            setSearchQuery("");
-            setStoreSelected({
-                value: null,
-                label: null,
-                warehouseTypeId: null,
-            });
-            setBrandSelected({ value: null, label: null });
-        },
-    });
+    //         setOrders([...orders, productOrder]);
+    //         resetForm();
+    //         setSearchQuery("");
+    //         setStoreSelected({
+    //             value: null,
+    //             label: null,
+    //             warehouseTypeId: null,
+    //         });
+    //         setBrandSelected({ value: null, label: null });
+    //     },
+    // });
 
     const { mutate, isLoading } = useCreateOrder();
 
-    const handleCreateOrder = () => {
-        if (orders.length === 0) {
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: 'کالایی در لیست سفارشات موجود نمی باشد',
-                showConfirmButton: false,
-                timer: 8500,
-            });
-        } else {
-            const formData = {
-                customerId: customerSelect?.value?.toString(),
-                totalAmount: totalAmount,
-                orderCode: 0,
-                confirmedStatus: true,
-                description: description,
-                exitType: exitSelect?.value,
-                orderSendTypeId: orderSendTypeSelect?.value,
-                paymentTypeId: rentPaymentSelect?.value,
-                customerOfficialName: "string",
-                invoiceTypeId: invoiceSelect?.value,
-                freightName: "string",
-                settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
-                dischargePlaceAddress: "string",
-                freightDriverName: "string",
-                carPlaque: "string",
-                details: orders?.map((item: ICreateOrderDetails) => {
-                    return {
-                        rowId: 0,
-                        productId: item.id,
-                        warehouseId: Number(item.warehouseId),
-                        warehouseTypeId: Number(item.warehouseTypeId),
-                        proximateAmount: Number(item.proximateAmount),
-                        numberInPackage: Number(item.proximateAmount),
-                        price: Number(item.price),
-                        cargoSendDate: "1402/02/02",
-                        buyPrice: Number(item.buyPrice),
-                        purchaseInvoiceTypeId: item.purchaseInvoiceTypeId,
-                        purchaserCustomerId: customerSelect?.value?.toString(),
-                        purchaseSettlementDate: "1402/02/02",
-                        sellerCompanyRow: "string",
-                    };
-                }),
-            };
-            mutate(formData, {
-                onSuccess: (orderData) => {
-                    orderData.succeeded === true
-                        ? Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: orderData.message,
-                            showConfirmButton: false,
-                            timer: 8500,
-                        })
-                        : Swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: orderData.data.Message,
-                            showConfirmButton: false,
-                            timer: 8500,
-                        });
-                },
-            });
-        }
-    };
+    // const handleCreateOrder = () => {
+    //     if (orders.length === 0) {
+    //         Swal.fire({
+    //             position: "top-end",
+    //             icon: "error",
+    //             title: "کالایی در لیست سفارشات موجود نمی باشد",
+    //             showConfirmButton: false,
+    //             timer: 8500,
+    //         });
+    //     } else {
+    //         const formData = {
+    //             customerId: customerSelect?.value?.toString(),
+    //             totalAmount: totalAmount,
+    //             orderCode: 0,
+    //             confirmedStatus: true,
+    //             description: description,
+    //             exitType: exitSelect?.value,
+    //             orderSendTypeId: orderSendTypeSelect?.value,
+    //             paymentTypeId: rentPaymentSelect?.value,
+    //             customerOfficialName: "string",
+    //             invoiceTypeId: invoiceSelect?.value,
+    //             freightName: "string",
+    //             settlementDate: moment(settlementDate).format("jYYYY/jMM/jDD"),
+    //             dischargePlaceAddress: "string",
+    //             freightDriverName: "string",
+    //             carPlaque: "string",
+    //             details: orders?.map((item: ICreateOrderDetails) => {
+    //                 return {
+    //                     rowId: 0,
+    //                     productId: item.id,
+    //                     warehouseId: Number(item.warehouseId),
+    //                     warehouseTypeId: Number(item.warehouseTypeId),
+    //                     proximateAmount: Number(item.proximateAmount),
+    //                     numberInPackage: Number(item.proximateAmount),
+    //                     price: Number(item.price),
+    //                     cargoSendDate: "1402/02/02",
+    //                     buyPrice: Number(item.buyPrice),
+    //                     purchaseInvoiceTypeId: item.purchaseInvoiceTypeId,
+    //                     purchaserCustomerId: customerSelect?.value?.toString(),
+    //                     purchaseSettlementDate: "1402/02/02",
+    //                     sellerCompanyRow: "string",
+    //                 };
+    //             }),
+    //         };
+    //         mutate(formData, {
+    //             onSuccess: (orderData) => {
+    //                 orderData.succeeded === true
+    //                     ? Swal.fire({
+    //                           position: "top-end",
+    //                           icon: "success",
+    //                           title: orderData.message,
+    //                           showConfirmButton: false,
+    //                           timer: 8500,
+    //                       })
+    //                     : Swal.fire({
+    //                           position: "top-end",
+    //                           icon: "error",
+    //                           title: orderData.data.Message,
+    //                           showConfirmButton: false,
+    //                           timer: 8500,
+    //                       });
+    //             },
+    //         });
+    //     }
+    // };
     return (
         <>
-            <>
-                {/* Product Number and Submit Date */}
-                {/* <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-y-3 tw-justify-between">
-                    <div className="tw-font-bold tw-font-yekan_bold tw-text-2xl">
-                        <span className="tw-px-2">شماره سفارش</span>
-                        <span className="tw-px-2 tw-text-green-700">35789</span>
-                    </div>
-                    <div className="tw-font-bold tw-font-yekan_bold tw-text-2xl">
-                        <span className="tw-px-2">تاریخ سفارش</span>
-                        <span className="tw-px-2 tw-text-slate-500">{moment(Date.now()).format("jYYYY/jMM/jDD").toString()}</span>
-                    </div>
-                </div> */}
-                {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
-                <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
-                    <Card6 image="" title="">
-                        <div className="tw-flex tw-justify-between tw-flex-col">
-                            <div className="tw-pt-4">
-                                <label className="tw-font-yekan_bold tw-text-lg">
-                                    مشتری و تاریخ تسویه
-                                </label>
-                                <div className="tw-mt-8">
-                                    <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-gap-x-4">
-                                        <div className="tw-w-full md:tw-w-full">
-                                            <ProfessionalSelect
-                                                options={dropdownCustomer(
-                                                    customers?.data
-                                                )}
-                                                value={customerSelect}
-                                                onChange={handleCustomerChange}
-                                                placeholder="جستجو مشتری"
-                                            />
+            <Formik
+                initialValues={initialValues}
+                onSubmit={
+                    async (values) => {
+                        console.log(values.settlementDate)
+                        const formData = {
+                            ...values,
+                            settlementDate: values.settlementDate
+                        }
+                        console.log(formData)
+                    }
+                }
+            >
+                {({ handleSubmit }) => {
+                    return (
+                        <Form onSubmit={handleSubmit}>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
+                                <Card6 image="" title="">
+                                    <div className="tw-flex tw-justify-between tw-flex-col">
+                                        <div className="tw-pt-2">
+                                            <label className="tw-font-yekan_bold tw-text-lg">
+                                                مشتری و تاریخ تسویه
+                                            </label>
+                                            <div className="tw-mt-2">
+                                                <div className="tw-flex md:tw-flex-col md:tw-flex-row tw-items-center tw-gap-x-4">
+                                                    <div className="tw-w-full md:tw-w-full">
+                                                        <FormikSelect
+                                                            name="customerId"
+                                                            placeholder="مشتری"
+                                                            options={dropdownCustomer(
+                                                                customers?.data
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    <span
+                                                        onClick={() =>
+                                                            setIsOpen(true)
+                                                        }
+                                                        className="tw-flex tw-w-10 tw-my-2 md:tw-my-0 tw-bg-green-600 tw-p-3 tw-rounded-md tw-text-white tw-cursor-pointer"
+                                                    >
+                                                        {" "}
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth="1.5"
+                                                            stroke="currentColor"
+                                                            className="tw-w-6 tw-h-6"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                d="M12 4.5v15m7.5-7.5h-15"
+                                                            />
+                                                        </svg>
+                                                    </span>
+                                                    <Modal
+                                                        isOpen={isOpen}
+                                                        onClose={() =>
+                                                            setIsOpen(false)
+                                                        }
+                                                    >
+                                                        <CreateCustomer
+                                                            refetch={refetch}
+                                                            setIsCreateOpen={
+                                                                setIsOpen
+                                                            }
+                                                        />
+                                                    </Modal>
+                                                </div>
+                                                <div className="tw-mt-2">
+                                                    <FormikDatepicker
+                                                        name="settlementDate"
+                                                        placeholder="تاریخ تسویه"
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <button
-                                            onClick={() => setIsOpen(true)}
-                                            className="tw-flex tw-my-2 md:tw-my-0 tw-bg-green-600 tw-p-3 tw-rounded-md tw-text-white"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                className="tw-w-6 tw-h-6"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M12 4.5v15m7.5-7.5h-15"
-                                                />
-                                            </svg>
-                                        </button>
                                     </div>
-                                    <Modal
-                                        isOpen={isOpen}
-                                        onClose={() => setIsOpen(false)}
-                                    >
-                                        <CreateCustomer
-                                            refetch={refetch}
-                                            setIsCreateOpen={setIsOpen}
+                                </Card6>
+                            </div>
+                            <SubmitButton isLoading={false} title="ثبت" />
+                        </Form>
+                    );
+                }}
+            </Formik>
+            {/* Search Customer and Selected Facttor&Send&Exit&Rent */}
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
+                {/* <Card6 image="" title="">
+                    <div className="tw-flex tw-justify-between tw-flex-col">
+                        <div className="tw-pt-4">
+                            <label className="tw-font-yekan_bold tw-text-lg">
+                                مشتری و تاریخ تسویه
+                            </label>
+                            <div className="tw-mt-8">
+                                <div className="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-gap-x-4">
+                                    <div className="tw-w-full md:tw-w-full">
+                                        <ProfessionalSelect
+                                            options={dropdownCustomer(
+                                                customers?.data
+                                            )}
+                                            value={customerSelect}
+                                            onChange={handleCustomerChange}
+                                            placeholder="جستجو مشتری"
                                         />
-                                    </Modal>
+                                    </div>
+                                    <button
+                                        onClick={() => setIsOpen(true)}
+                                        className="tw-flex tw-my-2 md:tw-my-0 tw-bg-green-600 tw-p-3 tw-rounded-md tw-text-white"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth="1.5"
+                                            stroke="currentColor"
+                                            className="tw-w-6 tw-h-6"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M12 4.5v15m7.5-7.5h-15"
+                                            />
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
-                            <div className="tw-pt-4">
-                                <CustomDatepicker
-                                    onChange={(d: any) =>
-                                        setSettlementDate(d.value)
-                                    }
-                                    placeholder="تاریخ تسویه"
-                                />
+                                <Modal
+                                    isOpen={isOpen}
+                                    onClose={() => setIsOpen(false)}
+                                >
+                                    <CreateCustomer
+                                        refetch={refetch}
+                                        setIsCreateOpen={setIsOpen}
+                                    />
+                                </Modal>
                             </div>
                         </div>
-                    </Card6>
+                        <div className="tw-pt-4">
+                            <CustomDatepicker
+                                onChange={(d: any) =>
+                                    setSettlementDate(d.value)
+                                }
+                                placeholder="تاریخ تسویه"
+                            />
+                        </div>
+                    </div>
+                </Card6> */}
 
-                    <Card6 image="" title="">
-                        <label className="tw-font-yekan_bold tw-text-lg tw-py-4">
-                            مشخصه سفارش
-                        </label>
-                        <div className="tw-grid tw-grid-cols-2 tw-gap-4">
-                            <div>
-                                <ProfessionalSelect
-                                    options={dropdownOrderSendType(
-                                        orderSendType
-                                    )}
-                                    value={orderSendTypeSelect}
-                                    onChange={handleOrderSendType}
-                                    placeholder="نوع ارسال"
-                                />
-                            </div>
-                            <div>
-                                <ProfessionalSelect
-                                    options={dropdownInvoiceType(factor)}
-                                    value={invoiceSelect}
-                                    onChange={handleInvoiceSelect}
-                                    placeholder="نوع فاکتور"
-                                />
-                            </div>
-                            <div>
-                                <ProfessionalSelect
-                                    options={dropdownRentPaymentType(rent)}
-                                    value={rentPaymentSelect}
-                                    onChange={handleRentPayment}
-                                    placeholder="نوع کرایه"
-                                />
-                            </div>
-                            <div>
-                                <ProfessionalSelect
-                                    options={dropdownExitType(exit)}
-                                    value={exitSelect}
-                                    onChange={handleExit}
-                                    placeholder="نوع خروج"
-                                />
-                            </div>
-                            <div className="tw-col-span-2">
-                                <CustomInput
-                                    placeholder="توضیحات"
-                                    value={description}
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLInputElement>
-                                    ) => setDescription(e.target.value)}
-                                />
-                            </div>
+                {/* <Card6 image="" title="">
+                    <label className="tw-font-yekan_bold tw-text-lg tw-py-4">
+                        مشخصه سفارش
+                    </label>
+                    <div className="tw-grid tw-grid-cols-2 tw-gap-4">
+                        <div>
+                            <ProfessionalSelect
+                                options={dropdownOrderSendType(orderSendType)}
+                                value={orderSendTypeSelect}
+                                onChange={handleOrderSendType}
+                                placeholder="نوع ارسال"
+                            />
                         </div>
-                    </Card6>
-                </div>
-                {/* Selected Products */}
-                <div className="tw-mt-8">
+                        <div>
+                            <ProfessionalSelect
+                                options={dropdownInvoiceType(factor)}
+                                value={invoiceSelect}
+                                onChange={handleInvoiceSelect}
+                                placeholder="نوع فاکتور"
+                            />
+                        </div>
+                        <div>
+                            <ProfessionalSelect
+                                options={dropdownRentPaymentType(rent)}
+                                value={rentPaymentSelect}
+                                onChange={handleRentPayment}
+                                placeholder="نوع کرایه"
+                            />
+                        </div>
+                        <div>
+                            <ProfessionalSelect
+                                options={dropdownExitType(exit)}
+                                value={exitSelect}
+                                onChange={handleExit}
+                                placeholder="نوع خروج"
+                            />
+                        </div>
+                        <div className="tw-col-span-2">
+                            <CustomInput
+                                placeholder="توضیحات"
+                                value={description}
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                ) => setDescription(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                </Card6> */}
+            </div>
+            {/* Selected Products */}
+            {/* <div className="tw-mt-8">
                     <Card6 image="" title="">
                         <div>
                             <div>
@@ -688,10 +790,9 @@ const Order = () => {
                             />
                         </div>
                     </Card6>
-                </div>
-            </>
+                </div> */}
 
-            <div className="tw-mt-8">
+            {/* <div className="tw-mt-8">
                 <Card6 image="" title="">
                     <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">
                         <div className="md:tw-border-l-2 md:tw-border-gray-300">
@@ -719,7 +820,7 @@ const Order = () => {
                        {isLoading ? "درحال پردازش" : "ثبت سفارش"}
                     </button>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

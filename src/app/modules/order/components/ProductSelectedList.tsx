@@ -24,9 +24,9 @@ const ProductSelectedList = (props: {
                         <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             کالا / محصول
                         </td>
-                        <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
+                        {/* <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             برند
-                        </td>
+                        </td> */}
                         <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             انبار
                         </td>
@@ -75,9 +75,9 @@ const ProductSelectedList = (props: {
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.productName}
                                 </td>
-                                <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                {/* <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.productBrandName}
-                                </td>
+                                </td> */}
                                 <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
                                     {item.warehouseName}
                                 </td>

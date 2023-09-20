@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, useState } from "react";
+import { forwardRef, ForwardedRef } from "react";
 import { useField, useFormikContext } from "formik";
 import MultiDatepicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
@@ -29,7 +29,7 @@ const FormikDatepicker = forwardRef((props: Props, ref: ForwardedRef<any>) => {
         ...rest
     } = props;
 
-    const [field, meta, helpers] = useField({ name });
+    const [field, ,helpers] = useField({ name });
     const formikProps = useFormikContext();
     const validationProps = getFormikFieldValidationProps(formikProps, name);
 

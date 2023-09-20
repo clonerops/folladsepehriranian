@@ -1,5 +1,5 @@
 import { useField, useFormikContext } from 'formik';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Select, { StylesConfig } from 'react-select'
 import { getFormikFieldValidationProps } from '../GetFormikFieldValidationProp';
 const FormikSelect = (props: any) => {
@@ -57,7 +57,6 @@ const FormikSelect = (props: any) => {
         formikProps,
         props.name
     );
-
     return (
         <>
             <Select
@@ -66,7 +65,16 @@ const FormikSelect = (props: any) => {
                 {...validationProps}
                 options={props.options}
                 styles={customStyles}
-                onChange={(option: any) => formikProps.setFieldValue(field.name, option.value)}
+                // onChange={(option: any) => formikProps.setFieldValue(field.name, option.value)}
+                onChange={(option: any) => {
+                    formikProps.setFieldValue(field.name, option.value);
+                    // eslint-disable-next-line
+                    {
+                        props.customChange &&
+                        props?.onSelect({ value: option.value, label: option.label, warehouseTypeId: option.warehouseTypeId });
+                    // eslint-disable-next-line
+                    }
+                }}
                 defaultInputValue={props.defaultInputValue}
                 className='tw-text-md tw-text-right'
                 defaultValue={props.defaultValue}

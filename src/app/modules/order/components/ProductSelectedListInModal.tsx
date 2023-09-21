@@ -106,9 +106,6 @@ const ProductSelectedListInModal = (props: {
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.approximateWeight}
                                     </td>
-                                    {/* <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
-                                        {item.brandName}
-                                    </td> */}
                                     <td className="tw-flex tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.productInventories?.map((i) => i.warehouseName)}
                                         {/* // {item.productInventories?.warehouseType} */}

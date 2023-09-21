@@ -104,6 +104,7 @@ const Order = () => {
     const handleProductSelect = (item: IProducts) => {
         if (item?.productIntegratedName) {
             setSearchQuery(item?.productIntegratedName.toString());
+            setProductSelected(item?.id)
             setShowProducts(false);
         }
     };
@@ -111,7 +112,7 @@ const Order = () => {
     useEffect(() => {
         if (selectProductFromModal?.productIntegratedName)
             setSearchQuery(selectProductFromModal?.productIntegratedName);
-        setProductSelected(selectProductFromModal?.id);
+            setProductSelected(selectProductFromModal?.id);
     }, [selectProductFromModal]);
 
     useEffect(() => {
@@ -128,8 +129,6 @@ const Order = () => {
     const initialValues = {
         customerId: "",
         totalAmount: 0,
-        orderCode: 0,
-        confirmedStatus: true,
         description: "",
         exitType: "",
         orderSendTypeId: "",
@@ -176,10 +175,8 @@ const Order = () => {
 
     const handleOrder = () => {
         const productOrder = {
-            id: productSelected,
+            productId: productSelected,
             productName: searchQuery,
-            // productBrandId: brandSelected?.value,
-            // productBrandName: brandSelected?.label,
             warehouseId: warehouseSelected?.value,
             warehouseTypeId: warehouseSelected?.warehouseTypeId,
             warehouseName: warehouseSelected?.label,
@@ -215,8 +212,6 @@ const Order = () => {
                         const formData = {
                             customerId: values.customerId,
                             totalAmount: totalAmount,
-                            orderCode: values.orderCode,
-                            confirmedStatus: values.confirmedStatus,
                             description: values.description,
                             exitType: Number(values.exitType),
                             orderSendTypeId: Number(values.orderSendTypeId),
@@ -230,15 +225,16 @@ const Order = () => {
                             carPlaque: "string",
                             details: orders?.map(
                                 (item: ICreateOrderDetails) => {
+
                                     return {
-                                        rowId: 0,
-                                        productId: item.id,
+                                        rowId: item.rowId,
+                                        productId: item.productId,
                                         warehouseId: item.warehouseId
                                             ? Number(item.warehouseId)
                                             : null,
-                                        warehouseTypeId: item.warehouseTypeId
-                                            ? Number(item.warehouseTypeId)
-                                            : null,
+                                        // warehouseTypeId: item.warehouseTypeId
+                                        //     ? Number(item.warehouseTypeId)
+                                        //     : null,
                                         proximateAmount: item.proximateAmount
                                             ? Number(item.proximateAmount)
                                             : null,

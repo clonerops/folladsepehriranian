@@ -14,8 +14,7 @@ export interface IProductOrder {
 export interface ICreateOrder {
     customerId: string | undefined | null
     totalAmount: number | undefined | null
-    orderCode: number | undefined | null
-    confirmedStatus: boolean | undefined | null
+    orderCode?: number | undefined | null
     description: string | undefined | null
     exitType: number | undefined | null
     orderSendTypeId: number | undefined | null 

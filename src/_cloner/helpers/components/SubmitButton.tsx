@@ -8,7 +8,7 @@ interface IProps {
 
 const SubmitButton:FC<IProps> = ({title, isLoading, isUpdate}) => {
     return (
-        <div className="tw-flex">
+        <div className="tw-flex tw-justify-end tw-items-end">
             <button
                 type="submit"
                 id="kt_sign_in_submit"

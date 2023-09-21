@@ -21,6 +21,7 @@ export interface IProducts {
 export interface IProductInventories {
     warehouseId: number | undefined
     warehouseType: string | undefined
+    warehouseName: string | undefined
     productBrandId: number | undefined
     thickness: number | undefined
     approximateInventory: number | undefined

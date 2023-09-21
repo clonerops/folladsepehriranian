@@ -43,7 +43,7 @@ const CreateCustomer = (props: {
                 <ErrorText text={data?.data?.title} />
             )}
             <Formik initialValues={initialValues} validationSchema={createValiadtion} onSubmit={
-                async (values, { setStatus, setSubmitting }) => {
+                async (values, { setStatus, setSubmitting }) => {   
                     try {
                         mutate(values, {
                             onSuccess: () => {

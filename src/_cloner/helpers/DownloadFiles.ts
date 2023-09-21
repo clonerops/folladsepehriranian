@@ -1,13 +1,13 @@
-// export const DownloadFile = (response: any, outputFilename: string) => {
-//     const url = URL.createObjectURL(new Blob([response]));
-//     const link = document.createElement('a');
-//     link.href = url;
-//     link.setAttribute('download', outputFilename);
-//     document.body.appendChild(link);
-//     link.click();
+export const DownloadExeclFile = (response: any, outputFilename: string) => {
+    const url = URL.createObjectURL(new Blob([response]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', outputFilename);
+    document.body.appendChild(link);
+    link.click();
 
-//     link.parentNode?.removeChild(link);
-// }
+    link.parentNode?.removeChild(link);
+}
 
 export const DownloadFilePNG = (base64Data: string, outputFilename: string) => {
     try {

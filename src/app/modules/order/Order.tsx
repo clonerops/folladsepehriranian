@@ -36,10 +36,11 @@ import FormikDatepicker from "../../../_cloner/helpers/components/FormikDatepick
 import SubmitButton from "../../../_cloner/helpers/components/SubmitButton";
 import FormikInput from "../../../_cloner/helpers/components/FormikInput";
 import MultiDatepickerCustom from "../../../_cloner/helpers/components/MultiDatepicker";
+import { orderValidation } from "./validations/orderValidation";
 
 const Order = () => {
     // Fetching Data
-    const { data: customers, refetch } = useGetCustomers();
+    const { data: customers, refetch: refetchCustomers } = useGetCustomers();
     const {
         data: products,
         isLoading: productLoading,
@@ -66,12 +67,13 @@ const Order = () => {
         value: number | null;
         label: string | null;
         warehouseTypeId: number | null;
-    }>()
-    const [purchaseInvoiceTypeSelected, setPurchaseInvoiceTypeSelected] = useState<{
-        value: number | null;
-        label: string | null;
-    }>()
-    const [purchaseSettlementDate, setPurchaseSettlementDate] = useState<any>()
+    }>();
+    const [purchaseInvoiceTypeSelected, setPurchaseInvoiceTypeSelected] =
+        useState<{
+            value: number | null;
+            label: string | null;
+        }>();
+    const [purchaseSettlementDate, setPurchaseSettlementDate] = useState<any>();
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newInputValue = event.target.value;
@@ -129,11 +131,11 @@ const Order = () => {
         orderCode: 0,
         confirmedStatus: true,
         description: "",
-        exitType: 0,
-        orderSendTypeId: 0,
-        paymentTypeId: 0,
+        exitType: "",
+        orderSendTypeId: "",
+        paymentTypeId: "",
         customerOfficialName: "",
-        invoiceTypeId: 0,
+        invoiceTypeId: "",
         freightName: "",
         settlementDate: "",
         dischargePlaceAddress: "",
@@ -155,22 +157,22 @@ const Order = () => {
     };
     const { mutate } = useCreateOrder();
 
-    const proximateAmountRef = useRef<any>()
-    const priceRef = useRef<any>()
-    const productDescRef = useRef<any>()
-    const rowIdRef = useRef<any>()
-    const sellerCompanyRowRef = useRef<any>()
-    const buyPriceRef = useRef<any>()
-    const [isBuy, setIsBuy] = useState<boolean>(false)
+    const proximateAmountRef = useRef<any>();
+    const priceRef = useRef<any>();
+    const productDescRef = useRef<any>();
+    const rowIdRef = useRef<any>();
+    const sellerCompanyRowRef = useRef<any>();
+    const buyPriceRef = useRef<any>();
+    const [isBuy, setIsBuy] = useState<boolean>(false);
 
     const handleSelectWarehouse = (value: any) => {
-        setWarehouseSelected(value)
+        setWarehouseSelected(value);
         if (value.warehouseTypeId === 1) {
-            setIsBuy(true)
+            setIsBuy(true);
         } else {
-            setIsBuy(false)
+            setIsBuy(false);
         }
-    }
+    };
 
     const handleOrder = () => {
         const productOrder = {
@@ -183,7 +185,9 @@ const Order = () => {
             warehouseName: warehouseSelected?.label,
             productDesc: productDescRef.current?.value,
             buyPrice: buyPriceRef.current?.value,
-            purchaseSettlementDate: moment(new Date(purchaseSettlementDate)).format("jYYYY/jMM/jDD"),
+            purchaseSettlementDate: moment(
+                new Date(purchaseSettlementDate)
+            ).format("jYYYY/jMM/jDD"),
             purchaseInvoiceTypeId: purchaseInvoiceTypeSelected?.value,
             purchaseInvoiceTypeName: purchaseInvoiceTypeSelected?.label,
             sellerCompanyRow: sellerCompanyRowRef.current?.value,
@@ -192,83 +196,133 @@ const Order = () => {
             rowId: rowIdRef.current?.value,
         };
         setOrders([...orders, productOrder]);
-    }
+    };
     return (
         <>
             <Formik
                 initialValues={initialValues}
-                onSubmit={
-                    async (values) => {
-                        if (orders.length === 0) {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "error",
-                                title: "کالایی در لیست سفارشات موجود نمی باشد",
-                                showConfirmButton: false,
-                                timer: 8500,
-                            });
-                        } else {
-                            const formData = {
-                                customerId: values.customerId,
-                                totalAmount: totalAmount,
-                                orderCode: values.orderCode,
-                                confirmedStatus: values.confirmedStatus,
-                                description: values.description,
-                                exitType: values.exitType,
-                                orderSendTypeId: values.orderSendTypeId,
-                                paymentTypeId: values.paymentTypeId,
-                                customerOfficialName: "string",
-                                invoiceTypeId: values.invoiceTypeId,
-                                freightName: "string",
-                                settlementDate: values.settlementDate,
-                                dischargePlaceAddress: "string",
-                                freightDriverName: "string",
-                                carPlaque: "string",
-                                details: orders?.map((item: ICreateOrderDetails) => {
+                validationSchema={orderValidation}
+                onSubmit={async (values) => {
+                    if (orders.length === 0) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: "کالایی در لیست سفارشات موجود نمی باشد",
+                            showConfirmButton: false,
+                            timer: 8500,
+                        });
+                    } else {
+                        const formData = {
+                            customerId: values.customerId,
+                            totalAmount: totalAmount,
+                            orderCode: values.orderCode,
+                            confirmedStatus: values.confirmedStatus,
+                            description: values.description,
+                            exitType: Number(values.exitType),
+                            orderSendTypeId: Number(values.orderSendTypeId),
+                            paymentTypeId: Number(values.paymentTypeId),
+                            customerOfficialName: "string",
+                            invoiceTypeId: Number(values.invoiceTypeId),
+                            freightName: "string",
+                            settlementDate: values.settlementDate,
+                            dischargePlaceAddress: "string",
+                            freightDriverName: "string",
+                            carPlaque: "string",
+                            details: orders?.map(
+                                (item: ICreateOrderDetails) => {
                                     return {
                                         rowId: 0,
                                         productId: item.id,
-                                        warehouseId: item.warehouseId ? Number(item.warehouseId) : null,
-                                        warehouseTypeId: item.warehouseTypeId ? Number(item.warehouseTypeId) : null,
-                                        proximateAmount: item.proximateAmount ? Number(item.proximateAmount) : null,
-                                        numberInPackage: item.proximateAmount ? Number(item.proximateAmount) : null,
-                                        price: item.price ? Number(item.price) : null,
+                                        warehouseId: item.warehouseId
+                                            ? Number(item.warehouseId)
+                                            : null,
+                                        warehouseTypeId: item.warehouseTypeId
+                                            ? Number(item.warehouseTypeId)
+                                            : null,
+                                        proximateAmount: item.proximateAmount
+                                            ? Number(item.proximateAmount)
+                                            : null,
+                                        numberInPackage: item.proximateAmount
+                                            ? Number(item.proximateAmount)
+                                            : null,
+                                        price: item.price
+                                            ? Number(item.price)
+                                            : null,
                                         cargoSendDate: "1402/01/01",
-                                        buyPrice: item.buyPrice ? Number(item.buyPrice) : 0,
-                                        purchaseInvoiceTypeId: item.purchaseInvoiceTypeId,
-                                        purchaserCustomerId: item.purchaserCustomerId ? item.purchaserCustomerId : null,
+                                        buyPrice: item.buyPrice
+                                            ? Number(item.buyPrice)
+                                            : 0,
+                                        purchaseInvoiceTypeId:
+                                            item.purchaseInvoiceTypeId,
+                                        purchaserCustomerId:
+                                            item.purchaserCustomerId
+                                                ? item.purchaserCustomerId
+                                                : null,
                                         purchaseSettlementDate: "1402/01/01",
-                                        sellerCompanyRow: item.sellerCompanyRow ? item.sellerCompanyRow : null,
+                                        sellerCompanyRow: item.sellerCompanyRow
+                                            ? item.sellerCompanyRow
+                                            : null,
                                     };
-                                }),
-                            };
-                            mutate(formData, {
-                                onSuccess: (orderData) => {
-                                    orderData.succeeded === true
-                                        ? Swal.fire({
-                                            position: "top-end",
-                                            icon: "success",
-                                            title: orderData.message,
-                                            showConfirmButton: false,
-                                            timer: 8500,
-                                        })
-                                        : Swal.fire({
-                                            position: "top-end",
-                                            icon: "error",
-                                            title: orderData.data.Message,
-                                            showConfirmButton: false,
-                                            timer: 8500,
-                                        });
-                                },
-                            });
-
-                        }
+                                }
+                            ),
+                        };
+                        mutate(formData, {
+                            onSuccess: (orderData) => {
+                                orderData.succeeded === true
+                                    ? Swal.fire({
+                                          position: "top-end",
+                                          icon: "success",
+                                          title: orderData.message,
+                                          showConfirmButton: false,
+                                          timer: 8500,
+                                      })
+                                    : Swal.fire({
+                                          position: "top-end",
+                                          icon: "error",
+                                          title: orderData.data.Message,
+                                          showConfirmButton: false,
+                                          timer: 8500,
+                                      });
+                            },
+                        });
                     }
-                }
+                }}
             >
                 {({ handleSubmit }) => {
                     return (
-                        <Form onSubmit={handleSubmit} >
+                        <Form onSubmit={handleSubmit}>
+                            <div className="tw-mb-4">
+                                <Card6 image="" title="">
+                                    <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">
+                                        <div className="md:tw-border-l-2 md:tw-border-gray-300">
+                                            <span className="tw-font-yekan_bold tw-text-xl">
+                                                قیمت کل:{" "}
+                                                <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">
+                                                    {sliceNumberPrice(
+                                                        totalAmount
+                                                    )}{" "}
+                                                    ریال
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div className="md:tw-pr-8">
+                                            <span className="tw-font-yekan_bold tw-text-xl">
+                                                قیمت به حروف:{" "}
+                                                <span className="tw-text-green-500 tw-text-sm tw-font-bold tw-px-8">
+                                                    {convertToPersianWord(
+                                                        totalAmount
+                                                    )}{" "}
+                                                    تومان
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <SubmitButton
+                                            isLoading={false}
+                                            title="ثبت"
+                                        />
+                                    </div>
+                                </Card6>
+                            </div>
                             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-2 tw-gap-4">
                                 <Card6 image="" title="">
                                     <div className="tw-flex tw-justify-between tw-flex-col">
@@ -309,19 +363,6 @@ const Order = () => {
                                                             />
                                                         </svg>
                                                     </span>
-                                                    <Modal
-                                                        isOpen={isOpen}
-                                                        onClose={() =>
-                                                            setIsOpen(false)
-                                                        }
-                                                    >
-                                                        <CreateCustomer
-                                                            refetch={refetch}
-                                                            setIsCreateOpen={
-                                                                setIsOpen
-                                                            }
-                                                        />
-                                                    </Modal>
                                                 </div>
                                                 <div className="tw-mt-2">
                                                     <FormikDatepicker
@@ -338,18 +379,43 @@ const Order = () => {
                                         مشخصه سفارش
                                     </label>
                                     <div className="md:tw-grid md:tw-grid-cols-2 md:tw-gap-4">
-                                        <FormikSelect name="orderSendTypeId" placeholder="نوع ارسال" options={dropdownOrderSendType(orderSendType)} />
-                                        <FormikSelect name="invoiceTypeId" placeholder="نوع فاکتور" options={dropdownInvoiceType(factor)} />
-                                        <FormikSelect name="paymentTypeId" placeholder="نوع پرداخت" options={dropdownRentPaymentType(rent)} />
-                                        <FormikSelect name="exitType" placeholder="نوع خروج" options={dropdownExitType(exit)} />
+                                        <FormikSelect
+                                            name="orderSendTypeId"
+                                            placeholder="نوع ارسال"
+                                            options={dropdownOrderSendType(
+                                                orderSendType
+                                            )}
+                                        />
+                                        <FormikSelect
+                                            name="invoiceTypeId"
+                                            placeholder="نوع فاکتور"
+                                            options={dropdownInvoiceType(
+                                                factor
+                                            )}
+                                        />
+                                        <FormikSelect
+                                            name="paymentTypeId"
+                                            placeholder="نوع پرداخت"
+                                            options={dropdownRentPaymentType(
+                                                rent
+                                            )}
+                                        />
+                                        <FormikSelect
+                                            name="exitType"
+                                            placeholder="نوع خروج"
+                                            options={dropdownExitType(exit)}
+                                        />
                                     </div>
                                 </Card6>
                             </div>
                             <div className="tw-mt-4">
                                 <Card6 image="" title="">
                                     <div
-                                        onClick={() => setSelectedProductOpen(true)}
-                                        className="tw-bg-indigo-500 tw-text-white tw-cursor-pointer tw-w-[18rem] tw-text-center tw-p-4 tw-rounded-lg">
+                                        onClick={() =>
+                                            setSelectedProductOpen(true)
+                                        }
+                                        className="tw-bg-indigo-500 tw-text-white tw-cursor-pointer tw-w-[18rem] tw-text-center tw-p-4 tw-rounded-lg"
+                                    >
                                         انتخاب کالا
                                     </div>
                                     <Modal
@@ -371,9 +437,7 @@ const Order = () => {
                                             }
                                         />
                                     </Modal>
-                                    <div
-                                        className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8"
-                                    >
+                                    <div className="md:tw-flex md:tw-items-center tw-flex-wrap md:tw-gap-x-8">
                                         <div className="tw-relative md:tw-w-[20%] tw-my-2">
                                             <input
                                                 onFocus={handleFocuse}
@@ -395,13 +459,15 @@ const Order = () => {
                                                     >
                                                         {productLoading && (
                                                             <span>
-                                                                درحال بارگزاری محصولات
+                                                                درحال بارگزاری
+                                                                محصولات
                                                             </span>
                                                         )}
                                                         {productError && (
                                                             <span>
-                                                                خطا هنگام بارگزاری
-                                                                محصولات رخ داده است!
+                                                                خطا هنگام
+                                                                بارگزاری محصولات
+                                                                رخ داده است!
                                                             </span>
                                                         )}
                                                         {filteredData?.map(
@@ -411,7 +477,9 @@ const Order = () => {
                                                             ) => {
                                                                 return (
                                                                     <li
-                                                                        key={index}
+                                                                        key={
+                                                                            index
+                                                                        }
                                                                         onClick={() =>
                                                                             handleProductSelect(
                                                                                 item
@@ -444,37 +512,108 @@ const Order = () => {
                                             )}
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
-                                            <FormikSelect customChange={true} value={warehouseSelected} onSelect={handleSelectWarehouse} name="warehouseId" placeholder="انبار" options={dropdownWarehouses(warehouse)} />
+                                            <FormikSelect
+                                                customChange={true}
+                                                value={warehouseSelected}
+                                                onSelect={handleSelectWarehouse}
+                                                name="warehouseId"
+                                                placeholder="انبار"
+                                                options={dropdownWarehouses(
+                                                    warehouse
+                                                )}
+                                            />
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
-                                            <FormikInput ref={proximateAmountRef} name="proximateAmount" placeholder="مقدار (کیلوگرم)" type="text" />
+                                            <FormikInput
+                                                ref={proximateAmountRef}
+                                                name="proximateAmount"
+                                                placeholder="مقدار (کیلوگرم)"
+                                                type="text"
+                                            />
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
-                                            <FormikInput ref={priceRef} name="price" placeholder="قیمت" type="text" />
+                                            <FormikInput
+                                                ref={priceRef}
+                                                name="price"
+                                                placeholder="قیمت"
+                                                type="text"
+                                            />
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
-                                            <FormikInput ref={productDescRef} name="productDesc" placeholder="توضیحات محصول" type="text" />
+                                            <FormikInput
+                                                ref={productDescRef}
+                                                name="productDesc"
+                                                placeholder="توضیحات محصول"
+                                                type="text"
+                                            />
                                         </div>
                                         <div className="md:tw-w-[20%] tw-my-2">
-                                            <FormikInput ref={rowIdRef} name="rowId" placeholder="ردیف فروش" type="text" />
+                                            <FormikInput
+                                                ref={rowIdRef}
+                                                name="rowId"
+                                                placeholder="ردیف فروش"
+                                                type="text"
+                                            />
                                         </div>
-                                        {isBuy &&
+                                        {isBuy && (
                                             <>
                                                 <div className="md:tw-w-[20%] tw-my-2">
-                                                    <FormikInput ref={sellerCompanyRowRef} name="sellerCompanyRow" placeholder="خرید از" type="text" />
+                                                    <FormikInput
+                                                        ref={
+                                                            sellerCompanyRowRef
+                                                        }
+                                                        name="sellerCompanyRow"
+                                                        placeholder="خرید از"
+                                                        type="text"
+                                                    />
                                                 </div>
                                                 <div className="md:tw-w-[20%] tw-my-2">
-                                                    <FormikInput ref={buyPriceRef} name="buyPrice" placeholder="قیمت خرید" type="text" />
+                                                    <FormikInput
+                                                        ref={buyPriceRef}
+                                                        name="buyPrice"
+                                                        placeholder="قیمت خرید"
+                                                        type="text"
+                                                    />
                                                 </div>
                                                 <div className="md:tw-w-[20%] tw-my-2">
-                                                    <FormikSelect customChange={true} value={purchaseInvoiceTypeSelected} onSelect={(value: any) => setPurchaseInvoiceTypeSelected(value)} name="purchaseInvoiceTypeId" placeholder="نوع فاکتور خرید" options={dropdownPurchaseInvoice(purchaseInvoiceType)} />
+                                                    <FormikSelect
+                                                        customChange={true}
+                                                        value={
+                                                            purchaseInvoiceTypeSelected
+                                                        }
+                                                        onSelect={(
+                                                            value: any
+                                                        ) =>
+                                                            setPurchaseInvoiceTypeSelected(
+                                                                value
+                                                            )
+                                                        }
+                                                        name="purchaseInvoiceTypeId"
+                                                        placeholder="نوع فاکتور خرید"
+                                                        options={dropdownPurchaseInvoice(
+                                                            purchaseInvoiceType
+                                                        )}
+                                                    />
                                                 </div>
                                                 <div className="md:tw-w-[20%] tw-my-2">
-                                                    <MultiDatepickerCustom value={purchaseSettlementDate} onChange={(date: any) => setPurchaseSettlementDate(date)} placeholder="تاریخ تسویه خرید" />
+                                                    <MultiDatepickerCustom
+                                                        value={
+                                                            purchaseSettlementDate
+                                                        }
+                                                        onChange={(date: any) =>
+                                                            setPurchaseSettlementDate(
+                                                                date
+                                                            )
+                                                        }
+                                                        placeholder="تاریخ تسویه خرید"
+                                                    />
                                                 </div>
                                             </>
-                                        }
-                                        <div onClick={handleOrder} className="md:tw-w-[10%] tw-my-2 tw-bg-green-500 tw-text-white tw-text-center tw-py-2 tw-rounded-lg tw-cursor-pointer">
+                                        )}
+                                        <div
+                                            onClick={handleOrder}
+                                            className="md:tw-w-[10%] tw-my-2 tw-bg-green-500 tw-text-white tw-text-center tw-py-2 tw-rounded-lg tw-cursor-pointer"
+                                        >
                                             افزودن
                                         </div>
                                     </div>
@@ -483,29 +622,17 @@ const Order = () => {
                                         setOrders={setOrders}
                                     />
                                 </Card6>
-                                <div className="tw-mt-4">
-                                    <Card6 image="" title="">
-                                        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">
-                                            <div className="md:tw-border-l-2 md:tw-border-gray-300">
-                                                <span className="tw-font-yekan_bold tw-text-xl">
-                                                    قیمت کل: <span className="tw-text-green-500 tw-text-2xl tw-font-bold tw-px-8">{sliceNumberPrice(totalAmount)} ریال</span>
-                                                </span>
-                                            </div>
-                                            <div className="md:tw-pr-8">
-                                                <span className="tw-font-yekan_bold tw-text-xl">
-                                                    قیمت به حروف: <span className="tw-text-green-500 tw-text-sm tw-font-bold tw-px-8">{convertToPersianWord(totalAmount)} تومان</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </Card6>
-
-                                </div>
                             </div>
-                            <SubmitButton isLoading={false} title="ثبت" />
                         </Form>
                     );
                 }}
             </Formik>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+                <CreateCustomer
+                    refetch={refetchCustomers}
+                    setIsCreateOpen={setIsOpen}
+                />
+            </Modal>
         </>
     );
 };

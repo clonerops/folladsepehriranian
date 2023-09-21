@@ -58,7 +58,7 @@ const FormikSelect = (props: any) => {
         props.name
     );
     return (
-        <>
+        <div className='tw-flex tw-flex-col'>
             <Select
                 {...field}
                 {...props.rest}
@@ -90,7 +90,7 @@ const FormikSelect = (props: any) => {
             />
             {validationProps.error && <div className="tw-text-red-500 tw-text-right tw-text-sm">{validationProps.helperText}</div>}
 
-        </>
+        </div>
 
     )
 }

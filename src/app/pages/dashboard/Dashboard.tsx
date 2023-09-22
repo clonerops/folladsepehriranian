@@ -1,37 +1,56 @@
+import { toAbsoluteUrl } from "../../../_cloner/helpers";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 
 const Dashboard = () => {
-  return (
-    <>
+    return (
+        <>
+            <Card7 image="" title="">
+                <div className="tw-flex tw-justify-center tw-items-center">
+                    <img alt="sepehr logo" src={toAbsoluteUrl("/media/logos/folladlogo.png")} width={100} />
+                </div>
+                <div className="tw-flex tw-flex-col tw-justify-start tw-items-start">
+                    <div className="tw-flex tw-flex-col tw-space-y-4">
+                        <h3 className="tw-text-3xl">کارخانه فولاد سپهر ایرانیان</h3>
+                        <h3 className="tw-text-xl">تولید کننده انواع میلگرد آجدار ، نبشی و ناودانی</h3>
+                    </div>
+                    <div className="tw-flex tw-flex-row tw-gap-x-4 tw-mx-auto tw-my-8">
+                        <Card7 image="" title="">
+                            <h3 className="tw-font-bold tw-text-2xl">میلگرد</h3>
+                        </Card7>
+                        <Card7 image="" title="">
+                            <h3 className="tw-font-bold tw-text-2xl">نبشی</h3>
+                        </Card7>
+                        <Card7 image="" title="">
+                            <h3 className="tw-font-bold tw-text-2xl">ناودانی</h3>
+                        </Card7>
+                    </div>
+                    <div className="tw-flex tw-flex-col tw-space-y-4">
+                        <h3 className="tw-text-xl tw-text-justify tw-leading-10">
+                            کارخانه فولاد سپهر ایرانیان شرکت فولاد سپهر ایرانیان (مسئولیت محدود) در سال 1388 به منظور تولید انواع میلگرد آجدار و ساده از شمش (بیلت) با طراحی مهندسان داخلی راه اندازی شد.
 
-      {/* <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4">
-                <Link
-                    to="/dashboard/order/managment"
-                    className="tw-rounded-lg tw-bg-indigo-600 tw-flex tw-justify-center tw-items-center tw-bg-gradient-to-r tw-from-indigo-500 tw-via-purple-500 tw-to-pink-500 tw-cursor-pointer"
-                >
-                    <span className="tw-text-white tw-px-8 tw-py-12 tw-font-yekan_bold">
-                        ثبت سفارشات
-                    </span>
-                </Link>
-                <Link
-                    to="/dashboard/order/lists"
-                    className="tw-rounded-lg tw-bg-indigo-600 tw-flex tw-justify-center tw-items-center tw-bg-gradient-to-r tw-from-indigo-500 tw-from-10% tw-via-sky-500 tw-via-30% tw-to-emerald-500 tw-to-90% tw-cursor-pointer"
-                >
-                    <span className="tw-text-white tw-px-8 tw-py-12 tw-font-yekan_bold">
-                        لیست سفارشات
-                    </span>
-                </Link>
-                <Link
-                    to="/dashboard/transfer"
-                    className="tw-rounded-lg tw-bg-indigo-600 tw-flex tw-justify-center tw-items-center tw-bg-gradient-to-r tw-from-green-400 tw-to-blue-500 tw-cursor-pointer"
-                >
-                    <span className="tw-text-white tw-px-8 tw-py-12 tw-font-yekan_bold">
-                        انبارداری
-                    </span>
-                </Link>
-            </div> */}
-    </>
-  );
+                            مزایای شرکت فولاد سپهر ایرانیان:
+
+                            – واقع شدن در مرکز پایتخت ایران و دسترسی آسان، سریع و کم هزینه برای مشتریان
+
+                            – کیفیت بالای محصولات و برخورداری از گواهینامه های استاندارد ملی
+
+                            – تولید متنوع محصولات از سایز 8 الی 32 و برآورد کردن حداکثری نیاز های مشتریان
+
+                            – قیمت های رقابتی به دلیل اعمال روشهای مدیریتی استاندارد جهت کاهش هزینه های تولید
+
+                            – بسته بندی های استاندارد و یکسان
+
+
+
+                            * در سال 1397 نبشی 3 و 4 به سبد کالای شرکت فولاد سپهر ایرانیان به همت مدیران و مهندسان داخلی افزوده شد.
+
+                            * همچنین در سال 1398 گروه بازرگانی سپهر ایرانیان به منظور تامین حداکثری نیازهای مشتریان تاسیس گردید .
+                        </h3>
+                    </div>
+                </div>
+            </Card7>
+        </>
+    );
 };
 
 export default Dashboard;

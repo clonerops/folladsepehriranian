@@ -10,18 +10,18 @@ const Dashboard = () => {
                 </div>
                 <div className="tw-flex tw-flex-col tw-justify-start tw-items-start">
                     <div className="tw-flex tw-flex-col tw-space-y-4">
-                        <h3 className="tw-text-3xl">کارخانه فولاد سپهر ایرانیان</h3>
-                        <h3 className="tw-text-xl">تولید کننده انواع میلگرد آجدار ، نبشی و ناودانی</h3>
+                        <h3 className="tw-text-3xl tw-text-primary">کارخانه فولاد سپهر ایرانیان</h3>
+                        <h3 className="tw-text-md">تولید کننده انواع میلگرد آجدار ، نبشی و ناودانی</h3>
                     </div>
                     <div className="tw-flex tw-flex-row tw-gap-x-4 tw-mx-auto tw-my-8">
                         <Card7 image="" title="">
-                            <h3 className="tw-font-bold tw-text-2xl">میلگرد</h3>
+                            <h3 className="tw-font-bold tw-text-2xl tw-text-green-600">میلگرد</h3>
                         </Card7>
                         <Card7 image="" title="">
-                            <h3 className="tw-font-bold tw-text-2xl">نبشی</h3>
+                            <h3 className="tw-font-bold tw-text-2xl tw-text-red-600">نبشی</h3>
                         </Card7>
                         <Card7 image="" title="">
-                            <h3 className="tw-font-bold tw-text-2xl">ناودانی</h3>
+                            <h3 className="tw-font-bold tw-text-2xl tw-text-blue-600">ناودانی</h3>
                         </Card7>
                     </div>
                     <div className="tw-flex tw-flex-col tw-space-y-4">

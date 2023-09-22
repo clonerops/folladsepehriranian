@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react'
-import { toAbsoluteUrl } from '../../../helpers'
-
 type Props = {
   image: string
   title: string
   children?: React.ReactNode
 }
 
-const Card7: FC<Props> = ({ title, children }) => {
+const Card7: FC<Props> = ({ children }) => {
   return (
     <div
       className='card h-100 tw-shadow-md'>

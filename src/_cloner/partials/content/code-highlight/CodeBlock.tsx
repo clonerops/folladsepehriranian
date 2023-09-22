@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // @ts-nocheck
 import React, {useState, useEffect, useRef} from 'react'
-import {CopyToClipboard} from 'react-copy-to-clipboard'
 import Highlight, {defaultProps, Language} from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/shadesOfPurple'
 // import {OverlayTrigger, Tooltip} from 'react-bootstrap'

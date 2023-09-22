@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
-import { IProductInventories, IProducts } from "../../product/core/_models";
+import { IProducts } from "../../product/core/_models";
 
 const ProductSelectedListInModal = (props: {
     products: IProducts[] | undefined;

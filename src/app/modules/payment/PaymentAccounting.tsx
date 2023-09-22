@@ -20,6 +20,7 @@ const PaymentAccounting = () => {
 
     useEffect(() => {
         mutate("0")
+        // eslint-disable-next-line
     }, [])
 
     const handleFetch = (selectedOption: any) => {

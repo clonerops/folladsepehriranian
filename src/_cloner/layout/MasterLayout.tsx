@@ -10,7 +10,7 @@ import {
   ThemeModeProvider,
 } from '../partials'
 import { PageDataProvider } from './core'
-import { reInitMenu, toAbsoluteUrl } from '../helpers'
+import { reInitMenu } from '../helpers'
 import { ToolbarWrapper } from './components/toolbar'
 
 const MasterLayout = () => {

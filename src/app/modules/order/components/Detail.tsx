@@ -1,7 +1,6 @@
 import ReusableTable from "../../../../_cloner/helpers/components/Table"
 import { Card7 } from "../../../../_cloner/partials/content/cards/Card7"
 import { columns } from "../../cargo/helpers/orderColumns"
-import { useRetrieveOrder } from "../core/_hooks"
 
 type Props = {
     data: any | undefined;

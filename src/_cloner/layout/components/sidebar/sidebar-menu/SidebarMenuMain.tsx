@@ -8,115 +8,103 @@ import { SidebarMenuItemWithSub } from './SidebarMenuItemWithSub'
 const SidebarMenuMain = () => {
 
   return (
-    <>
-      {/* <SidebarMenuItem
-        to='/dashboard/esale'
-        icon='/media/icons/duotune/art/art002.svg'
-        title={''}
-        fontIcon='bi-app-indicator'
-      /> */}
-      {/* <SidebarMenuItem
-        to='/dashboard/crm'
-        icon='/media/icons/duotune/art/art002.svg'
-        title={'داشبورد مدیریت امور مشتریان'}
+    <>    
+       <SidebarMenuItem
+        to='/dashboard'
+        icon='/media/icons/duotune/General/gen025.svg'
+        title={'صفحه نخست'}
         fontIcon='bi-app-indicator'
       />
-      <SidebarMenuItem
-        to='/dashboard/transfer'
-        icon='/media/icons/duotune/art/art002.svg'
-        title={'داشبورد مدیریت حمل محصول'}
-        fontIcon='bi-app-indicator'
-      /> */}
       {/* <SidebarMenuItem
         to='/builder'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Layout Builder'
         fontIcon='bi-layers'
       /> */}
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>سفارشات</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/order'
         title='مدیریت سفارشات'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Finance/fin006.svg'
       >
         <SidebarMenuItem to='/dashboard/order/managment' title='ثبت سفارش' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/order/lists' title='لیست سفارشات' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>پرداختها</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/customer'
         title='مدیریت پرداخت ها'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Finance/fin010.svg'
       >
         <SidebarMenuItem to='/dashboard/payment/managment' title='دریافت و پرداخت' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/payment/accounting' title='ثبت حسابداری دریافت و پرداخت' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>اعلام بار</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/order'
         title='مدیریت اعلام بار'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Ecommerce/ecm006.svg'
       >
         <SidebarMenuItem to='/dashboard/cargo/managment' title='سفارشات اعلام بار نشده' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>کاربران</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/user'
         title='مدیریت کاربران'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Communication/com014.svg'
       >
         <SidebarMenuItem to='/dashboard/user/create' title='ایجاد کاربر جدید' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>محصولات</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/product'
         title='مدیریت محصولات'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Ecommerce/ecm006.svg'
       >
         <SidebarMenuItem to='/dashboard/product/managment' title='لیست محصولات' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/product/price' title='قیمت محصولات' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/product/supplier' title='لیست تامین کنندگان' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>مشتریان</span>
         </div>
-      </div>
+      </div> */}
       <SidebarMenuItemWithSub
         to='/customer'
         title='مدیریت مشتریان'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/Communication/com014.svg'
       >
         <SidebarMenuItem to='/dashboard/customer/managment' title='لیست مشتریان' hasBullet={true} />
 

@@ -23,7 +23,7 @@ const SidebarLogo = () => {
           <img
             alt='Logo'
             src={toAbsoluteUrl('/media/logos/folladlogowhite.png')}
-            className='h-25px app-sidebar-logo-default text-white'
+            className='h-30px app-sidebar-logo-default text-white'
           />
         ) : (
           <>

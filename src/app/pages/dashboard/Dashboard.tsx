@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 
 const Dashboard = () => {
-    return (
-        <>
-            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4">
+  return (
+    <>
+
+      {/* <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4">
                 <Link
                     to="/dashboard/order/managment"
                     className="tw-rounded-lg tw-bg-indigo-600 tw-flex tw-justify-center tw-items-center tw-bg-gradient-to-r tw-from-indigo-500 tw-via-purple-500 tw-to-pink-500 tw-cursor-pointer"
@@ -28,9 +29,9 @@ const Dashboard = () => {
                         انبارداری
                     </span>
                 </Link>
-            </div>
-        </>
-    );
+            </div> */}
+    </>
+  );
 };
 
 export default Dashboard;

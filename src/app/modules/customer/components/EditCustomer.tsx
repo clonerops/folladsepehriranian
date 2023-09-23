@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+ import { Form, Formik } from "formik";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import EditText from "../../../../_cloner/helpers/components/EditText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
@@ -63,18 +63,18 @@ const EditCustomer = (props: {
                 {({ handleSubmit }) => {
                     return <Form onSubmit={handleSubmit} className="container">
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="firstName" placeholder="نام" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="lastName" placeholder="نام خانوادگی" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="fatherName" placeholder="نام پدر" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="officialName" placeholder="اسم رسمی مشتری" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="nationalId2" placeholder="شناسه ملی" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="nationalId" placeholder="کدملی" type="text" />
+                            <FormikInput title="نام" divClassName="tw-w-full tw-my-2" name="firstName" placeholder="نام" type="text" />
+                            <FormikInput title="نام خانوادگی" divClassName="tw-w-full tw-my-2" name="lastName" placeholder="نام خانوادگی" type="text" />
+                            <FormikInput title="نام پدر" divClassName="tw-w-full tw-my-2" name="fatherName" placeholder="نام پدر" type="text" />
+                            <FormikInput title="اسم رسمی مشتری" divClassName="tw-w-full tw-my-2" name="officialName" placeholder="اسم رسمی مشتری" type="text" />
+                            <FormikInput title="شناسه ملی" divClassName="tw-w-full tw-my-2" name="nationalId2" placeholder="شناسه ملی" type="text" />
+                            <FormikInput title="کدملی" divClassName="tw-w-full tw-my-2" name="nationalId" placeholder="کدملی" type="text" />
                         </div>
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-x-4">
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="representative" placeholder="معرف" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="mobile" placeholder="موبایل" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="tel1" placeholder="تلفن 1" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="tel2" placeholder="تلفن 2" type="text" />
+                            <FormikInput title="معرف" divClassName="tw-w-full tw-my-2" name="representative" placeholder="معرف" type="text" />
+                            <FormikInput title="موبایل" divClassName="tw-w-full tw-my-2" name="mobile" placeholder="موبایل" type="text" />
+                            <FormikInput title="تلفن 1" divClassName="tw-w-full tw-my-2" name="tel1" placeholder="تلفن 1" type="text" />
+                            <FormikInput title="تلفن 2" divClassName="tw-w-full tw-my-2" name="tel2" placeholder="تلفن 2" type="text" />
                         </div>
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-x-4">
                             <div className="tw-w-full tw-my-2 tw-text-right">
@@ -87,8 +87,8 @@ const EditCustomer = (props: {
                             <FormikSelect defaultValue={{value: props.item?.customerValidityId, label: props.item?.customerValidityId === 1 ? "عادی" : props.item?.customerValidityId === 2 ? "VIP" : "سیاه"}}  options={convertValueLabelCustomerValidaty(customerValidityData)} name="customerValidityId" placeholder="نوع اعتبار" />
                         </div>
                         <div className="tw-w-full tw-my-2 md:tw-col-span-3">
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="address1" placeholder="آدرس 1" type="text" />
-                            <FormikInput divClassName="tw-w-full tw-my-2" name="address2" placeholder="آدرس 2" type="text" />
+                            <FormikInput title="آدرس 1" divClassName="tw-w-full tw-my-2" name="address1" placeholder="آدرس 1" type="text" />
+                            <FormikInput title="آدرس 2" divClassName="tw-w-full tw-my-2" name="address2" placeholder="آدرس 2" type="text" />
                         </div>
                         <SubmitButton isLoading={isLoading} title="ویرایش مشتری" isUpdate />
                     </Form>

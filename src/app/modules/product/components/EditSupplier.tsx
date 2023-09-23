@@ -56,17 +56,17 @@ const EditSupplier = (props: {
                 {({ handleSubmit, setFieldValue }) => {
                     return <Form onSubmit={handleSubmit} className="container">
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8 tw-my-4">
-                            <FormikSelect defaultValue={{ value: props.item?.customerId, label: `${props.item?.customerFirstName + " " + props.item?.customerLastName}` }} name={"customerId"} placeholder="مشتری" options={dropdownCustomer(customers?.data)} />
-                            <FormikSelect defaultValue={{value: props.item?.productId, label: props.item?.productName}} name={"productId"} placeholder="کالا" options={dropdownProduct(products?.data)} />
+                            <FormikSelect title="مشتری" defaultValue={{ value: props.item?.customerId, label: `${props.item?.customerFirstName + " " + props.item?.customerLastName}` }} name={"customerId"} placeholder="مشتری" options={dropdownCustomer(customers?.data)} />
+                            <FormikSelect title="کالا" defaultValue={{value: props.item?.productId, label: props.item?.productName}} name={"productId"} placeholder="کالا" options={dropdownProduct(products?.data)} />
                         </div>
                         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8 tw-my-4">
-                            <FormikInput name="price" placeholder="قیمت" type="text" />
-                            <FormikDatepicker name="priceDate" placeholder="تاریخ قیمت" setFieldValue={setFieldValue} />
-                            <FormikInput name="overPrice" placeholder="قیمت تمام شده" type="text" />
+                            <FormikInput title="قیمت" name="price" placeholder="قیمت" type="text" />
+                            <FormikDatepicker title="تاریخ قیمت" name="priceDate" placeholder="تاریخ قیمت" setFieldValue={setFieldValue} />
+                            <FormikInput title="قیمت تمام شده" name="overPrice" placeholder="قیمت تمام شده" type="text" />
                         </div>
                         <div className="tw-grid tw-grid-cols-2 md:tw-grid-cols-2 tw-gap-8 tw-my-4">
-                            <FormikInput name="rentAmount" placeholder="کرایه" type="text" />
-                            <FormikInput name="rate" placeholder="امتیاز" type="text" />
+                            <FormikInput title="کرایه" name="rentAmount" placeholder="کرایه" type="text" />
+                            <FormikInput title="امتیاز" name="rate" placeholder="امتیاز" type="text" />
                         </div>
                         <SubmitButton title="ویرایش تامین کننده" isLoading={isLoading} isUpdate />
                     </Form>

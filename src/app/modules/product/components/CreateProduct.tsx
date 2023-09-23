@@ -63,42 +63,50 @@ const CreateProduct = (props: {
                                 <FormikInput
                                     name="productName"
                                     placeholder="نام کالا"
+                                    title="نام کالا"
                                     type="text"
                                 />
                                 {/* <FormikSelect name="productBrandId" placeholder="برند" options={dropdownBrand(brands)} /> */}
                                 <FormikInput
                                     name="productSize"
                                     placeholder="سایز"
+                                    title="سایز"
                                     type="text"
                                 />
                                 <FormikInput
                                     name="approximateWeight"
                                     placeholder="وزن تقریبی"
+                                    title="وزن تقریبی"
                                     type="number"
                                 />
                                 <FormikInput
                                     name="numberInPackage"
                                     placeholder="تعداد در بسته"
+                                    title="تعداد در بسته"
                                     type="number"
                                 />
                                 <FormikInput
                                     name="size"
                                     placeholder="اندازه"
+                                    title="اندازه"
                                     type="text"
                                 />
                                 <FormikInput
                                     name="standard"
                                     placeholder="استاندارد"
+                                    title="استاندارد"
                                     type="text"
                                 />
                                 <FormikInput
                                     name="productState"
                                     placeholder="حالت"
+                                    title="حالت"
                                     type="text"
                                 />
                                 <FormikInput
                                     name="description"
                                     placeholder="توضیحات"
+                                    title="توضیحات"
                                     type="text"
                                 />
                             </div>

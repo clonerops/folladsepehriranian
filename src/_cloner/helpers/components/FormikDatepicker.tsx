@@ -10,6 +10,7 @@ type Props = {
     name: string;
     label?: string;
     placeholder: string;
+    title?: string;
     value?: string;
     setFieldValue?: (
         field: string,
@@ -24,12 +25,13 @@ const FormikDatepicker = forwardRef((props: Props, ref: ForwardedRef<any>) => {
         name,
         label,
         placeholder,
+        title,
         setFieldValue,
         value,
         ...rest
     } = props;
 
-    const [field, ,helpers] = useField({ name });
+    const [field, , helpers] = useField({ name });
     const formikProps = useFormikContext();
     const validationProps = getFormikFieldValidationProps(formikProps, name);
 
@@ -40,6 +42,9 @@ const FormikDatepicker = forwardRef((props: Props, ref: ForwardedRef<any>) => {
     return (
         <>
             <div className={boxClassName}>
+                <div className="tw-text-right tw-font-bold tw-text-md">
+                    {title}
+                </div>
                 <MultiDatepicker
                     {...field}
                     {...rest}

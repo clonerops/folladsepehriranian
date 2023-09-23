@@ -49,12 +49,13 @@ type Props = {
     placeholder: string;
     name: string;
     value?: string;
+    title?: string;
     divClassName?: string;
     defaultChecked?: boolean;
 }
 
 const FormikInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
-    const { type, placeholder, name, divClassName, defaultChecked, ...rest } = props;
+    const { type, placeholder, name, divClassName, title, defaultChecked, ...rest } = props;
 
     const [field] = useField({ name });
 
@@ -64,6 +65,7 @@ const FormikInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     return (
         <>
             <div className={divClassName}>
+                <div className="tw-text-right tw-font-bold tw-text-md">{title}</div>
                 <input
                     type={type}
                     className="customInput tw-p-[8px] tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"

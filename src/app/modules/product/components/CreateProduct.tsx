@@ -77,13 +77,13 @@ const CreateProduct = (props: {
                                     name="approximateWeight"
                                     placeholder="وزن تقریبی"
                                     title="وزن تقریبی"
-                                    type="number"
+                                    type="text"
                                 />
                                 <FormikInput
                                     name="numberInPackage"
                                     placeholder="تعداد در بسته"
                                     title="تعداد در بسته"
-                                    type="number"
+                                    type="text"
                                 />
                                 <FormikInput
                                     name="size"

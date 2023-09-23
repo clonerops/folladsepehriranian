@@ -1,5 +1,5 @@
 export const columns = [
-    { key: 'productName', title: 'نام محصول' },
+    { key: 'productName', title: 'نام کالا' },
     { key: 'rowId', title: 'شماره ردیف' },
     { key: 'warehouseName', title: 'انبار' },
     { key: 'proximateAmount', title: 'مقدار تقریبی' },

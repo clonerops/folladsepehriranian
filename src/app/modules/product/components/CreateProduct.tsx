@@ -3,15 +3,22 @@ import { createProductValidations } from "../validations/createProduct";
 import SuccessText from "../../../../_cloner/helpers/components/SuccessText";
 import { useCreateProduct } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
+import {
+    QueryObserverResult,
+    RefetchOptions,
+    RefetchQueryFilters,
+} from "@tanstack/react-query";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
+import PageTitle from "../../../../_cloner/helpers/components/PageTitle";
 
 const CreateProduct = (props: {
-    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<any, unknown>>
+    setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    refetch: <TPageData>(
+        options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+    ) => Promise<QueryObserverResult<any, unknown>>;
 }) => {
-    // Fetchig 
+    // Fetchig
     const { mutate, data, isLoading } = useCreateProduct();
     // States
     const initialValues = {
@@ -28,44 +35,81 @@ const CreateProduct = (props: {
 
     return (
         <>
-            {data?.succeeded && (
-                <SuccessText text={data?.message} />
-            )}
+            {data?.succeeded && <SuccessText text={data?.message} />}
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
-            <Formik initialValues={initialValues} validationSchema={createProductValidations} onSubmit={
-                async (values, { setStatus, setSubmitting }) => {
+            <Formik
+                initialValues={initialValues}
+                validationSchema={createProductValidations}
+                onSubmit={async (values, { setStatus, setSubmitting }) => {
                     try {
                         mutate(values, {
                             onSuccess: () => {
-                                props.refetch()
-                                props.setIsCreateOpen(false)
-                            }
+                                props.refetch();
+                                props.setIsCreateOpen(false);
+                            },
                         });
                     } catch (error) {
-                        setStatus("اطلاعات ثبت محصول نادرست می باشد");
+                        setStatus("اطلاعات ثبت کالا نادرست می باشد");
                         setSubmitting(false);
                     }
-                }
-            }>
+                }}
+            >
                 {({ handleSubmit }) => {
-                    return <Form onSubmit={handleSubmit} className="container">
-                        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
-                            <FormikInput name="productName" placeholder="نام کالا" type="text" />
-                            {/* <FormikSelect name="productBrandId" placeholder="برند" options={dropdownBrand(brands)} /> */}
-                            <FormikInput name="productSize" placeholder="سایز" type="text" />
-                            <FormikInput name="approximateWeight" placeholder="وزن تقریبی" type="number" />
-                            <FormikInput name="numberInPackage" placeholder="تعداد در بسته" type="number" />
-                            <FormikInput name="size" placeholder="اندازه" type="text" />
-                            <FormikInput name="standard" placeholder="استاندارد" type="text" />
-                            <FormikInput name="productState" placeholder="حالت" type="text" />
-                            <FormikInput name="description" placeholder="توضیحات" type="text" />
-                        </div>
-                        <div className="tw-mt-8">
-                            <SubmitButton isLoading={isLoading} title="ثبت کالا جدبد" />
-                        </div>
-                    </Form>
+                    return (
+                        <Form onSubmit={handleSubmit} className="container">
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8">
+                                <FormikInput
+                                    name="productName"
+                                    placeholder="نام کالا"
+                                    type="text"
+                                />
+                                {/* <FormikSelect name="productBrandId" placeholder="برند" options={dropdownBrand(brands)} /> */}
+                                <FormikInput
+                                    name="productSize"
+                                    placeholder="سایز"
+                                    type="text"
+                                />
+                                <FormikInput
+                                    name="approximateWeight"
+                                    placeholder="وزن تقریبی"
+                                    type="number"
+                                />
+                                <FormikInput
+                                    name="numberInPackage"
+                                    placeholder="تعداد در بسته"
+                                    type="number"
+                                />
+                                <FormikInput
+                                    name="size"
+                                    placeholder="اندازه"
+                                    type="text"
+                                />
+                                <FormikInput
+                                    name="standard"
+                                    placeholder="استاندارد"
+                                    type="text"
+                                />
+                                <FormikInput
+                                    name="productState"
+                                    placeholder="حالت"
+                                    type="text"
+                                />
+                                <FormikInput
+                                    name="description"
+                                    placeholder="توضیحات"
+                                    type="text"
+                                />
+                            </div>
+                            <div className="tw-mt-8">
+                                <SubmitButton
+                                    isLoading={isLoading}
+                                    title="ثبت کالا جدبد"
+                                />
+                            </div>
+                        </Form>
+                    );
                 }}
             </Formik>
         </>

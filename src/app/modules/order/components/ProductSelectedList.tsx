@@ -22,7 +22,7 @@ const ProductSelectedList = (props: {
                             ردیف
                         </td>
                         <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                            کالا / محصول
+                            کالا / کالا
                         </td>
                         {/* <td className="tw-min-w-[200px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                             برند

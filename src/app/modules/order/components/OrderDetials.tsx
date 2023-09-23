@@ -12,7 +12,7 @@ const OrderDetials = (props: { item: IOrderDetail | undefined }) => {
                                 ردیف
                             </td>
                             <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                نام محصول
+                                نام کالا
                             </td>
                             <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 شماره ردیف

@@ -5,33 +5,16 @@ import AuthInputs from "../../../_cloner/helpers/components/AuthInputs";
 import { Card6 } from "../../../_cloner/partials/content/cards/Card6";
 import { useRegisterUser } from "./core/_hooks";
 import SuccessText from "../../../_cloner/helpers/components/SuccessText";
+import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 
 const CreateUser = () => {
     const loginSchema = Yup.object().shape({
-        firstName: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("نام الزامی است"),
-        lastName: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("نام خانوادگی الزامی است"),
-        email: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("ایمیل الزامی است"),
-        userName: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("نام کاربری الزامی است"),
-        password: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("کلمه عبور الزامی است"),
-        confirmPassword: Yup.string()
-            .min(6, "تعداد کاراکتر کمتر از 6 مجاز نمی باشد")
-            .max(50, "تعداد کاراکتر بیشتر از 50 مجاز نمی باشد")
-            .required("تکرار کلمه عبور الزامی است"),
+        firstName: Yup.string().required("نام الزامی است"),
+        lastName: Yup.string().required("نام خانوادگی الزامی است"),
+        email: Yup.string().required("ایمیل الزامی است"),
+        userName: Yup.string().required("نام کاربری الزامی است"),
+        password: Yup.string().required("کلمه عبور الزامی است"),
+        confirmPassword: Yup.string().required("تکرار کلمه عبور الزامی است"),
     });
 
     const initialValues = {
@@ -83,6 +66,11 @@ const CreateUser = () => {
 
     return (
         <Card6 image="" title="">
+            <PageTitle
+                title="ایجاد کاربر جدید"
+                image="/media/icons/duotune/Communication/com014.svg"
+            />
+
             {data?.data?.Message ||
                 (data?.message && (
                     <SuccessText text={data?.data?.Message || data?.message} />
@@ -102,7 +90,7 @@ const CreateUser = () => {
                                 errors={formik.errors.firstName}
                                 name={"firstName"}
                                 placeholder="نام"
-                            // title="نام"
+                                // title="نام"
                             ></AuthInputs>
                             {isError && data?.data?.errors?.FirstName && (
                                 <span className="tw-text-red-500">
@@ -137,7 +125,7 @@ const CreateUser = () => {
                             isError={data?.data?.errors?.Email}
                             name={"email"}
                             placeholder="آدرس ایمیل"
-                        // title="ایمیل"
+                            // title="ایمیل"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.Email && (
                             <span className="tw-text-red-500">
@@ -155,7 +143,7 @@ const CreateUser = () => {
                             isError={data?.data?.errors?.UserName}
                             name={"userName"}
                             placeholder="نام کاربری"
-                        // title="نام کاربری"
+                            // title="نام کاربری"
                         ></AuthInputs>
                         {isError && data?.data?.errors?.UserName && (
                             <span className="tw-text-red-500">

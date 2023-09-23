@@ -36,7 +36,7 @@ const Detail = (props: Props) => {
                 </Card7>
             </div>
             <div>
-                <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4 tw-text-[#009ef7]">محصولات</h3>
+                <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4 tw-text-[#009ef7]">کالاها</h3>
                 <ReusableTable columns={columns} data={data?.data?.details} isError={isError} isLoading={isLoading} renderActions={() => { return <></> }} />
             </div>
 

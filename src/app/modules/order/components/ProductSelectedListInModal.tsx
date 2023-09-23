@@ -53,7 +53,7 @@ const ProductSelectedListInModal = (props: {
                 <CustomInput
                     value={searchTerm}
                     onChange={handleSearchInput}
-                    placeholder="جستجو محصول / کالا"
+                    placeholder="جستجو کالا / کالا"
                 />
             </div>
             <div className="tw-overflow-x-auto tw-w-full md:tw-h-[380px]">
@@ -64,7 +64,7 @@ const ProductSelectedListInModal = (props: {
                                 ردیف
                             </td>
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                کالا / محصول
+                                کالا / کالا
                             </td>
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 شرح کالا

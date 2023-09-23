@@ -44,12 +44,12 @@ const CreateProductPrice = (props: Props) => {
         {({ handleSubmit }) => {
             return <Form onSubmit={handleSubmit}>
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4">
-                    <FormikSelect name="productId" label="productId" options={dropdownProduct(products?.data)} placeholder="محصول" />
+                    <FormikSelect name="productId" label="productId" options={dropdownProduct(products?.data)} placeholder="کالا" />
                     <FormikSelect name="productBrandId" label="productBrandId" options={dropdownBrand(brands)} placeholder="برند" />
                     <FormikInput name="price" type="text" placeholder="قیمت" />
                 </div>
                 <div className="tw-flex tw-justify-end tw-mt-4">
-                    <SubmitButton title="ثبت قیمت محصول" isLoading={isLoading} />
+                    <SubmitButton title="ثبت قیمت کالا" isLoading={isLoading} />
                 </div>
             </Form>
         }}

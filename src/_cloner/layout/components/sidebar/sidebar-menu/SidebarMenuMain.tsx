@@ -81,17 +81,17 @@ const SidebarMenuMain = () => {
       </SidebarMenuItemWithSub>
       {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>محصولات</span>
+          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>کالاها</span>
         </div>
       </div> */}
       <SidebarMenuItemWithSub
         to='/product'
-        title='مدیریت محصولات'
+        title='مدیریت کالاها'
         fontIcon='bi-archive'
         icon='/media/icons/duotune/Ecommerce/ecm006.svg'
       >
-        <SidebarMenuItem to='/dashboard/product/managment' title='لیست محصولات' hasBullet={true} />
-        <SidebarMenuItem to='/dashboard/product/price' title='قیمت محصولات' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/product/managment' title='لیست کالاها' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/product/price' title='قیمت کالاها' hasBullet={true} />
         <SidebarMenuItem to='/dashboard/product/supplier' title='لیست تامین کنندگان' hasBullet={true} />
 
       </SidebarMenuItemWithSub>

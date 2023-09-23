@@ -9,6 +9,7 @@ import CreateProductPrice from "./components/CreateProductPrice"
 import EditProductPrice from "./components/EditProductPrice"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import FuseSearch from "../../../_cloner/helpers/FuseSearch"
+import PageTitle from "../../../_cloner/helpers/components/PageTitle"
 
 
 const ProductPrice = () => {
@@ -85,13 +86,14 @@ const ProductPrice = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {productPriceLoading && <Backdrop loading={productPriceLoading} />}
+            <PageTitle title="قیمت کالاها" image="/media/icons/duotune/Communication/com011.svg" />
             <Card7 image="" title="">
                 <CreateProductPrice refetch={refetch} />
                 <div className="tw-w-80 md:tw-w-[40%] tw-mb-2">
                     <FuseSearch keys={['product.productName', 'brandName', 'price',]} placeholder="جستجو" data={productPrice?.data} threshold={0.5} setResults={setResults} />
                 </div>
                 <ReusableTable columns={columns} data={results} isLoading={productPriceLoading} isError={productPriceError} renderActions={renderAction} />
-                <MyModal title="ویرایش قیمت محصول" isOpen={isOpen} setIsOpen={setIsOpen}>
+                <MyModal title="ویرایش قیمت کالا" isOpen={isOpen} setIsOpen={setIsOpen}>
                     <EditProductPrice refetch={refetch} item={itemForEdit} />
                 </MyModal>
             </Card7>

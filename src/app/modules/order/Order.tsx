@@ -37,6 +37,7 @@ import SubmitButton from "../../../_cloner/helpers/components/SubmitButton";
 import FormikInput from "../../../_cloner/helpers/components/FormikInput";
 import MultiDatepickerCustom from "../../../_cloner/helpers/components/MultiDatepicker";
 import { orderValidation } from "./validations/orderValidation";
+import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 
 const Order = () => {
     // Fetching Data
@@ -104,7 +105,7 @@ const Order = () => {
     const handleProductSelect = (item: IProducts) => {
         if (item?.productIntegratedName) {
             setSearchQuery(item?.productIntegratedName.toString());
-            setProductSelected(item?.id)
+            setProductSelected(item?.id);
             setShowProducts(false);
         }
     };
@@ -112,7 +113,7 @@ const Order = () => {
     useEffect(() => {
         if (selectProductFromModal?.productIntegratedName)
             setSearchQuery(selectProductFromModal?.productIntegratedName);
-            setProductSelected(selectProductFromModal?.id);
+        setProductSelected(selectProductFromModal?.id);
     }, [selectProductFromModal]);
 
     useEffect(() => {
@@ -225,7 +226,6 @@ const Order = () => {
                             carPlaque: "string",
                             details: orders?.map(
                                 (item: ICreateOrderDetails) => {
-
                                     return {
                                         rowId: item.rowId,
                                         productId: item.productId,
@@ -287,6 +287,10 @@ const Order = () => {
                 {({ handleSubmit }) => {
                     return (
                         <Form onSubmit={handleSubmit}>
+                            <PageTitle
+                                title="ثبت سفارش"
+                                image="/media/icons/duotune/Finance/fin006.svg"
+                            />
                             <div className="tw-mb-4">
                                 <Card6 image="" title="">
                                     <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">
@@ -420,6 +424,7 @@ const Order = () => {
                                             setSelectedProductOpen(false)
                                         }
                                         className="tw-w-[800px]"
+                                        title="انتخاب کالا"
                                     >
                                         <ProductSelectedListInModal
                                             products={products?.data}
@@ -440,7 +445,7 @@ const Order = () => {
                                                 onBlur={handleBlur}
                                                 value={searchQuery}
                                                 onChange={handleInputChange}
-                                                placeholder="کالا / محصول"
+                                                placeholder="کالا / کالا"
                                                 type="text"
                                                 className="customInput tw-border tw-px-2 tw-border-gray-300 tw-rounded-md tw-py-2 tw-w-full tw-outline-none"
                                             />
@@ -456,13 +461,13 @@ const Order = () => {
                                                         {productLoading && (
                                                             <span>
                                                                 درحال بارگزاری
-                                                                محصولات
+                                                                کالاها
                                                             </span>
                                                         )}
                                                         {productError && (
                                                             <span>
                                                                 خطا هنگام
-                                                                بارگزاری محصولات
+                                                                بارگزاری کالاها
                                                                 رخ داده است!
                                                             </span>
                                                         )}
@@ -539,7 +544,7 @@ const Order = () => {
                                             <FormikInput
                                                 ref={productDescRef}
                                                 name="productDesc"
-                                                placeholder="توضیحات محصول"
+                                                placeholder="توضیحات کالا"
                                                 type="text"
                                             />
                                         </div>
@@ -623,7 +628,11 @@ const Order = () => {
                     );
                 }}
             </Formik>
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <Modal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                title="ایجاد مشتری جدید"
+            >
                 <CreateCustomer
                     refetch={refetchCustomers}
                     setIsCreateOpen={setIsOpen}

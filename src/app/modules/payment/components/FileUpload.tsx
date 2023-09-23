@@ -23,7 +23,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        // accept: acceptedFileTypes,
     });
 
     return (

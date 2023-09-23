@@ -45,7 +45,7 @@ const EditProduct = (props: {
                             }
                         });
                     } catch (error) {
-                        setStatus("ویرایش ثبت محصول نادرست می باشد");
+                        setStatus("ویرایش ثبت کالا نادرست می باشد");
                         setSubmitting(false);
                     }
                 }

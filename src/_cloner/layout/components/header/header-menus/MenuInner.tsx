@@ -8,7 +8,7 @@ export function MenuInner() {
       {/* <MenuItem title="بازرگانی سپهر ایرانیان" to='/dashboard' /> */}
       {/* <MenuItem title="تست هدر" to='/dashboard' /> */}
       {/* <MenuItem title="داشبورد مدیریت امور مشتریان" to='/dashboard-esale' />
-      <MenuItem title="داشبورد مدیریت حمل محصول" to='/dashboard-esale' /> */}
+      <MenuItem title="داشبورد مدیریت حمل کالا" to='/dashboard-esale' /> */}
       {/* <MenuItem title='Layout Builder' to='/builder' /> */}
 
       {/* <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>

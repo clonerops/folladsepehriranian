@@ -47,6 +47,7 @@ const ResetPassword = (props: {
             onClose={() => props.setIsOpen(false)}
             reqular
             className="tw-w-[600px]"
+            title="تغییر کلمه عبور"
         >
             <form className="tw-flex tw-justify-center tw-items-center tw-flex-col tw-mx-16 tw-my-8">
                 <div className="tw-w-full">

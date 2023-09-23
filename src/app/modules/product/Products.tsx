@@ -10,6 +10,7 @@ import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/productColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
+import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 
 const Products = () => {
     const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
@@ -103,10 +104,11 @@ const Products = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {productsLoading && <Backdrop loading={productsLoading} />}
+            <PageTitle title="لیست کالاها" image="/media/icons/duotune/Ecommerce/ecm006.svg" />
             <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
-                        <FuseSearch keys={['productName', 'productDetail.size', 'productDetail.productIntegratedName', 'approximateWeight', 'numberInPackage', 'productDetail.standard', 'productDetail.productState', 'description']} placeholder="جستجو کالا / محصول" data={products?.data} threshold={0.5} setResults={setResults} />
+                        <FuseSearch keys={['productName', 'productDetail.size', 'productDetail.productIntegratedName', 'approximateWeight', 'numberInPackage', 'productDetail.standard', 'productDetail.productState', 'description']} placeholder="جستجو کالا / کالا" data={products?.data} threshold={0.5} setResults={setResults} />
                     </div>
                     <CreateButton setState={setIsCreateOpen} />
                 </div>
@@ -136,12 +138,15 @@ const Products = () => {
             <Modal
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
+                title="ایجاد کالا جدید"
             >
                 <CreateProduct refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
+                title="ویرایش کالا"
+                
             >
                 <EditProduct refetch={refetch} item={itemForEdit} />
             </Modal>

@@ -1,18 +1,19 @@
-import { useRetrieveOrders } from "./core/_hooks"
-import { IOrderDetail } from "./core/_models"
+import { useRetrieveOrders } from "./core/_hooks";
+import { IOrderDetail } from "./core/_models";
 // import Modal from "../../../_cloner/helpers/components/Modal"
 // import { useState } from "react"
 // import OrderDetials from "./components/OrderDetials"
 // import CustomInput from "../../../_cloner/helpers/components/CustomInput"
 // import Swal from 'sweetalert2'
 // import SubmitButton from "../../../_cloner/helpers/components/SubmitButton"
-import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
-import { Link } from "react-router-dom"
+import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
+import { Link } from "react-router-dom";
+import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 
 const OrderList = () => {
-    const { data: orders } = useRetrieveOrders()
+    const { data: orders } = useRetrieveOrders();
     // const { mutate, isLoading } = useConfirmOrder()
-    // States 
+    // States
     // const [isOpenDetail, setIsOpenDetail] = useState<boolean>(false)
     // const [isOpenConfirm, setIsOpenConfirm] = useState<boolean>(false)
     // const [orderDetails, setOrderDetails] = useState<IOrderDetail>()
@@ -45,6 +46,10 @@ const OrderList = () => {
     return (
         <>
             <Card7 image="" title="">
+                <PageTitle
+                    title="لیست سفارشات"
+                    image="/media/icons/duotune/Ecommerce/ecm006.svg"
+                />
                 <div className="tw-w-full tw-overflow-auto">
                     <table className="tw-w-full tw-my-2">
                         <thead className="tw-bg-gray-200">
@@ -79,56 +84,64 @@ const OrderList = () => {
                                 <td className="tw-min-w-[160px] tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                     توضیحات
                                 </td>
-                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-
-                                </td>
+                                <td className="tw-py-4 px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300"></td>
                             </tr>
                         </thead>
                         <tbody>
-                            {orders?.data?.map((item: IOrderDetail, index: number) => {
-                                return <tr key="{id}">
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {index + 1}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.orderCode}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.registerDate}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.customerFirstName + " " + item.customerLastName}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.orderSendTypeDesc}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.paymentTypeDesc}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.invoiceTypeDesc}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.totalAmount}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.exitType === 1 ? "عادی" : "بعد از تسویه"}
-                                    </td>
-                                    <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        {item.description}
-                                    </td>
-                                    <td className="tw-flex tw-text-center tw-py-4 tw-border tw-border-gray-300">
-                                        <Link to={`/dashboard/order/detail/${item.id}`}>
-                                            <button className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
-                                                جزئیات
-                                            </button>
-                                        </Link>
-                                        {/* <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
+                            {orders?.data?.map(
+                                (item: IOrderDetail, index: number) => {
+                                    return (
+                                        <tr key="{id}">
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {index + 1}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.orderCode}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.registerDate}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.customerFirstName +
+                                                    " " +
+                                                    item.customerLastName}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.orderSendTypeDesc}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.paymentTypeDesc}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.invoiceTypeDesc}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.totalAmount}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.exitType === 1
+                                                    ? "عادی"
+                                                    : "بعد از تسویه"}
+                                            </td>
+                                            <td className="tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                {item.description}
+                                            </td>
+                                            <td className="tw-flex tw-text-center tw-py-4 tw-border tw-border-gray-300">
+                                                <Link
+                                                    to={`/dashboard/order/detail/${item.id}`}
+                                                >
+                                                    <button className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
+                                                        جزئیات
+                                                    </button>
+                                                </Link>
+                                                {/* <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
                                             تایید
                                         </button> */}
-                                    </td>
-                                </tr>
-                            })}
+                                            </td>
+                                        </tr>
+                                    );
+                                }
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -159,10 +172,8 @@ const OrderList = () => {
                     </div>
                 </div>
             </Modal> */}
-
-
         </>
-    )
-}
+    );
+};
 
-export default OrderList
+export default OrderList;

@@ -2,9 +2,9 @@ import * as Yup from "yup";
 
 const createProductValidations = Yup.object().shape({
     productName: Yup.string()
-        .required("نام محصول الزامی است"),
+        .required("نام کالا الزامی است"),
     productSize: Yup.string()
-        .required("سایز محصول الزامی است"),
+        .required("سایز کالا الزامی است"),
     approximateWeight: Yup.string()
         .required("افزودن وزن تقریبی الزامی است"),
     numberInPackage: Yup.string()

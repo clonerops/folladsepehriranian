@@ -10,6 +10,7 @@ import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/supplierColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
+import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 
 const Suppliers = () => {
     const { data: suppliers, isLoading: suppliersLoading, isError: suppliersError, refetch } = useRetrieveSuppliers();
@@ -101,6 +102,7 @@ const Suppliers = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {suppliersLoading && <Backdrop loading={suppliersLoading} />}
+            <PageTitle title="لیست تامین کنندگان" image="/media/icons/duotune/Communication/com014.svg" />
             <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
@@ -134,12 +136,14 @@ const Suppliers = () => {
             <Modal
                 isOpen={isCreateOpen}
                 onClose={() => setIsCreateOpen(false)}
+                title="ایجاد تامین کننده جدید"
             >
                 <CreateSupplier refetch={refetch} setIsCreateOpen={setIsCreateOpen} />
             </Modal>
             <Modal
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
+                title="ویرایش تامین کننده"
             >
                 <EditSupplier refetch={refetch} item={itemForEdit} />
             </Modal>

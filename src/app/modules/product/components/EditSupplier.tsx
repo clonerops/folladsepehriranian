@@ -48,7 +48,7 @@ const EditSupplier = (props: {
                             }
                         });
                     } catch (error) {
-                        setStatus("اطلاعات ویرایش محصول نادرست می باشد");
+                        setStatus("اطلاعات ویرایش کالا نادرست می باشد");
                         setSubmitting(false);
                     }
                 }

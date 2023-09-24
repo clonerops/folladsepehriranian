@@ -10,6 +10,8 @@ import EditProductPrice from "./components/EditProductPrice"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import FuseSearch from "../../../_cloner/helpers/FuseSearch"
 import PageTitle from "../../../_cloner/helpers/components/PageTitle"
+import DataGrid from "../../../_cloner/helpers/components/DataGrid"
+import { ToastComponent } from "../../../_cloner/helpers/components/Toast"
 
 
 const ProductPrice = () => {
@@ -24,6 +26,24 @@ const ProductPrice = () => {
         setResults(productPrice?.data)
     }, [productPrice])
 
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 8;
+
+
+    const totalItems = results?.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const currentItems = results?.slice(startIndex, endIndex);
+
+    const goToPage = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+
+
     const handleEdit = (item: IProductPrice | undefined) => {
         setIsOpen(true)
         setItemForEdit(item);
@@ -31,7 +51,8 @@ const ProductPrice = () => {
 
     const handleDelete = (id: string | undefined) => {
         if (id) deleteMutate(id, {
-            onSuccess: () => {
+            onSuccess: (message) => {
+                ToastComponent(message?.message)
                 refetch()
             }
         });
@@ -39,7 +60,7 @@ const ProductPrice = () => {
 
     const renderAction = (item: any) => {
         return <div className="tw-flex tw-gap-4">
-            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleEdit(item?.data)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -59,7 +80,7 @@ const ProductPrice = () => {
                     </svg>
                 </div>
             </div>
-            <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleDelete(item?.data?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -92,7 +113,30 @@ const ProductPrice = () => {
                 <div className="tw-w-80 md:tw-w-[40%] tw-mb-2">
                     <FuseSearch keys={['product.productName', 'brandName', 'price',]} placeholder="جستجو" data={productPrice?.data} threshold={0.5} setResults={setResults} />
                 </div>
-                <ReusableTable columns={columns} data={results} isLoading={productPriceLoading} isError={productPriceError} renderActions={renderAction} />
+                <DataGrid columns={columns(renderAction)} rowData={currentItems} />
+                <div>
+                    <p>
+                        صفحه {currentPage} از {totalPages}
+                    </p>
+                    <div className="tw-flex tw-justify-between">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => goToPage(currentPage - 1)}
+                            className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
+                        >
+                            قبلی
+                        </button>
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => goToPage(currentPage + 1)}
+                            className="tw-bg-gray-200 tw-rounded-md tw-px-6 tw-py-2"
+                        >
+                            بعدی
+                        </button>
+                    </div>
+                </div>
+
+                {/* <ReusableTable columns={columns} data={results} isLoading={productPriceLoading} isError={productPriceError} renderActions={renderAction} /> */}
                 <MyModal title="ویرایش قیمت کالا" isOpen={isOpen} setIsOpen={setIsOpen}>
                     <EditProductPrice refetch={refetch} item={itemForEdit} />
                 </MyModal>

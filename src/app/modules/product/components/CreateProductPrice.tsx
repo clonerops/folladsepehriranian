@@ -5,6 +5,7 @@ import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton"
 import { useCreateProductPrice, useRetrieveBrands, useRetrieveProducts } from "../core/_hooks"
 import { dropdownBrand, dropdownProduct } from "../helpers/dropdownConvert"
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query"
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast"
 
 const initialValues = {
     price: "",
@@ -31,7 +32,8 @@ const CreateProductPrice = (props: Props) => {
                     productBrandId: values.productBrandId
                 }
                 mutate(formData, {
-                    onSuccess: () => {
+                    onSuccess: (message) => {
+                        ToastComponent(message?.message)
                         props.refetch()
                     }
                 })

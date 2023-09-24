@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useRetrievesNotSendedOrder } from "./core/_hooks";
-import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/notSendedColumn";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
@@ -9,8 +8,6 @@ import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 const Cargo = () => {
     const {
         data: cargoNotSended,
-        isError,
-        isLoading,
     } = useRetrievesNotSendedOrder();
 
     const renderAction = (item: any) => {

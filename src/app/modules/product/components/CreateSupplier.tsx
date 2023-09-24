@@ -10,7 +10,6 @@ import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
-import moment from "moment-jalaali";
 import { createSupplierValidations } from "../validations/createSupplier";
 import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 

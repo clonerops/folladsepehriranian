@@ -2,7 +2,6 @@ import { Form, Formik } from "formik";
 import { useRetrieveProducts, useUpdateSupplier } from "../core/_hooks";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { ISuppliers } from "../core/_models";
-import EditText from "../../../../_cloner/helpers/components/EditText";
 import { dropdownProduct } from "../helpers/dropdownConvert";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { useGetCustomers } from "../../customer/core/_hooks";

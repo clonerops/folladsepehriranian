@@ -11,6 +11,7 @@ const PageTitle = (props: Props) => {
         <div className="tw-flex tw-gap-x-4 tw-font-bold tw-text-2xl tw-py-4">
             <img
                 src={toAbsoluteUrl(image)}
+                alt="none"
             />
             <span>{title}</span>
         </div>

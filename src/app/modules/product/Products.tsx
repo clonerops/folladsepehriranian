@@ -8,14 +8,13 @@ import EditProduct from "./components/EditProduct";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
-import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 import { columns } from "./helpers/productColumns";
 import {ToastComponent} from "../../../_cloner/helpers/components/Toast";
 
 const Products = () => {
-    const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
-    const { mutate, data: deleteProduct, isLoading: deleteLoading } = useDeleteProduct();
+    const { data: products, isLoading: productsLoading, refetch } = useRetrieveProducts();
+    const { mutate, isLoading: deleteLoading } = useDeleteProduct();
     const [results, setResults] = useState<IProducts[]>([])
 
     useEffect(() => {

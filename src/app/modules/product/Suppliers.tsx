@@ -6,16 +6,14 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CreateSupplier from "./components/CreateSupplier";
 import EditSupplier from "./components/EditSupplier";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
-import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/supplierColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
-import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 import { ToastComponent } from "../../../_cloner/helpers/components/Toast";
 
 const Suppliers = () => {
-    const { data: suppliers, isLoading: suppliersLoading, isError: suppliersError, refetch } = useRetrieveSuppliers();
+    const { data: suppliers, isLoading: suppliersLoading, refetch } = useRetrieveSuppliers();
     const { mutate, isLoading: deleteLoading } = useDeleteSupplier();
     const [results, setResults] = useState<ISuppliers[]>([])
 
@@ -105,7 +103,6 @@ const Suppliers = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {suppliersLoading && <Backdrop loading={suppliersLoading} />}
-            {/* <PageTitle title="لیست تامین کنندگان" image="/media/icons/duotune/Communication/com014.svg" /> */}
             <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">
@@ -114,7 +111,6 @@ const Suppliers = () => {
                     <CreateButton setState={setIsCreateOpen} />
                 </div>
                 <DataGrid columns={columns(renderAction)} rowData={currentItems} />
-                {/* <ReusableTable columns={columns} data={currentItems} renderActions={renderAction} isError={suppliersError} isLoading={suppliersLoading} /> */}
                 <div>
                     <p>
                         صفحه {currentPage} از {totalPages}

@@ -1,5 +1,4 @@
 import DataGrid from "../../../../_cloner/helpers/components/DataGrid";
-import ReusableTable from "../../../../_cloner/helpers/components/Table"
 import { Card7 } from "../../../../_cloner/partials/content/cards/Card7"
 import { columns } from "../../cargo/helpers/orderColumns"
 
@@ -10,7 +9,7 @@ type Props = {
 }
 
 const Detail = (props: Props) => {
-    const { data, isError, isLoading } = props;
+    const { data } = props;
 
     const renderAction = () => { return <></> }
 

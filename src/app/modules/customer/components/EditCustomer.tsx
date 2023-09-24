@@ -1,6 +1,5 @@
 import { Form, Formik } from "formik";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
-import EditText from "../../../../_cloner/helpers/components/EditText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
 import { ICustomer } from "../core/_models";
 import { useUpdateCustomer } from "../core/_hooks";

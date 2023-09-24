@@ -6,12 +6,9 @@ import Modal from "../../../_cloner/helpers/components/Modal";
 import CreateCustomer from "./components/CreateCustomer";
 import EditCustomer from "./components/EditCustomer";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
-import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/customerColumn";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
-import { toAbsoluteUrl } from "../../../_cloner/helpers";
-import PageTitle from "../../../_cloner/helpers/components/PageTitle";
 import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 import { ToastComponent } from "../../../_cloner/helpers/components/Toast";
 
@@ -19,7 +16,6 @@ const Customer = () => {
     const {
         data: customers,
         isLoading: customersLoading,
-        isError: customersError,
         refetch,
     } = useGetCustomers();
     const { mutate, isLoading: deleteLoading } = useDeleteCustomer();

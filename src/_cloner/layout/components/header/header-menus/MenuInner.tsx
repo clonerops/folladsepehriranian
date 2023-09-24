@@ -2,7 +2,6 @@
 // import {MegaMenu} from './MegaMenu'
 
 import { useLocation } from "react-router-dom"
-import {useState} from 'react'
 
 export function MenuInner() {
   let title = "";

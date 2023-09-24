@@ -15,7 +15,7 @@ const approvied = [
 ]
 
 const PaymentAccounting = () => {
-    const { mutate, data, isError, isLoading } = useGetRecievePaymentByApproved()
+    const { mutate, data, isLoading } = useGetRecievePaymentByApproved()
     const [loadingDownloadFile, setLoadingDownloadFile] = useState<boolean>(false);
 
     useEffect(() => {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { sortTableData } from '../tableUtils';
+import React from 'react';
+// import { sortTableData } from '../tableUtils';
 
 interface TableColumn {
     key: string;

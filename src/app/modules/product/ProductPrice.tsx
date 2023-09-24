@@ -8,13 +8,12 @@ import CreateProductPrice from "./components/CreateProductPrice"
 import EditProductPrice from "./components/EditProductPrice"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import FuseSearch from "../../../_cloner/helpers/FuseSearch"
-import PageTitle from "../../../_cloner/helpers/components/PageTitle"
 import DataGrid from "../../../_cloner/helpers/components/DataGrid"
 import { ToastComponent } from "../../../_cloner/helpers/components/Toast"
 
 
 const ProductPrice = () => {
-    const { refetch, data: productPrice, isLoading: productPriceLoading, isError: productPriceError } = useRetrieveProductPrice();
+    const { refetch, data: productPrice, isLoading: productPriceLoading } = useRetrieveProductPrice();
     const { mutate: deleteMutate, isLoading: deleteLoading } = useDeleteProductPrice()
     // State
     const [itemForEdit, setItemForEdit] = useState<IProductPrice | undefined>();

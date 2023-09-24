@@ -155,7 +155,7 @@ const Order = () => {
         purchaseSettlementDate: "",
         sellerCompanyRow: "",
     };
-    const { mutate } = useCreateOrder();
+    const { mutate, isLoading } = useCreateOrder();
 
     const proximateAmountRef = useRef<any>();
     const priceRef = useRef<any>();
@@ -317,7 +317,7 @@ const Order = () => {
                                             </span>
                                         </div>
                                         <SubmitButton
-                                            isLoading={false}
+                                            isLoading={isLoading}
                                             title="ثبت"
                                         />
                                     </div>

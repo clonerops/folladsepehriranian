@@ -9,6 +9,8 @@ import { IOrderDetail } from "./core/_models";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import { Link } from "react-router-dom";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
+import DataGrid from "../../../_cloner/helpers/components/DataGrid";
+import { columns } from "./helpers/orderListColumns";
 
 const OrderList = () => {
     const { data: orders } = useRetrieveOrders();
@@ -43,6 +45,16 @@ const OrderList = () => {
     //             }
     //         })
     // }
+    const renderAction = (item: any) => {
+        return <Link
+            to={`/dashboard/order/detail/${item?.data?.id}`}
+        >
+            <button className="tw-bg-indigo-500 tw-text-white  tw-px-4 tw-rounded-md">
+                جزئیات
+            </button>
+        </Link>
+
+    }
     return (
         <>
             <Card7 image="" title="">
@@ -50,7 +62,9 @@ const OrderList = () => {
                     title="لیست سفارشات"
                     image="/media/icons/duotune/Ecommerce/ecm006.svg"
                 />
-                <div className="tw-w-full tw-overflow-auto">
+                <DataGrid columns={columns(renderAction)} rowData={orders?.data} />
+
+                {/* <div className="tw-w-full tw-overflow-auto">
                     <table className="tw-w-full tw-my-2">
                         <thead className="tw-bg-gray-200">
                             <tr>
@@ -134,9 +148,6 @@ const OrderList = () => {
                                                         جزئیات
                                                     </button>
                                                 </Link>
-                                                {/* <button onClick={() => openConfirm(item)} className="tw-bg-green-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
-                                            تایید
-                                        </button> */}
                                             </td>
                                         </tr>
                                     );
@@ -144,7 +155,7 @@ const OrderList = () => {
                             )}
                         </tbody>
                     </table>
-                </div>
+                </div> */}
             </Card7>
 
             {/* <Modal

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import ProfessionalSelect from "../../../_cloner/helpers/components/ProfessionalSelect"
-import ReusableTable from "../../../_cloner/helpers/components/Table"
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
 import { useGetRecievePaymentByApproved } from "./core/_hooks"
 import { columns } from "./helpers/paymentAccountingColumns"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import { IPayment } from "./core/_models"
 import { DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
+import DataGrid from "../../../_cloner/helpers/components/DataGrid"
 
 const approvied = [
     { value: "0", label: "تایید نشده" },
@@ -43,7 +43,7 @@ const PaymentAccounting = () => {
             }
         }
     }
-    const handleEdit = (item: IPayment) => {
+    const hadelDownload = (item: IPayment) => {
         setLoadingDownloadFile(true)
         item?.attachments?.forEach(element => {
             switch (detectMimeType(element.fileData)) {
@@ -65,7 +65,7 @@ const PaymentAccounting = () => {
 
     const renderActions = (item: any) => {
         return <div className="tw-flex tw-gap-4">
-            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => hadelDownload(item?.data)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -84,7 +84,7 @@ const PaymentAccounting = () => {
                 <div className="tw-my-4 tw-w-[50%]">
                     <ProfessionalSelect options={approvied} onChange={handleFetch} placeholder="انتخاب کنید ..." />
                 </div>
-                <ReusableTable columns={columns} data={data?.data} renderActions={renderActions} isError={isError} isLoading={isLoading} />
+                <DataGrid columns={columns(renderActions)} rowData={data?.data} />
             </Card7>
 
         </>

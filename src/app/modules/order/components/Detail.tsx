@@ -1,3 +1,4 @@
+import DataGrid from "../../../../_cloner/helpers/components/DataGrid";
 import ReusableTable from "../../../../_cloner/helpers/components/Table"
 import { Card7 } from "../../../../_cloner/partials/content/cards/Card7"
 import { columns } from "../../cargo/helpers/orderColumns"
@@ -10,6 +11,8 @@ type Props = {
 
 const Detail = (props: Props) => {
     const { data, isError, isLoading } = props;
+
+    const renderAction = () => { return <></> }
 
     return (
         <>
@@ -26,10 +29,10 @@ const Detail = (props: Props) => {
                     <div className=" tw-text-lg tw-text-gray-500">نوع ارسال: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.orderSendTypeDesc}</span></div>
                 </Card7>
                 <Card7 image="" title="">
-                    <div className=" tw-text-lg tw-text-gray-500">نحوه پرداخت کرایه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.paymentTypeDesc}</span></div>
+                    <div className=" tw-text-lg tw-text-gray-500">پرداخت کرایه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.paymentTypeDesc}</span></div>
                 </Card7>
                 <Card7 image="" title="">
-                    <div className=" tw-text-lg tw-text-gray-500">اسم رسمی: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.customerOfficialName}</span></div>
+                    <div className=" tw-text-lg tw-text-gray-500">مشتری: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.customerFirstName + " " + data?.data?.customerLastName}</span></div>
                 </Card7>
                 <Card7 image="" title="">
                     <div className=" tw-text-lg tw-text-gray-500">تاریخ تسویه: <span className="tw-px-4 tw-font-yekan_bold tw-font-bold tw-text-xl tw-text-black">{data?.data?.settlementDate}</span></div>
@@ -37,7 +40,7 @@ const Detail = (props: Props) => {
             </div>
             <div>
                 <h3 className="tw-text-right tw-font-yekan_bold tw-font-bold tw-text-2xl tw-py-4 tw-text-[#009ef7]">کالاها</h3>
-                <ReusableTable columns={columns} data={data?.data?.details} isError={isError} isLoading={isLoading} renderActions={() => { return <></> }} />
+                <DataGrid columns={columns(renderAction)} rowData={data?.data?.details} />
             </div>
 
         </>

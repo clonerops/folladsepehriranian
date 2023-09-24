@@ -4,6 +4,7 @@ import ReusableTable from "../../../_cloner/helpers/components/Table";
 import { columns } from "./helpers/notSendedColumn";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
+import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 
 const Cargo = () => {
     const {
@@ -14,7 +15,7 @@ const Cargo = () => {
 
     const renderAction = (item: any) => {
         return (
-            <Link to={`/dashboard/order/cargo/${item.id}`}>
+            <Link to={`/dashboard/order/cargo/${item?.data?.id}`}>
                 <button className="tw-bg-indigo-500 tw-text-white tw-py-2 tw-px-4 tw-mx-2 tw-rounded-md">
                     اعلام بار
                 </button>
@@ -28,13 +29,14 @@ const Cargo = () => {
                 title="لیست سفارشات اعلام بار نشده"
                 image="/media/icons/duotune/Ecommerce/ecm006.svg"
             />
-            <ReusableTable
+            <DataGrid columns={columns(renderAction)} rowData={cargoNotSended} />
+            {/* <ReusableTable
                 columns={columns}
                 data={cargoNotSended}
                 isError={isError}
                 isLoading={isLoading}
                 renderActions={renderAction}
-            />
+            /> */}
         </Card7>
     );
 };

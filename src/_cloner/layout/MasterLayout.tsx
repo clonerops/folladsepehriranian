@@ -10,7 +10,7 @@ import {
   ThemeModeProvider,
 } from '../partials'
 import { PageDataProvider } from './core'
-import { reInitMenu } from '../helpers'
+import { reInitMenu, toAbsoluteUrl } from '../helpers'
 import { ToolbarWrapper } from './components/toolbar'
 
 const MasterLayout = () => {
@@ -23,12 +23,11 @@ const MasterLayout = () => {
     <PageDataProvider>
       <ThemeModeProvider>
         <div style={{
-          minHeight:"100vh",
-          // width: "100%",
-          // backgroundSize: "cover",
-          // backgroundRepeat: "no-repeat",
-          // backgroundOrigin: "cover",
-          // backgroundImage: `url(${toAbsoluteUrl('/media/LOGOS/blob-scene-haikei.svg')})`
+          minHeight: "100vh",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundOrigin: "cover",
+          backgroundImage: `url(${toAbsoluteUrl('/media/logos/nn.png')})`
         }} className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
             <HeaderWrapper />

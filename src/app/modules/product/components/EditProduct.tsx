@@ -1,8 +1,6 @@
 import { Form, Formik } from "formik";
 import { useUpdateProduct } from "../core/_hooks";
-import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import { IProducts } from "../core/_models";
-import EditText from "../../../../_cloner/helpers/components/EditText";
 import {
     QueryObserverResult,
     RefetchOptions,
@@ -10,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const EditProduct = (props: {
     item: IProducts | undefined;
@@ -35,16 +34,16 @@ const EditProduct = (props: {
 
     return (
         <>
-            {data?.succeeded && <EditText text={"ویرایش با موفقیت انجام شد"} />}
             {data?.data?.status === 400 && (
-                <ErrorText text={data?.data?.title} />
+                ToastComponent("خطا در ویرایش کالا")
             )}
             <Formik
                 initialValues={initialValues}
                 onSubmit={async (values, { setStatus, setSubmitting }) => {
                     try {
                         mutate(values, {
-                            onSuccess: () => {
+                            onSuccess: (message) => {
+                                ToastComponent("ویرایش با موفقیت انجام شد")
                                 props.refetch();
                             },
                         });
@@ -74,13 +73,13 @@ const EditProduct = (props: {
                                     name="approximateWeight"
                                     placeholder="وزن تقریبی"
                                     title="وزن تقریبی"
-                                    type="number"
+                                    type="text"
                                 />
                                 <FormikInput
                                     name="numberInPackage"
                                     placeholder="تعداد در بسته"
                                     title="تعداد در بسته"
-                                    type="number"
+                                    type="text"
                                 />
                                 <FormikInput
                                     name="size"

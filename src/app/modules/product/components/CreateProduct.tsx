@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-query";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
-import PageTitle from "../../../../_cloner/helpers/components/PageTitle";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const CreateProduct = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +45,8 @@ const CreateProduct = (props: {
                 onSubmit={async (values, { setStatus, setSubmitting }) => {
                     try {
                         mutate(values, {
-                            onSuccess: () => {
+                            onSuccess: (message) => {
+                                ToastComponent(message?.message)
                                 props.refetch();
                                 props.setIsCreateOpen(false);
                             },

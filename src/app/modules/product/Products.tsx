@@ -6,15 +6,16 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
-import ReusableTable from "../../../_cloner/helpers/components/Table";
-import { columns } from "./helpers/productColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
+import DataGrid from "../../../_cloner/helpers/components/DataGrid";
+import { columns } from "./helpers/productColumns";
+import {ToastComponent} from "../../../_cloner/helpers/components/Toast";
 
 const Products = () => {
     const { data: products, isLoading: productsLoading, isError: productsError, refetch } = useRetrieveProducts();
-    const { mutate, isLoading: deleteLoading } = useDeleteProduct();
+    const { mutate, data: deleteProduct, isLoading: deleteLoading } = useDeleteProduct();
     const [results, setResults] = useState<IProducts[]>([])
 
     useEffect(() => {
@@ -49,7 +50,8 @@ const Products = () => {
     };
     const handleDelete = (id: string | undefined) => {
         if (id) mutate(id, {
-            onSuccess: () => {
+            onSuccess: (message) => {
+                ToastComponent(message?.message)
                 refetch()
             }
         });
@@ -57,7 +59,7 @@ const Products = () => {
 
     const renderAction = (item: any) => {
         return <div className="tw-flex tw-gap-4">
-            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleEdit(item?.data)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -77,7 +79,7 @@ const Products = () => {
                     </svg>
                 </div>
             </div>
-            <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleDelete(item?.data?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -112,7 +114,7 @@ const Products = () => {
                     </div>
                     <CreateButton setState={setIsCreateOpen} />
                 </div>
-                <ReusableTable columns={columns} data={currentItems} renderActions={renderAction} isError={productsError} isLoading={productsLoading} />
+                <DataGrid columns={columns(renderAction)} rowData={currentItems} />
                 <div>
                     <p>
                         صفحه {currentPage} از {totalPages}
@@ -146,7 +148,7 @@ const Products = () => {
                 isOpen={isEditOpen}
                 onClose={() => setIsEditOpen(false)}
                 title="ویرایش کالا"
-                
+
             >
                 <EditProduct refetch={refetch} item={itemForEdit} />
             </Modal>

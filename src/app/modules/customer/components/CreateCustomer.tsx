@@ -10,6 +10,7 @@ import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { convertValueLabelCustomerValidaty } from "../helpers/convertValueLabel";
 import { createValiadtion } from "../validation/createValidation";
 import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const CreateCustomer = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -36,17 +37,16 @@ const CreateCustomer = (props: {
     };
     return (
         <>
-            {data?.succeeded && (
-                <SuccessText text={data?.message} />
-            )}
+
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
             <Formik initialValues={initialValues} validationSchema={createValiadtion} onSubmit={
-                async (values, { setStatus, setSubmitting }) => {   
+                async (values, { setStatus, setSubmitting }) => {
                     try {
                         mutate(values, {
-                            onSuccess: () => {
+                            onSuccess: (message) => {
+                                ToastComponent(message?.message)
                                 props.refetch()
                                 props.setIsCreateOpen(false)
                             }

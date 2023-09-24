@@ -12,6 +12,8 @@ import CreateButton from "../../../_cloner/helpers/components/CreateButton";
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import { toAbsoluteUrl } from "../../../_cloner/helpers";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
+import DataGrid from "../../../_cloner/helpers/components/DataGrid";
+import { ToastComponent } from "../../../_cloner/helpers/components/Toast";
 
 const Customer = () => {
     const {
@@ -54,17 +56,18 @@ const Customer = () => {
     const handleDelete = (id: string | undefined) => {
         if (id)
             mutate(id, {
-                onSuccess: () => {
+                onSuccess: (message) => {
+                    ToastComponent(message?.message)
                     refetch();
                 },
             });
     };
 
-    const renderActions = (item: any) => {
+    const renderAction = (item: any) => {
         return (
             <div className="tw-flex tw-gap-4">
                 <div
-                    onClick={() => handleEdit(item)}
+                    onClick={() => handleEdit(item?.data)}
                     className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md"
                 >
                     <div className="tw-cursor-pointer tw-text-white">
@@ -85,7 +88,7 @@ const Customer = () => {
                     </div>
                 </div>
                 <div
-                    onClick={() => handleDelete(item?.id)}
+                    onClick={() => handleDelete(item?.data?.id)}
                     className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md"
                 >
                     <div className="tw-cursor-pointer tw-text-white">
@@ -143,13 +146,7 @@ const Customer = () => {
                     </div>
                     <CreateButton setState={setIsCreateOpen} />
                 </div>
-                <ReusableTable
-                    columns={columns}
-                    data={currentItems}
-                    isError={customersError}
-                    isLoading={customersLoading}
-                    renderActions={renderActions}
-                />
+                <DataGrid columns={columns(renderAction)} rowData={currentItems} />
                 <div>
                     <p>
                         صفحه {currentPage} از {totalPages}

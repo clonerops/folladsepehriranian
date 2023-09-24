@@ -1,4 +1,4 @@
- import { Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import ErrorText from "../../../../_cloner/helpers/components/ErrorText";
 import EditText from "../../../../_cloner/helpers/components/EditText";
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { convertValueLabelCustomerValidaty } from "../helpers/convertValueLabel";
 import { customerType } from "../helpers/customerType";
 import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const EditCustomer = (props: {
     item: ICustomer | undefined,
@@ -39,9 +40,6 @@ const EditCustomer = (props: {
     };
     return (
         <>
-            {data?.succeeded && (
-                <EditText text={"ویرایش با موفقیت انجام شد"} />
-            )}
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
@@ -51,6 +49,7 @@ const EditCustomer = (props: {
                     try {
                         mutate(values, {
                             onSuccess: () => {
+                                ToastComponent("ویرایش با موفقیت انجام شد")
                                 props.refetch()
                             }
                         });
@@ -83,8 +82,8 @@ const EditCustomer = (props: {
                                     <span className="tw-px-4 tw-font-bold tw-text-lg">آیا تامین کننده می باشد؟</span>
                                 </label>
                             </div>
-                            <FormikSelect defaultValue={{value: props.item?.customerType, label: props.item?.customerType === 0 ? "حقیقی": "حقوقی"}} options={customerType} name="customerType" placeholder="نوع مشتری" />
-                            <FormikSelect defaultValue={{value: props.item?.customerValidityId, label: props.item?.customerValidityId === 1 ? "عادی" : props.item?.customerValidityId === 2 ? "VIP" : "سیاه"}}  options={convertValueLabelCustomerValidaty(customerValidityData)} name="customerValidityId" placeholder="نوع اعتبار" />
+                            <FormikSelect defaultValue={{ value: props.item?.customerType, label: props.item?.customerType === 0 ? "حقیقی" : "حقوقی" }} options={customerType} name="customerType" placeholder="نوع مشتری" />
+                            <FormikSelect defaultValue={{ value: props.item?.customerValidityId, label: props.item?.customerValidityId === 1 ? "عادی" : props.item?.customerValidityId === 2 ? "VIP" : "سیاه" }} options={convertValueLabelCustomerValidaty(customerValidityData)} name="customerValidityId" placeholder="نوع اعتبار" />
                         </div>
                         <div className="tw-w-full tw-my-2 md:tw-col-span-3">
                             <FormikInput title="آدرس 1" divClassName="tw-w-full tw-my-2" name="address1" placeholder="آدرس 1" type="text" />

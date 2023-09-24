@@ -1,28 +1,40 @@
-export const columns = [
-  { key: 'firstName', title: 'نام' },
-  { key: 'lastName', title: 'نام خانوادگی' },
-  { key: 'nationalId', title: 'کدملی' },
-  {
-    key: 'customerType',
-    title: 'نوع مشتری',
-    className: "tw-bg-indigo-500 tw-px-8 tw-py-2 tw-rounded-lg tw-text-white",
-    customText: (value: any) => (value === 0 ? 'حقیقی' : "حقوقی")
-  },
-  {
-    key: 'customerValidityId',
-    title: 'نوع اعتبار',
-    className: "tw-bg-green-500 tw-px-8 tw-py-2 tw-rounded-lg tw-text-white",
-    customText: (value: any) => (value === 1 ? 'عادی' : value === 2 ? "VIP" : "سیاه")
-  }, { key: 'mobile', title: 'موبایل' },
-  { key: 'tel1', title: 'تلفن یک'},
-  { key: 'tel2', title: 'تلفن دو' },
-  { 
-    key: 'isSupplier', 
-    title: 'تامین کننده؟',
-    className: "tw-bg-purple-500 tw-px-8 tw-py-2 tw-rounded-lg tw-text-white",
-    customText: (value: any) => (value === false ? 'خیر' : "بله")
- },
-  { key: 'address1', title: 'آدرس یک' },
-  { key: 'address2', title: 'آدرس دو' },
-  { key: 'representative', title: 'معرف' },
-];
+const customerTypeCellRenderer = (params: any) => {
+  if (params.data.customerType === 0) {
+    return 'حقوقی';
+  } else {
+    return 'حقیقی';
+  }
+};
+const customerValidTypeCellRenderer = (params: any) => {
+  if (params.data.customerValidityId === 1) {
+    return 'عادی';
+  } else if (params.data.customerValidityId === 2) {
+    return 'VIP';
+  } else {
+    return "سیاه"
+  }
+};
+const customerIsSupplier = (params: any) => {
+  if (params.data.isSupplier) {
+    return 'بله';
+  } else {
+    return "خیر"
+  }
+};
+
+export const columns = (renderAction: any) => {
+  const col = [
+    { field: 'firstName', headerName: 'نام', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'lastName', headerName: 'نام خانوادگی', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'nationalId', headerName: 'کدملی', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'customerType', headerName: 'نوع مشتری', headerClass: "tw-bg-blue-200 tw-text-black", cellRenderer: customerTypeCellRenderer },
+    { field: 'customerValidityId', headerName: 'نوع اعتبار', headerClass: "tw-bg-blue-200 tw-text-black", cellRenderer: customerValidTypeCellRenderer },
+    { field: 'mobile', headerName: 'موبایل', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'isSupplier', headerName: 'تامین کننده؟', headerClass: "tw-bg-blue-200 tw-text-black", cellRenderer: customerIsSupplier },
+    { field: 'address1', headerName: 'آدرس یک', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'address2', headerName: 'آدرس دو', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { field: 'representative', headerName: 'معرف', headerClass: "tw-bg-blue-200 tw-text-black" },
+    { headerName: 'عملیات', cellRenderer: renderAction, headerClass: "tw-bg-blue-200 tw-text-black" }
+  ]
+  return col
+}

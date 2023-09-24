@@ -11,6 +11,8 @@ import { columns } from "./helpers/supplierColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
 import CreateButton from "../../../_cloner/helpers/components/CreateButton";
 import PageTitle from "../../../_cloner/helpers/components/PageTitle";
+import DataGrid from "../../../_cloner/helpers/components/DataGrid";
+import { ToastComponent } from "../../../_cloner/helpers/components/Toast";
 
 const Suppliers = () => {
     const { data: suppliers, isLoading: suppliersLoading, isError: suppliersError, refetch } = useRetrieveSuppliers();
@@ -47,7 +49,8 @@ const Suppliers = () => {
     };
     const handleDelete = (id: string | undefined) => {
         if (id) mutate(id, {
-            onSuccess: () => {
+            onSuccess: (message) => {
+                ToastComponent(message?.message)
                 refetch()
             }
         });
@@ -55,7 +58,7 @@ const Suppliers = () => {
 
     const renderAction = (item: any) => {
         return <div className="tw-flex tw-gap-4">
-            <div onClick={() => handleEdit(item)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleEdit(item?.data)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -75,7 +78,7 @@ const Suppliers = () => {
                     </svg>
                 </div>
             </div>
-            <div onClick={() => handleDelete(item?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+            <div onClick={() => handleDelete(item?.data?.id)} className="tw-bg-red-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
@@ -110,7 +113,8 @@ const Suppliers = () => {
                     </div>
                     <CreateButton setState={setIsCreateOpen} />
                 </div>
-                <ReusableTable columns={columns} data={currentItems} renderActions={renderAction} isError={suppliersError} isLoading={suppliersLoading} />
+                <DataGrid columns={columns(renderAction)} rowData={currentItems} />
+                {/* <ReusableTable columns={columns} data={currentItems} renderActions={renderAction} isError={suppliersError} isLoading={suppliersLoading} /> */}
                 <div>
                     <p>
                         صفحه {currentPage} از {totalPages}

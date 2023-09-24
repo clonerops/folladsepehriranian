@@ -12,6 +12,7 @@ import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatep
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import moment from "moment-jalaali";
 import { createSupplierValidations } from "../validations/createSupplier";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const CreateSupplier = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -49,11 +50,12 @@ const CreateSupplier = (props: {
                             rate: Number(values.rate),
                             customerId: values.customerId,
                             productId: values.productId,
-                            priceDate: moment(values.priceDate).format("jYYYY/jMM/jDD")
+                            priceDate: values.priceDate
                         }
 
                         mutate(formData, {
-                            onSuccess: () => {
+                            onSuccess: (message) => {
+                                ToastComponent(message?.message)
                                 props.refetch()
                                 props.setIsCreateOpen(false)
                             }

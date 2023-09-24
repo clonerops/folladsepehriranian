@@ -11,6 +11,7 @@ import FormikSelect from "../../../../_cloner/helpers/components/FormikSelect";
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import FormikDatepicker from "../../../../_cloner/helpers/components/FormikDatepicker";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
+import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 
 const EditSupplier = (props: {
     item: ISuppliers | undefined,
@@ -33,9 +34,6 @@ const EditSupplier = (props: {
     };
     return (
         <>
-            {data?.succeeded && (
-                <EditText text={"ویرایش با موفقیت انجام شد"} />
-            )}
             {data?.data?.status === 400 && (
                 <ErrorText text={data?.data?.title} />
             )}
@@ -44,6 +42,7 @@ const EditSupplier = (props: {
                     try {
                         mutate(values, {
                             onSuccess: () => {
+                                ToastComponent("ویرایش با موفقیت انجام شد")
                                 props.refetch()
                             }
                         });

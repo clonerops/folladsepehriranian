@@ -58,10 +58,6 @@ const OrderList = () => {
     return (
         <>
             <Card7 image="" title="">
-                <PageTitle
-                    title="لیست سفارشات"
-                    image="/media/icons/duotune/Ecommerce/ecm006.svg"
-                />
                 <DataGrid columns={columns(renderAction)} rowData={orders?.data} />
 
                 {/* <div className="tw-w-full tw-overflow-auto">

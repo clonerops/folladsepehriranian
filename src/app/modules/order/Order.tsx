@@ -287,10 +287,6 @@ const Order = () => {
                 {({ handleSubmit }) => {
                     return (
                         <Form onSubmit={handleSubmit}>
-                            <PageTitle
-                                title="ثبت سفارش"
-                                image="/media/icons/duotune/Finance/fin006.svg"
-                            />
                             <div className="tw-mb-4">
                                 <Card6 image="" title="">
                                     <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3">

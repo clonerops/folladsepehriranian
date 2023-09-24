@@ -24,21 +24,24 @@ export const httpFormData = axios.create({
     },
 });
 
+// Add a response interceptor
 http.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-        if (!error.response && error.request) {
-            Cookies.remove("token");
+
+        // if (!error.response && error.request) {
+        //     Cookies.remove('token');
+        //     window.location.reload();
+        //     return Promise.reject(error);
+        // }
+
+        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            Cookies.remove('token');
             window.location.reload();
-            return Promise.reject(error);
         }
 
-        if (error.respons && !originalRequest._retry) {
-            originalRequest._retry = true;
-            Cookies.remove("token");
-            window.location.reload();
-        }
         return Promise.reject(error);
     }
 );

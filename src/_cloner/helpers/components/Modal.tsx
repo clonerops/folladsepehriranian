@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { toAbsoluteUrl } from "../AssetHelpers";
 
 interface IProps {
     isOpen: boolean;
@@ -20,7 +21,7 @@ const Modal: FC<IProps> = ({
     if (!isOpen) return null;
 
     return (
-        <div className="tw-fixed tw-inset-0 tw-z-[150]">
+        <div className="tw-fixed tw-inset-0 tw-z-[150]" >
             <div className="tw-flex tw-min-h-screen tw-items-center tw-justify-center tw-px-4 tw-pt-4 tw-pb-20 tw-text-center tw-sm:p-0">
                 <div
                     className="tw-fixed tw-inset-0 tw-transition-opacity"
@@ -72,6 +73,13 @@ const Modal: FC<IProps> = ({
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"
+                        style={{
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundOrigin: "cover",
+                            backgroundImage: `url(${toAbsoluteUrl('/media/logos/nn1.png')})`
+                  
+                        }}
                     >
                         <div
                             onClick={onClose}

@@ -12,6 +12,7 @@ import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
 import FormikTextarea from "../../../../_cloner/helpers/components/FormikTextarea";
+import { toAbsoluteUrl } from "../../../../_cloner/helpers";
 
 const CreateProduct = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>;

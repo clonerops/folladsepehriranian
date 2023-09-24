@@ -106,7 +106,6 @@ const ProductPrice = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {productPriceLoading && <Backdrop loading={productPriceLoading} />}
-            <PageTitle title="قیمت کالاها" image="/media/icons/duotune/Communication/com011.svg" />
             <Card7 image="" title="">
                 <CreateProductPrice refetch={refetch} />
                 <div className="tw-w-80 md:tw-w-[40%] tw-mb-2">

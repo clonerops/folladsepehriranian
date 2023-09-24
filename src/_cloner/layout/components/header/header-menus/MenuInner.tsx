@@ -1,10 +1,55 @@
 // import {MenuInnerWithSub} from './MenuInnerWithSub'
 // import {MegaMenu} from './MegaMenu'
 
+import { useLocation } from "react-router-dom"
+import {useState} from 'react'
+
 export function MenuInner() {
+  let title = "";
+  const { pathname } = useLocation()
+
+  switch (pathname) {
+    case "/dashboard/product/price":
+      title = "قیمت کالا"
+      break;
+    case "/dashboard/customer/managment":
+      title = "مدیریت و لیست مشتریان"
+      break;
+    case "/dashboard/product/supplier":
+      title = "مدیریت و لیست تامین کنندگان"
+      break;
+    case "/dashboard/product/managment":
+      title = "مدیریت و لیست کالا"
+      break;
+    case "/dashboard/user/create":
+      title = "مدیریت کاربران"
+      break;
+    case "/dashboard/cargo/managment":
+      title = "مدیریت اعلام بار"
+      break;
+    case "/dashboard/payment/managment":
+      title = "ثبت دریافت و پرداخت"
+      break;
+    case "/dashboard/payment/accounting":
+      title = "ثبت حسابداری دریافت و پرداخت"
+      break;
+    case "/dashboard/order/lists":
+      title = "لیست سفارشات و جزئیات"
+      break;
+    case "/dashboard/order/managment":
+      title = "ثبت سفارش جدید"
+      break;
+    case "/dashboard/order/detail":
+      title = "جزئیات سفارش"
+      break;
+  
+    default:
+      break;
+  }
+
   return (
     <>
-      
+      <span className="menu-item me-lg-1 tw-font-bold tw-text-orange-500 tw-text-xl">{title}</span>
       {/* <MenuItem title="بازرگانی سپهر ایرانیان" to='/dashboard' /> */}
       {/* <MenuItem title="تست هدر" to='/dashboard' /> */}
       {/* <MenuItem title="داشبورد مدیریت امور مشتریان" to='/dashboard-esale' />

@@ -116,10 +116,6 @@ const Customer = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {customersLoading && <Backdrop loading={customersLoading} />}
-            <PageTitle
-                title="مدیریت مشتریان"
-                image="/media/icons/duotune/Communication/com014.svg"
-            />
             <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">

@@ -24,6 +24,7 @@ const customerIsSupplier = (params: any) => {
 
 export const columns = (renderAction: any) => {
   const col = [
+    { field: 'id', headerName: 'کد مشتری', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'firstName', headerName: 'نام', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'lastName', headerName: 'نام خانوادگی', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'nationalId', headerName: 'کدملی', headerClass: "tw-bg-blue-200 tw-text-black" },

@@ -105,7 +105,7 @@ const Suppliers = () => {
         <>
             {deleteLoading && <Backdrop loading={deleteLoading} />}
             {suppliersLoading && <Backdrop loading={suppliersLoading} />}
-            <PageTitle title="لیست تامین کنندگان" image="/media/icons/duotune/Communication/com014.svg" />
+            {/* <PageTitle title="لیست تامین کنندگان" image="/media/icons/duotune/Communication/com014.svg" /> */}
             <Card7 image="" title="">
                 <div className="tw-flex tw-justify-between tw-items-center">
                     <div className="tw-w-80 md:tw-w-[40%]">

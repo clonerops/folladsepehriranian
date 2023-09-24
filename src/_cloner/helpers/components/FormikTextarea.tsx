@@ -55,7 +55,7 @@ type Props = {
     defaultChecked?: boolean;
 }
 
-const FormikInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
+const FormikTextarea = forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
     const { type, placeholder, name, divClassName, title, autoFocus, defaultChecked, ...rest } = props;
 
     const [field] = useField({ name });
@@ -67,12 +67,10 @@ const FormikInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
         <>
             <div className={divClassName}>
                 <div className="tw-text-right tw-font-bold tw-text-md">{title}</div>
-                <input
-                    type={type}
+                <textarea
                     className="customInput tw-p-[8px] tw-w-full tw-rounded-md tw-border tw-border-gray-300 tw-outline-none"
                     placeholder={placeholder}
                     id={name}
-                    ref={ref}
                     autoFocus={autoFocus}
                     defaultChecked={defaultChecked}
                     {...getFormikFieldValidationProps(formikProps, name)}
@@ -85,4 +83,4 @@ const FormikInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     );
 });
 
-export default FormikInput;
+export default FormikTextarea;

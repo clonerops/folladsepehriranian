@@ -9,6 +9,7 @@ import {
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
+import FormikTextarea from "../../../../_cloner/helpers/components/FormikTextarea";
 
 const EditProduct = (props: {
     item: IProducts | undefined;
@@ -69,6 +70,9 @@ const EditProduct = (props: {
                                     title="سایز"
                                     type="text"
                                 />
+                            </div>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-5 tw-gap-8 tw-my-4">
+
                                 <FormikInput
                                     name="approximateWeight"
                                     placeholder="وزن تقریبی"
@@ -83,8 +87,8 @@ const EditProduct = (props: {
                                 />
                                 <FormikInput
                                     name="size"
-                                    placeholder="اندازه"
-                                    title="اندازه"
+                                    placeholder="اندازه ضخامت"
+                                    title="اندازه ضخامت"
                                     type="text"
                                 />
                                 <FormikInput
@@ -99,12 +103,15 @@ const EditProduct = (props: {
                                     title="حالت"
                                     type="text"
                                 />
-                                <FormikInput
+                            </div>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols- tw-gap-8 tw-my-4">
+                                <FormikTextarea
                                     name="description"
                                     placeholder="توضیحات"
                                     title="توضیحات"
                                     type="text"
                                 />
+
                             </div>
                             <div className="tw-mt-4">
                                 <SubmitButton

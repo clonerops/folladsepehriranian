@@ -11,6 +11,7 @@ import {
 import FormikInput from "../../../../_cloner/helpers/components/FormikInput";
 import SubmitButton from "../../../../_cloner/helpers/components/SubmitButton";
 import { ToastComponent } from "../../../../_cloner/helpers/components/Toast";
+import FormikTextarea from "../../../../_cloner/helpers/components/FormikTextarea";
 
 const CreateProduct = (props: {
     setIsCreateOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -66,14 +67,16 @@ const CreateProduct = (props: {
                                     placeholder="نام کالا"
                                     title="نام کالا"
                                     type="text"
+                                    autoFocus={true}
                                 />
-                                {/* <FormikSelect name="productBrandId" placeholder="برند" options={dropdownBrand(brands)} /> */}
                                 <FormikInput
                                     name="productSize"
                                     placeholder="سایز"
                                     title="سایز"
                                     type="text"
                                 />
+                            </div>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-5 tw-gap-8 tw-my-4">
                                 <FormikInput
                                     name="approximateWeight"
                                     placeholder="وزن تقریبی"
@@ -88,8 +91,8 @@ const CreateProduct = (props: {
                                 />
                                 <FormikInput
                                     name="size"
-                                    placeholder="اندازه"
-                                    title="اندازه"
+                                    placeholder="اندازه ضخامت"
+                                    title="اندازه ضخامت"
                                     type="text"
                                 />
                                 <FormikInput
@@ -104,7 +107,9 @@ const CreateProduct = (props: {
                                     title="حالت"
                                     type="text"
                                 />
-                                <FormikInput
+                            </div>
+                            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-1 tw-gap-8 tw-my-4">
+                                <FormikTextarea
                                     name="description"
                                     placeholder="توضیحات"
                                     title="توضیحات"

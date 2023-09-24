@@ -1,5 +1,6 @@
 export const columns = (renderAction: any) => {
   const col = [
+    { field: 'productCode', headerName: 'کد کالا', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'productName', headerName: 'نام کالا', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'size', headerName: 'سایز کالا', headerClass: "tw-bg-blue-200 tw-text-black" },
     { field: 'productIntegratedName', headerName: 'شرح کالا', headerClass: "tw-bg-blue-200 tw-text-black" },

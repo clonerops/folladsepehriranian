@@ -46,7 +46,8 @@ const CreateCustomer = (props: {
                     try {
                         mutate(values, {
                             onSuccess: (message) => {
-                                ToastComponent(message?.message)
+                                console.log(message)
+                                ToastComponent(message?.message || message?.data?.Message || message?.data?.message)
                                 props.refetch()
                                 props.setIsCreateOpen(false)
                             }

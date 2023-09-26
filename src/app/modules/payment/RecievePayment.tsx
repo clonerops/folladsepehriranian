@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card7 } from '../../../_cloner/partials/content/cards/Card7'
 import { Form, Formik } from 'formik'
 import FormikInput from '../../../_cloner/helpers/components/FormikInput'
@@ -13,6 +13,7 @@ import { useGetReceivePaymentSources } from '../../../_cloner/helpers/_hooks'
 import { dropdownReceivePaymentResource } from './helpers/dropdownConvert'
 import { useGetCustomers } from '../customer/core/_hooks'
 import { dropdownCustomer } from '../order/helpers/dropdowns'
+import { ToastComponent } from '../../../_cloner/helpers/components/Toast'
 
 const initialValues = {
     ReceivedFrom: "",
@@ -23,38 +24,44 @@ const initialValues = {
     CompanyName: "",
     ContractCode: "",
     Description: "",
-    RecievePaymentSourceFromId: "",
-    ReceivedFromCuostomerId: "",
-    RecievePaymentSourceToId: "",
+    ReceivePaymentSourceFromId: "",
+    ReceiveFromCustomerId: "",
+    ReceivePaymentSourceToId: "",
     PayToCustomerId: ""
 
 }
 
 const RecievePayment = () => {
+    const [trachingCode, setTrachingCode] = useState<any>(0)
 
-    const { mutate, isLoading } = usePostRecievePayment()
+    const { mutate, isLoading, data } = usePostRecievePayment()
     const { data: paymentResource } = useGetReceivePaymentSources()
     const { data: customers } = useGetCustomers()
 
     const [files, setFiles] = useState<File[]>([]);
 
+    useEffect(() => {
+        console.log("data", data)
+    }, [mutate, data])
 
     return (
         <>
             {isLoading && <Backdrop loading={isLoading} />}
             <Card7 image='' title=''>
                 <div className='tw-flex tw-justify-between tw-items-center'>
-                    <div className='tw-font-bold tw-text-xl tw-bg-slate-200 tw-py-4 tw-px-16 tw-text-black tw-rounded-lg'>شماره: <span className='tw-text-2xl tw-px-4'></span></div>
+                    {/* <div className='tw-font-bold tw-text-xl tw-bg-slate-200 tw-py-4 tw-px-16 tw-text-black tw-rounded-lg'>شماره: <span className='tw-text-2xl tw-px-4'>{trachingCode}</span></div> */}
                     <div className='tw-font-bold tw-text-xl tw-bg-gray-200 tw-text-black tw-py-4 tw-px-16 tw-rounded-lg'>تاریخ ثبت: <span className='tw-text-2xl tw-pr-4'>{moment(Date.now()).format('jYYYY/jMM/jDD').toString()}</span></div>
                 </div>
                 <div className='tw-mt-8'>
                     <Formik initialValues={initialValues} onSubmit={
                         async (values) => {
                             const formData = new FormData()
-                            formData.append("RecievePaymentSourceFromId", values.RecievePaymentSourceFromId)
-                            formData.append("ReceivedFromCuostomerId", values.ReceivedFromCuostomerId)
-                            formData.append("RecievePaymentSourceToId", values.RecievePaymentSourceToId)
+                            formData.append("ReceivePaymentSourceFromId", values.ReceivePaymentSourceFromId)
+                            formData.append("ReceiveFromCustomerId", values.ReceiveFromCustomerId)
+                            formData.append("ReceivePaymentSourceToId", values.ReceivePaymentSourceToId)
                             formData.append("PayToCustomerId", values.PayToCustomerId)
+                            formData.append("ReceivedFrom", values.ReceivePaymentSourceFromId)
+                            formData.append("PayTo", values.ReceivePaymentSourceToId)
                             formData.append("AccountOwner", values.AccountOwner)
                             formData.append("TrachingCode", values.TrachingCode)
                             formData.append("CompanyName", values.CompanyName)
@@ -64,14 +71,15 @@ const RecievePayment = () => {
                                 formData.append('Attachments', file);
                             });
                             mutate(formData, {
-                                onSuccess: () => {
-                                    Swal.fire({
-                                        position: "top-end",
-                                        icon: "success",
-                                        title: "اطلاعات با موفقیت ذخیره شد",
-                                        showConfirmButton: false,
-                                        timer: 8500,
-                                    })
+                                onSuccess: (message) => {
+                                    console.log(message)
+                                    console.log(JSON.parse(message))
+                                    if(message) {
+                                        setTrachingCode(message?.trachingCode)
+                                        ToastComponent("ثبت دریافت و پرداخت انجام گردید.")
+                                    } else {
+                                        ToastComponent(message?.data?.Errors[0] || message?.data?.Message)
+                                    }
                                 }
                             })
                         }
@@ -79,12 +87,12 @@ const RecievePayment = () => {
                         {({ handleSubmit, values }) => {
                             return <Form onSubmit={handleSubmit}>
                                 <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 tw-my-4'>
-                                    <FormikSelect name='RecievePaymentSourceFromId' placeholder='دریافت از' options={dropdownReceivePaymentResource(paymentResource)} />
-                                    {Number(values.RecievePaymentSourceFromId) == 1 &&
-                                        <FormikSelect name='ReceivedFromCuostomerId' placeholder='نام مشتری' options={dropdownCustomer(customers?.data)} />
+                                    <FormikSelect name='ReceivePaymentSourceFromId' placeholder='دریافت از' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    {Number(values.ReceivePaymentSourceFromId) == 1 &&
+                                        <FormikSelect name='ReceiveFromCustomerId' placeholder='نام مشتری' options={dropdownCustomer(customers?.data)} />
                                     }
-                                    <FormikSelect name='RecievePaymentSourceToId' placeholder='پرداخت به' options={dropdownReceivePaymentResource(paymentResource)} />
-                                    {Number(values.RecievePaymentSourceToId ) == 1 &&
+                                    <FormikSelect name='ReceivePaymentSourceToId' placeholder='پرداخت به' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    {Number(values.ReceivePaymentSourceToId ) == 1 &&
                                          <FormikSelect name='PayToCustomerId' placeholder='نام مشتری'  options={dropdownCustomer(customers?.data)} />
                                     }
                                     <FormikInput name='AccountOwner' placeholder='صاحب حساب' type='text' />

@@ -13,8 +13,8 @@
 
   export const columns = (renderAction: any) => {
     const col = [
-      { field: 'receivedFrom', headerName: 'دریافت از', headerClass: "tw-bg-[#6501FD] tw-text-black" },
-      { field: 'payTo', headerName: 'پرداخت به', headerClass: "tw-bg-[#6501FD] tw-text-black" },
+      { field: 'receivePaymentSourceFromDesc', headerName: 'دریافت از', headerClass: "tw-bg-[#6501FD] tw-text-black" },
+      { field: 'receivePaymentSourceToDesc', headerName: 'پرداخت به', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'accountOwner', headerName: 'صاحب حساب', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'trachingCode', headerName: 'کد پیگیری', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'companyName', headerName: 'صاحب شرکت', headerClass: "tw-bg-[#6501FD] tw-text-black" },

@@ -7,6 +7,7 @@ import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import { IPayment } from "./core/_models"
 import { DownloadFileJPEG, DownloadFileJPG, DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
 import DataGrid from "../../../_cloner/helpers/components/DataGrid"
+import { ToastComponent } from "../../../_cloner/helpers/components/Toast"
 
 const approvied = [
     { value: "0", label: "تایید نشده" },
@@ -45,7 +46,7 @@ const PaymentAccounting = () => {
     }
     const hadelDownload = (item: IPayment) => {
         if (item.attachments?.length === 0) {
-            alert("فایلی برای دانلود وجود ندارد")
+            ToastComponent("فایلی برای دانلود وجود ندارد")
         } else {
             setLoadingDownloadFile(true)
             item?.attachments?.forEach(element => {
@@ -83,6 +84,7 @@ const PaymentAccounting = () => {
         </div>
 
     }
+    console.log("data", data)
     return (
         <>
             {isLoading && <Backdrop loading={isLoading} />}

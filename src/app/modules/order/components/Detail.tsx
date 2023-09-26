@@ -17,13 +17,12 @@ const Detail = (props: Props) => {
     const { id } = useParams()
     const { isConfirmed }: any = location.state;
     const { data } = props;
-    const { mutate, data: confirm, isLoading } = useConfirmOrder()
+    const { mutate, isLoading } = useConfirmOrder()
 
     const handleConfirmOrder = () => {
         if (id)
             mutate(id, {
                 onSuccess: (message) => {
-                    console.log(message?.succeeded)
                     if (message?.succeeded) {
                         ToastComponent("تایید سفارش با موفقیت انجام شد!")
                     } else {
@@ -35,8 +34,6 @@ const Detail = (props: Props) => {
                 }
             })
     }
-
-
 
     const renderAction = () => { return <></> }
 

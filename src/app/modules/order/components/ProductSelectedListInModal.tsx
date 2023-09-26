@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CustomInput from "../../../../_cloner/helpers/components/CustomInput";
 import { IProducts } from "../../product/core/_models";
+import DataGrid from "../../../../_cloner/helpers/components/DataGrid";
+import { columns } from "../helpers/productColumns";
 
 const ProductSelectedListInModal = (props: {
     products: IProducts[] | undefined;
@@ -11,11 +13,11 @@ const ProductSelectedListInModal = (props: {
         React.SetStateAction<IProducts | undefined>
     >;
 }) => {
+
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [startRowIndex, setStartRowIndex] = useState<number>(0); // Track starting index of current page
 
-    const itemsPerPage = 7; // Number of items to show per page
+    const itemsPerPage = 8; 
 
     const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
@@ -33,19 +35,23 @@ const ProductSelectedListInModal = (props: {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const currentItems = filteredData?.slice(startIndex, endIndex);
+    const currentItems: any = filteredData?.slice(startIndex, endIndex);
 
     const goToPage = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
-            setStartRowIndex((page - 1) * itemsPerPage); // Update startRowIndex
         }
     };
 
-    const handleSelectProduct = (item: IProducts) => {
+    const handleRowDoubleClick = (event: any) => {
+        const clickedRowNode = event.api.getRowNode(event.rowIndex);
         props.setSelectedProductOpen(false);
-        props.setSelectProductFromModal(item);
+        props.setSelectProductFromModal(clickedRowNode.data);
     };
+
+    const renderAction = () => {
+        return <></>
+    }
 
     return (
         <div className="container tw-my-8">
@@ -56,7 +62,13 @@ const ProductSelectedListInModal = (props: {
                     placeholder="جستجو کالا / کالا"
                 />
             </div>
-            <div className="tw-overflow-x-auto tw-w-full md:tw-h-[380px]">
+            <DataGrid
+                columns={columns(renderAction)}
+                rowData={currentItems}
+                rowSelection={"multiple"}
+                onRowDoubleClicked={handleRowDoubleClick}
+                />
+            {/* <div className="tw-overflow-x-auto tw-w-full md:tw-h-[380px]">
                 <table className="tw-w-full ">
                     <thead className="tw-bg-gray-200">
                         <tr>
@@ -72,9 +84,6 @@ const ProductSelectedListInModal = (props: {
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 وزن تقریبی
                             </td>
-                            {/* <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
-                                برند
-                            </td> */}
                             <td className="tw-min-w-[160px] tw-py-4 tw-px-2 tw-text-center tw-text-gray-600 tw-border tw-border-gray-300">
                                 انبار
                             </td>
@@ -108,7 +117,6 @@ const ProductSelectedListInModal = (props: {
                                     </td>
                                     <td className="tw-flex tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.productInventories?.map((i) => i.warehouseName)}
-                                        {/* // {item.productInventories?.warehouseType} */}
                                     </td>
                                     <td className="tw-text-center tw-py-2 tw-border tw-border-gray-300">
                                         {item.productInventories?.map((i) => i.approximateInventory)}
@@ -121,7 +129,7 @@ const ProductSelectedListInModal = (props: {
                         })}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
             <div>
                 <p>
                     صفحه {currentPage} از {totalPages}

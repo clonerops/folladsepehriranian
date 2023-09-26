@@ -1,18 +1,6 @@
-// export const columns = [
-//     { key: 'receivedFrom', title: 'دریافت از' },
-//     { key: 'payTo', title: 'پرداخت به' },
-//     { key: 'accountOwner', title: 'صاحب حساب' },
-//     { key: 'trachingCode', title: 'کد پیگیری' },
-//     { key: 'companyName', title: 'صاحب شرکت' },
-//     { key: 'contractCode', title: 'شماره قرارداد' },
-//     { key: 'isAccountingApproval', title: 'تایید حسابداری؟' },
-//     { key: 'accountingApprovalDate', title: 'تاریخ تایید حسابداری' },
-//     // { key: 'accountingApproverId', title: '' },
-//     { key: 'description', title: 'توضیحات' },
-//   ];
-
   export const columns = (renderAction: any) => {
     const col = [
+      { field: 'id', headerName: 'شماره ثبت', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'receivePaymentSourceFromDesc', headerName: 'دریافت از', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'receivePaymentSourceToDesc', headerName: 'پرداخت به', headerClass: "tw-bg-[#6501FD] tw-text-black" },
       { field: 'accountOwner', headerName: 'صاحب حساب', headerClass: "tw-bg-[#6501FD] tw-text-black" },

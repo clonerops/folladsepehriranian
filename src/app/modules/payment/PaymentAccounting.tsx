@@ -84,7 +84,6 @@ const PaymentAccounting = () => {
         </div>
 
     }
-    console.log("data", data)
     return (
         <>
             {isLoading && <Backdrop loading={isLoading} />}

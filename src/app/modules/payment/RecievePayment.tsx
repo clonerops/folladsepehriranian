@@ -34,22 +34,18 @@ const initialValues = {
 const RecievePayment = () => {
     const [trachingCode, setTrachingCode] = useState<any>(0)
 
-    const { mutate, isLoading, data } = usePostRecievePayment()
+    const { mutate, isLoading } = usePostRecievePayment()
     const { data: paymentResource } = useGetReceivePaymentSources()
     const { data: customers } = useGetCustomers()
 
     const [files, setFiles] = useState<File[]>([]);
-
-    useEffect(() => {
-        console.log("data", data)
-    }, [mutate, data])
 
     return (
         <>
             {isLoading && <Backdrop loading={isLoading} />}
             <Card7 image='' title=''>
                 <div className='tw-flex tw-justify-between tw-items-center'>
-                    {/* <div className='tw-font-bold tw-text-xl tw-bg-slate-200 tw-py-4 tw-px-16 tw-text-black tw-rounded-lg'>شماره: <span className='tw-text-2xl tw-px-4'>{trachingCode}</span></div> */}
+                    <div className='tw-font-bold tw-text-xl tw-bg-slate-200 tw-py-4 tw-px-16 tw-text-black tw-rounded-lg'>شماره: <span className='tw-text-2xl tw-px-4'>{trachingCode}</span></div>
                     <div className='tw-font-bold tw-text-xl tw-bg-gray-200 tw-text-black tw-py-4 tw-px-16 tw-rounded-lg'>تاریخ ثبت: <span className='tw-text-2xl tw-pr-4'>{moment(Date.now()).format('jYYYY/jMM/jDD').toString()}</span></div>
                 </div>
                 <div className='tw-mt-8'>
@@ -72,14 +68,12 @@ const RecievePayment = () => {
                             });
                             mutate(formData, {
                                 onSuccess: (message) => {
-                                    ToastComponent("ثبت دریافت و پرداخت انجام گردید.")
-                                    // console.log(message)
-                                    // console.log(JSON.parse(message))
-                                    // if(message) {
-                                    //     setTrachingCode(message?.trachingCode)
-                                    // } else {
-                                    //     ToastComponent(message?.data?.Errors[0] || message?.data?.Message)
-                                    // }
+                                    if(message?.succeeded) {
+                                        setTrachingCode(message?.data?.id)
+                                        ToastComponent("ثبت دریافت و پرداخت انجام گردید.")
+                                    } else {
+                                        ToastComponent(message?.data?.Errors[0] || message?.data?.Message)
+                                    }
                                 }
                             })
                         }

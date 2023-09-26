@@ -35,6 +35,9 @@ export function MenuInner() {
     case "/dashboard/order/lists":
       title = "لیست سفارشات و جزئیات"
       break;
+    case "/dashboard/order/confirm":
+      title = "اقدام به تایید سفارش"
+      break;
     case "/dashboard/order/managment":
       title = "ثبت سفارش جدید"
       break;

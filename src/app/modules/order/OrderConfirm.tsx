@@ -1,19 +1,13 @@
+import { useState, useEffect } from 'react'
 import { useRetrieveOrders } from "./core/_hooks";
-// import Modal from "../../../_cloner/helpers/components/Modal"
-// import { useState } from "react"
-// import OrderDetials from "./components/OrderDetials"
-// import CustomInput from "../../../_cloner/helpers/components/CustomInput"
-// import Swal from 'sweetalert2'
-// import SubmitButton from "../../../_cloner/helpers/components/SubmitButton"
 import { Card7 } from "../../../_cloner/partials/content/cards/Card7";
 import { Link } from "react-router-dom";
 import DataGrid from "../../../_cloner/helpers/components/DataGrid";
 import { columns } from "./helpers/orderListColumns";
 import FuseSearch from "../../../_cloner/helpers/FuseSearch";
-import { useEffect, useState } from "react";
-import { IOrder } from "./core/_models";
+import { IOrder } from './core/_models';
 
-const OrderList = () => {
+const OrderConfirm = () => {
     const { data: orders } = useRetrieveOrders();
     const [results, setResults] = useState<IOrder[]>([]);
 
@@ -24,11 +18,10 @@ const OrderList = () => {
     const renderAction = (item: any) => {
         return <Link
             to={`/dashboard/order/detail/${item?.data?.id}`}
-            state={{ isConfirmed: false }}
-
+            state={{isConfirmed: true}}
         >
-            <button className="tw-bg-indigo-500 tw-text-white  tw-px-4 tw-rounded-md">
-                جزئیات
+            <button className="tw-bg-success tw-text-black tw-font-bold  tw-px-4 tw-rounded-md">
+                اقدام به ثبت
             </button>
         </Link>
 
@@ -36,7 +29,7 @@ const OrderList = () => {
     return (
         <>
             <Card7 image="" title="">
-                <div className="tw-w-80 md:tw-w-[40%] tw-mb-4">
+            <div className="tw-w-80 md:tw-w-[40%] tw-mb-4">
                     <FuseSearch
                         keys={[
                             "orderCode",
@@ -62,4 +55,4 @@ const OrderList = () => {
     );
 };
 
-export default OrderList;
+export default OrderConfirm;

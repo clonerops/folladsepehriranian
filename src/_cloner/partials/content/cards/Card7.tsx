@@ -22,7 +22,7 @@ const Card7: FC<Props> = ({ children }) => {
         </div>
       </div> */}
 
-      <div className='card-body d-flex flex-column px-9 pt-6 pb-8'>
+      <div className='card-body d-flex flex-column px-9 pt-6 pb-6'>
         {/* <div className='d-flex align-items-center flex-wrap mb-5 mt-auto fs-6'> */}
         <div className=''>
           {children}

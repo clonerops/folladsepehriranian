@@ -13,6 +13,7 @@ import RecievePayment from '../modules/payment/RecievePayment'
 import PaymentAccounting from '../modules/payment/PaymentAccounting'
 import ProductPrice from '../modules/product/ProductPrice'
 import OrderDetail from '../modules/order/OrderDetail'
+import OrderConfirm from '../modules/order/OrderConfirm'
 
 const PrivateRoutes = () => {
 
@@ -26,6 +27,7 @@ const PrivateRoutes = () => {
         {/* Orders */}
         <Route path='dashboard/order/managment' element={<Order />} />
         <Route path='dashboard/order/lists' element={<OrderList />} />
+        <Route path='dashboard/order/confirm' element={<OrderConfirm />} />
         <Route path='dashboard/order/detail/:id' element={<OrderDetail />} />
         <Route path='dashboard/cargo/managment' element={<Cargo />} />
         <Route path='dashboard/order/Cargo/:id' element={<Confirm />} />

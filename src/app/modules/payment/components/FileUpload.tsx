@@ -23,6 +23,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
+        accept: {
+            'image/jpge': ['.jpeg', '.Jpeg'],
+            'image/png': ['.png', '.Png', '.PNG'],
+            'image/jpg': ['.jpg', '.Jpg'],
+        },
+        maxSize: 5242880
     });
 
     return (

@@ -108,7 +108,7 @@ const ProductPrice = () => {
             <Card7 image="" title="">
                 <CreateProductPrice refetch={refetch} />
                 <div className="tw-w-80 md:tw-w-[40%] tw-mb-2">
-                    <FuseSearch keys={['product.productName', 'brandName', 'price',]} placeholder="جستجو" data={productPrice?.data} threshold={0.5} setResults={setResults} />
+                    <FuseSearch keys={['productName', 'brandName', 'price',]} placeholder="جستجو" data={productPrice?.data} threshold={0.5} setResults={setResults} />
                 </div>
                 <DataGrid columns={columns(renderAction)} rowData={currentItems} />
                 <div>

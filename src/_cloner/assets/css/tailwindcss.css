@@ -161,3 +161,6 @@ input[type=number] {
     width: 100%;
 }
     
+.ag-header-cell-text {
+    color: white !important;
+}

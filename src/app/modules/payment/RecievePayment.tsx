@@ -11,6 +11,8 @@ import Backdrop from '../../../_cloner/helpers/components/Backdrop'
 import FormikSelect from '../../../_cloner/helpers/components/FormikSelect'
 import { useGetReceivePaymentSources } from '../../../_cloner/helpers/_hooks'
 import { dropdownReceivePaymentResource } from './helpers/dropdownConvert'
+import { useGetCustomers } from '../customer/core/_hooks'
+import { dropdownCustomer } from '../order/helpers/dropdowns'
 
 const initialValues = {
     ReceivedFrom: "",
@@ -21,12 +23,18 @@ const initialValues = {
     CompanyName: "",
     ContractCode: "",
     Description: "",
+    RecievePaymentSourceFromId: "",
+    ReceivedFromCuostomerId: "",
+    RecievePaymentSourceToId: "",
+    PayToCustomerId: ""
+
 }
 
 const RecievePayment = () => {
 
     const { mutate, isLoading } = usePostRecievePayment()
     const { data: paymentResource } = useGetReceivePaymentSources()
+    const { data: customers } = useGetCustomers()
 
     const [files, setFiles] = useState<File[]>([]);
 
@@ -43,8 +51,10 @@ const RecievePayment = () => {
                     <Formik initialValues={initialValues} onSubmit={
                         async (values) => {
                             const formData = new FormData()
-                            formData.append("ReceivedFrom", values.ReceivedFrom)
-                            formData.append("PayTo", values.PayTo)
+                            formData.append("RecievePaymentSourceFromId", values.RecievePaymentSourceFromId)
+                            formData.append("ReceivedFromCuostomerId", values.ReceivedFromCuostomerId)
+                            formData.append("RecievePaymentSourceToId", values.RecievePaymentSourceToId)
+                            formData.append("PayToCustomerId", values.PayToCustomerId)
                             formData.append("AccountOwner", values.AccountOwner)
                             formData.append("TrachingCode", values.TrachingCode)
                             formData.append("CompanyName", values.CompanyName)
@@ -66,16 +76,18 @@ const RecievePayment = () => {
                             })
                         }
                     }>
-                        {({ handleSubmit }) => {
+                        {({ handleSubmit, values }) => {
                             return <Form onSubmit={handleSubmit}>
                                 <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-4 tw-my-4'>
-                                    <FormikSelect name='ReceivedFrom' placeholder='دریافت از' options={dropdownReceivePaymentResource(paymentResource)} />
-                                    <FormikSelect name='PayTo' placeholder='پرداخت به' options={dropdownReceivePaymentResource(paymentResource)} />
-                                    {/* <FormikInput name='ReceivedFrom' placeholder='دریافت از' type='text' /> */}
-                                    {/* <FormikInput name='PayTo' placeholder='پرداخت به' type='text' /> */}
+                                    <FormikSelect name='RecievePaymentSourceFromId' placeholder='دریافت از' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    {Number(values.RecievePaymentSourceFromId) == 1 &&
+                                        <FormikSelect name='ReceivedFromCuostomerId' placeholder='نام مشتری' options={dropdownCustomer(customers?.data)} />
+                                    }
+                                    <FormikSelect name='RecievePaymentSourceToId' placeholder='پرداخت به' options={dropdownReceivePaymentResource(paymentResource)} />
+                                    {Number(values.RecievePaymentSourceToId ) == 1 &&
+                                         <FormikSelect name='PayToCustomerId' placeholder='نام مشتری'  options={dropdownCustomer(customers?.data)} />
+                                    }
                                     <FormikInput name='AccountOwner' placeholder='صاحب حساب' type='text' />
-                                </div>
-                                <div className='tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-4 tw-my-4'>
                                     <FormikInput name='Amount' placeholder='مبلغ' type='text' />
                                     <FormikInput name='TrachingCode' placeholder='کد پیگیری' type='text' />
                                     <FormikInput name='CompanyName' placeholder='نام شرکت' type='text' />
@@ -84,7 +96,6 @@ const RecievePayment = () => {
                                 <div className='tw-grid tw-grid-cols-1 tw-my-4'>
                                     <FormikInput name='Description' placeholder='توضیحات' type='text' />
                                 </div>
-
                                 <div>
                                     <FileUpload files={files} setFiles={setFiles} />
                                 </div>

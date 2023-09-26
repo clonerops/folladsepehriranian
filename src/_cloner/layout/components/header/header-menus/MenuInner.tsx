@@ -48,7 +48,7 @@ export function MenuInner() {
 
   return (
     <>
-      <span className="menu-item me-lg-1 tw-font-bold tw-text-orange-500 tw-text-xl">{title}</span>
+      <span className="menu-item me-lg-1 tw-font-bold tw-text-[#6601FB] tw-text-xl">{title}</span>
       {/* <MenuItem title="بازرگانی سپهر ایرانیان" to='/dashboard' /> */}
       {/* <MenuItem title="تست هدر" to='/dashboard' /> */}
       {/* <MenuItem title="داشبورد مدیریت امور مشتریان" to='/dashboard-esale' />

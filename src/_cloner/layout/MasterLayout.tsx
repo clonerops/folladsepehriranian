@@ -27,7 +27,7 @@ const MasterLayout = () => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundOrigin: "cover",
-          backgroundImage: `url(${toAbsoluteUrl('/media/logos/nn.png')})`
+          backgroundImage: `url(${toAbsoluteUrl('/media/logos/blob-scene-haikei.svg')})`
         }} className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
             <HeaderWrapper />

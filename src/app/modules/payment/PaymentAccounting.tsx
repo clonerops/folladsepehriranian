@@ -5,7 +5,7 @@ import { useGetRecievePaymentByApproved } from "./core/_hooks"
 import { columns } from "./helpers/paymentAccountingColumns"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
 import { IPayment } from "./core/_models"
-import { DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
+import { DownloadFileJPEG, DownloadFileJPG, DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
 import DataGrid from "../../../_cloner/helpers/components/DataGrid"
 
 const approvied = [
@@ -44,23 +44,31 @@ const PaymentAccounting = () => {
         }
     }
     const hadelDownload = (item: IPayment) => {
-        setLoadingDownloadFile(true)
-        item?.attachments?.forEach(element => {
-            switch (detectMimeType(element.fileData)) {
-                case "application/pdf":
-                    const outputFilenamePdf = `filesattachments${Date.now()}.pdf`;
-                    DownloadFilePDF(element.fileData, outputFilenamePdf)
-                    break;
-                case "image/png":
-                    const outputFilenamePng = `filesattachments${Date.now()}.png`;
-                    DownloadFilePNG(element.fileData, outputFilenamePng)        
-                    break;
-            
-                default:
-                    break;
-            }
-            setLoadingDownloadFile(false)        
-        });
+        if (item.attachments?.length === 0) {
+            alert("فایلی برای دانلود وجود ندارد")
+        } else {
+            setLoadingDownloadFile(true)
+            item?.attachments?.forEach(element => {
+                switch (detectMimeType(element.fileData)) {
+                    case "image/png":
+                        const outputFilenamePng = `filesattachments${Date.now()}.png`;
+                        DownloadFilePNG(element.fileData, outputFilenamePng)
+                        break;
+                    case "image/jpg":
+                        const outputFilenameJpg = `filesattachments${Date.now()}.jpg`;
+                        DownloadFileJPG(element.fileData, outputFilenameJpg)
+                        break;
+                    case "image/jpeg":
+                        const outputFilenameJpeg = `filesattachments${Date.now()}.jpeg`;
+                        DownloadFileJPEG(element.fileData, outputFilenameJpeg)
+                        break;
+
+                    default:
+                        break;
+                }
+                setLoadingDownloadFile(false)        
+            });
+        }
     };
 
     const renderActions = (item: any) => {

@@ -48,7 +48,7 @@ const SidebarMenuMain = () => {
         icon='/media/icons/duotune/Finance/fin010.svg'
       >
         <SidebarMenuItem to='/dashboard/payment/managment' title='دریافت و پرداخت' hasBullet={true} />
-        <SidebarMenuItem to='/dashboard/payment/accounting' title='ثبت حسابداری دریافت و پرداخت' hasBullet={true} />
+        <SidebarMenuItem to='/dashboard/payment/accounting' title='حسابداری دریافت پرداخت' hasBullet={true} />
 
       </SidebarMenuItemWithSub>
       {/* <div className='menu-item'>

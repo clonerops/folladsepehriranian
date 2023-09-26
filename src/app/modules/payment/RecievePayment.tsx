@@ -72,14 +72,14 @@ const RecievePayment = () => {
                             });
                             mutate(formData, {
                                 onSuccess: (message) => {
-                                    console.log(message)
-                                    console.log(JSON.parse(message))
-                                    if(message) {
-                                        setTrachingCode(message?.trachingCode)
-                                        ToastComponent("ثبت دریافت و پرداخت انجام گردید.")
-                                    } else {
-                                        ToastComponent(message?.data?.Errors[0] || message?.data?.Message)
-                                    }
+                                    ToastComponent("ثبت دریافت و پرداخت انجام گردید.")
+                                    // console.log(message)
+                                    // console.log(JSON.parse(message))
+                                    // if(message) {
+                                    //     setTrachingCode(message?.trachingCode)
+                                    // } else {
+                                    //     ToastComponent(message?.data?.Errors[0] || message?.data?.Message)
+                                    // }
                                 }
                             })
                         }

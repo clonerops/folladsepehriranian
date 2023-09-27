@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { IPayment } from "./_models";
 import * as api from "./_requests";
 
@@ -20,10 +20,8 @@ const useUpdateRecievePaymentById = () => {
     });
 };
 
-const useGetRecievePaymentById = () => {
-    return useMutation((id: string) => {
-        return api.getRecievePaymentById(id);
-    });
+const useGetRecievePaymentById = (id: string) => {
+    return useQuery(['recievePayDetail', id], () => api.getRecievePaymentById(id))
 };
 const useDeleteRecievePaymentById = () => {
     return useMutation((id: string) => {

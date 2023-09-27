@@ -14,6 +14,7 @@ import PaymentAccounting from '../modules/payment/PaymentAccounting'
 import ProductPrice from '../modules/product/ProductPrice'
 import OrderDetail from '../modules/order/OrderDetail'
 import OrderConfirm from '../modules/order/OrderConfirm'
+import Detail from '../modules/payment/components/Detail'
 
 const PrivateRoutes = () => {
 
@@ -42,6 +43,7 @@ const PrivateRoutes = () => {
         {/* Payment */}
         <Route path='dashboard/payment/managment' element={<RecievePayment />} />
         <Route path='dashboard/payment/accounting' element={<PaymentAccounting />} />
+        <Route path='dashboard/payment/accounting/:id' element={<Detail />} />
 
 
         {/* Lazy Modules */}

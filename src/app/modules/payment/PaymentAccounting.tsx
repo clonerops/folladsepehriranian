@@ -4,10 +4,8 @@ import { Card7 } from "../../../_cloner/partials/content/cards/Card7"
 import { useGetRecievePaymentByApproved } from "./core/_hooks"
 import { columns } from "./helpers/paymentAccountingColumns"
 import Backdrop from "../../../_cloner/helpers/components/Backdrop"
-import { IPayment } from "./core/_models"
-import { DownloadFileJPEG, DownloadFileJPG, DownloadFilePDF, DownloadFilePNG } from "../../../_cloner/helpers/DownloadFiles"
 import DataGrid from "../../../_cloner/helpers/components/DataGrid"
-import { ToastComponent } from "../../../_cloner/helpers/components/Toast"
+import { Link } from "react-router-dom"
 
 const approvied = [
     { value: "0", label: "تایید نشده" },
@@ -28,60 +26,16 @@ const PaymentAccounting = () => {
         mutate(selectedOption.value)
     }
 
-
-    var signatures: any = {
-        JVBERi0: "application/pdf",
-        R0lGODdh: "image/gif",
-        R0lGODlh: "image/gif",
-        iVBORw0KGgo: "image/png",
-        "/9j/": "image/jpg"
-    };
-
-    function detectMimeType(b64: any) {
-        for (var s in signatures) {
-            if (b64.indexOf(s) === 0) {
-                return signatures[s];
-            }
-        }
-    }
-    const hadelDownload = (item: IPayment) => {
-        if (item.attachments?.length === 0) {
-            ToastComponent("فایلی برای دانلود وجود ندارد")
-        } else {
-            setLoadingDownloadFile(true)
-            item?.attachments?.forEach(element => {
-                switch (detectMimeType(element.fileData)) {
-                    case "image/png":
-                        const outputFilenamePng = `filesattachments${Date.now()}.png`;
-                        DownloadFilePNG(element.fileData, outputFilenamePng)
-                        break;
-                    case "image/jpg":
-                        const outputFilenameJpg = `filesattachments${Date.now()}.jpg`;
-                        DownloadFileJPG(element.fileData, outputFilenameJpg)
-                        break;
-                    case "image/jpeg":
-                        const outputFilenameJpeg = `filesattachments${Date.now()}.jpeg`;
-                        DownloadFileJPEG(element.fileData, outputFilenameJpeg)
-                        break;
-
-                    default:
-                        break;
-                }
-                setLoadingDownloadFile(false)        
-            });
-        }
-    };
-
     const renderActions = (item: any) => {
-        return <div className="tw-flex tw-gap-4">
-            <div onClick={() => hadelDownload(item?.data)} className="tw-bg-yellow-500 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
+        return <Link to={`/dashboard/payment/accounting/${item?.data?.id}`} className="tw-flex tw-gap-4">
+            <div className="tw-bg-cyan-950 tw-px-4 tw-py-2 tw-cursor-pointer tw-rounded-md">
                 <div
                     className="tw-cursor-pointer tw-text-white"
                 >
-                    فایل های ضمیمه
+                    جزئیات و تایید حسابداری
                 </div>
             </div>
-        </div>
+        </Link>
 
     }
     return (
